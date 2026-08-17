@@ -1,0 +1,51 @@
+
+    {% if block.settings.heading != blank %}
+      <div class="yv-specifications-title">{{ block.settings.heading }}</div>
+    {% endif %}
+    {% if block.settings.custom_content_image != blank %}
+        <div class="yv-specifications-icon-holder">
+            <span class="yv-specifications-icon">
+                {%-
+                    render 'lazy-image', image: block.settings.custom_content_image , width: 50
+                -%}
+            </span>
+            
+            {% comment %} 
+            {%- render 'icons', icon: block.settings.icon -%}
+        </span> {% endcomment %}
+        </div>
+    {% endif %}
+    {% if block.settings.content != blank %}
+      <div class="yv-specifications-content">{{ block.settings.content }}</div>
+    {% endif %}
+{% schema %}
+{
+    "name": "t:common.header.custom_section.label",
+    "tag": "div",
+    "class": "yv-specifications-info",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "custom_content_image",
+            "label": "t:common.image.label"
+        },
+        {
+            "type": "text",
+            "label": "t:sections.specifications.blocks.feature.settings.heading.label",
+            "id": "heading",
+            "default": "Custom block"
+        },
+        {
+            "type": "richtext",
+            "label": "t:sections.specifications.blocks.feature.settings.column_content.content.label",
+            "id": "content",
+            "default": "<p>Custom comparsion details here</p>"
+        }
+        ],
+    "presets": [
+        {
+            "name": "t:common.header.custom_section.label"
+        }
+    ]
+}
+{% endschema %}

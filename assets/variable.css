@@ -1,0 +1,150 @@
+
+@font-face {
+  font-family: Outfit;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("//clinicaveterinariarenaca.com/cdn/fonts/outfit/outfit_n4.387c2e2715c484a1f1075eb90d64808f1b37ac58.woff2") format("woff2"),
+       url("//clinicaveterinariarenaca.com/cdn/fonts/outfit/outfit_n4.aca8c81f18f62c9baa15c2dc5d1f6dd5442cdc50.woff") format("woff");
+}
+
+@font-face {
+  font-family: Outfit;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("//clinicaveterinariarenaca.com/cdn/fonts/outfit/outfit_n7.bfc2ca767cd7c6962e82c320123933a7812146d6.woff2") format("woff2"),
+       url("//clinicaveterinariarenaca.com/cdn/fonts/outfit/outfit_n7.f0b22ea9a32b6f1f6f493dd3a7113aae3464d8b2.woff") format("woff");
+}
+
+
+
+@font-face {
+  font-family: Outfit;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("//clinicaveterinariarenaca.com/cdn/fonts/outfit/outfit_n7.bfc2ca767cd7c6962e82c320123933a7812146d6.woff2") format("woff2"),
+       url("//clinicaveterinariarenaca.com/cdn/fonts/outfit/outfit_n7.f0b22ea9a32b6f1f6f493dd3a7113aae3464d8b2.woff") format("woff");
+}
+
+:root {
+  --gray: #ececec;
+  --dark-gray: #747474;
+  --green:#6cad61;
+  --red:#ec7c7c;
+  --heading-font-family:Outfit,sans-serif;
+  --heading-font-weight:700;
+  --font-family:Outfit,sans-serif;
+  --body-font-weight:400;
+  --body-font-weight-bold: 300;
+  --thin:100;
+  --light:300;
+  --normal:400;
+  --medium:500;
+  --semibold:600;
+  --bold:700; 
+  --extrabold:900;
+  --theme-color: #2B41F5;
+  --theme-light-color: rgba(43, 65, 245, 0.1);
+  --colorTextBody: #FFFFFF;
+  --colorLightTextBody: rgba(255, 255, 255, 0.5);
+  --colorXlightTextBody: rgba(255, 255, 255, 0.3);
+  --colorXXlightTextBody: rgba(255, 255, 255, 0.1);
+  --cartDotColor: #2B41F5;
+  --cartDotColorLight:rgba(43, 65, 245, 0.3);
+  --cartDotColorNull:rgba(43, 65, 245, 0);
+  --colorBtnPrimary: #2B41F5;
+  --colorBtnPrimaryText: #ffffff; 
+  --colorBtnPrimaryBorder: #FFFFFF; 
+  --colorBtnSecondary: #2B41F5;
+  --colorBtnSecondaryText:#FFFFFF;
+  --colorBtnSecondaryBorder:#2B41F5;  
+  --primaryColorBody: #2B41F5;
+  --saleBadgeBg:#2B41F5;
+  --saleBadgeText:#ffffff;
+  --soldBadgeBg:#E22120;
+  --soldBadgeText:#ffffff;
+  --preorderBadgeBg:#2B41F5;
+  --preorderBadgeText:#ffffff;
+  --customBadgeBg:#2B41F5;
+  --customBadgeText:#ffffff;
+  --secondaryColorBody: #FFFFFF;
+ 
+  
+--primarySocialIconBg:#5c6df7;
+    --primaryAlternateBg:#5c6df7;--secondarySocialIconBg:#e6e6e6;
+    --secondaryAlternateBg:#f2f2f2;--tertiarySocialIconBg:#5c6df7;
+    --tertiaryAlternateBg:#5c6df7;--quaternarySocialIconBg:#e6e6e6;
+    --quaternaryAlternateBg:#f2f2f2;--secondarycolorTextBody: #111111;
+  --secondaryColorLightTextBody: rgba(17, 17, 17, 0.5);
+  --secondaryColorXlightTextBody: rgba(17, 17, 17, 0.3);
+  --secondary_heading_color: #2B41F5;
+  --secondary_subheading_color: #111111;
+  --tertiaryColorBody:#2B41F5;
+  --tertiarycolorTextBody: #FFFFFF;
+  --tertiaryColorLightTextBody: rgba(255, 255, 255, 0.5);
+  --tertiaryColorXlightTextBody: rgba(255, 255, 255, 0.3);
+  --tertiary_heading_color: #FFFFFF;
+  --tertiary_subheading_color: #FFFFFF;
+  --gradientColorBody: linear-gradient(262deg, rgba(NaN, NaN, NaN, 1), rgba(217, 217, 217, 1) 100%);
+  --quaternaryColorBody: #FFFFFF;
+  --quaternarycolorTextBody: #111111;
+  --quaternaryColorLightTextBody: rgba(17, 17, 17, 0.5);
+  --quaternaryColorXlightTextBody: rgba(17, 17, 17, 0.3);
+  --quaternary_heading_color: #2B41F5;
+  --quaternary_subheading_color: #111111;
+  --colorImageBg: rgba(0,0,0,0);
+  --colorImageBorder: #eee;
+  --productImageBorder:0;
+  --articleImageBorder:0;
+  --collectionImageBorder:0;
+  --colorTextSavings: #E22120;
+  --colorBgSavings: #2B41F5;
+  --heading_color: #FFFFFF;
+  --subheading_color: #FFFFFF;
+  --heading_base_size: 1.0;
+  --heading_spacing: -0.025em;
+  --heading_line_height: 1.1;
+  --base_spacing: 0.0em;
+  --base_line_height: 1.6;
+  --text_base_size: 1.0;
+  --buttonRadius: 7px;
+  --productGridRadius: 20px;
+  --headingTextTransform:;
+  --buttonFontFamily: var(--font-family);
+  --variantFontFamily: var(--font-family);
+  --filtersHeadingFontFamily: var(--font-family);
+  --priceFontFamily: var(--font-family);
+  --tabHeadingFontFamily: var(--font-family);
+  --tabHeadingTextTransform:;
+  --navigationFontFamily: var(--font-family);
+  --navigationTextTransform:;
+  --variantTextTransform:uppercase;
+  --xsmallText:calc(var(--text_base_size) * 10px);
+  --smallText: calc(var(--text_base_size) * 12px);
+  --text: calc(var(--text_base_size) * 14px);
+  --mediumText: calc(var(--text_base_size) * 16px);
+  --largeText: calc(var(--text_base_size) * 18px);
+  --xlargeText:  calc(var(--text_base_size) * 20px);
+  --buttonAnimationDirection:translateY(100%);
+}
+@media (min-width:1025px) {
+  .button:before,
+  .pdp-action-container button.shopify-payment-button__button--hidden:before,
+  .pdp-action-container button.shopify-payment-button__button:before,
+  .tertiary-button:before {
+      content: "";
+      position: absolute;top:0;
+        left:0;
+        width:100%;
+        height:0;z-index: -1;
+      transition: 0.6s ease-in-out;
+  }
+  .button:hover:before,
+  .pdp-action-container button.shopify-payment-button__button--hidden:hover:before,
+  .pdp-action-container button.shopify-payment-button__button:hover:before,
+  .secondary-button:hover:before {bottom:0;
+      top:auto;
+      height:100%;}
+}

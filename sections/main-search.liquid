@@ -1,0 +1,561 @@
+{% paginate search.results by 24 %}
+<style>
+    #shopify-section-{{ section.id }}{
+    --layoutRadius : {{ section.settings.filters_radius }}px;
+    --primaryAlternateBg:{{ section.settings.filter_card_bg_color }};
+  }
+  .resultContainer > div{
+    display:none;
+  }
+  #searchResultContainer[data-result="products"] > .productResultContainer{
+    display:flex;
+  }
+  #searchResultContainer[data-result="others"] > .otherResultContainer{
+    display:block;
+  }
+  @media screen and (max-width: 767px) {
+    .shopify-section-main-header.sticky-header-hidden-parent {
+      z-index:2;
+    }
+  }
+</style>
+<div class="yv-search-page-container template-search {% unless search.performed and search.results.size > 0 %} template-search--empty{% endunless %}">
+  <div class="{% if settings.layout_width == 'boxed' %}container{% else %}container-fluid{% endif %}">
+    <div class="section-heading center-heading">
+      <{{ section.settings.seo_heading }} class="section-heading-title h2" >{{ 'templates.search.title' | t }}</{{ section.settings.seo_heading }}>
+    </div>
+    <div class="yv-search-result-inputbox" style="--layoutRadius:{% if settings.layout_style == 'rounded' %}10px{% else %}0px{% endif %}">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search">
+          <input name="type" type="hidden" value="product">
+          <input name="options[prefix]" type="hidden" value="last">
+        <div class="yv-search-result-input" style="--layoutRadius:{% if settings.layout_style == 'rounded' %}6px{% else %}0px{% endif %}">
+          <label for="Search-In-Template" class="hidden">{{ 'general.search.search' | t }}</label>
+          <input
+                 class="form-control"
+                 id="Search-In-Template"
+                 type="text"
+                 name="q"
+                 value="{{ search.terms | escape }}"
+                  {% if settings.enable_search_prompts %}
+                    {% if settings.search_prompts_1 != blank or settings.search_prompts_2 != blank or settings.search_prompts_2 != blank %}
+                       placeholder="{{ settings.search_prompts_1 }}" 
+                       data-placeholder-one="{{ settings.search_prompts_1 }}" 
+                       data-placeholder-two="{{ settings.search_prompts_2 }}" 
+                       data-placeholder-three="{{ settings.search_prompts_3 }}"
+                      data-search-prompts
+                    {% else %}
+                       placeholder="{{ 'general.search.search' | t }}"
+                    {% endif %}
+                  {% else %}
+                     placeholder="{{ 'general.search.search' | t }}"
+                  {% endif %}
+                 {%- if settings.predictive_search_enabled -%}
+                 role="combobox"
+                 aria-expanded="false"
+                 aria-owns="predictive-search-results-list"
+                 aria-controls="predictive-search-results-list"
+                 aria-haspopup="listbox"
+                 aria-autocomplete="list" 
+                 autocorrect="off"
+                 autocomplete="off"
+                 autocapitalize="off"
+                 spellcheck="false"
+                 {%- endif -%}
+                 >
+          {%- if settings.predictive_search_enabled -%}
+          <div class="predictive-search predictive-search--search-template" tabindex="-1" data-predictive-search>
+            <div class="predictive-search__loading-state">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+              </svg>
+            </div>
+          </div>
+          <span class="predictive-search-status visually-hidden" role="status" aria-hidden="true"></span> 
+          {%- endif -%}
+          <button type="submit" class="yv-search-button button small-btn" aria-label="{{ 'general.search.search' | t }}">
+            
+            {% if settings.buttonAnimation == 'animated-arrow'%}
+              <span class="btn-animated-arrow"><svg fill="none" viewBox="0 0 8 8">
+                <path fill="currentColor" fill-rule="evenodd" d="M0 0h8v8H7V1.707L1.354 7.354 1 7.707.293 7l.353-.354L6.293 1H0V0Z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+            {% endif %}
+            <span class="btn-txt">Search</span>
+          </button>
+        </div>
+      </form>
+      {%- if search.performed and search.results_count > 0 -%}
+      <div role="status">
+      <h6 class="yv-search-result-count text-center">
+        {{ 'templates.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+      </h6>
+      </div>
+      {%- endif -%}
+    </div>
+    {%- if search.performed -%}
+      {%- capture activeFilters -%}
+  {%- for filter in search.filters -%}
+    {%- for value in filter.active_values -%}
+      <li class="yv-applied-filter-item">
+        <a class="yv-applied-filter-remove" href="{{ value.url_to_remove }}">
+          {{ value.label | escape }}
+          <span class="yv-applied-filter-cross">
+            <svg viewBox="0 0 6 6" width="6" height="6" fill="currentcolor">
+              <path  d="m0.8 0q0 0 0.1 0.1l2.1 2.1l2.1-2.1c0.1-0.1 0.2-0.1 0.2 0l0.6 0.6c0.1 0 0.1 0.1 0 0.2l-2.1 2.1l2.1 2.1c0.1 0.1 0.1 0.2 0 0.2l-0.6 0.6c0 0.1-0.1 0.1-0.2 0l-2.1-2.1l-2.1 2.1c-0.1 0.1-0.2 0.1-0.2 0l-0.6-0.6c-0.1 0-0.1-0.1 0-0.2l2.1-2.1l-2.1-2.1c-0.1-0.1-0.1-0.2 0-0.2l0.6-0.6q0-0.1 0.1-0.1z" />
+            </svg>
+          </span>
+        </a>
+      </li>
+    {%- endfor -%}
+    {% if filter.type == 'price_range' %}
+      {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+        <li class="yv-applied-filter-item">
+          <a class="yv-applied-filter-remove" href="{{ filter.url_to_remove }}">
+            {%- if filter.min_value.value -%}
+              {{ filter.min_value.value | money }}
+            {%- else -%}
+              {{ 0 | money }}
+            {%- endif -%}
+            -
+            {%- if filter.max_value.value -%}
+              {{ filter.max_value.value | money }}
+            {%- else -%}
+              {{ filter.range_max | money }}
+            {%- endif -%}
+            <span class="yv-applied-filter-cross">
+              <svg viewBox="0 0 6 6" width="6" height="6" fill="currentcolor">
+                <path  d="m0.8 0q0 0 0.1 0.1l2.1 2.1l2.1-2.1c0.1-0.1 0.2-0.1 0.2 0l0.6 0.6c0.1 0 0.1 0.1 0 0.2l-2.1 2.1l2.1 2.1c0.1 0.1 0.1 0.2 0 0.2l-0.6 0.6c0 0.1-0.1 0.1-0.2 0l-2.1-2.1l-2.1 2.1c-0.1 0.1-0.2 0.1-0.2 0l-0.6-0.6c-0.1 0-0.1-0.1 0-0.2l2.1-2.1l-2.1-2.1c-0.1-0.1-0.1-0.2 0-0.2l0.6-0.6q0-0.1 0.1-0.1z" />
+              </svg>
+            </span>
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+    <div class="yv-search-result-content">
+      {% assign activeStatus = false %}
+      <div class="yv-tabs-wrapper">
+        <ul class="list-unstyled yv-tabs align-center">
+          <li class="yv-tab-item yv-tab-result-page-head {% if search.types contains 'product' and activeStatus == false %}active{% assign activeStatus = true %}{% endif %}" data-results="search-page-products">
+            <a href="{{ '?type=product&options%5Bprefix%5D=last&q=' | append: search.terms | escape }}" class="yv-tab-link" data-type="products">Products</a>
+          </li>
+          {%- if settings.enable_article_result -%}
+          <li class="yv-tab-item yv-tab-result-page-head {% if search.types contains 'article' and activeStatus == false %}active{% assign activeStatus = true %}{% endif %}" data-results="search-page-articles">
+            <a href="{{ '?type=article&options%5Bprefix%5D=last&q=' | append: search.terms | escape }}" class="yv-tab-link" data-type="others">Articles</a>
+          </li>
+          {%- endif -%}
+          {%- if settings.enable_page_result -%}
+          <li class="yv-tab-item yv-tab-result-page-head {% if search.types contains 'page' and activeStatus == false %}active{% assign activeStatus = true %}{% endif %}" data-results="search-page-pages">
+            <a href="{{ '?type=page&options%5Bprefix%5D=last&q=' | append: search.terms | escape }}" class="yv-tab-link" data-type="others">Pages</a>
+          </li>
+          {%- endif -%}
+        </ul>
+        <div class="yv-tab-content{% if section.settings.enable_filtering == false or search.filters.size == 0 %} filters-hide{% endif %}"> 
+          {%- liquid
+            assign filterVisibility = true
+            if section.settings.enable_filtering == false or search.filters.size == 0 or section.settings.filter_menu == blank
+              if section.settings.enable_sorting == false
+                assign filterVisibility = false
+              endif
+            endif
+          -%}
+          <div class="yv-collections-topbar {{ section.settings.filters_layout }} {% if filterVisibility %} yv-collections-topbar-sticky{% endif %}">
+            {%- if section.settings.enable_filtering -%}
+              {%- if search.filters.size > 0 or section.settings.filter_menu != blank -%}
+              <div class="yv-left-sidebar">
+                <div class="filter-heading-wrapper">
+                  <h6
+                    id="filterHeading"
+                    class="yv-filter-sidebar-heading{% if section.settings.filters_layout == 'drawer' %} filters-drawer-toggle{% endif %}"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 474 474" width="50" height="50">
+                      <g id="Clip-Path" clip-path="url(#cp1)">
+                        <g id="Layer_3">
+                          <path id="Layer_4" fill-rule="evenodd" d="m456.8 0.2c13.1 0 21.3 14.2 14.6 25.5l-183.7 245.1v152.2c0 6.4-3.6 12.3-9.3 15.2l-67.7 33.8c-11.2 5.6-24.5-2.6-24.5-15.1v-186.1l-183.7-245.1c-6.6-11.3 1.5-25.5 14.6-25.5zm-239.1 257.4c1.5 2.6 2.4 5.6 2.4 8.6v163.3l33.8-16.9v-146.4c0-3 0.8-6 2.3-8.6l171-223.5h-380.4z"></path>
+                        </g>
+                      </g>
+                    </svg>
+                    {{ 'sections.collection_template.filter_by_label' | t }}                    
+                  </h6>
+                </div>
+              </div>
+              {%- endif -%}
+            {%- endif -%}
+            {% if search.types contains 'product' %}
+              {% comment %} {% if search.results_count <= 0 %} {% endcomment %}
+              <div class="yv-right-sidebar">
+              {% comment %} {{ search.results_count }} {% endcomment %}
+              <p class="products-count text-medium">
+                {{ 'sections.collection_template.product_count_simple' | t: count: search.results_count }}
+              </p>
+              <div class="collection-sort-elements">
+                {%- if section.settings.enable_display_options -%}
+                  <button href="" class="sort-grid-icon" data-value="grid-layout-2">
+                    <svg viewBox="0 0 10 12" width="10" height="12">
+                      <path  d="m0 0h3v12h-3z" />
+                      <path  d="m7 0h3v12h-3z" />
+                    </svg>
+                  </button>
+                  <button href="" class="sort-grid-icon active" data-value="grid-layout-3">
+                    <svg viewBox="0 0 15 12" width="15" height="12">
+                      <path  d="m0 0h3v12h-3z" />
+                      <path  d="m6 0h3v12h-3z" />
+                      <path  d="m12 0h3v12h-3z" />
+                    </svg>
+                  </button>
+                  <button href="" class="sort-grid-icon " data-value="grid-layout-4">
+                    <svg viewBox="0 0 21 12" width="21" height="12">
+                      <g/><g><g><path d="M0,0H3V12H0V0Z"/><path d="M6,0h3V12h-3V0Z"/><path d="M12,0h3V12h-3V0Z"/><path d="M18,0h3V12h-3V0Z"/></g></g>
+                    </svg>
+                  </button>
+                  <button href="" class="sort-grid-icon" data-value="grid-layout-5">
+                    <svg viewBox="0 0 27 12" width="27" height="12">
+                      <g/><g><g><path d="M0,0H3V12H0V0Z"/><path d="M6,0h3V12h-3V0Z"/><path d="M12,0h3V12h-3V0Z"/><path d="M18,0h3V12h-3V0Z"/><path d="M24,0h3V12h-3V0Z"/></g></g>
+                    </svg>
+                  </button>
+                {%- endif -%}
+                {%- if section.settings.enable_sorting -%}
+                  <div id="toolbox-sort" class="collection-sortbar">
+                    <button type="button" class="collection-sortby-selected">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 10" width="16" height="10">
+                        <path d="m0 0h16v2h-16zm0 4h12v2h-12zm0 4h8v2h-8z"/>
+                      </svg>
+                      <span>{{ 'sections.collection_template.sort_by_label' | t }}</span>
+                      <svg width="15" height="7" viewBox="0 0 15 7" fill="none">
+                        <path
+                          d="M5.22891 6.14382L0.311533 1.66462C0.111998 1.48178 -5.39594e-08 1.23445 -4.26902e-08 0.976639C-3.14211e-08 0.718831 0.111998 0.471497 0.311533 0.288658C0.411127 0.197192 0.529616 0.124594 0.660167 0.0750507C0.790718 0.0255075 0.930746 4.06842e-08 1.07217 4.68662e-08C1.2136 5.30482e-08 1.35363 0.0255076 1.48418 0.0750507C1.61473 0.124594 1.73322 0.197192 1.83281 0.288658L6.73948 4.77761C6.83908 4.86908 6.95757 4.94168 7.08812 4.99122C7.21867 5.04076 7.35869 5.06627 7.50012 5.06627C7.64155 5.06627 7.78158 5.04076 7.91213 4.99122C8.04268 4.94168 8.16117 4.86908 8.26076 4.77761L13.1674 0.288658C13.3677 0.1049 13.64 0.00115203 13.9243 0.000236994C14.2086 -0.000678039 14.4816 0.101316 14.6834 0.28378C14.8851 0.466244 14.999 0.714232 15 0.97319C15.001 1.23215 14.889 1.48086 14.6887 1.66462L9.77133 6.14382C9.16871 6.69206 8.35183 7 7.50012 7C6.64842 7 5.83154 6.69206 5.22891 6.14382Z"
+                          fill="currentColor" />
+                      </svg>
+                    </button>
+                  </div>
+                  <ul id="sort__list" class="list-unstyled sort-list">
+                    <li class="sort-heading d-block d-md-none">
+                      <h4>{{ 'sections.collection_template.sort_by_label' | t }}</h4>
+                      <button class="close-sort">
+                        <svg
+                          class="MobileCrossSvg"
+                          xmlns="http://www.w3.org/2000/svg"
+                          x="0px"
+                          y="0px"
+                          width="50"
+                          height="50"
+                          viewBox="0 0 50 50"
+                          style=" fill:#000000;"
+                        >
+                          <g><path style=" " d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z "></path></g>
+                        </svg>
+                      </button>
+                    </li>
+                      {%- assign sort_by = search.sort_by | default: search.default_sort_by -%}
+                      {%- for option in search.sort_options -%}
+                        <li class="{% if option.value == sort_by %}selected{% endif %}">
+                          <input type="radio" name="sort_by" value="{{ option.value | escape }}" title="{{ option.name | escape }}" id="sortByOption-{{ forloop.index }}"
+                          data-name="{{ option.name | escape }}"  form="FiltersForm"
+                          {% if option.value == sort_by %}
+                            checked
+                          {% endif %}
+                          data-sort-by>
+                          <label for="sortByOption-{{ forloop.index }}">
+                            <span class="checkmark"></span>
+                            {{ option.name | escape -}}
+                          </label>
+                        </li>
+                      {% endfor %}                    
+                  </ul>
+                {%- endif -%}
+              </div>
+            </div>
+              {% comment %} {% endif %} {% endcomment %}
+           {% endif %}
+          </div>
+          {%- if search.types contains 'product' -%}
+          <div class="yv-tab-pane yv-search-result-page-list active" id="search-page-products">             
+            {%- liquid
+            	assign clearAll = '?type=product&options%5Bprefix%5D=last&q=' | append: search.terms | escape
+              	assign filterActiveCheck = false 
+              -%}
+              {%- capture activeFilters -%}
+              {%- for filter in search.filters -%}
+              {%- for value in filter.active_values -%} 
+            {%- assign filterActiveCheck = true -%}
+              <li class="yv-applied-filter-item 11">
+              <a class="yv-applied-filter-remove" href="{{ value.url_to_remove }}">
+                {{ value.label | escape }}
+                <span class="yv-applied-filter-cross">
+                  <svg viewBox="0 0 6 6" width="6" height="6" fill="currentcolor">
+                    <path  d="m0.8 0q0 0 0.1 0.1l2.1 2.1l2.1-2.1c0.1-0.1 0.2-0.1 0.2 0l0.6 0.6c0.1 0 0.1 0.1 0 0.2l-2.1 2.1l2.1 2.1c0.1 0.1 0.1 0.2 0 0.2l-0.6 0.6c0 0.1-0.1 0.1-0.2 0l-2.1-2.1l-2.1 2.1c-0.1 0.1-0.2 0.1-0.2 0l-0.6-0.6c-0.1 0-0.1-0.1 0-0.2l2.1-2.1l-2.1-2.1c-0.1-0.1-0.1-0.2 0-0.2l0.6-0.6q0-0.1 0.1-0.1z" />
+                  </svg>
+                </span>
+              </a>
+              </li>
+              {%- endfor %}
+            {%- if filter.type == "price_range" -%}
+            {%- if filter.min_value.value != nil or filter.max_value.value != nil -%}
+            {%- assign filterActiveCheck = true -%}
+              {% assign active = active | plus: 1 %}              
+              <li class="yv-applied-filter-item 22">
+                <a  class="yv-applied-filter-remove" href="{{ filter.url_to_remove }}">
+                {%- if filter.min_value.value -%}{{ filter.min_value.value | money }}{%- else -%}{{ 0 | money }}{%- endif -%}-{%- if filter.max_value.value -%}{{ filter.max_value.value | money }}{%- else -%}{{ filter.range_max | money }}{%- endif -%}
+                <span class="yv-applied-filter-cross">
+                  <svg viewBox="0 0 6 6" width="6" height="6" fill="currentcolor">
+                    <path  d="m0.8 0q0 0 0.1 0.1l2.1 2.1l2.1-2.1c0.1-0.1 0.2-0.1 0.2 0l0.6 0.6c0.1 0 0.1 0.1 0 0.2l-2.1 2.1l2.1 2.1c0.1 0.1 0.1 0.2 0 0.2l-0.6 0.6c0 0.1-0.1 0.1-0.2 0l-2.1-2.1l-2.1 2.1c-0.1 0.1-0.2 0.1-0.2 0l-0.6-0.6c-0.1 0-0.1-0.1 0-0.2l2.1-2.1l-2.1-2.1c-0.1-0.1-0.1-0.2 0-0.2l0.6-0.6q0-0.1 0.1-0.1z" />
+                  </svg>
+                </span>
+              </a>
+              </li>
+              {%- endif -%}
+              {%- endif -%}
+              {%- endfor -%}
+              {%- endcapture -%} 
+            <div id="CollectionProductsContainer" data-id="{{ section.id }}" class="yv-collection-products productResultContainer{% if section.settings.filters_layout == 'drawer' %} filters-toggle yv-drawer-filters{% endif %}">
+              {%- if section.settings.enable_filtering -%}
+                {%- if search.filters.size > 0 or section.settings.filter_menu != blank -%}
+                  <aside id="filterSideBar" class="yv-filter-sidebar filters-style-{{ section.settings.filters_style }}">
+                    {% render 'collection-sidebar', section: section, results: search, clearAll: clearAll %}
+                  </aside>
+                {% endif %}
+              {% else %}
+                <form id="FiltersForm" class="collectionFilters__form">
+                  <input type="hidden" name="q" value="{{ search.terms }}">
+                </form>
+              {% endif %}        
+              <div class="yv-products-list {% if search.results_count == 0 %}{%- unless filterActiveCheck -%}no-result-found{%- endunless -%}{% endif %}"> 
+                {%- if activeFilters != blank -%}
+                <ul class="list-unstyled yv-products-applied-filter">
+                  {{ activeFilters }}
+                  <li class="yv-applied-filter-item">
+                    <a href="{{ '?type=product&options%5Bprefix%5D=last&q=' | append: search.terms | escape }}"  class="yv-applied-filter-remove">{{ 'sections.collection_template.clear_all' | t }}</a>
+                  </li>
+                </ul>
+                {%- endif -%}
+                <div class="row" data-collection-products>
+                  {%- for item in search.results -%}
+                  {%- case item.object_type -%}
+                  {%- when 'product' -%}
+                  <div class="col-6 col-sm-4 col-md-4 col-lg-3 col-xl-2" data-product-grid>
+                    {%- liquid
+                    if settings.enable_animation
+                      assign animationAttr = 'data-aos="fade-up"'
+                    else
+                      assign animationAttr = ''
+                    endif
+                    render 'product-grid', product: item, animationAttr: animationAttr
+                  -%}
+                  </div>
+                  {%- endcase -%}
+              {%- else -%}
+                  {% render 'not-found' %}
+                  {%- endfor -%}
+                </div>
+                {%- if paginate.pages > 1 -%}
+                {% render 'pagination', paginate: paginate, anchor: '' %}
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+          {%- endif -%}
+          {% if search.types contains 'article' %}
+          <div class="yv-tab-pane yv-search-result-page-list active" id="search-page-articles">
+            <div class="articleResultContainer yv-blog-outer-box">
+              <div class="row" role="list" 
+                  data-result="others"
+                  >
+                {%- for item in search.results -%}
+                {%- case item.object_type -%}
+                {%- when 'article' -%}
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3">
+                  <div class="yv-blog-card">
+                    <a href="{{ item.url }}" class="yv-blog-card-img">
+                      {%- if item.image -%}             
+                      <div class="image-wrapper image-{{ settings.article_image_style }}" {% if settings.article_image_style == 'aspect' %}style="padding-bottom:{{ 1 | divided_by : item.image.aspect_ratio | times: 100 }}%"{% endif %}>
+                        {% render 'lazy-image', image: item.image %} 
+                      </div>
+                    {%- else -%}
+                      {%- if settings.article_image_style != 'aspect' -%}
+                        <div class="image-wrapper no-article-image image-{{ settings.article_image_style }}">
+                      {%- endif -%}
+                      {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                      {%- if settings.article_image_style != 'aspect' -%}
+                        </div>
+                      {%- endif -%}                    
+                    {%- endif -%}
+                      <span class="yv-blog-date">{{ item.published_at | date: "%B %d, %Y" }}</span>
+                    </a>
+                    <h5 class="yv-blog-title d-none d-md-block">{{ item.title | truncatewords: 6 }}</h5> 
+                    <div class="yv-blog-card-text">
+                      <h5 class="yv-blog-title d-block d-md-none">{{ item.title | truncatewords: 6 }}</h5>
+                      {%- if item.excerpt_or_content != blank -%}
+                      <p class="yv-blog-desc">{{ item.excerpt_or_content | strip_html | truncatewords: 15 }}</p>
+                      {%- endif -%}
+                      <a href="{{ item.url }}" class="button xsmall-btn secondary-button">
+                        {% if settings.buttonAnimation == 'animated-arrow'%}
+                          <span class="btn-animated-arrow"><svg fill="none" viewBox="0 0 8 8">
+                            <path fill="currentColor" fill-rule="evenodd" d="M0 0h8v8H7V1.707L1.354 7.354 1 7.707.293 7l.353-.354L6.293 1H0V0Z" clip-rule="evenodd"></path>
+                            </svg>
+                          </span>
+                        {% endif %}
+                        <span class="btn-txt">{{ 'blogs.article.read_more' | t }}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                {%- endcase -%}
+                {%- else -%}
+                {% render 'not-found' %}
+                {%- endfor -%}
+              </div>
+            </div>	
+          </div>
+          {% endif %}
+          {% if search.types contains 'page' %}
+          <div class="yv-tab-pane yv-search-result-page-list active" id="search-page-pages">
+            <div class="pageResultContainer">
+              <div class="row" role="list" 
+                  data-result="others"
+                  >
+                {%- for item in search.results limit: 50 -%}
+                {%- case item.object_type -%}
+                {%- when 'page' -%}
+              <div class="col-12 col-sm-6 col-md-4">
+                <div class="page-result-item">
+                  <h5 class="page-result-title">{{ item.title | truncate: 50 | escape }}</h5>
+                  {%- if item.content != blank -%}
+                  <p class="page-result-desc">{{ item.content | strip_html | truncatewords: 50 | escape }}</p>
+                  {%- endif -%}
+                  <a class="page-result-link" href="{{ item.url }}">Read More</a>
+                </div>
+              </div>
+                {%- endcase -%}
+                {%- else -%}
+                {% render 'not-found' %}
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {%- liquid 
+          		if search.types contains 'page' or search.types contains 'article'
+                  if paginate.pages > 1
+                      render 'pagination', paginate: paginate, anchor: ''
+                  endif
+                endif
+          -%}
+        </div>
+      </div>
+    </div>
+    {%- endif -%}
+  </div>
+</div>
+{%- endpaginate -%}
+{% schema %}
+{
+  "name": "t:sections.main-search.name",
+  "tag": "section",
+  "class": "main-search-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "seo_heading",
+      "label": "t:common.header.heading_tag.label",
+      "info": "t:common.header.heading_tag.info",
+      "default": "h2",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:common.header.heading_tag.options.h1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:common.header.heading_tag.options.h2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:common.header.heading_tag.options.h3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:common.header.heading_tag.options.h4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:common.header.heading_tag.options.h5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:common.header.heading_tag.options.h6.label"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection.settings.header__1.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection.settings.enable_filtering.label",
+      "info": "t:sections.main-collection.settings.enable_filtering.info"
+    },
+    {
+      "type": "select",
+      "id": "filters_layout",
+      "default": "sidebar",
+      "label": "t:sections.main-collection.settings.filters_layout.label",
+      "options": [
+        {
+          "value": "drawer",
+          "label": "t:sections.main-collection.settings.filters_layout.options.drawer.label"
+        },
+        {
+          "value": "sidebar",
+          "label": "t:sections.main-collection.settings.filters_layout.options.sidebar.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "filters_style",
+      "default": "border",
+      "label": "t:sections.main-collection.settings.filters_style.label",
+      "options": [
+        {
+          "value": "border",
+          "label": "t:sections.main-collection.settings.filters_style.options.border.label"
+        },
+        {
+          "value": "card",
+          "label": "t:sections.main-collection.settings.filters_style.options.card.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "default": true,
+      "label": "t:sections.main-collection.settings.enable_sorting.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_display_options",
+      "default": true,
+      "label": "t:sections.main-collection.settings.enable_display_options.label"
+    },
+    {
+      "type": "range",
+      "id": "filters_radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "default": 10,
+      "label": "t:sections.main-collection.settings.filters_radius.label"
+    },
+     {
+      "type": "color",
+      "id": "filter_card_bg_color",
+      "label": "t:settings_schema.colors.settings.card_background.label"
+    }
+  ]
+}
+{% endschema %}

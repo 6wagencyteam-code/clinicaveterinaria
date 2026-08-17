@@ -1,0 +1,200 @@
+{% assign active_flag = false %}
+{% capture collectionTabs %}
+    {% for i in (1..5) %}
+    {%- liquid
+        assign collection_id = 'collection_tabbed_' | append: i
+        assign collction = block.settings[collection_id]
+    -%}
+    {% if collction.products != blank %}                   
+        <li class="yv-megamenu-collection-box{% if active_flag == false %} active{% endif %}" data-collection-tab="{{ collection_id }}" >
+        <button class="yv-collection-menu-link">
+            <span>{{ collction.title }}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M1.91357 5.95508H9.13327" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M5.69238 1.91797L9.70588 5.93147L5.69238 9.63677" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            </button>
+        </li>
+        {% assign active_flag = true %}
+    {% endif %}
+    {% endfor %}
+{% endcapture %}
+{% liquid
+  assign col_classes_inner = 'col-lg-12'
+  assign col_classes_outer = 'col-lg-9'
+  if block.settings.promotion_products == blank 
+  assign col_classes_outer = 'col-lg-12'
+  endif
+  if block.settings.tab_image_style == 'landscape'
+    assign tab_image_ratio = 75
+  elsif block.settings.tab_image_style == 'square'
+    assign tab_image_ratio = 100
+  elsif block.settings.tab_image_style == 'portrait'
+    assign tab_image_ratio = 125
+  endif
+  if block.settings.product_image_style == 'landscape'
+    assign image_ratio = 75
+  elsif block.settings.product_image_style == 'square'
+    assign image_ratio = 100
+  elsif block.settings.product_image_style == 'portrait'
+    assign image_ratio = 125
+  endif
+
+  if source == 'mobile-menu'
+    assign col_class = 'col-md-12'
+    assign col_class_below = 'col-md-12'
+    assign container = false
+  else
+    assign col_class = 'col-md-7'
+    assign col_class_below = 'col-md-5'
+    assign container = false
+  endif
+%}
+<category-megamenu class="yv-category-menus-outer fullwidth-megamenus" id="category-menu-{{ block.id }}">
+{% if container %}<div class="container">{% endif %}
+    <div class="row">
+      <div class="col-12 col-sm-12 {{ col_class }} {{ col_classes_outer }}">
+        <div class="yv-category-left-holder">
+          <div class="row">
+            {% if collectionTabs != blank and block.settings.heading_1 != blank %}
+              <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+                <div class="yv-dropdown-catergories yv-menu-tabbing">
+                  {% if block.settings.heading_1 != blank %}
+                    <div class="menu-category-title">{{ block.settings.heading_1 }}</div>
+                  {% endif %}
+                  <ul class="list-unstyled yv-megamenus-collection-list">
+                    {{ collectionTabs }}
+                  </ul>
+                </div>
+              </div>
+              {% assign col_classes_inner = 'col-lg-9' %}
+            {% endif %}
+            <div class="col-12 col-sm-12 col-md-12 {{ col_classes_inner }}">
+              {% if block.settings.heading_2 != blank %}
+                <div class="menu-category-title">{{ block.settings.heading_2 }}</div>
+              {% endif %}
+              {% assign collection_exist = false %}
+              {% assign active_flag = false %}
+              {% for i in (1..5) %}
+                {%- liquid
+                  assign collection_id = 'collection_tabbed_' | append: i
+                  assign collection_link_id = 'link_tabbed_' | append: i
+                  assign collection_link_text = 'link_text_' | append: i
+
+                  assign collction = block.settings[collection_id]
+                  assign collection_link = block.settings[collection_link_id]
+                  assign collection_browse_text = block.settings[collection_link_text]
+                -%}
+                {% if collction.products != blank %}
+                  <div
+                    class="yv-category-menu-wrapper{% if active_flag == false %} active{% endif %}"
+                    id="{{ collection_id }}"
+                    data-collection-tab-content
+                  >
+                    <div class="yv-megamenu-category-products mobile-swipe">
+                    {% assign collection_exist = true %}
+                    {% for collection_product in collction.products limit: 10 %}
+                      <div class="yv-megamenu-category-box text-center">
+                        <a href="{{ collection_product.url }}" class="yv-megamenu-category-img">
+                          <div class="image-wrapper" style="padding-bottom:{{ tab_image_ratio }}%">
+                            {% if collection_product.featured_media != blank %}
+                              {%- render 'lazy-image', image: collection_product.featured_media -%}
+                            {% else %}
+                              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                            {% endif %}
+                          </div>
+                        </a>
+                        <div class="yv-category-information">
+                          <a href="{{ collection_product.url }}" class="">{{ collection_product.title }}</a>
+                        </div>
+                      </div>
+                    {% endfor %}
+                     </div>
+                    <div class="yv-category-browse d-flex justify-content-between align-items-center">
+                      <a
+                        href="{% if collection_link != blank %}{{ collection_link }}{% else %}{{ collction.link }}{% endif %}"
+                        class="yv-category-link"
+                      >
+                        {%- if collection_browse_text != blank -%}
+                          {{- collection_browse_text -}}
+                        {%- else -%}
+                          {{- collction.title -}}
+                        {%- endif -%}
+                      </a>
+                      {% if collction.image %} 
+                        <div class="yv-category-image">
+                            <div class="image-wrapper" style="padding-bottom:100%"> 
+                                {%- render 'lazy-image', image: collction.image -%}
+                            </div>
+                        </div> 
+                      {% endif %}
+                    </div>
+                    {% assign active_flag = true %}
+                  </div>
+                {% endif %}
+              {% endfor %}
+              {% if collection_exist == false %}
+                <div class="yv-category-menu-wrapper active">
+                   <div class="yv-megamenu-category-products ">
+                  {% for collection_product in collections.all.products limit: 10 %} 
+                    <div class="yv-megamenu-category-box text-center">
+                      <a href="" class="yv-megamenu-category-img">
+                        <div class="image-wrapper" style="padding-bottom:{{ tab_image_ratio }}%">
+                          {%- render 'lazy-image', image: collection_product.featured_media -%}
+                        </div>
+                      </a>
+                      <div class="yv-category-information">
+                        <a href="{{ collection_product.url }}" class="">{{ collection_product.title }}</a>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+                  <div class="yv-category-browse d-flex justify-content-between align-items-center">
+                    <a href="{{ collections['all'].url }}" class="yv-category-link">{{ 'general.view_all' | t }}</a>
+                    {% comment %}
+                      {% if collction.image %}
+                        <div class="yv-category-image">
+                            <div class="image-wrapper" style="padding-bottom:100%"> 
+                                {%- render 'lazy-image', image: collction.image -%}
+                            </div>
+                        </div>
+                      {% endif %}
+                    {% endcomment %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% if block.settings.promotion_products != blank %}
+        <div class="col-12 col-sm-12 {{ col_class_below }} col-lg-3">
+          <div class="yv-megamenu-product-outer">
+            {% if block.settings.promotion_heading != blank %}
+              <div class="menu-category-title">{{ block.settings.promotion_heading }}</div>
+            {% endif %}
+            <ul class="list-unstyled yv-megamenu-product-list">
+              {% for promotion_product in block.settings.promotion_products %}
+                <li class="yv-megamenu-product-box">
+                  <a href="{{ promotion_product.url }}" class="yv-megamenu-product-img">
+
+                    <div class="image-wrapper" style="padding-bottom:{{ image_ratio }}%">
+                      {%- render 'lazy-image', image: promotion_product.featured_media -%}
+                    </div>
+                  </a>
+                  <div class="yv-megamenu-product-detail yv-product-information">
+                    <a href="{{ promotion_product.url }}" class="">{{ promotion_product.title }}</a>
+                    <div class="yv-prizebox">
+                      <span class="yv-product-price">{{ promotion_product.price | money_with_currency }}</span>
+                    </div>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% if container %}</div>{% endif %}
+</category-megamenu>

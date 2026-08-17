@@ -1,0 +1,176 @@
+
+.view-details:hover {
+    color: var(--colorTextBody);
+} 
+.yv-compare-card .yv-product-information { 
+    gap: 10px;
+    border-bottom: 1px solid var(--primaryBorderColor);
+    padding-bottom: 20px
+} 
+.yv-specifications-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primaryAlternateBg);
+    max-width: 41px;
+    height: 41px;
+    border-radius: var(--layoutRadius);
+    fill: var(--customBadgeText);
+    margin-inline: auto;
+    padding: 8px;
+    overflow: hidden;
+}
+.yv-specifications-icon img {
+    height: auto;
+}
+.yv-specifications-info { 
+    gap: 10px;
+    padding-block: 25px 20px;
+} 
+.yv-specification-details .yv-specifications-info:not(:last-child) {
+    border-bottom: 1px dashed var(--primaryBorderColor);
+} 
+.yv-compare-card,
+.yv-compare-card .yv-product-card-img {
+    border-radius: var(--layoutRadius);
+} 
+.yv-compare-card {
+    padding: 20px; 
+    margin-bottom: 0; 
+    position: relative;
+    z-index: 1;
+} 
+
+.yv-specifications-title,
+.yv-compare-card .yv-product-title {
+    font-weight: var(--semibold);
+} 
+.yv-compare-wrapper {
+    display: flex; 
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: 100%;
+    padding: 10px;    /* for shadow */  
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch;
+}
+
+ .yv-compare-wrapper .yv-compare-outline:last-child{
+    margin-right: auto;
+ }
+
+ .yv-compare-wrapper .yv-compare-outline:first-child{
+    margin-left: auto;
+ }
+
+.yv-compare-outline {  
+    flex: calc(100%/3 - 14px);
+    min-width: calc(100% / 3 - 14px); 
+    max-width: calc(100% / 3 - 14px); 
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    position: relative;
+    z-index: 1;
+    overflow: hidden; 
+    border-radius: var(--layoutRadius); 
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.10);
+} 
+.yv-compare-outline::after {  
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 100%; 
+    height: 100%; 
+    /* border thickness */
+    --b: 2px;
+    /* radius */
+    --x: 50%;
+    /* mouse X */
+    --y: 50%;
+    /* mouse Y */
+    --spin: 0deg;
+    /* rotation */
+    --glow: 1.25;
+    --runner: 1;
+    /* border-radius: var(--r); */
+    border: var(--b) solid transparent;
+    transform: translateZ(0);
+    outline: none;
+    z-index: -1;
+    border-radius: var(--layoutRadius);
+    overflow: hidden;
+}
+.yv-specification-details *:not(.button svg,.button span,.button),
+.yv-compare-card .yv-product-information *:not(.button svg,.button span,.button,.yv-specifications-icon) {
+    color: var(--primaryCardText);
+}
+.yv-compare-outline::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--primaryCardBackground);
+    border-radius: var(--layoutRadius);
+    z-index: 0;
+    max-width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    margin: auto; 
+}
+
+.yv-compare-card .yv-product-information,
+.yv-specifications-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.yv-specifications-content table {
+    white-space: nowrap;
+} 
+
+@media (hover: hover) and (pointer: fine) { 
+.yv-compare-outline:hover:after { 
+    background: linear-gradient(180deg, rgba(14, 14, 18, 0.88), rgb(255 255 255 / 80%)) padding-box, 
+        conic-gradient(from var(--spin) at var(--x) var(--y), rgba(255, 45, 210, 1), rgba(120, 60, 255, 1), rgba(40, 170, 255, 1), rgba(0, 255, 200, 1), rgba(255, 230, 0, 1), rgba(255, 106, 0, 1), rgba(255, 45, 210, 1)) border-box;
+    background-clip: padding-box, border-box;
+    background-origin: border-box;
+    animation: gradient-rotate 4s linear infinite;
+}
+
+.yv-compare-outline:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+@keyframes gradient-rotate {
+    0% {
+        filter: hue-rotate(0deg);
+    } 
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
+}
+  
+@media (max-width: 1199px){
+    .yv-specifications-info{
+        padding-block: 15px 20px; 
+        gap: 5px;
+    }
+    .yv-compare-card{
+        padding: 15px;
+    }  
+}
+
+@media (max-width: 991px){
+    .yv-compare-outline { 
+        flex: calc(100% / 2 - 14px);
+        max-width: calc(100% / 2 - 14px);
+        min-width: calc(100% / 2 - 14px);
+    } 
+}
+
+@media (max-width: 767px){
+       .yv-compare-outline { 
+        flex: calc(100% / 1 - 30px);
+        max-width: calc(100% / 1 - 30px);
+        min-width: calc(100% / 1 - 30px); 
+    }
+}

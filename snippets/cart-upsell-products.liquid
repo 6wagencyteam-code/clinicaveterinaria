@@ -1,0 +1,48 @@
+{% if settings.upsell_products %}
+  {% assign uniqueProductIdsString = cart.items | map: 'product_id' | uniq | join: ', ' %}
+  <div
+    class="upsell-product-wrapper hidden product-recommendations"
+    data-related-products="{{ settings.upsell_type }}"
+    data-limit="{{ settings.product_range }}"
+    data-cart-upsell-wrapper
+  >
+    <div class="container xs-container">
+      <div class="section-heading">
+        <h5>
+          {% if settings.upsell_heading != blank -%}
+            {{- settings.upsell_heading -}}
+          {%- else -%}
+            {{- 'general.cart_upsell' | t -}}
+          {%- endif %}
+        </h5>
+      </div>
+      <div
+        class="upsell-product-slider"
+        data-cart-upsell
+        data-desktop-only
+        data-flickity-slider='
+          {"wrapAround":false,
+          "cellAlign": "left",
+          "dragThreshold":true,
+          "contain": true,
+          "groupCells": true,
+          "touchVerticalScroll": false,
+          "prevNextButtons": true,
+          "pageDots": false,
+          "arrowShape":"M50.1228 1.62718C48.1063 -0.542395 44.8369 -0.542395 42.8204 1.62718L1.51235 46.0716C-0.504121 48.2412 -0.504121 51.7588 1.51235 53.9284L42.8204 98.3728C44.8369 100.542 48.1063 100.542 50.1228 98.3728C52.1392 96.2032 52.1392 92.6857 50.1228 90.5161L17.6293 55.5556H94.8365C97.6882 55.5556 100 53.0682 100 50C100 46.9317 97.6882 44.4444 94.8365 44.4444H17.6293L50.1228 9.48393C52.1392 7.31435 52.1392 3.79676 50.1228 1.62718Z"}
+        '
+      >
+        {%- liquid
+          if settings.product_list != blank and settings.upsell_type == 'product-list'
+            for product in settings.product_list limit: settings.product_range
+              unless uniqueProductIdsString contains product.id
+                assign mainClass = 'small-product-card'
+                render 'product-grid', product: product, productClasses: mainClass, hideHoverImage: true, hide_options: true, hideRelated: true, hideQuickView: true, hidestockcount: true, hidebadges: true, hideCustomLabel: true, hidePickup: true
+              endunless
+            endfor
+          endif
+        -%}
+      </div>
+    </div>
+  </div>
+{% endif %}

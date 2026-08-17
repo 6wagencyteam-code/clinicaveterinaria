@@ -1,0 +1,22 @@
+{% if content_heading != blank %}
+<div class="yv-product-accordion sidebar-content" {{ block.shopify_attributes }} data-tabs-open-method="click" data-faq-accordions>
+    <details class="yv-accordion-card"{% if open_default_accordion %} open{% endif %}>
+      <summary class="yv-accordion-header{% if open_default_accordion %} active{% endif %}" content="accordion-content-{{ block.id }}">
+        <h6>{{ content_heading }}</h6>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" width="14px" height="14px" viewBox="0 0 14 14" xml:space="preserve">
+          <rect class="v-line" x="6" y="0" width="2.1" height="14"/>
+          <rect class="h-line" x="6" transform="matrix(6.123234e-17 -1 1 6.123234e-17 0 14)" width="2.1" height="14"/>
+        </svg>
+      </summary>
+      <div id="accordion-content-{{ block.id }}" class="yv-accordion-content"{% if open_default_accordion %} style="display:block"{% endif %}>
+        <div class="yv-content-body">
+        {% if content != blank %} 
+        {{ content }}
+        {% else %}
+        {{ 'onboarding.rich_text_field' | t }}
+        {% endif %}
+        </div>
+      </div>
+    </details>
+</div>
+{% endif %}

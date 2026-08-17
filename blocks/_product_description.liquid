@@ -1,0 +1,18 @@
+{% if closest.product.description != blank %}
+    <div class="yv-specifications-title">{{ 'Description' }}</div>
+    <div class="yv-specifications-content rte">{{ closest.product.description | replace: '<table', '<div class="table-responsive"><table ' | replace: '</table>', '</table></div>' }}</div> 
+{% endif %}
+{% schema %}
+{
+    "name": "t:sections.before-after.settings.description.label",
+    "class": "yv-specifications-info",
+    "tag": "div",
+    "settings": [
+    ],
+    "presets": [
+      {
+        "name": "t:sections.before-after.settings.description.label"
+      }
+    ]
+}
+{% endschema %}

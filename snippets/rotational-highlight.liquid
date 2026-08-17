@@ -1,0 +1,26 @@
+{%- assign parts = heading | split: '[' -%}
+{%- for part in parts -%}
+  {%- if part contains ']' -%}
+    
+    {%- assign inside = part | split: ']' | first -%}
+    {%- assign after  = part | split: ']' | last -%}
+    {%- assign rotating_items = inside | split: ',' -%}
+
+    <rotating-text class="section-heading-rotator" aria-hidden="true">
+      <div class="section-heading-rotator-wrapper">
+        {%- for item in rotating_items -%}
+          <span class="section-heading-rotator-item">
+            {{ item | strip }}
+          </span>
+        {%- endfor -%}
+      </div>
+    </rotating-text>
+
+    {%- if after != blank and after != inside -%}
+      {{ after }}
+    {%- endif -%}
+
+  {%- else -%}
+    {{ part }}
+  {%- endif -%}
+{%- endfor -%}

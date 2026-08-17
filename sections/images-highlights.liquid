@@ -1,0 +1,1868 @@
+{{ 'images-highlights.css' | asset_url | stylesheet_tag }}
+<div class="container sm-container">
+  <images-highlights class="yv-images-highlights-wrapper" data-blocks-count="{{ section.blocks.size }}">
+    <div class="yv-images-highlights-media-wrapper">
+      {%- for block in section.blocks -%}
+      {%- liquid
+        assign default_title = 'sections.images_highlights.highlight_title' | t
+        assign highlight_title = block.settings.highlight_title | default: default_title 
+
+        assign default_description = 'sections.images_highlights.highlight_description' | t
+        assign highlight_description = block.settings.highlight_description | default: default_description 
+        
+      -%}
+       {%- if highlight_title != blank and highlight_description != blank -%} 
+        {%- liquid
+          if block.settings.link_to != blank
+            assign tag = 'a'
+          else
+            assign tag = 'div'
+          endif
+        -%}
+        <{{ tag }} {% if tag == 'a' %} href="{{ block.settings.link_to }}" {% endif %} class="yv-images-highlights-media{% if tag == 'a' %} d-block{% endif %}{% if forloop.first %} active{% endif %}"  data-highlight-item="yv-item-{{ block.id }}" {{ block.shopify_attributes }}>
+          <div class="image-wrapper image-landscape">
+            {%- if block.settings.image != blank -%}
+            {%- assign alt = block.settings.highlight_title | default: block.settings.image.title -%}
+            {{ block.settings.image 
+              | image_url: width: 3840, format: 'webp'
+              | image_tag: 
+              widths: '320,480,640,768,1024,1280,1440,1600,1920,2048,2560,3840',
+              sizes: '100vw',
+              fetchpriority: 'auto',
+              loading: 'lazy',
+              alt: alt
+            }}
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+        </{{ tag }}>
+      {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="yv-images-highlights-content-wrapper">
+      {%- if section.blocks.size > 1 -%}
+      <div class="yv-images-navigation">
+        <button class="flickity-button flickity-prev-next-button previous" type="button" aria-label="Previous" data-action="previous">
+          <svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M50.1228 1.62718C48.1063 -0.542395 44.8369 -0.542395 42.8204 1.62718L1.51235 46.0716C-0.504121 48.2412 -0.504121 51.7588 1.51235 53.9284L42.8204 98.3728C44.8369 100.542 48.1063 100.542 50.1228 98.3728C52.1392 96.2032 52.1392 92.6857 50.1228 90.5161L17.6293 55.5556H94.8365C97.6882 55.5556 100 53.0682 100 50C100 46.9317 97.6882 44.4444 94.8365 44.4444H17.6293L50.1228 9.48393C52.1392 7.31435 52.1392 3.79676 50.1228 1.62718Z" class="arrow"></path></svg>
+        </button>
+        <button class="flickity-button flickity-prev-next-button next" type="button" aria-label="Next" data-action="next">
+          <svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M50.1228 1.62718C48.1063 -0.542395 44.8369 -0.542395 42.8204 1.62718L1.51235 46.0716C-0.504121 48.2412 -0.504121 51.7588 1.51235 53.9284L42.8204 98.3728C44.8369 100.542 48.1063 100.542 50.1228 98.3728C52.1392 96.2032 52.1392 92.6857 50.1228 90.5161L17.6293 55.5556H94.8365C97.6882 55.5556 100 53.0682 100 50C100 46.9317 97.6882 44.4444 94.8365 44.4444H17.6293L50.1228 9.48393C52.1392 7.31435 52.1392 3.79676 50.1228 1.62718Z" class="arrow"></path></svg>
+        </button>
+      </div>
+      {%- endif -%}
+      <ul class="yv-images-highlights-content list-unstyled d-none d-md-block">
+        {%- for block in section.blocks -%}
+
+          {%- liquid
+            assign default_title = 'sections.images_highlights.highlight_title' | t
+            assign highlight_title = block.settings.highlight_title | default: default_title 
+    
+            assign default_description = 'sections.images_highlights.highlight_description' | t
+            assign highlight_description = block.settings.highlight_description | default: default_description 
+            
+          -%}
+
+          {%- if highlight_title != blank and highlight_description != blank -%}
+            <li class="yv-images-highlights-item" data-highlight-item-content="yv-item-{{ block.id }}" {{ block.shopify_attributes }}>
+              <div class="yv-images-highlights-background-mask"></div>
+              <button class="yv-images-highlights-header" type="button" id="yv-item-{{ block.id }}" aria-label="{{ block.settings.highlight_title | escape }}">
+                <div class="yv-images-highlights-header-inner">
+                  <span class="yv-images-highlights-icon">
+                    <svg viewBox="0 0 11 11" fill="none">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M9.9924 5.63242V4.76037H5.63243V0.400391H4.76038V4.76037H0.400391V5.63242H4.76038V9.99241H5.63243V5.63242H9.9924Z" fill="currentColor" stroke="currentColor" stroke-width="0.8"/>
+                    </svg>
+                  </span>
+                  <div class="yv-images-highlights-title heading-font text-medium">{{ highlight_title }}</div>
+                </div>
+              </button>
+              <div class="yv-images-highlights-body">
+                <div class="yv-images-highlights-body-content-mask">
+                  <div class="yv-images-highlights-body-inner" data-highlight-body>
+                      <span class="yv-images-highlights-body-inner-title heading-style h6">{{ highlight_title }}</span>
+                      {{ highlight_description }}
+                  </div>
+                </div>
+              </div>
+            </li>
+          {%- endif -%}
+        {%- endfor -%} 
+      </ul>
+      <div class="yv-images-highlights-content-mobile-wrapper">
+        <ul class="yv-images-highlights-content yv-images-highlights-content-mobile list-unstyled d-flex d-md-none">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign default_title = 'sections.images_highlights.highlight_title' | t
+              assign highlight_title = block.settings.highlight_title | default: default_title 
+      
+              assign default_description = 'sections.images_highlights.highlight_description' | t
+              assign highlight_description = block.settings.highlight_description | default: default_description 
+              
+            -%}
+            {%- if highlight_title != blank and highlight_description != blank -%}
+              <li class="yv-images-highlights-item" data-highlight-item-content-mobile="yv-item-{{ block.id }}" {{ block.shopify_attributes }}>
+                <div class="yv-images-highlights-background-mask"></div>
+                <button class="yv-images-highlights-header" type="button" id="yv-item-{{ block.id }}" aria-label="{{ block.settings.highlight_title | escape }}">
+                  <div class="yv-images-highlights-header-inner">
+                    <span class="yv-images-highlights-icon">
+                      <svg viewBox="0 0 11 11" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M9.9924 5.63242V4.76037H5.63243V0.400391H4.76038V4.76037H0.400391V5.63242H4.76038V9.99241H5.63243V5.63242H9.9924Z" fill="currentColor" stroke="currentColor" stroke-width="0.8"/>
+                      </svg>
+                    </span>
+                    <div class="yv-images-highlights-title heading-font text-medium">{{ highlight_title }}</div>
+                  </div>
+                </button>
+                <div class="yv-images-highlights-body">
+                  <div class="yv-images-highlights-body-content-mask">
+                    <div class="yv-images-highlights-body-inner" data-highlight-body>
+                        <span class="yv-images-highlights-body-inner-title heading-style h6">{{ highlight_title }}</span>
+                        {{ highlight_description }}
+                    </div>
+                  </div>
+                </div>
+              </li>
+            {%- endif -%}
+          {%- endfor -%} 
+        </ul>
+      </div>
+    </div>
+  </images-highlights>
+</div> 
+
+<style>
+  #shopify-section-{{ section.id }}.shopify-section {
+    background:var(--{{- section.settings.bgcolor -}}ColorBody);
+    padding-top:{{ section.settings.top_space_desktop }}px;
+    padding-bottom:{{ section.settings.bottom_space_desktop }}px;
+    --mediaHeight:{{ section.settings.desktop_height }}px;
+    --layoutRadius:{{ section.settings.desktop_radius }}px;
+    {% if section.settings.enable_top_border %}
+      border-top: 1px {{ section.settings.border_style }} var(--primaryBorderColor);
+    {% endif %}
+    {% if section.settings.enable_bottom_border %}
+      border-bottom: 1px {{ section.settings.border_style }} var(--primaryBorderColor);
+    {% endif %}
+    {%- unless section.settings.bgcolor == 'primary' or section.settings.bgcolor == 'gradient' -%}
+    --primaryColorBody:var(--{{- section.settings.bgcolor -}}ColorBody);
+    --primaryBorderColor: var(--{{- section.settings.bgcolor -}}BorderColor);
+    {%- endunless -%}
+  }
+
+
+  @media only screen and (max-width:575px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      padding-top:{{ section.settings.top_space_mobile }}px;
+      padding-bottom:{{ section.settings.bottom_space_mobile }}px;
+      --mediaHeight:{{ section.settings.mobile_height }}px;
+    }
+  }
+
+  {% if section.settings.section_visibility == 'large' %}
+    @media (max-width: 767px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% elsif section.settings.section_visibility == 'small' %}
+    @media (min-width: 768px) {
+      #shopify-section-{{ section.id }}{
+        display: none !important;
+      }
+    }
+  {% endif %}
+</style>
+{% comment %}
+{%- javascript -%}
+  class ImagesHighlights extends HTMLElement {
+    constructor() {
+      super();
+      this.highlightItems = this.querySelectorAll('[data-highlight-item]');
+      this.highlightContentItems = this.querySelectorAll('[data-highlight-item-content]');
+      this.buttons = this.querySelectorAll('button[id^="yv-item-"]');
+      this.highlightBodyItems = this.querySelectorAll('[data-highlight-body]');
+      this.animationCount = 0; // Track number of active animations
+      this.animationQueue = []; // Queue for pending animations
+      this.currentMobileIndex = 0; // Track current mobile slider index
+      this.resizeHandler = null; // Store resize handler reference
+    }
+    connectedCallback() {
+      this.init();
+      this.setupResizeListener();
+    }
+    
+    disconnectedCallback() {
+      if (this.resizeHandler) {
+        window.removeEventListener('resize', this.resizeHandler);
+      }
+    }
+    
+    // Setup resize listener to update max-width on window resize
+    setupResizeListener() {
+      this.resizeHandler = () => {
+        const dynamicMaxWidth = this.getDynamicMaxWidth();
+        
+        // Update all desktop items' body-inner max-width
+        Array.from(this.highlightContentItems).forEach(item => {
+          const bodyInner = item.querySelector('.yv-images-highlights-body-inner');
+          if (bodyInner) {
+            bodyInner.style.maxWidth = `${dynamicMaxWidth}px`;
+          }
+        });
+        
+        // Update all mobile items' body-inner max-width (no max-width on item itself)
+        const mobileItems = this.querySelectorAll('[data-highlight-item-content-mobile]');
+        if (mobileItems && mobileItems.length > 0) {
+          mobileItems.forEach(item => {
+            // Apply 100% max-width to body-inner (CSS handles it on mobile)
+            const bodyInner = item.querySelector('.yv-images-highlights-body-inner');
+            if (bodyInner) {
+              bodyInner.style.maxWidth = '100%';
+            }
+          });
+        }
+      };
+      
+      window.addEventListener('resize', this.resizeHandler);
+    }
+    
+    // Helper method to mark animation start
+    startAnimation() {
+      this.animationCount++;
+    }
+    
+    // Helper method to mark animation end
+    endAnimation() {
+      this.animationCount = Math.max(0, this.animationCount - 1);
+      
+      // Process queued animations if no animations are running
+      if (this.animationCount === 0 && this.animationQueue.length > 0) {
+        const nextAction = this.animationQueue.shift();
+        setTimeout(() => {
+          if (nextAction.type === 'activate') {
+            this.activateItem(nextAction.buttonId);
+          } else if (nextAction.type === 'navigate') {
+            this.navigate(nextAction.direction);
+          }
+        }, 50); // Small delay to ensure DOM updates
+      }
+    }
+    
+    // Check if any animation is in progress
+    isAnimating() {
+      return this.animationCount > 0;
+    }
+    
+    // Helper function to calculate dynamic max-width (max 470px, responsive to viewport)
+    getDynamicMaxWidth() {
+      // Get content wrapper to calculate available space
+      const contentWrapper = this.querySelector('.yv-images-highlights-content-wrapper');
+      if (!contentWrapper) {
+        // Fallback: use viewport width with default padding
+        const defaultPadding = 120; // 60px each side (3rem desktop)
+        const availableWidth = window.innerWidth - defaultPadding;
+        return Math.min(470, availableWidth);
+      }
+      
+      // Get computed padding from wrapper
+      const computedStyle = window.getComputedStyle(contentWrapper);
+      const paddingLeft = parseFloat(computedStyle.paddingLeft) || 0;
+      const paddingRight = parseFloat(computedStyle.paddingRight) || 0;
+      const totalPadding = paddingLeft + paddingRight;
+      
+      // Calculate available width (viewport - padding - some margin for safety)
+      const availableWidth = window.innerWidth - totalPadding - 20; // 20px safety margin
+      
+      // Return min of 470px or available width
+      return Math.min(470, Math.max(280, availableWidth)); // Min 280px for very small screens
+    }
+    
+    animateImageActive(imageItem) {
+      this.startAnimation();
+      
+      // Animate from RIGHT to LEFT (towards center)
+      // ALWAYS start from RIGHT side regardless of current position
+      // Start: scale(0.8333) + translateX(+200) + opacity(0) - RIGHT side
+      // End: scale(1) + translateX(0) + opacity(1) - CENTER
+      
+      const duration = 600; // 600ms
+      const startTime = performance.now();
+      
+      // ALWAYS start from RIGHT side - force this
+      const startScale = 0.8333;
+      const startTranslateX = 200; // RIGHT side (positive value)
+      const startOpacity = 0;
+      
+      // Ending values (active state - center)
+      const endScale = 1;
+      const endTranslateX = 0; // CENTER
+      const endOpacity = 1;
+      
+      // Force starting position - always from RIGHT
+      imageItem.style.transform = `matrix(${startScale}, 0, 0, ${startScale}, ${startTranslateX}, 0)`;
+      imageItem.style.opacity = startOpacity;
+      imageItem.style.visibility = 'visible';
+      imageItem.style.display = 'grid';
+      
+      // Smooth easing function
+      const easeOutCubic = (t) => {
+        return 1 - Math.pow(1 - t, 3);
+      };
+      
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeOutCubic(progress);
+        
+        // Calculate current values - always animate from RIGHT to CENTER (towards left)
+        const currentScale = startScale + (endScale - startScale) * easedProgress;
+        const currentTranslateX = startTranslateX + (endTranslateX - startTranslateX) * easedProgress;
+        const currentOpacity = startOpacity + (endOpacity - startOpacity) * easedProgress;
+        
+        // Apply transform using matrix
+        // matrix(scaleX, skewY, skewX, scaleY, translateX, translateY)
+        imageItem.style.transform = `matrix(${currentScale}, 0, 0, ${currentScale}, ${currentTranslateX}, 0)`;
+        imageItem.style.opacity = currentOpacity;
+        imageItem.style.pointerEvents = progress >= 1 ? 'auto' : 'none';
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          // Animation complete
+          this.endAnimation();
+        }
+      };
+      
+      // Small delay to ensure starting position is set
+      requestAnimationFrame(() => {
+        requestAnimationFrame(animate);
+      });
+    }
+    
+    animateImageInactive(imageItem) {
+      this.startAnimation();
+      
+      // Animate from CENTER to LEFT (towards left)
+      // Start: scale(1) + translateX(0) + opacity(1) - CENTER
+      // End: scale(0.8333) + translateX(-200) + opacity(0) - LEFT side
+      
+      const duration = 500; // 500ms for fade out
+      const startTime = performance.now();
+      
+      // Starting values (active state - center)
+      const startScale = 1;
+      const startTranslateX = 0; // CENTER
+      const startOpacity = 1;
+      
+      // Ending values (inactive state - left)
+      const endScale = 0.8333;
+      const endTranslateX = -200; // LEFT side (negative value)
+      const endOpacity = 0;
+      
+      // Smooth easing function
+      const easeInCubic = (t) => {
+        return t * t * t;
+      };
+      
+      const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easedProgress = easeInCubic(progress);
+        
+        // Calculate current values
+        const currentScale = startScale + (endScale - startScale) * easedProgress;
+        const currentTranslateX = startTranslateX + (endTranslateX - startTranslateX) * easedProgress;
+        const currentOpacity = startOpacity + (endOpacity - startOpacity) * easedProgress;
+        
+        // Apply transform using matrix
+        imageItem.style.transform = `matrix(${currentScale}, 0, 0, ${currentScale}, ${currentTranslateX}, 0)`;
+        imageItem.style.opacity = currentOpacity;
+        imageItem.style.pointerEvents = 'none';
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          // After animation completes (opacity is 0), remove matrix transform
+          // Keep only opacity at 0, remove transform
+          imageItem.style.transform = '';
+          imageItem.style.opacity = '0';
+          imageItem.style.visibility = 'hidden';
+          this.endAnimation();
+        }
+      };
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animateItem(item) {
+      this.startAnimation();
+      
+      // Calculate height and width from data-highlight-body element
+      const bodyElement = item.querySelector('[data-highlight-body]');
+      if (bodyElement) {
+        const bodyParent = bodyElement.parentElement;
+        const originalBodyPosition = bodyParent.style.position;
+        const originalBodyOpacity = bodyParent.style.opacity;
+        const originalBodyVisibility = bodyParent.style.visibility;
+        
+        // Temporarily show element for measurement
+        bodyParent.style.position = 'static';
+        bodyParent.style.opacity = '1';
+        bodyParent.style.visibility = 'visible';
+        bodyElement.style.opacity = '1';
+        bodyElement.style.visibility = 'visible';
+        
+        // Measure dimensions
+        const bodyHeight = bodyElement.scrollHeight;
+        // Calculate dynamic max-width (max 470px, responsive to viewport)
+        const bodyWidth = this.getDynamicMaxWidth();
+        
+        // Restore original styles
+        bodyParent.style.position = originalBodyPosition;
+        bodyParent.style.opacity = originalBodyOpacity;
+        bodyParent.style.visibility = originalBodyVisibility;
+        bodyElement.style.opacity = '';
+        bodyElement.style.visibility = '';
+        
+        // Get button dimensions for initial size (collapsed state)
+        const buttonElement = item.querySelector('button');
+        const buttonHeight = buttonElement ? buttonElement.offsetHeight : 48;
+        const buttonWidth = buttonElement ? buttonElement.offsetWidth : 0;
+        // const buttonWidth = 470;
+        const finalWidth = Math.max(bodyWidth, buttonWidth);
+        
+        // Remove active class temporarily to reset dimensions for animation
+        const wasActive = item.classList.contains('active');
+        if (wasActive) {
+          item.classList.remove('active');
+        }
+        
+        // Start from button size (initial state)
+        item.style.width = `${buttonWidth}px`;
+        item.style.height = `${buttonHeight}px`;
+        
+        // Re-add active class immediately if it was active
+        if (wasActive) {
+          item.classList.add('active');
+        }
+        
+        // Calculate differences for animation
+        const widthDiff = finalWidth - buttonWidth;
+        const heightDiff = bodyHeight - buttonHeight;
+        
+        // Animation parameters - time-based for perfect synchronization
+        const duration = 600;
+        const startTime = performance.now();
+        const overshootPx = 0; // 3px overshoot for bounce effect
+        
+        // Smooth easing function
+        const easeOutCubic = (t) => {
+          return 1 - Math.pow(1 - t, 3);
+        };
+        
+        // Animate height and width simultaneously with overshoot bounce effect
+        const animate = (currentTime) => {
+          const elapsed = currentTime - startTime;
+          let progress = Math.min(elapsed / duration, 1); // 0 to 1
+          
+          let easedProgress;
+          let overshoot = 0;
+          
+          // Phase 1: 0 to 0.9 - smooth animation to final size
+          // Phase 2: 0.9 to 0.95 - overshoot by 2-4px
+          // Phase 3: 0.95 to 1.0 - settle back to final size
+          
+          if (progress < 0.9) {
+            // Normal animation phase
+            const phaseProgress = progress / 0.9;
+            easedProgress = easeOutCubic(phaseProgress);
+          } else if (progress < 0.95) {
+            // Overshoot phase - go beyond final size
+            const phaseProgress = (progress - 0.9) / 0.05; // 0 to 1 in this phase
+            easedProgress = 1; // Already at final
+            overshoot = overshootPx * Math.sin(phaseProgress * Math.PI / 2); // Smooth overshoot
+          } else {
+            // Settle phase - return to final size
+            const phaseProgress = (progress - 0.95) / 0.05; // 0 to 1 in this phase
+            easedProgress = 1; // At final
+            overshoot = overshootPx * (1 - phaseProgress); // Gradually reduce overshoot
+          }
+          
+          // Calculate current dimensions simultaneously using same progress
+          // Add overshoot for bounce effect
+          const currentWidth = buttonWidth + (widthDiff * easedProgress) + overshoot;
+          const currentHeight = buttonHeight + (heightDiff * easedProgress) + overshoot;
+          
+          // Apply both dimensions in same frame for simultaneous animation
+          item.style.width = `${currentWidth}px`;
+          item.style.height = `${currentHeight}px`;
+          
+          // Continue animation if not complete
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            // Animation complete
+            this.endAnimation();
+          }
+          // Active class already added on click, no need to add again
+        };
+        
+        // Start animation
+        requestAnimationFrame(animate);
+      }
+    }
+    
+    // Reusable function to activate an item by buttonId
+    activateItem(buttonId) {
+      if (!buttonId) return;
+      
+      // If animation is in progress, queue this action
+      if (this.isAnimating()) {
+        this.animationQueue.push({ type: 'activate', buttonId: buttonId });
+        return;
+      }
+      
+      // Find and update elements with data-highlight-item (images)
+      Array.from(this.highlightItems).forEach(item => {
+        const isActive = item.getAttribute('data-highlight-item') === buttonId;
+        const wasActive = item.classList.contains('active');
+        
+        if (isActive) {
+          // Image becoming active
+          if (!wasActive) {
+            // Add active class first
+            item.classList.add('active');
+            
+            // Animate to active state - always from right side
+            this.animateImageActive(item);
+          }
+          // If already active, no need to animate again
+        } else {
+          // Image becoming inactive
+          if (wasActive) {
+            // Remove active class first
+            item.classList.remove('active');
+            
+            // Animate to inactive state
+            this.animateImageInactive(item);
+          }
+        }
+      });
+      
+      // Find and update elements with data-highlight-item-content
+      Array.from(this.highlightContentItems).forEach(item => {
+        if (item.getAttribute('data-highlight-item-content') === buttonId) {
+          // Instantly add active class on click
+          item.classList.add('active');
+          
+          // Set dynamic max-width for body-inner
+          const bodyInner = item.querySelector('.yv-images-highlights-body-inner');
+          if (bodyInner) {
+            const dynamicMaxWidth = this.getDynamicMaxWidth();
+            bodyInner.style.maxWidth = `${dynamicMaxWidth}px`;
+          }
+          
+          // Trigger animation using the reusable method
+          this.animateItem(item);
+        } else {
+          // Instantly remove active class on click
+          item.classList.remove('active');
+          // Smooth close animation
+          this.startAnimation();
+          const currentWidth = item.offsetWidth;
+          const currentHeight = item.offsetHeight;
+          
+          // Get button dimensions for target size (collapsed state)
+          const buttonElement = item.querySelector('button');
+          const buttonHeight = buttonElement ? buttonElement.offsetHeight : 48;
+          const buttonWidth = buttonElement ? buttonElement.offsetWidth : 0;
+          
+          // Calculate differences for reverse animation
+          const widthDiff = buttonWidth - currentWidth;
+          const heightDiff = buttonHeight - currentHeight;
+          
+          // Animation parameters - time-based for perfect synchronization
+          const duration = 400; // 400ms for close
+          const startTime = performance.now();
+          
+          // Easing function for smooth close
+          const easeInOut = (t) => {
+            return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+          };
+          
+          // Animate height and width simultaneously for smooth close
+          const animateClose = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1); // 0 to 1
+            const easedProgress = easeInOut(progress);
+            
+            // Calculate current dimensions simultaneously using same progress
+            // This ensures both complete at exactly the same time
+            const currentW = currentWidth + (widthDiff * easedProgress);
+            const currentH = currentHeight + (heightDiff * easedProgress);
+            
+            // Apply both dimensions in same frame
+            item.style.width = `${currentW}px`;
+            item.style.height = `${currentH}px`;
+            
+            // Continue animation if not complete
+            if (progress < 1) {
+              requestAnimationFrame(animateClose);
+            } else {
+              // Remove active class and reset styles after animation
+              item.classList.remove('active');
+              item.style.width = '';
+              item.style.height = '';
+              this.endAnimation();
+            }
+          };
+          
+          // Start close animation
+          requestAnimationFrame(animateClose);
+        }
+      });
+    }
+    
+    // Navigation function - safely handles next/previous
+    navigate(direction) {
+      // If animation is in progress, queue this action
+      if (this.isAnimating()) {
+        this.animationQueue.push({ type: 'navigate', direction: direction });
+        return;
+      }
+      
+      // Safety check: ensure buttons exist
+      if (!this.buttons || this.buttons.length === 0) return;
+      
+      // Get all buttons as array
+      const buttonsArray = Array.from(this.buttons);
+      if (buttonsArray.length === 0) return;
+      
+      // Find currently active button
+      let currentIndex = -1;
+      buttonsArray.forEach((button, index) => {
+        const buttonId = button.getAttribute('id');
+        const isActive = Array.from(this.highlightItems).some(item => 
+          item.getAttribute('data-highlight-item') === buttonId && 
+          item.classList.contains('active')
+        );
+        if (isActive) {
+          currentIndex = index;
+        }
+      });
+      
+      // Safety check: if no active item found, activate first one
+      if (currentIndex === -1) {
+        const firstButton = buttonsArray[0];
+        if (firstButton) {
+          const firstButtonId = firstButton.getAttribute('id');
+          this.activateItem(firstButtonId);
+        }
+        return;
+      }
+      
+      // Calculate next/previous index
+      let targetIndex;
+      if (direction === 'next') {
+        targetIndex = (currentIndex + 1) % buttonsArray.length; // Loop to first if at end
+      } else if (direction === 'previous') {
+        targetIndex = (currentIndex - 1 + buttonsArray.length) % buttonsArray.length; // Loop to last if at start
+      } else {
+        return; // Invalid direction
+      }
+      
+      // Safety check: ensure target index is valid
+      if (targetIndex < 0 || targetIndex >= buttonsArray.length) return;
+      
+      // Get target button and activate it
+      const targetButton = buttonsArray[targetIndex];
+      if (targetButton) {
+        const targetButtonId = targetButton.getAttribute('id');
+        if (targetButtonId) {
+          this.activateItem(targetButtonId);
+        }
+      }
+    }
+    
+    init() {
+      // Trigger animation for first item on load (corresponds to first active image)
+      const firstActiveImage = Array.from(this.highlightItems).find(item => item.classList.contains('active'));
+      if (firstActiveImage) {
+        const firstImageId = firstActiveImage.getAttribute('data-highlight-item');
+        const firstContentItem = Array.from(this.highlightContentItems).find(item => 
+          item.getAttribute('data-highlight-item-content') === firstImageId
+        );
+        
+        if (firstContentItem) {
+          // Reset to collapsed state first (remove active class temporarily)
+          firstContentItem.classList.remove('active');
+          
+          // Clear any existing inline styles that might interfere
+          firstContentItem.style.width = '';
+          firstContentItem.style.height = '';
+          
+          // Use requestAnimationFrame to ensure DOM and layout are fully ready
+          requestAnimationFrame(() => {
+            // Get button dimensions for initial collapsed state after layout
+            const buttonElement = firstContentItem.querySelector('button');
+            const buttonHeight = buttonElement ? buttonElement.offsetHeight : 48;
+            const buttonWidth = buttonElement ? buttonElement.offsetWidth : 0;
+            
+            // Force collapsed state explicitly
+            firstContentItem.style.width = `${buttonWidth}px`;
+            firstContentItem.style.height = `${buttonHeight}px`;
+            
+            // Another frame to ensure the reset is applied
+            requestAnimationFrame(() => {
+              // Set dynamic max-width for body-inner before animation
+              const bodyInner = firstContentItem.querySelector('.yv-images-highlights-body-inner');
+              if (bodyInner) {
+                const dynamicMaxWidth = this.getDynamicMaxWidth();
+                bodyInner.style.maxWidth = `${dynamicMaxWidth}px`;
+              }
+              
+              // Now add active class and animate smoothly
+              firstContentItem.classList.add('active');
+              this.animateItem(firstContentItem);
+            });
+          });
+        }
+      }
+      
+      // Initialize mobile slider - set max-width and apply first item height/width
+      const mobileItems = this.querySelectorAll('[data-highlight-item-content-mobile]');
+      if (mobileItems && mobileItems.length > 0) {
+        const dynamicMaxWidth = this.getDynamicMaxWidth();
+        const mobileWrapper = this.querySelector('.yv-images-highlights-content-mobile');
+        
+        // Reset mobile slider state
+        this.currentMobileIndex = 0;
+        if (mobileWrapper) {
+          mobileWrapper.style.transform = 'translateX(0)';
+        }
+        
+        // Reset non-first items (no max-width needed, body has 100% width)
+        mobileItems.forEach((item, index) => {
+          // Apply 100% max-width to body-inner (CSS handles it on mobile)
+          const bodyInner = item.querySelector('.yv-images-highlights-body-inner');
+          if (bodyInner) {
+            bodyInner.style.maxWidth = '100%';
+          }
+          
+          // Reset non-first items
+          if (index !== 0) {
+            item.classList.remove('active');
+            item.style.width = '';
+            item.style.height = '';
+          }
+        });
+        
+        // Set first mobile item as active and apply height/width
+        const firstMobileItem = mobileItems[0];
+        if (firstMobileItem) {
+          // Add active class
+          firstMobileItem.classList.add('active');
+          
+          // Get height from data-highlight-body element
+          const bodyElement = firstMobileItem.querySelector('[data-highlight-body]');
+          if (bodyElement) {
+            // Temporarily show element for accurate measurement
+            const bodyParent = bodyElement.parentElement;
+            const originalBodyPosition = bodyParent.style.position;
+            const originalBodyOpacity = bodyParent.style.opacity;
+            const originalBodyVisibility = bodyParent.style.visibility;
+            
+            // Make element visible for measurement
+            bodyParent.style.position = 'static';
+            bodyParent.style.opacity = '1';
+            bodyParent.style.visibility = 'visible';
+            bodyElement.style.opacity = '1';
+            bodyElement.style.visibility = 'visible';
+            
+            // Measure height
+            const bodyHeight = bodyElement.scrollHeight;
+            
+            // Restore original styles
+            bodyParent.style.position = originalBodyPosition;
+            bodyParent.style.opacity = originalBodyOpacity;
+            bodyParent.style.visibility = originalBodyVisibility;
+            bodyElement.style.opacity = '';
+            bodyElement.style.visibility = '';
+            
+            // Get button height to calculate total height
+            const buttonElement = firstMobileItem.querySelector('button');
+            const buttonHeight = buttonElement ? buttonElement.offsetHeight : 48;
+            
+            // Get container width for width (no max-width constraint on item)
+            const wrapperWidth = mobileWrapper ? mobileWrapper.offsetWidth : window.innerWidth;
+            
+            // Apply total height and width
+            const totalHeight = buttonHeight + bodyHeight;
+            firstMobileItem.style.height = `${totalHeight}px`;
+            firstMobileItem.style.width = `${wrapperWidth}px`;
+          }
+        }
+      }
+
+      // Add click listeners to content buttons
+      Array.from(this.buttons).forEach(button => {
+        button.addEventListener('click', () => {
+          const buttonId = button.getAttribute('id');
+          if (buttonId) {
+            this.activateItem(buttonId);
+          }
+        });
+      });
+      
+      // Add navigation buttons if they exist
+      const navButtons = this.querySelectorAll('[data-action="previous"], [data-action="next"]');
+      if (navButtons && navButtons.length > 0) {
+        navButtons.forEach(navButton => {
+          navButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const action = navButton.getAttribute('data-action');
+            if (action === 'previous' || action === 'next') {
+              this.navigate(action);
+              this.mobileNavigate(action);
+            }
+          });
+        });
+      }
+    }
+
+    mobileNavigate(action) {
+      // Get mobile slider wrapper (ul container)
+      const mobileWrapper = this.querySelector('.yv-images-highlights-content-mobile');
+      if (!mobileWrapper) return;
+      
+      // Get all mobile items
+      const mobileItems = this.querySelectorAll('[data-highlight-item-content-mobile]');
+      if (!mobileItems || mobileItems.length === 0) return;
+      
+      const totalItems = mobileItems.length;
+      
+      // Get container width (each item is 100% width, no max-width constraint on item)
+      const wrapperWidth = mobileWrapper.offsetWidth || window.innerWidth;
+      const containerWidth = wrapperWidth;
+      
+      // Calculate target index
+      let targetIndex;
+      if (action === 'next') {
+        targetIndex = (this.currentMobileIndex + 1) % totalItems; // Loop to first if at end
+      } else if (action === 'previous') {
+        targetIndex = (this.currentMobileIndex - 1 + totalItems) % totalItems; // Loop to last if at start
+      } else {
+        return; // Invalid action
+      }
+      
+      // Remove active class from current item (going out of view)
+      const currentItem = mobileItems[this.currentMobileIndex];
+      if (currentItem) {
+        currentItem.classList.remove('active');
+        // Reset height when item goes out of view
+        currentItem.style.height = '';
+      }
+      
+      // Add active class to target item (coming into view)
+      const targetItem = mobileItems[targetIndex];
+      if (targetItem) {
+        targetItem.classList.add('active');
+        
+        // Get height from data-highlight-body element
+        const bodyElement = targetItem.querySelector('[data-highlight-body]');
+        if (bodyElement) {
+          // Temporarily show element for accurate measurement
+          const bodyParent = bodyElement.parentElement;
+          const originalBodyPosition = bodyParent.style.position;
+          const originalBodyOpacity = bodyParent.style.opacity;
+          const originalBodyVisibility = bodyParent.style.visibility;
+          
+          // Make element visible for measurement
+          bodyParent.style.position = 'static';
+          bodyParent.style.opacity = '1';
+          bodyParent.style.visibility = 'visible';
+          bodyElement.style.opacity = '1';
+          bodyElement.style.visibility = 'visible';
+          
+          // Measure height
+          const bodyHeight = bodyElement.scrollHeight;
+          
+          // Restore original styles
+          bodyParent.style.position = originalBodyPosition;
+          bodyParent.style.opacity = originalBodyOpacity;
+          bodyParent.style.visibility = originalBodyVisibility;
+          bodyElement.style.opacity = '';
+          bodyElement.style.visibility = '';
+          
+          // Get button height to calculate total height
+          const buttonElement = targetItem.querySelector('button');
+          const buttonHeight = buttonElement ? buttonElement.offsetHeight : 48;
+          
+          // Apply total height (button + body)
+          const totalHeight = buttonHeight + bodyHeight;
+          targetItem.style.height = `${totalHeight}px`;
+          
+          // Apply 100% max-width to body-inner (CSS handles it on mobile, no max-width on item)
+          const bodyInner = targetItem.querySelector('.yv-images-highlights-body-inner');
+          if (bodyInner) {
+            bodyInner.style.maxWidth = '100%';
+          }
+        }
+      }
+      
+      // Calculate exact translate position (negative because we're moving left)
+      const translateX = -targetIndex * containerWidth;
+      
+      // Apply transform
+      mobileWrapper.style.transform = `translateX(${translateX}px)`;
+      
+      // Update current index
+      this.currentMobileIndex = targetIndex;
+    }
+
+  }
+  customElements.define('images-highlights', ImagesHighlights);
+{%- endjavascript -%}
+{% endcomment %}
+
+{% javascript %}
+  class ImagesHighlights extends HTMLElement {
+    constructor() {
+      super();
+
+      // Cache DOM
+      this.highlightItemsArr = Array.from(this.querySelectorAll('[data-highlight-item]'));
+      this.contentItemsArr = Array.from(this.querySelectorAll('[data-highlight-item-content]'));
+      this.mobileItemsArr = Array.from(this.querySelectorAll('[data-highlight-item-content-mobile]'));
+      this.buttonsArr = Array.from(this.querySelectorAll('button[id^="yv-item-"]'));
+      this.navButtons = Array.from(this.querySelectorAll('[data-action="previous"], [data-action="next"]'));
+      this.isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+      // State
+      this.animationCount = 0;
+      this.animationQueue = [];
+      this.currentMobileIndex = 0;
+      this.resizeHandler = null;
+    }
+
+    connectedCallback() {
+      this.init();
+      this.setupResizeListener();
+    }
+
+    disconnectedCallback() {
+      if (this.resizeHandler) {
+        window.removeEventListener('resize', this.resizeHandler);
+      }
+    }
+
+    waitForLayout(cb) {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(cb);
+      });
+    }
+
+    setupResizeListener() {
+      this.resizeHandler = () => {
+        const maxW = this.getDynamicMaxWidth();
+
+        // Update desktop max-widths
+        this.contentItemsArr.forEach(item => {
+          const body = item.querySelector('.yv-images-highlights-body-inner');
+          if (body) body.style.maxWidth = `${maxW}px`;
+        });
+
+        // Update mobile max-widths
+        this.mobileItemsArr.forEach(item => {
+          const body = item.querySelector('.yv-images-highlights-body-inner');
+          if (body) body.style.maxWidth = '100%';
+        });
+
+        // ---- MODE SWITCH DETECTOR ----
+        const nowMobile = window.matchMedia('(max-width: 767px)').matches;
+
+        if (nowMobile !== this.isMobile) {
+          this.isMobile = nowMobile;
+
+          if (this.isMobile) {
+            // ENTERING MOBILE MODE
+            this.resetMobileState();
+          } else {
+            // ENTERING DESKTOP MODE
+            this.resetDesktopState();
+          }
+        }
+      };
+
+      window.addEventListener('resize', this.resizeHandler);
+    }
+
+    resetMobileState() {
+      const wrapper = this.querySelector('.yv-images-highlights-content-mobile');
+      if (!wrapper) return;
+
+      wrapper.style.transform = 'translateX(0)';
+      this.currentMobileIndex = 0;
+
+      // this.measureWhenVisible(wrapper, () => {
+      //   this.initMobileFirstItem();
+      // });
+      this.measureWhenVisible(wrapper, () => {
+        this.waitForLayout(() => {
+          this.initMobileFirstItem();
+        });
+      });
+
+    }
+
+    resetDesktopState() {
+      // Clear any mobile inline junk
+      this.mobileItemsArr.forEach(item => {
+        item.classList.remove('active');
+        item.style.width = '';
+        item.style.height = '';
+      });
+
+      const wrapper = this.querySelector('.yv-images-highlights-content-mobile');
+      if (wrapper) {
+        wrapper.style.transform = '';
+      }
+    }
+
+    measureWhenVisible(el, cb) {
+      if (!el) return;
+
+      const check = () => {
+        if (el.offsetParent !== null) {
+          cb();
+        } else {
+          requestAnimationFrame(check);
+        }
+      };
+
+      check();
+    }
+
+    /* ---------------- CORE UTILS ---------------- */
+    startAnimation() {
+      this.animationCount++;
+    }
+
+    endAnimation() {
+      this.animationCount = Math.max(0, this.animationCount - 1);
+
+      if (this.animationCount === 0 && this.animationQueue.length) {
+        const next = this.animationQueue.shift();
+        requestAnimationFrame(() => {
+          if (next.type === 'activate') this.activateItem(next.buttonId);
+          if (next.type === 'navigate') this.navigate(next.direction);
+        });
+      }
+    }
+
+    isAnimating() {
+      return this.animationCount > 0;
+    }
+
+    queueOrRun(action) {
+      if (this.isAnimating()) {
+        this.animationQueue.push(action);
+        return true;
+      }
+      return false;
+    }
+
+    /* ---------------- LAYOUT ---------------- */
+    getDynamicMaxWidth() {
+      const wrapper = this.querySelector('.yv-images-highlights-content-wrapper');
+
+      if (!wrapper) {
+        const available = window.innerWidth - 120;
+        return Math.min(470, available);
+      }
+
+      const style = getComputedStyle(wrapper);
+      const padding = (parseFloat(style.paddingLeft) || 0) +
+                      (parseFloat(style.paddingRight) || 0);
+
+      const available = window.innerWidth - padding - 20;
+      return Math.min(470, Math.max(280, available));
+    }
+
+    setupResizeListener() {
+      this.resizeHandler = () => {
+        const maxW = this.getDynamicMaxWidth();
+
+        this.contentItemsArr.forEach(item => {
+          const body = item.querySelector('.yv-images-highlights-body-inner');
+          if (body) body.style.maxWidth = `${maxW}px`;
+        });
+
+        this.mobileItemsArr.forEach(item => {
+          const body = item.querySelector('.yv-images-highlights-body-inner');
+          if (body) body.style.maxWidth = '100%';
+        });
+      };
+
+      window.addEventListener('resize', this.resizeHandler);
+    }
+
+    /* ---------------- IMAGE ANIMATION ---------------- */
+
+    animateImageActive(el) {
+      this.startAnimation();
+
+      const duration = 600;
+      const start = performance.now();
+
+      const from = { scale: 0.8333, x: 200, o: 0 };
+      const to = { scale: 1, x: 0, o: 1 };
+
+      el.style.visibility = 'visible';
+      el.style.display = 'grid';
+      el.style.transform = `matrix(${from.scale},0,0,${from.scale},${from.x},0)`;
+      el.style.opacity = from.o;
+
+      const ease = t => 1 - Math.pow(1 - t, 3);
+
+      const frame = now => {
+        const p = Math.min((now - start) / duration, 1);
+        const e = ease(p);
+
+        const scale = from.scale + (to.scale - from.scale) * e;
+        const x = from.x + (to.x - from.x) * e;
+        const o = from.o + (to.o - from.o) * e;
+
+        el.style.transform = `matrix(${scale},0,0,${scale},${x},0)`;
+        el.style.opacity = o;
+        el.style.pointerEvents = p === 1 ? 'auto' : 'none';
+
+        p < 1 ? requestAnimationFrame(frame) : this.endAnimation();
+      };
+
+      requestAnimationFrame(frame);
+    }
+
+    animateImageInactive(el) {
+      this.startAnimation();
+
+      const duration = 500;
+      const start = performance.now();
+
+      const from = { scale: 1, x: 0, o: 1 };
+      const to = { scale: 0.8333, x: -200, o: 0 };
+
+      const ease = t => t * t * t;
+
+      const frame = now => {
+        const p = Math.min((now - start) / duration, 1);
+        const e = ease(p);
+
+        const scale = from.scale + (to.scale - from.scale) * e;
+        const x = from.x + (to.x - from.x) * e;
+        const o = from.o + (to.o - from.o) * e;
+
+        el.style.transform = `matrix(${scale},0,0,${scale},${x},0)`;
+        el.style.opacity = o;
+        el.style.pointerEvents = 'none';
+
+        if (p < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          el.style.transform = '';
+          el.style.opacity = '0';
+          el.style.visibility = 'hidden';
+          this.endAnimation();
+        }
+      };
+
+      requestAnimationFrame(frame);
+    }
+
+    /* ---------------- CONTENT ANIMATION ---------------- */
+
+    animateItem(item) {
+      
+      this.startAnimation();
+
+      const body = item.querySelector('[data-highlight-body]');
+      if (!body) {
+        this.endAnimation();
+        return;
+      }
+
+      const parent = body.parentElement;
+
+      // SAVE INLINE STYLES (not computed, inline only — like your original)
+      const originalStyles = {
+        position: parent.style.position || '',
+        opacity: parent.style.opacity || '',
+        visibility: parent.style.visibility || '',
+      };
+
+      // FORCE VISIBLE FOR MEASURE
+      parent.style.position = 'static';
+      parent.style.opacity = '1';
+      parent.style.visibility = 'visible';
+      body.style.opacity = '1';
+      body.style.visibility = 'visible';
+
+      // MEASURE
+      const bodyHeight = body.scrollHeight;
+
+      const button = item.querySelector('button');
+      const buttonHeight = button ? button.offsetHeight : 48;
+      const buttonWidth = button ? button.offsetWidth : 0;
+
+      const finalWidth = Math.max(
+        this.getDynamicMaxWidth(),
+        buttonWidth
+      );
+
+      // FULL RESTORE — NO SHORTCUTS
+      parent.style.position = originalStyles.position;
+      parent.style.opacity = originalStyles.opacity;
+      parent.style.visibility = originalStyles.visibility;
+      body.style.opacity = '';
+      body.style.visibility = '';
+
+      // RESET ACTIVE STATE LIKE YOUR ORIGINAL
+      const wasActive = item.classList.contains('active');
+      if (wasActive) item.classList.remove('active');
+
+      item.style.width = `${buttonWidth}px`;
+      item.style.height = `${buttonHeight}px`;
+
+      if (wasActive) item.classList.add('active');
+
+      const widthDiff = finalWidth - buttonWidth;
+      const heightDiff = bodyHeight - buttonHeight;
+
+      const duration = 600;
+      const start = performance.now();
+
+      const easeOut = t => 1 - Math.pow(1 - t, 3);
+
+      const frame = now => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = easeOut(progress);
+
+        const currentW = buttonWidth + widthDiff * eased;
+        const currentH = buttonHeight + heightDiff * eased;
+
+        item.style.width = `${currentW}px`;
+        item.style.height = `${currentH}px`;
+
+        if (progress < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          this.endAnimation();
+        }
+      };
+
+      requestAnimationFrame(frame);
+    }
+
+ 
+    /* ---------------- ACTIVATION ---------------- */
+
+    activateItemFINE(buttonId) {
+      if (!buttonId) return;
+      if (this.queueOrRun({ type: 'activate', buttonId })) return;
+
+      this.highlightItemsArr.forEach(item => {
+        const isActive = item.dataset.highlightItem === buttonId;
+        const wasActive = item.classList.contains('active');
+
+        if (isActive && !wasActive) {
+          item.classList.add('active');
+          this.animateImageActive(item);
+        }
+
+        if (!isActive && wasActive) {
+          item.classList.remove('active');
+          this.animateImageInactive(item);
+        }
+      });
+
+      this.contentItemsArr.forEach(item => {
+        const isActive = item.dataset.highlightItemContent === buttonId;
+
+        if (isActive) {
+          item.classList.add('active');
+          const body = item.querySelector('.yv-images-highlights-body-inner');
+          if (body) body.style.maxWidth = `${this.getDynamicMaxWidth()}px`;
+          this.animateItem(item);
+        }  else {
+          this.startAnimation();
+
+          const currentWidth = item.offsetWidth;
+          const currentHeight = item.offsetHeight;
+
+          const button = item.querySelector('button');
+          const buttonHeight = button ? button.offsetHeight : 48;
+          const buttonWidth = button ? button.offsetWidth : 0;
+
+          const widthDiff = buttonWidth - currentWidth;
+          const heightDiff = buttonHeight - currentHeight;
+
+          const duration = 400;
+          const start = performance.now();
+
+          const easeInOut = t =>
+            t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+          const frame = now => {
+            const p = Math.min((now - start) / duration, 1);
+            const e = easeInOut(p);
+
+            item.style.width = `${currentWidth + widthDiff * e}px`;
+            item.style.height = `${currentHeight + heightDiff * e}px`;
+
+            if (p < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              item.classList.remove('active');
+              item.style.width = '';
+              item.style.height = '';
+              this.endAnimation();
+            }
+          };
+
+          requestAnimationFrame(frame);
+        }
+
+      });
+    }
+
+    activateItem(buttonId) {
+      if (!buttonId) return;
+      if (this.queueOrRun({ type: 'activate', buttonId })) return;
+
+      this.highlightItemsArr.forEach(item => {
+        const isActive = item.dataset.highlightItem === buttonId;
+        const wasActive = item.classList.contains('active');
+
+        if (isActive && !wasActive) {
+          item.classList.add('active');
+          this.animateImageActive(item);
+        }
+
+        if (!isActive && wasActive) {
+          item.classList.remove('active');
+          this.animateImageInactive(item);
+        }
+      });
+
+      this.contentItemsArr.forEach(item => {
+        const isActive = item.dataset.highlightItemContent === buttonId;
+
+        if (isActive) {
+          item.classList.add('active');
+
+          const body = item.querySelector('.yv-images-highlights-body-inner');
+          if (body) body.style.maxWidth = `${this.getDynamicMaxWidth()}px`;
+
+          // force reflow
+          item.offsetHeight;
+
+          // start fade-in
+          item.classList.add('animating');
+
+          this.animateItem(item);
+        } else {
+          // start fade-out
+          item.classList.remove('animating');
+
+          this.startAnimation();
+
+          const currentWidth = item.offsetWidth;
+          const currentHeight = item.offsetHeight;
+
+          const button = item.querySelector('button');
+          const buttonHeight = button ? button.offsetHeight : 48;
+          const buttonWidth = button ? button.offsetWidth : 0;
+
+          const widthDiff = buttonWidth - currentWidth;
+          const heightDiff = buttonHeight - currentHeight;
+
+          const duration = 400;
+          const start = performance.now();
+
+          const easeInOut = t =>
+            t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+          const frame = now => {
+            const p = Math.min((now - start) / duration, 1);
+            const e = easeInOut(p);
+
+            item.style.width = `${currentWidth + widthDiff * e}px`;
+            item.style.height = `${currentHeight + heightDiff * e}px`;
+
+            if (p < 1) {
+              requestAnimationFrame(frame);
+            } else {
+              item.classList.remove('active');
+              item.style.width = '';
+              item.style.height = '';
+              this.endAnimation();
+            }
+          };
+
+          requestAnimationFrame(frame);
+        }
+      });
+    }
+
+
+    /* ---------------- NAV ---------------- */
+
+    navigate(direction) {
+      if (this.queueOrRun({ type: 'navigate', direction })) return;
+
+      const index = this.buttonsArr.findIndex(btn =>
+        this.highlightItemsArr.some(item =>
+          item.dataset.highlightItem === btn.id &&
+          item.classList.contains('active')
+        )
+      );
+
+      const nextIndex =
+        direction === 'next'
+          ? (index + 1) % this.buttonsArr.length
+          : (index - 1 + this.buttonsArr.length) % this.buttonsArr.length;
+
+      const target = this.buttonsArr[nextIndex];
+      if (target) this.activateItem(target.id);
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    mobileNavigateOLD(action) {
+      const wrapper = this.querySelector('.yv-images-highlights-content-mobile');
+      if (!wrapper || !this.mobileItemsArr.length) return;
+
+      const width = wrapper.offsetWidth || window.innerWidth;
+      const total = this.mobileItemsArr.length;
+
+      const next =
+        action === 'next'
+          ? (this.currentMobileIndex + 1) % total
+          : (this.currentMobileIndex - 1 + total) % total;
+
+      const current = this.mobileItemsArr[this.currentMobileIndex];
+      const target = this.mobileItemsArr[next];
+
+      if (current) {
+        current.classList.remove('active');
+        current.style.height = '';
+      }
+
+      if (target) {
+        target.classList.add('active');
+
+        const body = target.querySelector('[data-highlight-body]');
+        const button = target.querySelector('button');
+
+        if (body && button) {
+          const h = body.scrollHeight + button.offsetHeight;
+          target.style.height = `${h}px`;
+        }
+      }
+
+      wrapper.style.transform = `translateX(${-next * width}px)`;
+      this.currentMobileIndex = next;
+    }
+
+    mobileNavigate(action) {
+      const wrapper = this.querySelector('.yv-images-highlights-content-mobile');
+      if (!wrapper || !this.mobileItemsArr.length) return;
+
+      const total = this.mobileItemsArr.length;
+
+      const next =
+        action === 'next'
+          ? (this.currentMobileIndex + 1) % total
+          : (this.currentMobileIndex - 1 + total) % total;
+
+      const current = this.mobileItemsArr[this.currentMobileIndex];
+      const target = this.mobileItemsArr[next];
+
+      if (current) {
+        current.classList.remove('active');
+        current.style.height = '';
+      }
+
+      if (target) {
+        target.classList.add('active');
+
+        const body = target.querySelector('[data-highlight-body]');
+        const button = target.querySelector('button');
+
+        if (body && button) {
+          const h = body.scrollHeight + button.offsetHeight;
+          target.style.height = `${h}px`;
+        }
+      }
+
+      // REAL SLIDE MATH
+      const targetLeft = target.offsetLeft;
+      wrapper.style.transform = `translateX(${-targetLeft}px)`;
+
+      this.currentMobileIndex = next;
+    }
+
+
+    initMobileFirstItem() {
+      const mobileWrapper = this.querySelector('.yv-images-highlights-content-mobile');
+      if (!mobileWrapper || !this.mobileItemsArr.length) return;
+
+      this.currentMobileIndex = 0;
+      mobileWrapper.style.transform = 'translateX(0)';
+
+      const wrapperWidth = mobileWrapper.offsetWidth || window.innerWidth;
+
+      this.mobileItemsArr.forEach((item, index) => {
+        const bodyInner = item.querySelector('.yv-images-highlights-body-inner');
+        if (bodyInner) bodyInner.style.maxWidth = '100%';
+
+        if (index !== 0) {
+          item.classList.remove('active');
+          item.style.width = '';
+          item.style.height = '';
+        }
+      });
+
+      const firstItem = this.mobileItemsArr[0];
+      if (!firstItem) return;
+
+      firstItem.classList.add('active');
+
+      const body = firstItem.querySelector('[data-highlight-body]');
+      const button = firstItem.querySelector('button');
+      if (!body || !button) return;
+
+      // FORCE VISIBLE FOR MEASURE (same ritual as original)
+      const parent = body.parentElement;
+
+      const original = {
+        position: parent.style.position || '',
+        opacity: parent.style.opacity || '',
+        visibility: parent.style.visibility || ''
+      };
+
+      parent.style.position = 'static';
+      parent.style.opacity = '1';
+      parent.style.visibility = 'visible';
+      body.style.opacity = '1';
+      body.style.visibility = 'visible';
+
+      const bodyHeight = body.scrollHeight;
+      const totalHeight = bodyHeight + button.offsetHeight;
+
+      // RESTORE
+      parent.style.position = original.position;
+      parent.style.opacity = original.opacity;
+      parent.style.visibility = original.visibility;
+      body.style.opacity = '';
+      body.style.visibility = '';
+
+      // APPLY DIMENSIONS (this was missing)
+      firstItem.style.height = `${totalHeight}px`;
+      firstItem.style.width = `${wrapperWidth}px`;
+    }
+
+    /* ---------------- INIT ---------------- */
+
+    init() {
+      const firstActive = this.highlightItemsArr.find(i =>
+        i.classList.contains('active')
+      );
+
+      if (firstActive) {
+        const id = firstActive.dataset.highlightItem;
+        const content = this.contentItemsArr.find(
+          i => i.dataset.highlightItemContent === id
+        );
+
+        if (content) {
+          content.classList.remove('active');
+          content.style.width = '';
+          content.style.height = '';
+
+          requestAnimationFrame(() => {
+            const button = content.querySelector('button');
+            if (!button) return;
+
+            content.style.width = `${button.offsetWidth}px`;
+            content.style.height = `${button.offsetHeight}px`;
+
+            requestAnimationFrame(() => {
+              const body = content.querySelector('.yv-images-highlights-body-inner');
+              if (body) body.style.maxWidth = `${this.getDynamicMaxWidth()}px`;
+              content.classList.add('active');
+              this.animateItem(content);
+            });
+          });
+        }
+      }
+
+      this.buttonsArr.forEach(btn =>
+        btn.addEventListener('click', () => this.activateItem(btn.id))
+      );
+
+      this.navButtons.forEach(btn =>
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          const action = btn.dataset.action;
+          this.navigate(action);
+          this.mobileNavigate(action);
+        })
+      );
+
+      const wrapper = this.querySelector('.yv-images-highlights-content-mobile');
+      // this.measureWhenVisible(wrapper, () => {
+      //   this.initMobileFirstItem();
+      // });
+
+      this.measureWhenVisible(wrapper, () => {
+        this.waitForLayout(() => {
+          this.initMobileFirstItem();
+        });
+      });
+
+
+    }
+  }
+
+  customElements.define('images-highlights', ImagesHighlights);
+
+{% endjavascript %}
+{% schema %}
+  {
+    "name": "t:sections.images-highlights.name",
+    "tag": "section",
+    "class": "images-highlights-section",
+    "disabled_on": {
+      "groups": [
+        "header",
+        "footer"
+      ]
+    },
+    "settings": [
+      {
+        "type": "select",
+        "id": "section_visibility",
+        "label": "t:common.section_visibility.label",
+        "default": "always",
+        "options": [
+          {
+            "label": "t:common.section_visibility.options.always.label",
+            "value": "always"
+          },
+          {
+            "label": "t:common.section_visibility.options.small_devices.label",
+            "value": "small"
+          },
+          {
+            "label": "t:common.section_visibility.options.large_devices.label",
+            "value": "large"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:common.header.section_border.label"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_top_border",
+        "label": "t:common.enable_top_border.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_bottom_border",
+        "label": "t:common.enable_bottom_border.label",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "border_style",
+        "default": "solid",
+        "label": "t:common.border_style.label",
+        "options": [
+          {
+            "value": "solid",
+            "label": "t:common.border_style.options.solid.label"
+          },
+          {
+            "value": "dashed",
+            "label": "t:common.border_style.options.dashed.label"
+          }
+        ]
+      },
+      {
+        "type": "range",
+        "id": "desktop_radius",
+        "default": 50,
+        "label": "t:sections.tabbed-collage.settings.image_radius_desktop.label",
+        "min": 0,
+        "max": 50,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "t:common.height.label"
+      },
+      {
+        "type": "range",
+        "id": "desktop_height",
+        "label": "t:common.desktop.label",
+        "default": 650,
+        "min": 300,
+        "max": 1000,
+        "step": 10,
+        "unit": "px"
+      },
+      {
+        "type": "range",
+        "id": "mobile_height",
+        "label": "t:common.mobile.label",
+        "default": 500,
+        "min": 300,
+        "max": 800,
+        "step": 10,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "t:common.header.color_section.label"
+      },
+      {
+        "type": "select",
+        "id": "bgcolor",
+        "label": "t:common.header.background_section.label",
+        "default": "gradient",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:common.header.primary.label"
+          },
+          {
+            "value": "secondary",
+            "label": "t:common.header.secondary.label"
+          },
+          {
+            "value": "tertiary",
+            "label": "t:common.header.tertiary.label"
+          },
+          {
+            "value": "quaternary",
+            "label": "t:common.header.quaternary.label"
+          },
+          {
+            "value": "gradient",
+            "label": "t:common.header.gradient.label"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:common.header.space_section.label"
+      },
+      {
+        "type": "range",
+        "id": "top_space_desktop",
+        "label": "t:common.top_space_desktop.label",
+        "default": 40,
+        "min": 0,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "bottom_space_desktop",
+        "label": "t:common.bottom_space_desktop.label",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "top_space_mobile",
+        "label": "t:common.top_space_mobile.label",
+        "default": 10,
+        "min": 0,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "bottom_space_mobile",
+        "label": "t:common.bottom_space_mobile.label",
+        "default": 50,
+        "min": 0,
+        "max": 100,
+        "step": 5
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "t:common.image.label",
+        "limit": 6,
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:common.image.label"
+          },
+          {
+            "type": "text",
+            "id": "highlight_title",
+            "label": "t:sections.events_calendar.blocks.event.settings.title.label",
+            "info": "t:sections.images-highlights.highlight_title_info",
+            "default": "Highlight Title"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "highlight_description",
+            "label": "t:sections.events_calendar.blocks.event.settings.description.label",
+            "info": "t:sections.images-highlights.description_info",
+            "default": "Write your description here."
+          },
+          {
+            "type": "url",
+            "id": "link_to",
+            "label": "t:sections.slider.blocks.slide.settings.button_link.label",
+            "default": "/collections/all"
+          },
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.images-highlights.name",
+        "blocks": [
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          },
+          {
+            "type": "image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

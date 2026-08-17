@@ -1,0 +1,193 @@
+                   <style>
+                    #shopify-block-{{ block.id }}{
+                        --textSize:{{ block.settings.text_size }}px;
+                        {% if block.settings.marquee_text_style == 'gradient' %}  
+                          --marqueeTextColor: {{ block.settings.marquee_text_gradient }};
+                        {% else %}
+                          --marqueeTextColor: {{ block.settings.marquee_text_solid }}; 
+                        {% endif %} 
+                          {% if block.settings.highlight_text_gradient != blank %}
+                          --highlightTextColor: {{ block.settings.highlight_text_gradient }};
+                        {% else %}
+                          --highlightTextColor: {{ block.settings.highlight_text_color }};
+                        {% endif %}
+                      } 
+                      #shopify-block-{{ block.id }} .bullet-highlights{
+                        --highlightBorderColor:{{ block.settings.highlight_border_color }}
+                      }
+                      #shopify-block-{{ block.id }} .outlined-highlights{
+                        --marqueeTextColor:{{ block.settings.marquee_text_solid }}
+                      }
+                    
+                    @media only screen and (max-width: 767px) { 
+                      #shopify-block-{{ block.id }}{
+                        --textSize:{{ block.settings.mobile_text_size }}px;
+                      } 
+                    }
+                </style>
+                
+                  {% if block.settings.text != blank %}
+                    {% liquid
+                      if block.settings.highlight_font == 'heading'
+                        assign font_class = 'heading-font'
+                      elsif block.settings.highlight_font == 'body'
+                        assign font_class = 'body-font'
+                      elsif block.settings.highlight_font == 'accent'
+                        assign font_class = 'accent-font'
+                      endif
+
+                      assign strong_start = '<span class="highlighted-text ' | append: font_class | append: '">'
+                      assign strong_end = '</span>'
+
+                      assign bullet_start = '<span class="bullet-highlights">'
+                      assign bullet_end = '</span>'
+
+                      assign outline_start = '<span class="outlined-highlights">'
+                      assign outline_end = '</span>'
+                    %}
+
+                    {% assign text = block.settings.text
+                      | replace: '<strong>', strong_start
+                      | replace: '</strong>', strong_end
+                      | replace: '[', bullet_start
+                      | replace: ']', bullet_end
+                      | replace: '(', outline_start
+                      | replace: ')', outline_end
+                    %}
+
+                    <div class="marquee-item-wrap text-{{ block.settings.marquee_text_style }}">
+                      <div class="marquee-text">
+                        {{ text }}
+                      </div>
+                    </div>
+                  {% endif %}
+
+              
+
+{% schema %}
+{
+    "name": "t:common.header.text_section.label",
+    "tag": "div",
+    "class": "marquee-item marquee-item-text",
+    "settings": [
+         {
+          "type": "paragraph",
+          "content": "t:sections.rotating-text.settings.paragraph.content"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "t:common.header.text_section.label",
+          "default": "Your Promotion Text Goes Here"
+        },
+        {
+          "type": "paragraph",
+          "content":"t:sections.marquee.marquee_text.info"
+        },
+        {
+          "type": "color",
+          "id": "highlight_text_color",
+          "label": "t:common.highlight_text_color.label",
+          "default": "#000000",
+          "visible_if": "{{ block.settings.text contains '<strong>' }}"
+        },
+        {
+          "type": "color_background", 
+          "id": "highlight_text_gradient",
+          "label": "t:common.highlight_text_gradient.label",
+          "info": "t:common.highlight_text_gradient.info",
+          "default": "linear-gradient(90deg, #A678C8 0%, #718CC7 48.08%, #639A47 100%)", 
+          "visible_if": "{{ block.settings.text contains '<strong>' }}"
+
+        }, 
+        {
+          "type": "color",
+          "id": "highlight_border_color",
+          "label": "Border color",
+          "default": "#000000",
+          "visible_if": "{{ block.settings.text contains '[' and block.settings.text contains ']' }}" 
+        },
+        {
+          "type": "select",
+          "id": "highlight_font",
+          "default": "body",
+          "label": "t:common.highlight_font.label",
+          "visible_if": "{{ block.settings.text contains '<strong>' }}",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:common.highlight_font.options.body.label"
+            },
+            {
+              "value": "heading",
+              "label": "t:common.highlight_font.options.heading.label"
+            },
+            {
+              "value": "accent",
+              "label": "t:common.highlight_font.options.accent.label"
+            }
+          ]
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "t:common.text_size.label",
+          "min": 10,
+          "max": 100,
+          "step": 1,
+          "default": 26,
+          "unit": "px"
+        },
+        {
+          "type": "select",
+          "id": "marquee_text_style",
+          "label": "t:sections.custom-liquid.settings.content_alignment.label",
+          "options": [
+            {
+              "label": "t:common.border_style.options.solid.label",
+              "value": "solid"
+            },
+            {
+              "label": "t:sections.announcement-bar.settings.bg_style.gradient.label",
+              "value": "gradient"
+            }
+          ],
+          "default": "solid"
+        },
+        {
+          "type": "color_background", 
+          "id": "marquee_text_gradient",
+          "label": "t:sections.split-slider.settings.overlaycolor.label",
+          "default": "linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.04) 100%)",
+          "visible_if": "{{ block.settings.marquee_text_style == 'gradient' }}"
+        },
+        {
+          "type": "color",
+          "id": "marquee_text_solid",
+          "label": "t:sections.split-slider.settings.overlaycolor.label",
+          "default": "#ffffff",
+          "visible_if": "{{ block.settings.marquee_text_style == 'solid' }}"
+        },
+       
+        {
+          "type": "header",
+          "content": "t:sections.map.settings.mobile_layout.content"
+        },
+        {
+          "type": "range",
+          "id": "mobile_text_size",
+          "label": "t:common.text_size.label",
+          "min": 10,
+          "max": 100,
+          "step": 2,
+          "default": 22,
+          "unit": "px"
+        }
+        ],
+    "presets": [
+        {
+            "name": "t:common.header.text_section.label"
+        }
+    ]
+}
+{% endschema %}

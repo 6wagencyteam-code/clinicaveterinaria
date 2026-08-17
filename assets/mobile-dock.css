@@ -1,0 +1,78 @@
+.yv-mobile-dock {
+    position: fixed;
+    bottom: 15px;
+    z-index: 3;
+    background: var(--backgroundColor);
+    display: flex;
+    width: 95%;
+    max-width: 355px;
+    border-radius: 50px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    border: 1px solid var(--borderColor);
+    box-shadow: 0 0 24px #34466e59;
+    padding: 10px;
+    justify-content: space-between;
+    overflow: hidden;
+    transform: translateY(130%);
+    transition: transform .4s ease;
+}
+
+.yv-mobile-dock.blur-background {
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+
+.dock-active {
+    overflow: visible;
+    transform: translateY(0);
+}
+
+.yv-dock-item {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    color: var(--iconColor);
+    position: relative;
+}
+
+.yv-dock-item svg {
+    width: 50%;
+    height: 50%;
+    display: block;
+}
+
+.yv-dock-item.active {
+    background: var(--iconColor);
+    color: var(--backgroundColor);
+}
+
+.yv-dock-item.active svg {
+    width: 40%;
+    height: 40%;
+}
+
+.yv-mobile-dock .cart-dot {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    background: var(--cartDotColor);
+    top: 12px;
+    right: 6px;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    animation: 1.6s infinite pulse;
+}
+
+@media (max-width:767px) {
+    .body-wrapper:has(.dock-active) .yv-scroll-top {
+        bottom: 100px;
+    }
+}

@@ -1,0 +1,18 @@
+{% if closest.product.selected_or_first_available_variant.sku != blank %}
+    <div class="yv-specifications-title">{{ 'SKU' }}</div>
+    <div class="yv-specifications-content">{{ closest.product.selected_or_first_available_variant.sku }}</div>
+{% endif %}
+{% schema %}
+{
+    "name": "t:sections.main-product.blocks.sku.name",
+    "class": "yv-specifications-info",
+    "tag": "div",
+    "settings": [ 
+        ],
+    "presets": [
+        {
+            "name": "t:sections.main-product.blocks.sku.name"
+        }
+    ]
+}
+{% endschema %}

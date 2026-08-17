@@ -1,0 +1,111 @@
+{% liquid
+  assign loading = 'lazy'
+  if section.index <= 3
+    assign loading = 'eager'
+  endif
+%}
+<style>
+  #shopify-block-{{ block.id }}{
+    --mediaWidth:{{ block.settings.image_width }}px;
+    --svgSize:{{ block.settings.image_width }}px;
+  }
+  @media only screen and (max-width: 767px) {
+    #shopify-block-{{ block.id }}{
+      --mediaWidth:{{ block.settings.mobile_image_width }}px;
+      --svgSize:{{ block.settings.mobile_image_width }}px;
+    }
+  }
+</style>
+{% liquid
+  assign class = ''
+  if block.settings.image_rounded
+    assign class = 'rounded'
+  endif
+%}
+{% if block.settings.link_to != blank %}
+  <a href="{{ block.settings.link_to }}" class="marquee-item-wrap ">
+{% else %}
+  <div class="marquee-item-wrap ">
+{% endif %}
+{% if block.settings.image_marquee != blank %}
+  {% liquid
+    assign default_alt = 'Marquee image' | escape
+    assign image_alt = block.settings.image_marquee.alt | default: default_alt
+    assign fetch_priority = 'auto'
+    if loading == 'eager'
+      assign fetch_priority = 'high'
+    endif
+  %}
+  {{
+    block.settings.image_marquee
+    | image_url: width: 1200, format: 'webp'
+    | image_tag:
+      sizes: '(max-width: 479px) 80vw, (max-width: 1023px) 40vw, 200px',
+      widths: '50,100,150,200,300,400,800,1200',
+      decoding: 'async',
+      loading: loading,
+      fetchpriority: fetch_priority,
+      alt: image_alt,
+      class: class
+  }}
+{% else %}
+  <span class="svg-wrapper">
+    {{ 'logo' | placeholder_svg_tag: 'placeholder-svg' }}
+  </span>
+{% endif %}
+{% if block.settings.link_to != blank -%}
+  </a>
+{% else %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:common.image.label",
+  "tag": "div",
+   "class": "marquee-item marquee-item-image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image_marquee",
+      "label": "t:common.image.label"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "label": "t:sections.banner-with-categories.settings.content_width.label",
+      "default": 50,
+      "min": 50,
+      "max": 400,
+      "step": 5,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_width",
+      "label": "t:sections.marquee.mobile-width.label",
+      "default": 40,
+      "min": 10,
+      "max": 400,
+      "step": 5,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "label": "t:sections.marquee.image-rounded.label",
+      "id": "image_rounded",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "link_to",
+      "label": "t:sections.images-carousel.link-to.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:common.image.label"
+    }
+  ]
+}
+{% endschema %}

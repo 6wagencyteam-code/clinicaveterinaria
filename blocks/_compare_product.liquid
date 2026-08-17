@@ -1,0 +1,91 @@
+
+{% assign product = closest.product %}
+<div class="yv-product-card yv-compare-card text-center">
+  {% render 'comparison-product' , product: product %} 
+  <div class="yv-specification-details">
+      {% content_for 'blocks', closest.product: block.settings.product %}
+  </div>
+</div>
+{% schema %}
+    {
+        "name": "t:sections.product-comparison-grid.blocks.name",
+        "tag": "div",
+        "class": "yv-compare-outline",
+        "settings": [
+            {
+                "type": "product",
+                "id": "product",
+                "label": "t:common.image_height.heading.product_image_style.label",
+                "info":"t:sections.product-comparison-grid.blocks.compare_product_info"
+            },
+            {
+              "type":"checkbox",
+              "id":"summary_product_title",
+              "label":"t:sections.product-comparison-grid.blocks.show_title",
+              "default": true
+          },
+          {
+              "type":"checkbox",
+              "id":"summary_product_desc",
+              "label":"t:sections.product-comparison-grid.blocks.show_description",
+              "default": true
+          },
+          {
+              "type":"checkbox",
+              "id":"summary_product_price",
+              "label":"t:sections.product-comparison-grid.blocks.show_price",
+              "default": true
+          },
+          {
+                "type":"checkbox",
+                "id":"quick_view",
+                "label":"t:settings_schema.product-grid.settings.show_quick_view.label",
+                "default": true
+            },
+          {
+              "type":"checkbox",
+              "id":"summary_product_link",
+              "label":"t:sections.product-comparison-grid.blocks.enable_product_link",
+              "info":"t:sections.product-comparison-grid.blocks.product_link_info",
+              "default": true
+          }
+        
+        ],
+        "blocks": [
+            {
+                "type": "_custom_content" 
+            },
+            {
+                "type": "_product_sku"
+            },
+            {
+                "type": "_product_type"
+            },
+            {
+                "type": "_product_vendor"
+            },
+            {
+                "type": "_product_description"
+            }
+        ],
+        "presets": [
+        {
+            "name" :"t:sections.product-comparison-grid.blocks.name",
+            "blocks": [
+                {
+                    "type": "_custom_content"
+                },
+                {
+                    "type": "_custom_content"
+                },
+                {
+                    "type": "_custom_content"
+                },
+                {
+                    "type": "_custom_content"
+                }
+            ]   
+        }
+        ]
+    }
+{% endschema %}

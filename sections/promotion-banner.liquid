@@ -1,0 +1,477 @@
+<div class="container" {% if section.settings.show_icon_on_image %}style="position: relative;"{% endif %}>
+  {% if section.settings.show_icon_on_image %}
+    <div class="yv-draw-icon" data-icon="{{ section.settings.icon }}">
+      {% render 'animated-icons', icon: section.settings.icon %}
+    </div>
+  {% endif %}
+  <div id="promo-banner-{{ section.id }}" class="promo-banner-main">
+    {% liquid
+      assign sectionContent = false
+      if section.settings.heading != blank or section.settings.text != blank
+        assign sectionContent = true
+      elsif section.settings.label != blank and section.settings.link != blank
+        assign sectionContent = true
+      endif
+    %}
+    {% if sectionContent %}
+    <div class="promo-banner-content">
+      {%- if section.settings.heading != blank -%}
+        <p class="promo-banner-title h6">{{ section.settings.heading }}</p>
+      {% endif %}
+      {%- if section.settings.text != blank -%}
+        <p>{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- if section.settings.label != blank and section.settings.link != blank -%}
+        <a href="{{ section.settings.link }}" class="button xsmall-btn promo-btn"> 
+          <span class="btn-txt">{{ section.settings.label }}</span>
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+    {% if section.blocks.size > 0 %}
+      <div class="promo-banner-counter">
+        <div class="promo-banner-counter-list" >
+          {% for block in section.blocks %}
+          <div class="promo-banner-counter-item">
+            <div class="promo-banner-counter-item-inner">
+              {% unless block.settings.counter_number == nil %}
+              <h2 class="promo-banner-counter-count heading-style h1 font-{{ section.settings.font_size }}"> 
+                <counter-text data-counter="{{ block.settings.counter_number }}">0</counter-text>
+                {% if block.settings.unit_text != blank %}
+                <sup>{{ block.settings.unit_text }}</sup>
+                {% endif %}
+              </h2>
+              {% endunless %}
+              {% if block.settings.heading %}
+               <h6 class="promo-banner-counter-heading">{{ block.settings.heading }}</h6>
+              {% endif %}
+              {% if block.settings.description %}
+              <p class="promo-banner-counter-desc">{{ block.settings.description | newline_to_br }}</p>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+<style>
+  {% if section.settings.show_icon_on_image %}
+    #shopify-section-{{ section.id }} .animated-path {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      stroke: {{ section.settings.icon_animated_color }};
+      stroke-width: 8;
+    }
+    #shopify-section-{{ section.id }} .yv-draw-icon {
+      position: absolute;  
+      top: {{ section.settings.top_to_bottom | append: '%' }}; 
+      left: {{ section.settings.left_to_right | append: '%' }};
+    }
+    @media only screen and (max-width:767px) {
+      #shopify-section-{{ section.id }} .yv-draw-icon {
+        position: absolute;  
+        top: {{ section.settings.mobile_top_to_bottom | append: '%' }}; 
+        left: {{ section.settings.mobile_left_to_right | append: '%' }};
+      }
+    }
+  {% endif %}
+  #shopify-section-{{ section.id }}.promotion-banner {
+    --counter-count:{{ section.blocks.size }};
+    {% if section.settings.full_width %}
+      background-color:{{ section.settings.bgcolor }};
+    {% endif %}
+    padding-top:{{ section.settings.top_space_desktop }}px;
+    padding-bottom:{{ section.settings.bottom_space_desktop }}px;
+  }
+    #promo-banner-{{ section.id }}{
+      {% unless section.settings.full_width %}
+      background-color:{{ section.settings.bgcolor }};
+      border-radius:{{ section.settings.border_radius }}px;
+    {% endunless %}
+      --colorBtnPrimaryText:{{ section.settings.btntextcolor }};
+      --colorBtnPrimary:{{ section.settings.btnbgcolor }};
+      --colorBtnPrimaryBorder:{{ section.settings.btnborder }};
+    }
+    @media only screen and (max-width:575px) {
+      #shopify-section-{{ section.id }}.promotion-banner{
+        padding-top:{{ section.settings.top_space_mobile }}px;
+        padding-bottom:{{ section.settings.bottom_space_mobile }}px;
+      }
+    }
+    #promo-banner-{{ section.id }} .promo-banner-content .promo-banner-title{
+      color:{{ section.settings.textcolor }}
+    }
+    #promo-banner-{{ section.id }} .promo-banner-content p,
+    #promo-banner-{{ section.id }} .promo-banner-counter-item-inner *{
+      color:{{ section.settings.textcolor }}
+    }
+    .promo-banner-main{
+      {% if section.settings.full_width %}
+        padding:0;
+        {% else %}
+        padding: 15px 20px;
+      {% endif %}
+    }
+  .promo-banner-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      justify-content: center;
+  }
+    .promo-banner-content .promo-banner-title, .promo-banner-content p, .promo-banner-content a {
+      margin: 0 10px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+   .promo-banner-content a {
+     display: inline-flex;
+  }
+    @media screen and (max-width:575px){
+      .promo-banner-content p {
+          width:100%;
+          text-align:center;
+      }
+      .promo-banner-content a {
+          margin: 6px 10px 0;
+      }
+    }  
+  {% if section.settings.section_visibility == 'large' %}
+      @media (max-width: 767px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+    {% elsif section.settings.section_visibility == 'small' %}
+      @media (min-width: 768px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+  {% endif %}
+</style>
+{% schema %}
+{
+  "name": "t:sections.promotion-banner.name",
+  "tag": "section",
+  "class": "promotion-banner",
+  "max_blocks": 4,
+  "disabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.promotion-banner.settings.full_width.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "t:sections.promotion-banner.settings.border_radius.label",
+      "default": 5,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "info": "t:sections.promotion-banner.settings.border_radius.info"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.text_section.label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.promotion-banner.settings.heading.label",
+      "default": "Promotion"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "t:sections.promotion-banner.settings.text.label",
+      "default": "Add the details of your promotion"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.button_section.label"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:sections.promotion-banner.settings.label.label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.promotion-banner.settings.link.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.promotion-banner.content.number_and_unit"
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "label": "t:common.button.shortname.label",
+      "default": "large",
+      "options": [
+        {
+          "label": "t:common.button.options.small.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.button.options.medium.label",
+          "value": "medium"
+        },
+        {
+          "label": "t:common.button.options.large.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "color",
+      "id": "textcolor",
+      "label": "t:sections.promotion-banner.settings.textcolor.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "bgcolor",
+      "label": "t:sections.promotion-banner.settings.bgcolor.label",
+      "default": "#F8F8F8"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:common.header.button_section.label"
+    },
+    {
+      "type": "color",
+      "id": "btntextcolor",
+      "label": "t:sections.promotion-banner.settings.btntextcolor.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btnbgcolor",
+      "label": "t:sections.promotion-banner.settings.btnbgcolor.label",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btnborder",
+      "label": "t:sections.promotion-banner.settings.btnborder.label",
+      "default": "#000000"
+    },
+    {
+      "type": "select",
+      "id": "section_visibility",
+      "label": "t:common.section_visibility.label",
+      "default": "always",
+      "options": [
+        {
+          "label": "t:common.section_visibility.options.always.label",
+          "value": "always"
+        },
+        {
+          "label": "t:common.section_visibility.options.small_devices.label",
+          "value": "small"
+        },
+        {
+          "label": "t:common.section_visibility.options.large_devices.label",
+          "value": "large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.icon_over_section.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon_on_image",
+      "label": "t:common.show_icon.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:common.icon.label",
+      "default": "heart",
+      "options": [
+        {
+          "label": "t:common.icon_name.arrow.label",
+          "value": "arrow"
+        },
+        {
+          "label": "t:common.icon_name.line-arrow.label",
+          "value": "line-arrow"
+        },
+        {
+          "label": "t:common.icon_name.heart.label",
+          "value": "heart"
+        },
+        {
+          "label": "t:common.icon_name.star.label",
+          "value": "star"
+        },
+        {
+          "label": "t:common.icon_name.snail.label",
+          "value": "snail"
+        },
+        {
+          "label": "t:common.icon_name.sparkle.label",
+          "value": "sparkle"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": "t:common.icon_position.label"
+    },
+    {
+      "type": "range",
+      "id": "left_to_right",
+      "label": "t:common.left_to_right.label",
+      "default": 90,
+      "min": -10,
+      "max": 90,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "top_to_bottom",
+      "label": "t:common.top_to_bottom.label",
+      "default": 50,
+      "min": -10,
+      "max": 90,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "mobile_left_to_right",
+      "label": "t:common.mobile_left_to_right.label",
+      "default": 50,
+      "min": -10,
+      "max": 90,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "mobile_top_to_bottom",
+      "label": "t:common.mobile_top_to_bottom.label",
+      "default": 50,
+      "min": -10,
+      "max": 90,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "icon_animated_color",
+      "label": "t:common.icon_animated_color.label",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "t:common.header.space_section.label"
+    },
+    {
+      "type": "range",
+      "id": "top_space_desktop",
+      "label": "t:common.top_space_desktop.label",
+      "default": 30,
+      "min": 0,
+      "max": 60,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_desktop",
+      "label": "t:common.bottom_space_desktop.label",
+      "default": 30,
+      "min": 0,
+      "max": 60,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "top_space_mobile",
+      "label": "t:common.top_space_mobile.label",
+      "default": 30,
+      "min": 0,
+      "max": 60,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "bottom_space_mobile",
+      "label": "t:common.bottom_space_mobile.label",
+      "default": 30,
+      "min": 0,
+      "max": 60,
+      "step": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "counter",
+      "name": "t:sections.promotion-banner.blocks.name",
+      "settings": [
+        {
+          "type": "number",
+          "id": "counter_number",
+          "label": "t:sections.promotion-banner.blocks.settings.counter_number.label"
+        },
+        {
+          "type": "text",
+          "id": "unit_text",
+          "label": "t:sections.promotion-banner.blocks.settings.unit_text.label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.promotion-banner.blocks.settings.heading.label",
+          "default": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "t:sections.promotion-banner.blocks.settings.description.label",
+          "default": "Add short description for this block"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.promotion-banner.presets.name",
+      "blocks": [
+        {
+          "type": "counter"
+        },
+        {
+          "type": "counter"
+        },
+        {
+          "type": "counter"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

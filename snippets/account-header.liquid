@@ -1,0 +1,20 @@
+<div class="account-pages-header">
+  <div class="account-header-tabs">
+  <a href="{{ routes.account_url }}"  class="{% if request.path == routes.account_url or request.path contains '/orders/' %}active{% endif %}">
+       {{ 'customer.orders.title' | t }}
+      </a>
+  <a href="{{ routes.account_addresses_url }}" class="{% if request.path == routes.account_addresses_url %}active{% endif %}">
+        {{ 'customer.account.view_addresses' | t }}
+      </a>
+   <a class="button black-btn small-btn" href="{{ routes.account_logout_url }}">
+     
+      {% if settings.buttonAnimation == 'animated-arrow'%}
+        <span class="btn-animated-arrow"><svg fill="none" viewBox="0 0 8 8">
+          <path fill="currentColor" fill-rule="evenodd" d="M0 0h8v8H7V1.707L1.354 7.354 1 7.707.293 7l.353-.354L6.293 1H0V0Z" clip-rule="evenodd"></path>
+          </svg>
+        </span>
+      {% endif %}
+      <span class="btn-txt">{{ 'customer.log_out' | t }}</span>
+    </a>
+  </div>
+</div>

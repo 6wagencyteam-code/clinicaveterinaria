@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="yv-404-wrapper">
+    <div class="yv-404-content">
+       {%- comment -%} theme-check-disable ImgWidthAndHeight,ImgLazyLoading{%- endcomment -%}
+      <img class="pencel mx-auto" src="{{ 'not_found.svg' | asset_url }}" width="150" alt="not found" style="width:100px" lazyload="lazy"> 
+      {%- comment -%} theme-check-enable ImgWidthAndHeight,ImgLazyLoading{%- endcomment -%}
+      <h2>{{ 'templates.404.tag' | t }}</h2>
+      <h4>{{ 'templates.404.title' | t }}</h4>
+      <p>{{ 'templates.404.subtext_html' | t }}</p>
+      <div class="back-to-home-box">
+        <a href="{{ routes.root_url }}" class="button black-btn small-btn">
+          {% if settings.buttonAnimation == 'animated-arrow'%}
+            <span class="btn-animated-arrow"><svg fill="none" viewBox="0 0 8 8">
+              <path fill="currentColor" fill-rule="evenodd" d="M0 0h8v8H7V1.707L1.354 7.354 1 7.707.293 7l.353-.354L6.293 1H0V0Z" clip-rule="evenodd"></path>
+              </svg>
+            </span>
+          {% endif %}
+          <span class="btn-txt">
+          {{ 'templates.404.button_txt' | t }}</span></a>
+      </div>
+    </div>
+  </div>
+</div>

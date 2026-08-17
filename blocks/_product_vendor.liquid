@@ -1,0 +1,18 @@
+  {% if closest.product.vendor %}
+    <div class="yv-specifications-title">{{ 'Vendor' }}</div>
+    <div class="yv-specifications-content">{{ closest.product.vendor }}</div>
+  {% endif %}
+{% schema %}
+{
+    "name": "t:settings_schema.product-grid.settings.similar_condition.options.vendor.label",
+    "tag": "div",
+    "class": "yv-specifications-info",
+    "settings": [
+        ],
+    "presets": [
+        {
+            "name": "t:settings_schema.product-grid.settings.similar_condition.options.vendor.label"
+        }
+    ]
+}
+{% endschema %}

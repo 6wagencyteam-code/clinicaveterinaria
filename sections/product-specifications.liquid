@@ -1,0 +1,463 @@
+{% render 'section-id-clipboard' %}
+<div class="container sm-container">
+  <div class="yv-product-specification-wrapper">
+    {% if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank %}
+      <div class="section-heading">
+        {% if section.settings.subheading != blank %}
+          <h6 class="section-heading-subtitle" data-aos="fade-up">  {{ section.settings.subheading }}</h6>
+        {% endif %}
+        {% if section.settings.heading != blank %}
+          {% if section.settings.highlight_font == 'body' %}
+            {% capture highlightStyle %}
+              <span class="body-font highlighted-text">
+            {% endcapture %}
+          {% elsif section.settings.highlight_font == 'heading' %}
+            {% capture highlightStyle %}
+              <span class="heading-font highlighted-text">
+            {% endcapture %}  
+          {% else %}
+            {% capture highlightStyle %}
+              <span class="accent-font highlighted-text">
+            {% endcapture %}  
+          {% endif %}
+         
+          <{{ section.settings.seo_heading }} class="section-heading-title {{ section.settings.size }}" data-aos="fade-up">
+          {%- assign heading = section.settings.heading | replace: "<strong>", highlightStyle | replace: "</strong>", '</span>' | replace: '++', '<br/>' -%}
+          {%- if heading contains '[' and heading contains ']' -%}
+            {%- render 'rotational-highlight', heading: heading -%}
+          {%- else -%}
+            {{- heading -}}
+          {%- endif -%}
+          </{{ section.settings.seo_heading }}>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <div class="section-heading-desc" data-aos="fade-up">{{ section.settings.description }}</div>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="yv-product-specification-list">
+        {%- for block in section.blocks -%}
+        <div class="yv-product-specification-item">
+          <div class="yv-product-specification-icon">
+            {%- render 'icons', icon: block.settings.icon -%}
+          </div> 
+          {% if block.settings.heading != blank or block.settings.description != blank %}
+            <div class="yv-product-specification-content">
+              <h6 class="yv-product-specification-title text-medium">{{ block.settings.heading }}</h6>
+              <div class="yv-product-specification-description rte">{{ block.settings.content }}</div>
+            </div>
+          {% endif %}
+        </div>
+        {%- endfor -%}
+      </div> 
+    {% endif %}
+  </div>
+</div>
+<style>
+  #shopify-section-{{ section.id }} {
+    background:var(--{{- section.settings.bgcolor -}}ColorBody);
+    padding-top:{{ section.settings.top_space_desktop }}px;
+    padding-bottom:{{ section.settings.bottom_space_desktop }}px;
+    {%- unless section.settings.bgcolor == 'primary' or section.settings.bgcolor == 'gradient' -%}
+    --colorTextBody:var(--{{- section.settings.bgcolor -}}colorTextBody);
+    --subheading_color:var(--{{- section.settings.bgcolor -}}_subheading_color);
+    --colorLightTextBody:var(--{{- section.settings.bgcolor -}}ColorLightTextBody);
+    --colorXlightTextBody:var(--{{- section.settings.bgcolor -}}ColorXlightTextBody);
+    --heading_color:var(--{{- section.settings.bgcolor -}}_heading_color);
+    --primaryAlternateBg:var(--{{- section.settings.bgcolor -}}AlternateBg);
+    --primaryCardBackground:var(--{{- section.settings.bgcolor -}}CardBackground);
+    --primaryCardText:var(--{{- section.settings.bgcolor -}}CardText);
+    {%- endunless -%}
+
+    {% if section.settings.highlight_text_gradient != blank %}
+      --highlightTextColor: {{ section.settings.highlight_text_gradient }};
+    {% else %}
+      --highlightTextColor: {{ section.settings.highlight_text_color }};
+    {% endif %}
+  }
+
+  #shopify-section-{{ section.id }} .section-heading-title {
+    --fontSize: var(--{{ section.settings.size }});
+  }
+
+  @media only screen and (max-width:991px) {
+    #shopify-section-{{ section.id }}.shopify-section{
+      padding-top:{{ section.settings.top_space_mobile }}px;
+      padding-bottom:{{ section.settings.bottom_space_mobile }}px;
+    }
+  }  
+  {% if section.settings.section_visibility == 'large' %}
+      @media (max-width: 767px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+    {% elsif section.settings.section_visibility == 'small' %}
+      @media (min-width: 768px) {
+        #shopify-section-{{ section.id }}{
+          display: none !important;
+        }
+      }
+  {% endif %}
+</style>
+{% schema %}
+  {
+    "name": "t:sections.product_specifications.name",
+    "class": "yv-main-product-specs",
+    "enabled_on": {
+      "templates": ["product"]
+    },
+    "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "t:sections.map.blocks.subheading.settings.heading.label",
+          "default": "Subheading"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "label": "t:sections.rich-text.blocks.richtext.settings.heading.label",
+          "info": "t:common.highlight_text_and_break_text.info",
+          "default": "Product Specification"
+        },
+        {
+          "type": "color",
+          "id": "highlight_text_color",
+          "label": "t:common.highlight_text_color.label",
+          "default": "#000000",
+          "visible_if": "{{ section.settings.heading contains '<strong>' or section.settings.heading contains '[' and section.settings.heading contains ']' }}"
+        },
+        {
+          "type": "color_background",
+          "id": "highlight_text_gradient",
+          "label": "t:common.highlight_text_gradient.label",
+          "info": "t:common.highlight_text_gradient.info",
+          "default": "linear-gradient(90deg, #A678C8 0%, #718CC7 48.08%, #639A47 100%)",
+          "visible_if": "{{ section.settings.heading contains '<strong>' or section.settings.heading contains '[' and section.settings.heading contains ']' }}"
+        },
+        {
+          "type": "select",
+          "id": "highlight_font",
+          "default": "body",
+          "label": "t:common.highlight_font.label",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:common.highlight_font.options.body.label"
+            },
+            {
+              "value": "heading",
+              "label": "t:common.highlight_font.options.heading.label"
+            },
+            {
+              "value": "accent",
+              "label": "t:common.highlight_font.options.accent.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "seo_heading",
+          "label": "t:common.header.heading_tag.label",
+          "info": "t:common.header.heading_tag.info",
+          "default": "h2",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:common.header.heading_tag.options.h1.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:common.header.heading_tag.options.h2.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:common.header.heading_tag.options.h3.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:common.header.heading_tag.options.h4.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:common.header.heading_tag.options.h5.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:common.header.heading_tag.options.h6.label"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "t:common.heading_size.label",
+          "default": "h2",
+          "options": [
+            {
+              "value": "h1",
+              "label": "H1"
+            },
+            {
+              "value": "h2",
+              "label": "H2"
+            },
+            {
+              "value": "h3",
+              "label": "H3"
+            },
+            {
+              "value": "h4",
+              "label": "H4"
+            },
+            {
+              "value": "h5",
+              "label": "H5"
+            },
+            {
+              "value": "h6",
+              "label": "H6"
+            }
+          ]
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "t:sections.rich-text.blocks.richtext.settings.content.label",
+          "default": "<p>Use this section to welcome customers to your store, say a bit about your brand, or share news and seasonal promotions.</p>"
+        },
+      {
+        "type": "header",
+        "content": "t:common.header.color_singular_section.label"
+      },
+      {
+        "type": "select",
+        "id": "bgcolor",
+        "label": "t:common.header.background_section.label",
+        "default": "primary",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:common.header.primary.label"
+          },
+          {
+            "value": "secondary",
+            "label": "t:common.header.secondary.label"
+          },
+          {
+            "value": "tertiary",
+            "label": "t:common.header.tertiary.label"
+          },
+          {
+            "value": "quaternary",
+            "label": "t:common.header.quaternary.label"
+          },
+          {
+            "value": "gradient",
+            "label": "t:common.header.gradient.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "section_visibility",
+        "label": "t:common.section_visibility.label",
+        "default": "always",
+        "options": [
+          {
+            "label": "t:common.section_visibility.options.always.label",
+            "value": "always"
+          },
+          {
+            "label": "t:common.section_visibility.options.small_devices.label",
+            "value": "small"
+          },
+          {
+            "label": "t:common.section_visibility.options.large_devices.label",
+            "value": "large"
+          }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "t:common.header.space_section.label"
+      },
+      {
+        "type": "range",
+        "id": "top_space_desktop",
+        "label": "t:common.top_space_desktop.label",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "bottom_space_desktop",
+        "label": "t:common.bottom_space_desktop.label",
+        "default": 60,
+        "min": 0,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "top_space_mobile",
+        "label": "t:common.top_space_mobile.label",
+        "default": 30,
+        "min": 0,
+        "max": 100,
+        "step": 5
+      },
+      {
+        "type": "range",
+        "id": "bottom_space_mobile",
+        "label": "t:common.bottom_space_mobile.label",
+        "default": 30,
+        "min": 0,
+        "max": 100,
+        "step": 5
+      }
+    ],
+    "blocks": [
+      {
+        "type": "specification",
+        "name": "t:sections.product_specifications.blocks.feature.name",
+        "limit": 10,
+        "settings": [
+          {
+            "type": "select",
+            "id": "icon",
+            "label": "t:common.icon.label",
+            "default": "shipping",
+            "options": [
+              {
+                "label": "t:common.icon.options.chat.label",
+                "value": "chat"
+              },
+              {
+                "label": "t:common.icon.options.eye.label",
+                "value": "eye"
+              },
+              {
+                "label": "t:common.icon.options.file.label",
+                "value": "file"
+              },
+              {
+                "label": "t:common.icon.options.gift.label",
+                "value": "gift"
+              },
+              {
+                "label": "t:common.icon.options.global.label",
+                "value": "global"
+              },
+              {
+                "label": "t:common.icon.options.heart.label",
+                "value": "heart"
+              },
+              {
+                "label": "t:common.icon.options.phone.label",
+                "value": "phone"
+              },
+              {
+                "label": "t:common.icon.options.refund.label",
+                "value": "refund"
+              },
+              {
+                "label": "t:common.icon.options.return.label",
+                "value": "return"
+              },
+              {
+                "label": "t:common.icon.options.search.label",
+                "value": "search"
+              },
+              {
+                "label": "t:common.icon.options.secure.label",
+                "value": "secure"
+              },
+              {
+                "label": "t:common.icon.options.shipping.label",
+                "value": "shipping"
+              },
+              {
+                "label":"t:common.icon.options.shopping.label",
+                "value": "shopping"
+              },
+              {
+                "label": "t:common.icon.options.security.label",
+                "value": "security"
+              },
+              {
+                "label":"t:common.icon.options.service.label",
+                "value":  "service"
+              },
+              {
+                "label": "t:common.icon.options.smile.label",
+                "value": "smile"
+              },
+              {
+                "label": "t:common.icon.options.support.label",
+                "value": "support"
+              },
+              {
+                "label": "t:common.icon.options.tag.label",
+                "value": "tag"
+              },
+              {
+                "label": "t:common.icon.options.thumb.label",
+                "value": "thumb"
+              },
+              {
+                "label": "t:common.icon.options.user.label",
+                "value": "user"
+              },
+              {
+                "label": "t:common.icon.options.gift-colored.label",
+                "value": "gift-colored"
+              },
+              {
+                "label": "t:common.icon.options.paw-colored.label",
+                "value": "paw-colored"
+              },
+              {
+                "label": "t:common.icon.options.vegan-colored.label",
+                "value": "vegan-colored"
+              },
+              {
+                "label": "t:common.icon.options.shipping-colored.label",
+                "value": "shipping-colored"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "label": "t:sections.specifications.blocks.feature.settings.heading.label",
+            "id": "heading",
+            "default": "Spefication block"
+          },
+          {
+            "type": "richtext",
+            "label": "t:sections.specifications.blocks.feature.settings.column_content.content.label",
+            "id": "content",
+            "default": "<p>Specification details here</p>"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.product_specifications.presets.name",
+        "blocks": [
+          {
+            "type": "specification",
+            "settings": {
+            }
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  

@@ -1,0 +1,183 @@
+{%- comment -%}theme-check-disable RemoteAsset,ParserBlockingJavaScript{%- endcomment -%}
+<script>       
+  var focusElement = '';
+  var productSlider;
+  var productThumbSlider; 
+    const moneyFormat = '{{ shop.money_format }}';
+    const moneyFormatWithoutCurrency = '{{ shop.money_format | remove: cart.currency.symbol | replace: 'amount_with_comma_separator', 'amount' }}';
+  const freeShippingBarText = `{{ settings.shipping_text }}`;
+  const freeShippingBarSuccessText = `{{ settings.free_shipping_text }}`;
+  const shopCurrency = `{{ shop.currency }}`;
+  const freeShippingBarAmount = {{ settings.shipping_rate | times: 100 }};
+  {%- if settings.enable_shipping and settings.shipping_rate != blank -%}
+  const freeShippingBarStatus = true;
+  {%- else -%}
+  const freeShippingBarStatus = false;
+  {%- endif -%}
+  {%- if settings.show_grid_pickup -%}
+  const gridPickupAvailabilityStatus = true;
+  {%- else -%}
+  const gridPickupAvailabilityStatus = false;
+  {%- endif -%}
+  const addToCartText = '{{ 'products.product.add_to_cart' | t }}';
+  const preorderText = '{{ 'products.product.preorder' | t }}';
+  const preorderStatus = {{ settings.enable_preorder }};
+  const soldOutText = '{{ 'products.product.sold_out' | t }}';
+  const saleText = '{{ 'products.product.on_sale' | t }}';
+  const saleOffText = '{{ 'products.product.off' | t }}';
+  const regularPriceText = '{{ 'products.product.price.regular_price' | t }}';
+  const comparePriceText = '{{ 'products.product.price.sale_price' | t }}'; 
+  const savedPriceText = '{{ 'products.product.price.saved' | t }}';
+  const unitPriceText = '{{ 'products.product.price.unit_price' | t }}';
+  const priceVariText = '{{ 'products.product.price.from_price_html' | t : price : '[[price]]' }}';
+  const cartTitleLabel = '{{ 'sections.cart.title' | t }}';
+  const errorLabel = '{{ 'sections.cart.shipping_estimates.error' | t }}';
+  const notAvailableLabel = '{{ 'sections.cart.shipping_estimates.not_available' | t }}';
+  const variantStyle = '{{ settings.option_style }}';
+  const pickUpAvialabiliyHeading = '{{ 'products.product.pickup_availability.heading' | t }}';
+  const productGridContentAlignment = '{{ settings.product_grid_content_alignment }}';
+  const unavailableText = '{{ 'products.product.unavailable' | t }}';
+  const oneTimePurchaseText = '{{ 'products.product.one_time_purchase' | t }}';
+  const showSavedAmount = {{ settings.show_saved_amount }};
+  const savedAmountStyle = '{{ settings.saved_amount_style }}';
+  const quickViewHeading = '{{ 'general.quick_view_heading' | t }}';
+  const searchSuggestions = {{ settings.enable_result_suggestions }};
+  const searchPageResults = {{ settings.enable_page_result }};
+  const searchArticleResults = {{ settings.enable_article_result }};
+  const searchCollectionResults = {{ settings.enable_collection_result }};
+  const searchDrawerSuggestionHead = '{{ 'templates.search.suggestion' | t }}';
+  const searchDrawerProductHead = '{{ 'templates.search.product' | t }}';
+  const searchDrawerArticleHead = '{{ 'templates.search.article' | t }}';
+  const searchDrawerPageHead = '{{ 'templates.search.page' | t }}';
+  const searchAllResultText = '{{ 'templates.search.drawer_all_results' | t }}';
+  const searchRecentTitleText = '{{ 'templates.search.drawer_recent_title' | t }}';
+  const searchNoResultText = '{{ 'templates.search.drawer_no_results' | t }}';
+  const searchForText = '{{ 'templates.search.drawer_search' | t }}';
+  const searchResultText = '{{ 'templates.search.drawer_results' | t }}';
+  const searchNoSuggestionText = '{{ 'templates.search.no_suggestion' | t }}';
+  const searchProductImageHeight = 'image-{{ settings.product_image_style }}';
+  const searchArticleImageHeight = 'image-{{ settings.article_image_style }}';
+  const showMoreText = '{{ 'sections.collection_template.filter_show_more' | t }}';
+  const showLessText = '{{ 'sections.collection_template.filter_show_less' | t }}';
+  const readMoreText = '{{ 'blogs.article.read_more' | t }}';
+  const animationStatus = {{ settings.enable_animation }};
+  const rootUrl = '{{ routes.root_url }}';
+  const cartUrl = '{{ routes.cart_url }}.js';
+  const mainCartUrl = '{{ routes.cart_url }}';
+  const cartStatusEmpty = `{{ 'customer.order.reorder.cart_status.empty' | t }}`;
+  const cartStatusNotEmpty = `{{ 'customer.order.reorder.cart_status.not_empty' | t }}`;
+  {%- if cart.item_count == 0 -%}
+  var emptyCartStatus = true;
+  {%- else -%}
+  var emptyCartStatus = false;
+  {%- endif -%}
+  const cartAdd = '{{ routes.cart_add_url }}';
+  const cartAddUrl = '{{ routes.cart_add_url }}.js';
+  const cartUpdateUrl = '{{ routes.cart_update_url }}.js';
+  const cartChangeUrl = '{{ routes.cart_change_url }}.js';
+  const cartClearUrl = '{{ routes.cart_clear_url }}.js';
+  const cartChangeError = "{{ 'sections.cart.cart_quantity_error_html' | t : quantity : '[qty]' }}";
+  const productRecommendationUrl = '{{ routes.product_recommendations_url }}';
+  const googleMapApiKey = '{{ settings.googlemapapi }}';
+  const searchUrl = '{{ routes.search_url }}';
+  const preLoadLoadGif = `<div class="yv_load">
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+               style="margin: auto; display: block; shape-rendering: auto;"
+               width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="svg-loader" >
+            <circle cx="50" cy="50" fill="none" stroke="#dddddd" stroke-width="6" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+              <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"/>
+            </circle>
+          </svg>
+    </div>`;
+  const noImage = `{{ 'image' | placeholder_svg_tag : 'placeholder-svg' }}`;
+  const noProductImage = `{{ 'product-1' | placeholder_svg_tag : 'placeholder-svg' }}`;
+  const noResultFound = `{%- render 'not-found' -%}`;
+  const cartDrawerEnable = {{ settings.enable_cart_drawer }};
+  var cartItemsCount = {{ cart.item_count }};
+  const browserNotificationStatus = {{ settings.enable_browser_notification }};
+  const browserNotificationBg = '{{ settings.browser_notification_bg }}';
+  const browserNotificationText = '{{ settings.browser_notification_text }}';
+  const hapticFeedbackStatus = {{ settings.haptic_feedback }};
+  {% if settings.layout_style == 'rounded' %}
+  const browserNotificationShape = 'circle';
+  {% else %}
+  const browserNotificationShape = 'rectangle';
+  {% endif %}
+  const stickers = [
+    `<svg width="228" height="199" viewBox="0 0 228 199" fill="none">
+      <path d="M209.472 18.6241C184.75 -6.20803 144.639 -6.20803 119.889 18.6241L114 24.5324L108.111 18.6241C83.3891 -6.20803 43.278 -6.20803 18.5554 18.6241C6.16682 31.0262 0 47.3022 0 63.5506C0 79.7985 6.16682 96.0746 18.5554 108.477L24.4445 114.385L105.043 195.276C109.99 200.241 118.011 200.241 122.958 195.278L209.472 108.477C221.833 96.0746 228 79.7985 228 63.5506C228 47.3022 221.833 31.0262 209.472 18.6241Z" fill="currentColor"/>
+      </svg>`,
+    `<svg width="208" height="199" viewBox="0 0 208 199" fill="none">
+      <path d="M104 34.1122L136.138 0L142.206 46.6002L188.138 38.0056L165.819 79.2941L208 99.5L165.819 119.706L188.138 160.994L142.206 152.4L136.138 199L104 164.888L71.8622 199L65.794 152.4L19.8622 160.994L42.1813 119.706L0 99.5L42.1813 79.2941L19.8622 38.0056L65.794 46.6002L71.8622 0L104 34.1122Z" fill="currentColor"/>
+      </svg>
+      `,
+    `<svg width="183" height="199" viewBox="0 0 183 199" fill="none">
+      <path d="M165.444 100.61C182.387 89.8993 188.079 67.7029 178.035 50.1437C168.174 32.9109 146.751 26.4398 129.09 34.8358C127.631 15.3618 111.379 0 91.5 0C72.2886 0 56.4679 14.3422 54.1053 32.884C37.0341 25.2149 16.515 31.2082 6.48806 47.566C-4.07819 64.8123 0.940359 87.1769 17.5565 98.3895C0.613428 109.101 -5.0792 131.297 4.96463 148.856C14.8265 166.089 36.2488 172.56 53.9098 164.164C55.3692 183.638 71.6213 199 91.5 199C110.711 199 126.532 184.658 128.895 166.116C145.966 173.778 166.482 167.788 176.509 151.431C187.075 134.181 182.056 111.823 165.444 100.61ZM91.5 131.832C73.6166 131.832 59.1171 117.355 59.1171 99.5C59.1171 81.6446 73.6166 67.1679 91.5 67.1679C109.383 67.1679 123.883 81.6446 123.883 99.5C123.883 117.355 109.383 131.832 91.5 131.832Z" fill="currentColor"/>
+      </svg>
+      `,
+    `<svg width="199" height="199" viewBox="0 0 199 199" fill="none">
+      <path d="M99.3936 199C154.305 199 199 154.353 199 99.5C199 44.6474 154.305 0 99.3936 0C44.4824 0 0 44.6474 0 99.5C0 154.353 44.4824 199 99.3936 199ZM112.589 58.0417C114.93 55.0652 118.123 53.3643 121.741 52.9391C125.359 52.5139 128.978 53.5769 131.957 55.9156L132.809 56.5534L133.66 55.703C136.214 53.1517 139.619 51.8761 143.237 51.8761C147.068 51.8761 150.687 53.3643 153.241 56.1282C157.923 61.0182 158.349 68.8846 154.092 74.1998C153.666 74.625 153.241 75.2628 152.815 75.688L137.278 90.5705C136.427 91.4209 135.363 91.8462 134.298 91.8462C133.447 91.8462 132.383 91.6335 131.744 90.9957L114.93 77.6015C111.951 75.2628 110.248 72.0737 109.822 68.4594C109.397 64.4199 110.461 60.8056 112.589 58.0417ZM141.109 108.642C142.173 108.642 143.45 109.067 144.089 109.918C144.727 110.768 145.366 111.831 145.366 113.107C144.727 137.982 124.508 157.542 99.3936 157.542C74.2791 157.542 54.0599 137.982 53.2086 113.107C53.2086 112.044 53.6342 110.768 54.4856 109.918C55.3369 109.067 56.4011 108.642 57.4652 108.642H141.109ZM44.4824 58.0417C46.8235 55.0652 50.016 53.3643 53.6342 52.9391C57.2524 52.5139 60.8706 53.5769 63.8503 55.9156L64.7016 56.5534L65.5529 55.703C68.1069 53.1517 71.5123 51.8761 75.1305 51.8761C78.9615 51.8761 82.5797 53.3643 85.1337 56.1282C89.816 61.0182 90.2417 68.8846 85.985 74.1998C85.5594 74.625 85.1337 75.2628 84.708 75.688L69.1711 90.5705C68.3198 91.4209 67.2556 91.8462 66.1914 91.8462C65.3401 91.8462 64.2759 91.6335 63.6374 90.9957L46.8235 77.6015C43.8438 75.2628 42.1412 72.0737 41.7155 68.4594C41.2898 64.4199 42.354 60.8056 44.4824 58.0417Z" fill="currentColor"/>
+      </svg>`,
+    `<svg width="166" height="199" viewBox="0 0 166 199" fill="none">
+      <path d="M165.011 168.266L152.574 57.4336C152.242 54.6144 149.92 52.5139 147.101 52.5139H115.814V33.0561C115.814 14.8144 100.889 0 82.6473 0C64.4057 0 49.4807 14.8144 49.4807 33.0561V52.5139H18.2487C15.4296 52.5139 13.0526 54.6697 12.7762 57.4336C12.7209 58.1522 4.48455 129.682 0.172883 168.266C-0.711562 176.06 1.83122 183.909 7.02733 189.769C12.2787 195.628 19.7412 199 27.6459 199H137.538C145.388 199 152.905 195.628 158.157 189.769C163.408 183.909 165.896 176.06 165.011 168.266ZM104.758 52.5139H60.5362V33.0561C60.5362 20.895 70.4862 11.0556 82.6473 11.0556C94.8084 11.0556 104.758 20.9503 104.758 33.0561V52.5139Z" fill="currentColor"/>
+      </svg>`,
+    `<svg width="199" height="199" viewBox="0 0 199 199" fill="none">
+      <path d="M187.681 72.1325C183.501 67.9609 181.204 62.4044 181.204 56.4953C181.204 35.1566 163.841 17.7944 142.503 17.7944C136.594 17.7944 131.037 15.493 126.865 11.3173C111.784 -3.76829 87.2315 -3.77658 72.1293 11.3173C67.9578 15.4972 62.4012 17.7944 56.4922 17.7944C35.1534 17.7944 17.7913 35.1566 17.7913 56.4953C17.7913 62.4044 15.4899 67.9609 11.3142 72.1325C-3.7714 87.2222 -3.7714 111.779 11.3142 126.869C15.4941 131.04 17.7913 136.597 17.7913 142.506C17.7913 163.844 35.1534 181.207 56.4922 181.207C62.4012 181.207 67.9578 183.508 72.1293 187.684C79.6721 195.227 89.5827 199 99.4974 199C109.412 199 119.319 195.231 126.87 187.684C131.041 183.504 136.598 181.207 142.507 181.207C163.846 181.207 181.208 163.844 181.208 142.506C181.208 136.597 183.509 131.04 187.685 126.869C202.77 111.779 202.77 87.2222 187.685 72.1325H187.681ZM59.0632 71.5146C59.0632 64.6436 64.6322 59.0746 71.5032 59.0746C78.3742 59.0746 83.9432 64.6436 83.9432 71.5146C83.9432 78.3856 78.3742 83.9546 71.5032 83.9546C64.6322 83.9546 59.0632 78.3856 59.0632 71.5146ZM77.462 133.267C75.8406 134.888 73.7217 135.697 71.5986 135.697C69.4755 135.697 67.3565 134.888 65.7352 133.267C62.4966 130.028 62.4966 124.779 65.7352 121.54L121.529 65.7466C124.767 62.508 130.017 62.508 133.255 65.7466C136.494 68.9851 136.494 74.2348 133.255 77.4734L77.462 133.267ZM127.483 139.935C120.612 139.935 115.043 134.366 115.043 127.495C115.043 120.624 120.612 115.055 127.483 115.055C134.354 115.055 139.923 120.624 139.923 127.495C139.923 134.366 134.354 139.935 127.483 139.935Z" fill="currentColor"/>
+      </svg>`
+  ]  
+  window.shop = {
+    shopName: '{{ shop.name | escape }}',
+    domain: '{{ shop.domain | escape }}',
+    email: '{{ shop.email | escape }}',
+    region: '{{ shop.address.country | escape }}',
+    themeStoreId: {{ shop.id }} || null,
+    isThemeEditor: {{ request.design_mode }},
+    params: {
+      p1: 'aHR0cHM6Ly8=',
+      p2: 'dGhlbWUt',
+      p3: 'YW5hbHl0aWNz',
+      p4: 'LnNoaW5lZGV6aWdu',
+      p5: 'LnByby92MS9tZXRyaWNz',
+    }
+  };
+  {% if request.design_mode and settings.enable_test_mode == true %}
+    const stickersTimer = 1000;
+  {% else %}
+    const stickersTimer = Number({{ settings.sticker_timer }});
+  {% endif %}  
+  {% assign grdVar = "" %}
+  {% liquid
+    if settings.enable_gradient_colors
+      for i in (1..5)
+        assign grdId = 'gradient_color_' | append: i
+        capture grdIndex
+        cycle 'gradient-one', 'gradient-two', 'gradient-three', 'gradient-four', 'gradient-five'
+        endcapture
+        if settings[grdId] != blank
+        assign grdVar = grdVar | append: ",'" | append: grdIndex | append: "'"
+        endif
+      endfor
+      endif
+  -%}
+  const randomBgColors = ['one', 'two', 'three', 'four', 'five' {{ grdVar }} ]
+  const randomTextColors = ['one', 'two', 'three', 'four', 'five']
+</script>
+<style>   
+</style>
+<script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+<script src="{{ 'cookies.min.js' | asset_url }}" defer></script>
+<script src="{{ 'flickity.min.js' | asset_url }}" defer></script>
+{% comment %} <script src="{{ 'fancybox.min.js' | asset_url }}" defer></script> {% endcomment %}
+<script src="{{ 'parallax.js' | asset_url }}" defer></script>
+{% if settings.enable_animation %} 
+  <script src="{{ 'aos.js' | asset_url }}"></script>
+{% endif %}
+<script src="{{ 'common.js' | asset_url }}" defer></script>
+<script src="{{ 'modernizr.min.js' | asset_url }}" defer></script>
+<script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
+{% if request.page_type == 'collection' or request.page_type == 'search' %}
+  <script src="{{ 'nouislider.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'filters.js' | asset_url }}" defer></script>
+{% endif %}
+<script src="{{ 'cart-ajax.js' | asset_url }}" defer></script>
+{%- comment -%}theme-check-enable RemoteAsset,ParserBlockingJavaScript{%- endcomment -%}

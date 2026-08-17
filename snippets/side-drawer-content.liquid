@@ -1,0 +1,250 @@
+<div class="side-drawer-story{% if section.settings.sidedrawer_head_style == 'bar' %} bar-view{% endif %}" data-content-drawer-main>
+      <div class="side-drawer-story-inner">
+          <div class="side-drawer-head">
+            {% if section.settings.sidedrawer_head_style == 'bar' %}
+            <button title="Close" class="side-drawer-story-close">
+              <svg aria-hidden="true" focusable="false"  class="icon icon-close" viewBox="0 0 40 40">
+                 <path d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z" class="layer"></path>
+              </svg>
+            </button>
+          {% endif %}
+              <div class="side-drawer-main-heading" data-content-drawer-head>
+                <h4 class="side-drawer-heading-text">{{ section.settings.heading }}</h4>
+              </div>
+          </div> 
+            <div class="side-drawer-body">
+              <button title="Close" class="side-drawer-story-close" side-drawer-story-close>
+                <svg aria-hidden="true" focusable="false"  class="icon icon-close" viewBox="0 0 40 40">
+                  <path d="M23.868 20.015L39.117 4.78c1.11-1.108 1.11-2.77 0-3.877-1.109-1.108-2.773-1.108-3.882 0L19.986 16.137 4.737.904C3.628-.204 1.965-.204.856.904c-1.11 1.108-1.11 2.77 0 3.877l15.249 15.234L.855 35.248c-1.108 1.108-1.108 2.77 0 3.877.555.554 1.248.831 1.942.831s1.386-.277 1.94-.83l15.25-15.234 15.248 15.233c.555.554 1.248.831 1.941.831s1.387-.277 1.941-.83c1.11-1.109 1.11-2.77 0-3.878L23.868 20.015z" class="layer"></path>
+                </svg>
+              </button>
+              <div class="side-drawer-body-inner">
+                {% for block in section.blocks %}
+                    {% case block.type %}
+                      {% when  'collection' %}
+                        <div id="sideDrawerBlock-{{ block.id }}" class="side-drawer-collection-list side-drawer-content-list" {{ block.shopify_attributes }}>
+                          {% if block.settings.heading != blank %}
+                            <{{ block.settings.seo_heading }} class="side-drawer-inner-text">{{ block.settings.heading }}</{{ block.settings.seo_heading }}>
+                          {% endif %}
+                            <div class="row">
+                              {% liquid 
+                                for collection in block.settings.collection_list
+                                  render 'collection-grid', collection: collection
+                                else
+                                  for i in (1..4)
+                                    render 'collection-grid', collection: collection
+                                  endfor
+                                endfor 
+                              %}
+                            </div>
+                        </div>
+                        {% unless block.settings.text_color contains 'rgba(0,0,0,0)' or block.settings.text_color == empty %}
+                          <style>
+                            #sideDrawerBlock-{{ block.id }}{
+                              --heading_color:{{ block.settings.text_color }}; 
+                              --colorTextBody:{{ block.settings.text_color }}; 
+                            }
+                          </style>
+                        {% endunless %} 
+                      {% when 'products' %}
+                        <div id="sideDrawerBlock-{{ block.id }}" class="side-drawer-product-list side-drawer-content-list" {{ block.shopify_attributes }}>
+                          {% if block.settings.heading != blank %}
+                            <{{ block.settings.seo_heading }} class="side-drawer-inner-text">{{ block.settings.heading }}</{{ block.settings.seo_heading }}>
+                          {% endif %}
+                          {% if block.settings.heading != blank %}
+                            <div class="row">
+                              {%- liquid
+                                if settings.product_image_style == 'landscape'
+                                  assign productImageRatio = 75
+                                elsif settings.product_image_style == 'square'
+                                  assign productImageRatio = 100
+                                elsif settings.product_image_style == 'portrait'
+                                  assign productImageRatio = 125
+                                endif
+                            -%}
+                              {% for product in block.settings.product_list %}
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                  {%- render 'product-grid', product: product -%}
+                                </div>
+                              {% else %}
+                              {%- for i in (1..4) -%}
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                                  <div class="yv-product-card{% if settings.layout_style == 'rounded' or customRadius %} product-grid-layout-rounded{% endif %}">
+                                    <div class="animated-grid">
+                                      <div class="yv-product-card-img">              
+                                        {%- if settings.product_image_style != 'aspect' -%}
+                                        <div class="image-wrapper no-product-image" style="padding-bottom:{{- productImageRatio -}}%">
+                                        {%- endif -%}
+                                        {%- capture current -%}{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
+                                        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                                        {%- if settings.product_image_style != 'aspect' -%}
+                                        </div>
+                                        {%- endif -%}
+                                      </div>
+                                      <div class="yv-product-information {{ settings.product_grid_content_alignment }}">
+                                        <div class="yv-product-information__wrapper">
+                                          <span class="yv-product-title">{{ 'onboarding.product_title' | t }}</span>
+                                          <div class="yv-prizebox">
+                                            <span class="yv-product-price">{{ 1999 | money }}</span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              {%- endfor -%}
+                              {% endfor %}
+                            </div>
+                          {% endif %}
+                        </div>
+                        {% unless block.settings.text_color contains 'rgba(0,0,0,0)' or block.settings.text_color == empty %}
+                          <style>
+                            #sideDrawerBlock-{{ block.id }}{
+                              --heading_color:{{ block.settings.text_color }}; 
+                              --colorTextBody:{{ block.settings.text_color }}; 
+                            }
+                          </style>
+                        {% endunless %} 
+                      {% when  'media-with-text' %}
+                        <div id="sideDrawerBlock-{{ block.id }}" class="side-drawer-media-with-text side-drawer-content-list">
+                          <div class="row align-items-{{ block.settings.content_position }} image-position-{{ block.settings.media_alignment }}">
+                            {% capture mediaContent %}
+                              <div class="col-12 col-sm-12 col-md-6">
+                                <div class="yv-imgbox-container">
+                                  <div
+                                    class="yv-img-content"
+                                  >
+                                    {% liquid
+                                        if block.settings.video != blank
+                                          assign imageRatio =  1 | divided_by: block.settings.video.aspect_ratio | times: 100
+                                        elsif block.settings.image != blank
+                                          assign imageRatio =  1 | divided_by: block.settings.image.aspect_ratio | times: 100
+                                        else
+                                          assign imageRatio =  70
+                                        endif
+                                    %}
+                                    {% if block.settings.video != blank %}
+                                      <deferred-media
+                                        class="image-wrapper"
+                                        style="padding-bottom:{{ imageRatio }}%;position:relative"
+                                      >
+                                        <template style="display:none">
+                                          {{ block.settings.video | video_tag: image_size: '1100x',
+                                              class: 'videoBackgroundFile', 
+                                              autoplay: true,
+                                              loop: true,
+                                              controls: false,
+                                              muted: true
+                                          }}
+                                        </template>
+                                        <noscript>
+                                          <img
+                                            class="{{ class }}"
+                                            src="{{ block.settings.video.preview_image | image_url }}"
+                                            loading="eager"
+                                            alt="{{ block.settings.video.preview_image.alt | default: shop.name | strip_html }}"
+                                            width="{{ block.settings.video.preview_image.width }}"
+                                            height="{{ block.settings.video.preview_image.height }}"
+                                          >
+                                        </noscript>
+                                      </deferred-media>
+                                      {% elsif block.settings.image != blank %}
+                                      <div class="image-wrapper"
+                                        style="padding-bottom: {{ imageRatio }}%;">
+                                        {% render 'lazy-image', image: block.settings.image %}
+                                      </div>
+                                      {% else %}
+                                      <div class="image-wrapper"
+                                        style="padding-bottom: {{ imageRatio }}%;">
+                                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                </div>
+                              </div>
+                            {% endcapture %}
+                            {% liquid
+                              if block.settings.media_alignment == 'left'
+                                echo mediaContent
+                              endif
+                            %}
+                            {% if block.settings.heading != blank or block.settings.description != blank %}
+                              <div class="col-12 col-sm-12 col-md-6">
+                                <div class="text-content">
+                                  {% if block.settings.heading != blank %}
+                                  <div class="section-heading ">
+                                    <{{ block.settings.seo_heading }} class="section-heading-title h1" >
+                                      {{ block.settings.heading }}
+                                    </{{ block.settings.seo_heading }}>
+                                  </div>
+                                  {% endif %}
+                                  {% if block.settings.description != blank %}
+                                    {{ block.settings.description }}
+                                  {% endif %}
+                                  {%- if block.settings.btn_link != blank and block.settings.btn_text != blank -%}
+                                    <a class="button {{ block.settings.button_size }}-btn {{ block.settings.mobile_button_size }}-btn mt-3" href="{{ block.settings.btn_link }}">
+                                      
+                                      {% if settings.buttonAnimation == 'animated-arrow'%}
+                                        <span class="btn-animated-arrow"><svg fill="none" viewBox="0 0 8 8">
+                                          <path fill="currentColor" fill-rule="evenodd" d="M0 0h8v8H7V1.707L1.354 7.354 1 7.707.293 7l.353-.354L6.293 1H0V0Z" clip-rule="evenodd"></path>
+                                          </svg>
+                                        </span>
+                                      {% endif %}
+                                      <span class="btn-txt">{{- block.settings.btn_text -}}</span>
+                                    </a>
+                                  {%- endif -%}
+                                </div>
+                              </div> 
+                            {% endif %}
+                            {% liquid
+                              if block.settings.media_alignment == 'right'
+                                echo mediaContent
+                              endif
+                            %}
+                          </div>
+                        </div>
+                        <style>
+                          #sideDrawerBlock-{{ block.id }}{
+                            {% unless block.settings.heading_color contains 'rgba(0,0,0,0)' or block.settings.heading_color == empty %}
+                            --heading_color:{{ block.settings.heading_color }}; 
+                          {% endunless %}
+                          {% unless block.settings.text_color contains 'rgba(0,0,0,0)' or block.settings.text_color == empty %}
+                            --colorTextBody:{{ block.settings.text_color }}; 
+                          {% endunless %}
+                          {% unless block.settings.btn_bg_color contains 'rgba(0,0,0,0)' or block.settings.btn_bg_color == empty %}
+                            --colorBtnPrimary:{{ block.settings.btn_bg_color }}; 
+                          {% endunless %}
+                          {% unless block.settings.btn_border_color contains 'rgba(0,0,0,0)' or block.settings.btn_border_color == empty %}
+                            --colorBtnPrimaryBorder:{{ block.settings.btn_border_color }}; 
+                          {% endunless %}
+                          {% unless block.settings.btn_text_color contains 'rgba(0,0,0,0)' or block.settings.btn_text_color == empty %}
+                            --colorBtnPrimaryText:{{ block.settings.btn_text_color }}; 
+                          {% endunless %}
+                          }
+                        </style>
+                    {% endcase %}
+                {% endfor %}
+              </div>
+            </div>
+      </div>
+  </div>
+  <style>
+    #shopify-section-{{ section.id }}{
+      {% unless section.settings.drawer_body_bg contains 'rgba(0,0,0,0)' or section.settings.drawer_body_bg == empty %}
+      --side-drawer-body:{{ section.settings.drawer_body_bg }};
+      {% endunless %}  
+      {% unless section.settings.drawer_header_bg contains 'rgba(0,0,0,0)' or section.settings.drawer_header_bg == empty %}
+      --side-drawer-head:{{ section.settings.drawer_header_bg }};
+      {% endunless %}  
+      {% unless section.settings.drawer_header_color contains 'rgba(0,0,0,0)' or section.settings.drawer_header_color == empty %}
+      --side-drawer-head-color:{{ section.settings.drawer_header_color }};
+      {% endunless %}      
+    }
+    {% if section.settings.sidedrawer_head_style == 'bar' %}
+    @media (min-width:768px){
+      body{
+        padding-right:50px;
+      }
+    }
+  {% endif %}
+  </style>

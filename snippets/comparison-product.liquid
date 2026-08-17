@@ -1,0 +1,190 @@
+{%- assign featuredMedia = product.featured_media -%}
+{%- assign image_class = 'product-first-img' -%}
+{%- assign mediaId = 'yv-product-image-item-' | append: featuredMedia.id -%}
+{%-  assign productImageSize = '1700' -%} 
+  <div class="yv-product-card-img" tabindex="-1">
+    <a class="yv-product-img" href="{{ product.url }}" aria-label="Product image">
+      <div class="image-wrapper image-square">
+        {% if featuredMedia != blank %}
+          {%-
+            render 'lazy-image',
+            id: mediaId,
+            class: image_class,
+            image: featuredMedia,
+            width: productImageSize
+          -%}
+          <img
+            src="{{ featuredMedia | image_url }}"
+            sizes="auto"
+            alt=""
+            class="product-first-img"
+            loading="lazy"
+          >
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    </a>
+  </div>
+  <div class="yv-product-information">
+    {% unless product.has_only_default_variant %}
+      <div class="select-color product-option-selector color-variants-wrapper">
+        {%- for option in product.options_with_values -%}
+          {%- liquid
+            assign downOption = option.name | downcase
+            assign optionIndex = forloop.index
+            assign colorOptions = settings.color_name | downcase
+            assign varOptionIndex = 'option' | append: forloop.index
+            assign option_input_name = 'option-' | append: forloop.index | append: '-' | append: product.id
+          -%}
+        {%- if settings.option_style == 'swatch' -%}
+          {%- if colorOptions contains downOption -%}
+            <ul class="list-unstyled product-loop-variants justify-content-center {% if colorOptions contains downOption and settings.color_swatch_style == 'circle' %}circle{% endif %}">
+              {%- for value in option.values -%}
+                {% liquid
+                  if value.swatch.image
+                    assign image_url = value.swatch.image | image_url: width: 50
+                    assign swatch_value = 'background-image:url(' | append: image_url | append: ')'
+                    assign swatch_focal_point = value.swatch.image.presentation.focal_point
+                  elsif value.swatch.color
+                    assign swatch_value = 'background-color:rgb(' | append: value.swatch.color.rgb | append: ')'
+                  else
+                    assign swatch_value = null
+                  endif
+                  assign option_disabled = false
+                  if value.available
+                  assign option_disabled = true
+                  endif
+                %}
+                <li
+                  class="{% if colorOptions contains downOption %}color_option{% else %}{{ downOption }}__option{% endif %} variant_option"
+                >
+                  <label class="visually-hidden" for="{{ option_input_name }}-{{ value | handleize }}">
+                    {{- value -}}
+                  </label>
+            
+                  {%- liquid
+                    assign variantImage = ''
+                    if settings.variant_image
+                      assign variantsList = product.variants | where: varOptionIndex, value
+                      for variant in variantsList
+                        if variant.featured_image != blank
+                          assign variantImage = variant.featured_image
+                          break
+                        endif
+                      endfor
+                    endif
+                  -%}
+                  {% if colorOptions contains downOption %}
+                    {%- assign variantColorImage = value | handleize | append: '.png' -%}
+                    <span
+                      class="option {% if value.selected %}selected{% endif %} {% unless settings.variant_image %}variantColorOption {% if value.swatch.image %} variantImageOption{% endif %} {% else %}variantImageOption{% endunless %}"
+                      data-pallet-color="{{ value | downcase }}"
+                      {% if colorOptions contains downOption %}
+                        {% unless settings.variant_image and variantImage != blank %}
+                          style="{% if swatch_value != null %}{{ swatch_value }}; {% if swatch_focal_point %} --swatch-focal-point: {{ swatch_focal_point }};{% endif %}{%  else %}background-color:{{ value | downcase | remove: ' ' }};background-image:url('{{ variantColorImage | asset_url }}');{% endif %}"
+                        {%- endunless -%}
+                      {% endif %}
+                    >
+                      {%- if settings.variant_image -%}
+                        {%- if variantImage != blank -%}
+                          <img
+                            src="{{ variantImage | image_url: width: 34 }}"
+                            width="34"
+                            height="34"
+                            alt="{{ variantImage.alt | strip_html | escape }}"
+                            loading="lazy"
+                          >
+                        {%- endif -%}
+                      {%- endif -%}
+                    </span>
+                  {%- else -%}
+                    <span class="option {% if value.selected %}selected{% endif %}">
+                      {{ value }}
+                    </span>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+            
+          {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% endunless %}
+    {% if block.settings.summary_product_title %}
+      <{% if product.title != blank %}a href="{{ product.url }}" {% else %}div {% endif %}
+        class="yv-product-title text"
+        title="{{ product.title }}"
+        aria-label="{{ product.handle }}"
+        tabindex="-1" >
+      {% if product.title != blank %}
+        {{ product.title }}
+        </a>
+      {% else %}
+        {{ 'Example of product title' }}
+        </div>
+      {% endif %}
+    {% endif %}
+    {% if block.settings.summary_product_desc and product.description != blank %}
+      <div class="yv-product-card-info">{{ product.description |  strip_html |  truncatewords: 10 }}</div>
+    {% endif %}
+    {% if block.settings.summary_product_price %}
+      <div
+        class="yv-prizebox text justify-content-center"
+        data-saved="true"
+        data-saved-style="currency"
+        data-price-wrapper=""
+      >
+       <span class="yv-product-price">{% if product.price != blank %}{{ product.price |  money_with_currency }}{% else %}{{ '999' |  money_with_currency }}{% endif %}</span>
+
+        {%- if product.compare_at_price_min > product.price_min and product != blank -%}
+          <span class="yv-product-compare-price">{{ product.compare_at_price_min | money }}</span>
+        {%- endif -%}
+      </div>
+    {% endif %}
+    {% if block.settings.quick_view and product != blank %}
+      <div class="yv-product-cards-btn">
+        {%- if settings.quick_view_style == 'drawer' -%}
+          <a 
+          href="{{ product.url }}" 
+          class="quickView button {{ section.settings.button_size }}-btn m-{{ section.settings.mobile_button_size }}-btn"
+          title="{{ product.title }}"
+          data-href="{{ product.url }}"
+          >
+        {% else %}
+          <quick-add-toggle
+            class="button {{ section.settings.button_size }}-btn m-{{ section.settings.mobile_button_size }}-btn"
+            aria-label="{{ 'general.quick_view_heading' | t }}"
+            tabindex="-1"
+          >
+        {% endif %}
+        {% if settings.buttonAnimation == 'animated-arrow'%}
+          <span class="btn-animated-arrow"><svg fill="none" viewBox="0 0 8 8">
+            <path fill="currentColor" fill-rule="evenodd" d="M0 0h8v8H7V1.707L1.354 7.354 1 7.707.293 7l.353-.354L6.293 1H0V0Z" clip-rule="evenodd"></path>
+            </svg>
+          </span>
+        {% endif %}
+        <span class="btn-txt">{{ 'general.quick_view_heading' | t }}</span>
+        {%- if settings.quick_view_style == 'drawer' -%}
+          </a>
+        {% else %}
+          <template>
+            {% render 'quick-add-content', product: product %}
+          </template>
+          </quick-add-toggle>
+        {% endif %}
+      </div>
+    {% endif %}
+    {% if block.settings.summary_product_link and product != blank %}
+      <div class="yv-compare-view-btn">
+        <a href="{{ product.url }}" class="view-details button-without-bg"
+          >View Details
+          <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M1.66406 5.17773H7.94206" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M4.9502 1.66797L8.4402 5.15797L4.9502 8.37997" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>

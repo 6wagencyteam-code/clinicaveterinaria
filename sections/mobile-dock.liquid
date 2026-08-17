@@ -1,0 +1,174 @@
+{%- if section.blocks.size > 0 -%}
+  {{ 'mobile-dock.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'mobile-dock.js' | asset_url }}" defer="defer"></script>
+
+  <mobile-dock class="yv-mobile-dock d-flex d-md-none{% if section.settings.enable_background_blur %} blur-background{% endif %}" data-size="{{ section.blocks.size }}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'account' -%}
+          <a
+            class="yv-dock-item{% if request.page_type contains 'customers' %} active{% endif %}"
+            href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}"
+            rel="nofollow"
+          >
+            <svg viewBox="0 0 22 22" fill="none">
+              <path d="M11.0021 10.9998C13.3032 10.9998 15.1687 9.13435 15.1687 6.83317C15.1687 4.53199 13.3032 2.6665 11.0021 2.6665C8.70087 2.6665 6.83539 4.53199 6.83539 6.83317C6.83539 9.13435 8.70087 10.9998 11.0021 10.9998Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.1602 19.3326C18.1602 16.1076 14.9519 13.4993 11.0019 13.4993C7.05189 13.4993 3.84357 16.1076 3.84357 19.3326" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+        {%- when 'cart' -%}
+          <a class="yv-dock-item{% if request.page_type == 'cart' %} active{% endif %}" href="{{ routes.cart_url }}" aria-controls="CartDrawer" aria-expanded="false" data-has-cartdrawer="{{ settings.enable_cart_drawer }}">
+            <svg x="0px" y="0px" viewBox="0 0 50 50">
+              <path d="M43,15.6h-7.8v-5.2c0-2-0.8-3.9-2.2-5.3C31.6,3.8,29.7,3,27.7,3h-5.5c-2,0-3.9,0.8-5.3,2.2c-1.4,1.4-2.2,3.3-2.2,5.3v5.2H7   c-0.6,0-1.1,0.5-1.1,1.1v22.4c0,2.1,0.8,4.1,2.3,5.6c1.5,1.5,3.5,2.3,5.6,2.3h22.4c2.1,0,4.1-0.8,5.6-2.3c1.5-1.5,2.3-3.5,2.3-5.6   V16.8c0-0.3-0.1-0.6-0.3-0.8C43.5,15.8,43.3,15.6,43,15.6z M17,10.5c0-1.4,0.6-2.7,1.5-3.7c1-1,2.3-1.5,3.7-1.5h5.5   c1.4,0,2.7,0.6,3.7,1.5c1,1,1.5,2.3,1.5,3.7v5.2H17V10.5z M41.8,39.1c0,1.5-0.6,2.9-1.7,4c-1.1,1.1-2.5,1.7-4,1.7H13.8   c-1.5,0-2.9-0.6-4-1.7c-1.1-1.1-1.7-2.5-1.7-4V17.9h6.6v5.2c0,0.6,0.5,1.1,1.1,1.1c0.6,0,1.1-0.5,1.1-1.1v-5.2H33v5.2   c0,0.6,0.5,1.1,1.1,1.1c0.6,0,1.1-0.5,1.1-1.1v-5.2h6.6V39.1z" stroke="currentColor"/>
+            </svg>
+            {% unless cart == empty %}<span class="cart-dot"></span>{% endunless %}
+          </a>
+
+        {%- when 'home' -%}
+          <a class="yv-dock-item{% if request.page_type == 'index' %} active{% endif %}" href="{{ routes.root_url }}">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M9.91996 14.748L9.91996 10.748" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8.15049 1.33323L1.79797 6.42073C1.08297 6.98907 0.624633 8.18986 0.780467 9.08819L1.99963 16.3849C2.21963 17.6865 3.4663 18.7407 4.7863 18.7407H15.053C16.3638 18.7407 17.6197 17.6774 17.8397 16.3849L19.0588 9.08819C19.2055 8.18986 18.7472 6.98907 18.0413 6.42073L11.6888 1.3424C10.708 0.554068 9.12215 0.554068 8.15049 1.33323Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+        {%- when 'menu' -%}
+          <button type="button" class="yv-dock-item" aria-controls="MenuDrawer" aria-expanded="false">
+            <svg viewBox="0 0 22 22" fill="none">
+              <path d="M5.59961 12.9004C7.5294 12.9004 9.09961 14.4702 9.09961 16.4004C9.0994 18.3304 7.52927 19.9004 5.59961 19.9004C3.67013 19.9002 2.09982 18.3303 2.09961 16.4004C2.09961 14.4703 3.67 12.9006 5.59961 12.9004ZM16.4004 12.9004C18.3304 12.9006 19.9004 14.4703 19.9004 16.4004C19.9002 18.3303 18.3303 19.9002 16.4004 19.9004C14.4703 19.9004 12.9006 18.3304 12.9004 16.4004C12.9004 14.4702 14.4702 12.9004 16.4004 12.9004ZM5.59961 14.5C4.55182 14.5002 3.7002 15.353 3.7002 16.4004C3.70041 17.4476 4.55195 18.2996 5.59961 18.2998C6.64745 18.2998 7.49979 17.4477 7.5 16.4004C7.5 15.3529 6.64758 14.5 5.59961 14.5ZM16.4004 14.5C15.3529 14.5 14.5 15.3529 14.5 16.4004C14.5002 17.4477 15.353 18.2998 16.4004 18.2998C17.4476 18.2996 18.2996 17.4476 18.2998 16.4004C18.2998 15.353 17.4477 14.5002 16.4004 14.5ZM5.59961 2.09961C7.52926 2.09961 9.0994 3.67001 9.09961 5.59961C9.09961 7.52939 7.52939 9.09961 5.59961 9.09961C3.67001 9.0994 2.09961 7.52926 2.09961 5.59961C2.09982 3.67014 3.67014 2.09982 5.59961 2.09961ZM16.4004 2.09961C18.3303 2.09982 19.9002 3.67013 19.9004 5.59961C19.9004 7.52927 18.3304 9.0994 16.4004 9.09961C14.4702 9.09961 12.9004 7.5294 12.9004 5.59961C12.9006 3.67 14.4703 2.09961 16.4004 2.09961ZM5.59961 3.7002C4.55197 3.70041 3.70041 4.55197 3.7002 5.59961C3.7002 6.64743 4.55184 7.49979 5.59961 7.5C6.64756 7.5 7.5 6.64756 7.5 5.59961C7.49979 4.55184 6.64743 3.7002 5.59961 3.7002ZM16.4004 3.7002C15.353 3.7002 14.5002 4.55182 14.5 5.59961C14.5 6.64758 15.3529 7.5 16.4004 7.5C17.4477 7.49979 18.2998 6.64745 18.2998 5.59961C18.2996 4.55195 17.4476 3.70041 16.4004 3.7002Z" fill="currentColor"/>
+            </svg>
+          </button>
+
+        {%- when 'search' -%}
+          <a class="yv-dock-item{% if request.page_type == 'search' %} active{% endif %}" href="{{ routes.search_url }}" aria-controls="SearchDrawer" aria-expanded="false">
+            <svg viewBox="0 0 22 22" fill="none">
+              <path d="M10.1111 17.2222C14.0385 17.2222 17.2222 14.0385 17.2222 10.1111C17.2222 6.18375 14.0385 3 10.1111 3C6.18375 3 3 6.18375 3 10.1111C3 14.0385 6.18375 17.2222 10.1111 17.2222Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M19 19L15.4444 15.4445" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        {%- when 'link' -%}
+          {%- if block.settings.link != blank -%}
+          <a
+            class="yv-dock-item{% if request.page_type contains block.settings.link %} active{% endif %}"
+            href="{{ block.settings.link }}"
+            {% if block.settings.external %}
+              target="_blank" rel="noopener"
+            {% endif %}
+          >
+            <svg viewBox="0 0 20 19" fill="none">
+              <path d="M10.4603 11.6225H8.13575C7.75453 11.6225 7.4384 11.3064 7.4384 10.9251C7.4384 10.5439 7.75453 10.2278 8.13575 10.2278H10.4603C12.8963 10.2278 14.8768 8.24733 14.8768 5.81125C14.8768 3.37517 12.8963 1.3947 10.4603 1.3947H5.81125C3.37517 1.3947 1.3947 3.37517 1.3947 5.81125C1.3947 6.83403 1.75732 7.82892 2.40818 8.61925C2.64993 8.91678 2.61274 9.35379 2.3152 9.60483C2.01767 9.84658 1.58066 9.80939 1.32961 9.51185C0.474198 8.47048 0 7.15946 0 5.81125C0 2.60344 2.60344 0 5.81125 0H10.4603C13.6681 0 16.2715 2.60344 16.2715 5.81125C16.2715 9.01906 13.6681 11.6225 10.4603 11.6225Z" fill="currentColor"/>
+              <path d="M14.1794 18.1311H9.53043C6.32262 18.1311 3.71918 15.5277 3.71918 12.3199C3.71918 9.11205 6.32262 6.50861 9.53043 6.50861H11.8549C12.2361 6.50861 12.5523 6.82474 12.5523 7.20596C12.5523 7.58717 12.2361 7.90331 11.8549 7.90331H9.53043C7.09435 7.90331 5.11388 9.88378 5.11388 12.3199C5.11388 14.7559 7.09435 16.7364 9.53043 16.7364H14.1794C16.6155 16.7364 18.596 14.7559 18.596 12.3199C18.596 11.2971 18.2334 10.3022 17.5825 9.51186C17.3407 9.21432 17.3779 8.77732 17.6755 8.52627C17.973 8.27523 18.41 8.32172 18.6611 8.61925C19.5258 9.66063 20 10.9716 20 12.3199C19.9907 15.5277 17.3872 18.1311 14.1794 18.1311Z" fill="currentColor"/>
+              </svg>
+          </a>
+          {%- endif -%}
+      {%- endcase %}
+    {%- endfor %}
+  </mobile-dock>
+{%- endif -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    --backgroundColor:{{ section.settings.background_color }};
+    --iconColor:{{ section.settings.icon_color }};
+    --borderColor:{{ section.settings.border_color }};
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.mobile-dock.name",
+  "class": "mobile-dock-section",
+  "limit": 1,
+  "max_blocks": 5,
+  "enabled_on": {
+    "groups": ["custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:common.header.color_section.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_background_blur",
+      "label": "t:sections.mobile-dock.settings.enable_background_blur.label",
+      "info": "t:sections.mobile-dock.settings.enable_background_blur.info",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:sections.mobile-dock.settings.background_color.label",
+      "default": "#ffffffbf",
+      "alpha": true
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "t:sections.mobile-dock.settings.border_color.label",
+      "default": "#ffffff",
+      "alpha": true
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "t:sections.mobile-dock.settings.icon_color.label",
+      "default": "#000000"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "account",
+      "name": "t:sections.mobile-dock.blocks.account.name",
+      "limit": 1,
+      "settings": [
+      ]
+    },
+    {
+      "type": "cart",
+      "name": "t:sections.mobile-dock.blocks.cart.name",
+      "limit": 1,
+      "settings": [
+      ]
+    },
+    {
+      "type": "home",
+      "name": "t:sections.mobile-dock.blocks.home.name",
+      "limit": 1,
+      "settings": [
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "t:sections.mobile-dock.blocks.menu.name",
+      "limit": 1,
+      "settings": [
+      ]
+    },
+    {
+      "type": "search",
+      "name": "t:sections.mobile-dock.blocks.search.name",
+      "limit": 1,
+      "settings": [
+      ]
+    },
+    {
+      "type": "link",
+      "name": "t:sections.mobile-dock.blocks.link.name",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.mobile-dock.blocks.link.settings.link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "external",
+          "label": "t:sections.mobile-dock.blocks.link.settings.external.label",
+          "default": false
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,84 @@
+{% if block.settings.variation_products != blank or request.design_mode %}
+<div
+    class="product-variations-wrapper"
+    {{ block.shopify_attributes }}
+  >
+    <label class="yv-variant-title">
+        {%- if block.settings.heading != blank -%}
+            {{- block.settings.heading -}}
+        {%- else -%}
+            {{- 'products.product.onboarding.options.option1.label' | t -}}
+        {%- endif -%}
+    </label>
+    <ul class="list-unstyled product-variations-block-list {% if settings.color_swatch_style == 'circle' %} circle{% endif %}">
+    {%- for variationProduct in block.settings.variation_products -%}
+        <li
+        class="product-variations-block-item color_option{% if variationProduct.id == product.id %} active{% endif %}"
+        >
+            <a href="{{ variationProduct.url }}" title="{{ variationProduct.title | escape }}">
+                {%- liquid
+                    assign variantImage = ''
+                    if block.settings.show_image and variationProduct.featured_media != blank
+                        assign variantImage = variationProduct.featured_media.preview_image
+                    endif                    
+                    assign colorOptions = settings.color_name | downcase
+                    assign variantOption = ''
+                    for option in variationProduct.options_with_values
+                        assign downOption = option.name | downcase
+                        if colorOptions contains downOption
+                            assign variantOption = option.values.first
+                            break
+                        endif
+                    endfor
+                -%}
+                {%- assign variantColorImage = variantOption | handleize | append: '.png' -%}
+                <span
+                class="option{% if variantImage == blank %} variantColorOption{% else %} variantImageOption{% endif %}"
+                {%- if variantImage == blank and variantOption != blank %}
+                    data-pallet-color="{{ variantOption | downcase }}"
+                    style="background-color:{{ variantOption | downcase | remove: ' ' }};background-image:url('{{ variantColorImage | asset_img_url : 100 }}');"
+                {% endif -%}
+                >
+                {%- if variantImage != blank -%}
+                    <img
+                        src="{{ variantImage | image_url: width: 65 }}"
+                        width="34"
+                        height="34"
+                        alt="{{ variantImage.alt | strip_html | escape }}"
+                        loading="lazy"
+                    >
+                {%- endif -%}
+                </span>
+            </a>
+        </li>
+    {% else %}
+        {% if request.design_mode %}
+            {%- for i in (1..4) -%}
+                {% liquid
+                    assign optionValue = 'products.product.onboarding.options.option1.label' | append: i | t
+                    capture placeholderIndex
+                        cycle cycleGroup: '1', '2', '3', '4'
+                    endcapture
+                %}
+                <li class="product-variations-block-item color_option">
+                    <a href="#!" title="{{ optionValue | escape }}">
+                    <span
+                      class="option {% if forloop.first %}selected{% endif %}{% unless block.settings.show_image %} variantColorOption{% else %} variantImageOption{% endunless %}"
+                      {% unless block.settings.show_image %}
+                      style="background-color:{{ optionValue }};"
+                    {% endunless %}
+                    >
+                    {%- liquid
+                        if block.settings.show_image
+                            echo 'product-apparel-' | append: placeholderIndex | placeholder_svg_tag: 'placeholder-svg'
+                        endif 
+                    -%}
+                    </span>
+                </a>
+                </li>
+              {%- endfor -%}
+        {%- endif -%}
+    {%- endfor -%}
+    </ul>
+</div>
+{% endif %}

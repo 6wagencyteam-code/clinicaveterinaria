@@ -1,0 +1,78 @@
+<div
+  class="mobile-category-menu-bar d-none d-lg-block"
+>
+  <ul class="list-unstyled navbar-nav navbar-nav-sidebar">
+    {%- for link in linklists[section.settings.catalog_menu].links -%}
+      {% assign menuTitle = link.title | handleize %}
+      {% capture menubadge %}
+            {% for block in section.blocks %}
+              {% if block.type == 'menu-badge' %}
+                {% assign badgetitle =  block.settings.badge_label | handleize %}
+                {% if block.settings.menu_badge != blank and  badgetitle == menuTitle %}
+                   <span class="navPages-label new-label" id="menu-badge-{{ block.id }}">{{ block.settings.menu_badge }}</span>
+                {% endif %}
+              {% endif %}
+            {% endfor %} 
+          {% endcapture %}
+          {% liquid 
+            assign menu_custom_color = '' 
+          %}
+          {% for block in section.blocks %}
+            {% if block.type == 'menu-badge' %}
+              {% assign badgetitle = block.settings.badge_label | handleize %}
+              {% if badgetitle == menuTitle %}
+                {% assign menu_custom_color = block.settings.menu_text %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+      <li class="nav-item sidemenu-animation {% if link.links != blank %}dropdown{% endif %} sidemenu-animation-delay-{{ forloop.index }} {% if link.current %}active{% endif %}">
+        {%- unless link.links != blank -%}
+          <a class="list-menu__item" href="{{ link.url }}" {% if menu_custom_color != blank %} style="color:{{ menu_custom_color }};" {% endif %}>
+            {{ link.title | escape }}
+            {% if menubadge != blank %}
+              {{ menubadge }}
+            {% endif %}
+          </a>
+        {%- else -%}
+          <button class="list-menu__item {% if link.links != '' %}toggle {% endif %}" href="{{ link.url }}" {% if menu_custom_color != blank %} style="color:{{ menu_custom_color }};" {% endif %}>
+            {{ link.title | escape }}
+            {% if menubadge != blank %}
+              {{ menubadge }}
+            {% endif %}
+          </button>
+        {% endunless %}
+        <div class="inner child">
+          <ul class="list-unstyled">
+            {%- for childlink in link.links -%}
+              <li class="nav-item {% if childlink.links != blank %}dropdown{% endif %}">
+                {%- unless childlink.links != blank -%}
+                  <a class="toggle-level" href="{{ childlink.url }}"> {{ childlink.title | escape }}</a>
+                {%- else -%}
+                  <button class="toggle-level">
+                    {{ childlink.title | escape }}
+                  </button>
+                {%- endunless -%}
+                {%- if childlink.links != blank -%}
+                  <div class="inner grandchild">
+                    <ul class="list-unstyled">
+                      {%- for grandchildlink in childlink.links -%}
+       
+                        <li class="nav-item">
+                          <a href="{{ grandchildlink.url }}">
+                            <span>
+                              {{ grandchildlink.title | escape }}
+                            </span>
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {% endif %}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>

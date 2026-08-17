@@ -1,0 +1,375 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign product_form_id = 'product-form-' | append: product.id -%}
+<product-info
+  id="product-quick-view"
+  data-section-id="quick-view"
+  data-section-name="quick-view"
+  data-original-section="quick-view"
+  data-product-id="{{ product.id }}"
+  data-update-url="false"
+  data-url="{{ product.url }}"
+  class="quick-add-popup-content-wrapper"
+  quick-add-body>
+  <div class="quick-add-popup-content-header">
+    <div class="quick-add-popup-product-img">
+      {%- if product.featured_media != blank -%}
+        {% assign imageClass = 'product-img active product-img-' | append: product.featured_media.id %} 
+        <div class="image-wrapper {{ imageClass }}" style="padding-bottom:{{ 1 | divided_by : product.featured_media.preview_image.aspect_ratio | times: 100 | minus : 1 }}%">
+          {%- render 'lazy-image'
+            , image: product.featured_media.preview_image
+            , sizes: '[100,200]' -%}
+        </div>
+        {% for image in product.images %}
+          {% if image.attached_to_variant? %}
+            {% assign imageClass = 'hidden product-img product-img-' | append: image.id %}
+            <div class="image-wrapper {{ imageClass }}" style="padding-bottom:{{ 1 | divided_by : image.aspect_ratio | times: 100 | minus : 1 }}%">
+              {% render 'lazy-image'
+                , image: image
+                , sizes: '[100,200]' %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <div class="image-wrapper no-product-image" style="padding-bottom:100%">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {% endif %}
+    </div>
+    <div class="quick-add-popup-product-detail">
+      <a
+        href="{{ product.url }}"
+        class="yv-product-title"
+        title="{{ product.title }}">{{ product.title }}</a>
+      {% render 'product-form-price'
+        , current_variant: current_variant
+        , quickAdd: true %}
+    </div>
+  </div>
+  <div class="quick-add-popup-content-body">
+    {%- unless product.has_only_default_variant -%}
+      <variant-selects id="variant-selects-quick-view" data-section="quick-view" data-inventoryPolicy="{{ product.selected_or_first_available_variant.inventory_policy }}" data-inventoryQuantity="{{ product.selected_or_first_available_variant.inventory_quantity }}">
+        {%- for option in product.options_with_values -%}
+          {%- liquid
+            assign downOption = option.name | downcase
+            assign colorOptions = settings.color_name | downcase
+            assign optionIndex = forloop.index
+            assign varOptionIndex = 'option' | append: forloop.index
+          -%}
+          <div class="{% if colorOptions contains downOption %}select-color{% else %}select-{{ downOption }}{% endif %} product-option-selector no-js-hidden" {{ block.shopify_attributes }}>
+            <label class="yv-variant-title">
+              {{- 'products.product.option' | t: title: downOption -}}
+              {%- if colorOptions contains downOption and settings.color_swatch_style == 'circle' %}
+                :
+                <span class="option-value" data-option-value>{{ option.selected_value }}</span>
+              {%- endif -%}
+            </label>
+            {%- if settings.option_style == 'swatch' -%}
+              <fieldset
+                class="product-variants-fieldset"
+                data-option-index="option{{ forloop.index }}"
+                data-option-slug="{{ option.name | handleize }}">
+                <ul class="list-unstyled product-loop-variants {% if colorOptions contains downOption and settings.color_swatch_style == 'circle' %}circle{% endif %}">
+                  {% comment %} {%- for value in option.values -%}
+                    <li class="{% if colorOptions contains downOption %}color_option{% else %}{{ downOption }}__option{% endif %} variant_option">
+                      <label class="visually-hidden" for="option-{{ optionIndex }}-{{ forloop.index }}">
+                        {{- value -}}
+                      </label>
+                      <input
+                        class="productOption"
+                        id="option-{{ optionIndex }}-{{ forloop.index }}"
+                        form="{{ product_form_id }}"
+                        type="radio"
+                        name="option-{{ optionIndex }}"
+                        value="{{ value | escape }}"
+                        title="{{ value | escape }}"
+                        data-product-url="{{ value.product_url }}"
+                        data-value-product-id="{{ value.id }}"
+                        {% if option.selected_value == value %}
+                        checked
+                        {% endif %}>
+                      {%- liquid
+                        assign variantImage = ''
+                        if settings.variant_image
+                          assign variantsList = product.variants | where: varOptionIndex, value
+                          for variant in variantsList
+                            if variant.featured_image != blank
+                              assign variantImage = variant.featured_image
+                              break
+                            endif
+                          endfor
+                        endif
+                      -%}
+                      {%- if colorOptions contains downOption -%}
+                        {%- assign variantColorImage = value | handleize | append: '.png' -%}
+                        <span
+                          class="option {% if option.selected_value == value %}selected{% endif %} {% unless settings.variant_image %}variantColorOption{% else %}variantImageOption{% endunless %}"
+                          {% if colorOptions contains downOption %}
+                          {%- unless settings.variant_image and variantImage != blank %}
+                          style="background-color:{{ value | downcase | remove: ' ' }};background-image:url('{{ variantColorImage | asset_img_url : 100 }}');"
+                          {% endunless -%}
+                          {% endif %}>
+                          {%- if settings.variant_image -%}
+                            {%- if variantImage != blank -%}
+                              <img
+                                src="{{ variantImage | image_url: width: 34 }}"
+                                width="34"
+                                height="34"
+                                alt="{{ variantImage.alt | strip_html | escape }}"
+                                loading="lazy">
+                            {%- endif -%}
+                          {%- endif -%}
+                        </span>
+                      {%- else -%}
+                        <span class="option {% if option.selected_value == value %}selected{% endif %}">
+                          {{ value }}
+                        </span>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%} {% endcomment %}
+                  {%- for value in option.values -%}
+                    {% liquid
+                      if value.swatch.image
+                        assign image_url = value.swatch.image | image_url: width: 50
+                        assign swatch_value = 'background-image:url(' | append: image_url | append: ')'
+                        assign swatch_focal_point = value.swatch.image.presentation.focal_point
+                      elsif value.swatch.color
+                        assign swatch_value = 'background-color:rgb(' | append: value.swatch.color.rgb | append: ')'
+                      else
+                        assign swatch_value = null  
+                      endif
+                      assign option_disabled = false
+                      if value.available
+                        assign option_disabled = true
+                      endif
+                    %}
+                    <li
+                      class="{% if colorOptions contains downOption %}color_option{% if settings.variant_image %} image_option{% endif %}{% else %}{{ downOption }}__option{% endif %} variant_option"
+                    >
+                      <label class="visually-hidden" for="{{ option_input_name }}-{{ value | handleize }}">
+                        {{- value -}}
+                      </label>
+                      <input
+                        class="productOption{% if option_disabled != true %} not-available{% endif %}"
+                        id="{{ option_input_name }}-{{ value | handleize }}"
+                        form="{{ product_form_id }}"
+                        type="radio"
+                        name="option-{{ optionIndex }}"
+                        value="{{ value | escape }}"
+                        title="{{ value | escape }}"
+                        data-product-url="{{ value.product_url }}"
+                        data-value-product-id="{{ value.id }}"
+                        {% if value.selected %}
+                          checked
+                        {% endif %}
+                      >
+                    
+                      {%- if colorOptions contains downOption -%}
+                        {%- assign variantColorImage = value | handleize | append: '.png' -%}
+                        <span
+                          class="option {% if value.selected %}selected{% endif %} {% unless settings.variant_image %}variantColorOption {% if value.swatch.image %} variantImageOption{% endif %}{% else %}variantImageOption{% endunless %}"
+                          {% if colorOptions contains downOption %}
+                            {%- unless settings.variant_image and value.variant.featured_media != blank %}
+                              data-pallet-color="{{ value | downcase }}"
+                              style="{% if swatch_value != null %}{{ swatch_value }}; {% else %}background-color:{{ value | downcase | remove: ' ' }};background-image:url('{{ variantColorImage | asset_img_url : 100 }}');{% endif %} {% if swatch_focal_point %} --swatch-focal-point: {{ swatch_focal_point }};{% endif %}"
+                            {% endunless -%}
+                          {% endif %}
+                        >
+                          {%- if settings.variant_image -%}
+                            {%- if value.variant.featured_media != blank -%}
+                              <img
+                                src="{{ value.variant.featured_media | image_url: width: 34 }}"
+                                width="34"
+                                height="34"
+                                alt="{{ value.variant.featured_media.alt | strip_html | escape }}"
+                                loading="lazy"
+                              >
+                            {%- endif -%}
+                          {%- endif -%}
+                        </span>
+                      {%- else -%}
+                        <span class="option {% if value.selected %}selected{% endif %}">
+                          {{ value }}
+                        </span>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </fieldset>
+            {%- elsif settings.option_style == 'dropdown' -%}
+              <div class="dropdown {{ downOption }}-select productOptionSelect">
+                <div class="product-loop-variants">
+                  <select class="productOption dropdown-selected" name="option-{{ optionIndex }}">
+                    {%- for value in option.values -%}
+                      <option
+                        value="{{ value | escape }}"
+                        {% if option.selected_value == value %}
+                        selected
+                        {% endif %}>
+                        {{ value }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+        <script type="application/json" data-selected-variant>
+                {{ product.selected_or_first_available_variant | json }}
+        </script>
+      </variant-selects>
+    {%- endunless -%}
+    <div class="yv-product-quantity" {{ block.shopify_attributes }}>
+      <label class="yv-variant-title" for="product-quantity-{{ product_form_id }}">
+        {{- 'products.product.quantity.label' | t -}}
+      </label>
+      <div class="quantity">
+        <button type="button" class="quantity-button quantity-down no-js-hidden">
+          <span class="yv-visually-hidden">
+            {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+          </span>
+          <svg
+            x="0px"
+            y="0px"
+            width="14px"
+            height="14px"
+            viewBox="0 0 14 14">
+            <rect
+              x="6"
+              transform="matrix(6.123234e-17 -1 1 6.123234e-17 0 14)"
+              width="2.1"
+              height="14" />
+          </svg>
+        </button>
+        <input
+          id="product-quantity-{{ product_form_id }}"
+          type="number"
+          name="quantity"
+          min="1"
+          step="1"
+          value="1"
+          form="{{ product_form_id }}"
+          aria-label="{{ 'products.product.quantity.label' | t }}">
+        <button type="button" class="quantity-button quantity-up no-js-hidden">
+          <span class="yv-visually-hidden">
+            {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+          </span>
+          <svg
+            x="0px"
+            y="0px"
+            width="14px"
+            height="14px"
+            viewBox="0 0 14 14">
+            <polygon points="14,6 8,6 8,0 6,0 6,6 0,6 0,8 6,8 6,14 8,14 8,8 14,8 " />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="product_button ff">
+      {%- form 'product'
+        , product
+        , id: product_form_id
+        , class: 'form main-product-form'
+        , novalidate: 'novalidate'
+        , data-type: 'add-to-cart-form'
+      -%}
+        {%- liquid
+        -%}
+        {%- liquid
+          render 'product-variants', product: product
+          assign preorder = false
+          if settings.enable_preorder and current_variant.inventory_policy == 'continue' and current_variant.inventory_quantity <= 0
+            assign preorder = true
+          endif
+        -%}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ current_variant.id }}">
+        {{ form | payment_terms }}
+        <div
+          class="productErrors error-text"
+          style="display:none"
+          role="status"></div>
+        {% if settings.enable_terms_checkbox and settings.terms_conditions_text != blank %}
+          <div class="terms_conditions-wrapper-main">
+            <div class="terms_conditions-wrapper custom-checkbox" data-terms-conditions-wrapper>
+              <input
+                type="checkbox"
+                name="terms_conditions"
+                value="yes"
+                title="{{ settings.terms_conditions_text | strip_html }}"
+                id="terms_conditions_input"
+                onClick="acceptTermsConditions(event)"
+                data-section="shopify-section-{{ section.id }}"
+                {% unless current_variant.available %}
+                  disabled
+                {% endunless %}
+              >
+              <span class="checkmark"></span>
+              <label for="terms_conditions_input" title="{{ settings.terms_conditions_text | strip_html }}">
+                {{ settings.terms_conditions_text }}
+              </label>
+            </div>
+          </div>
+        {% endif %}
+        <div class="pdp-action-container yv-checkout-btn{% if settings.dynamic_checkout_btn %} dynamic-checkout-enabled{% else %}  yv-checkout-btn-full-width{% endif %}{% unless current_variant.available %} disabled{% elsif settings.enable_terms_checkbox and settings.terms_conditions_text != blank %} disabled{% endunless %}" data-button-wrapper>
+          <button
+            id="ProductSubmitButton-quick-view-{{ product.id }}"
+            type="submit"
+            class="Sd_addProduct add_to_cart button med-btn"
+            {% unless current_variant.available %}
+            disabled
+            {% elsif settings.enable_terms_checkbox and settings.terms_conditions_text != blank %}
+            disabled
+            {% endunless %}>
+            <span data-button-text>
+              {%- unless current_variant.available -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                {%- if preorder -%}
+                  {{ 'products.product.preorder' | t }}
+                {%- else -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- endif -%}
+              {%- endunless -%}
+            </span>
+            <svg
+              style="margin: auto; display: none; shape-rendering: auto;"
+              width="200px"
+              height="200px"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="xMidYMid"
+              class="svg-loader">
+              <circle
+                cx="50"
+                cy="50"
+                fill="none"
+                stroke="currentcolor"
+                stroke-width="6"
+                r="35"
+                stroke-dasharray="164.93361431346415 56.97787143782138">
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  repeatCount="indefinite"
+                  dur="1s"
+                  values="0 50 50;360 50 50"
+                  keyTimes="0;1" />
+              </circle>
+            </svg>
+          </button>
+          {% if settings.dynamic_checkout_btn %}
+            {{ form | payment_button }}
+          {% endif %}
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+  <script type="application/json" id="QuickViewVariants">
+      {{ product.variants | json }}
+  </script>
+  <script>
+      window.productVariants = window.productVariants || JSON.parse(document.getElementById('QuickViewVariants').textContent);
+  </script>
+</product-info>

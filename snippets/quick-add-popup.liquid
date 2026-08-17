@@ -1,0 +1,125 @@
+<div id="quick-add-popup" class="quick-add-popup shopify-section">
+  <quick-add-close class="close-fullwidth cursor-pointer"></quick-add-close>
+  <div class="popup-dialog">
+    <div class="popup-content">
+      <quick-add-close tabindex="0" class="popup-close cursor-pointer" aria-label="close">
+        <svg class="popup-close-icon1" width="25" height="25" viewBox="0 0 25 25" fill="none">
+          <path d="M25 1.24999L1.25005 24.9999L5.11029e-05 23.7499L23.75 0L25 1.24999Z" fill="currentColor"></path>
+          <path d="M1.25 0.000133605L24.9999 23.75L23.75 25L0 1.25013L1.25 0.000133605Z" fill="currentColor"></path>
+        </svg>
+      </quick-add-close>
+      <div class="quick-add-popup-content yv_product_content_section {% if settings.layout_style == 'rounded' %} product-layout-rounded{% endif %}" quick-add-body>        
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .quick-add-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    background: var(--colorLightTextBody);
+    transition: opacity 0.15s;
+  }
+  .quick-add-popup.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+  .close-fullwidth {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    pointer-events: none;
+  }
+  .popup-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    padding: 20px;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: auto;
+    height: 100%;
+    transition: 0.4s ease-out;
+    transform: translateY(100px);
+    opacity: 0;
+    transition-delay: 0.2s;
+  }
+  .quick-add-popup.show .popup-dialog {
+    transform: none;
+    opacity: 1;
+  }
+  .quick-add-popup.show  .close-fullwidth {
+    pointer-events: all;
+  }
+  .popup-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    overflow: hidden;
+    background-color: var(--primaryColorBody);
+    color: var(--colorTextBody);
+    border-radius: var(--cardRadius);
+  }
+  .popup-close {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    background: transparent;
+    color: var(--colorTextBody);
+    overflow: hidden;
+    transition: 0.4s ease;
+  }
+  .popup-close svg {
+    width: 12px;
+    height: 12px;
+    fill: currentColor;
+  }
+  .quick-add-popup-content {
+    padding: 20px;
+    padding-right: 40px;
+    max-height: 100%;
+    overflow: auto;
+  }
+  .quick-add-popup-content-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    align-items: center;
+  }
+  .quick-add-popup-product-img {
+    width: 100px;
+
+  }
+  .product-layout-rounded .quick-add-popup-product-img {
+    border-radius:20px;
+    overflow: hidden;
+  }
+  .quick-add-popup-content-body {
+    padding-top: 30px;
+    margin-top: 30px;
+    border-top: 1px solid var(--colorXlightTextBody);
+  }
+</style>

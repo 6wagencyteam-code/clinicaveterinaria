@@ -1,0 +1,33 @@
+
+{%- assign img_url = image | image_url: width: '100' | replace: 'width=100', 'width={width}' -%}
+<img
+  {% if id != blank %}
+    id="{{ id }}"
+  {% endif %}
+  class="{% if settings.enable_lazyload %}lazyload no-js-hidden{% endif %} {{ class }}"
+  {% if settings.enable_lazyload %}
+    data-src="{{ img_url }}"
+  {% else %}
+    src="{{ image | image_url: width: image.width }}"
+  {% endif %}
+  data-aspectratio="{{ image.aspect_ratio }}"
+  data-sizes="auto"
+  data-widths="{{ sizes }}"
+  width="{{ image.width }}"
+  height="{{ image.height }}"
+  data-original="{{ image | image_url }}"
+  alt="{{ image.alt | escape }}"
+  loading="{% if section.index <= 2 %}eager{% else %}lazy{% endif %}"
+  style="object-position:{{ image.presentation.focal_point | default: '50.0% 50.0%' }}"
+>
+  {% if settings.enable_lazyload %}
+  <noscript>
+    <img     
+     src="{{ image | image_url: width: image.width }}"
+     loading="eager"
+      alt="{{ image.alt | default: shop.name | strip_html }}"
+      width="{{ image.width }}"
+      height="{{ image.height }}"
+    >
+  </noscript>
+{% endif %}

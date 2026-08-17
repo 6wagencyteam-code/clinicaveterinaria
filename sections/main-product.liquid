@@ -1,0 +1,1496 @@
+<style>
+  {% comment %} #shopify-section-{{ section.id }} {
+    padding-top: var(--interlinkTabHeight, 0px);
+  } {% endcomment %}
+  {% if section.settings.gallery_style == 'slider' %}
+    #shopify-section-{{ section.id }} {
+      --productSliderHeight: {{ section.settings.carousel_height_desktop }};
+    }
+    {% unless section.settings.carousel_height_desktop == 'adapt' %}
+      #shopify-section-{{ section.id }}
+      .thumbnail-position-left .yv-product-small-slider
+      , #shopify-section-{{ section.id }}
+      .thumbnail-position-right .yv-product-small-slider {
+        width: {{ section.settings.carousel_height_desktop }};
+      }
+    {% endunless %}
+    @media screen and (max-width: 767px) {
+      #shopify-section-{{ section.id }} {
+        --productSliderHeight: {{ section.settings.carousel_height_mobile }};
+      }
+      {% unless section.settings.carousel_height_mobile == 'adapt' %}
+        #shopify-section-{{ section.id }}
+        .thumbnail-position-left .yv-product-small-slider
+        , #shopify-section-{{ section.id }}
+        .thumbnail-position-right .yv-product-small-slider {
+          width: {{ section.settings.carousel_height_mobile }};
+        }
+      {% endunless %}
+    }
+  {% endif %}
+  {% assign colorBrightness = settings.color_body_bg | color_brightness %}
+  {%- if colorBrightness < 130 -%}
+    #shopify-section-{{ section.id }}
+    .product-section select {
+      background: url('{{ 'select-arrow-white.png' | asset_url }}') no-repeat 97% 50%/10px transparent;
+    }
+    #shopify-section-{{ section.id }}
+    .product-view-dropdown select {
+      background: url('{{ 'select-arrow-white.png' | asset_url }}') no-repeat 88% 50%/9px transparent;
+    }
+    #shopify-section-{{ section.id }}
+    .selling_plan select {
+      background: url('{{ 'select-arrow-white.png' | asset_url }}') no-repeat 97% 50%/10px var(--primaryAlternateBg);
+    }
+  {%- else -%}
+  #shopify-section-{{ section.id }}
+  .product-section select {
+    background: url('{{ 'lang-dropdown-arrow.svg' | asset_url }}') no-repeat 97% 50%/10px transparent;
+  }
+  #shopify-section-{{ section.id }}
+  .product-view-dropdown select {
+    background: url('{{ 'lang-dropdown-arrow.svg' | asset_url }}') no-repeat 88% 50%/9px transparent;
+  }
+  #shopify-section-{{ section.id }}
+  .selling_plan select {
+    background: url('{{ 'lang-dropdown-arrow.svg' | asset_url }}') no-repeat 97% 50%/10px var(--primaryAlternateBg);
+  }
+{%- endif -%}
+{%  liquid 
+  if section.settings.gallery_style == "slider"
+    assign common_class = "yv-product-slider-wrapper"
+    if section.settings.carousel_media_width == "large"
+      assign left_col = "col-lg-8"
+      assign right_col =  "col-lg-4"
+    elsif section.settings.carousel_media_width == "medium"
+      assign left_col = "col-lg-7"
+      assign right_col =  "col-lg-5"
+    elsif section.settings.carousel_media_width == "small"
+      assign left_col = "col-lg-6"
+      assign right_col =  "col-lg-6"
+    endif
+  else
+    assign left_col = "col-lg-7"
+    assign right_col =  "col-lg-5"
+  endif
+%}
+</style>
+<product-info
+  id="MainProduct-{{ section.id }}"
+  class="d-block {% if section.settings.gallery_style == 'slider' %}main-product-slider-wrapper{% else %}container{% endif %}"
+  data-section-id="{{ section.id }}"
+  data-update-url="true"
+  data-original-section="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-url="{{ product.url }}">
+  <div
+    class="yv_product_content_section main-product-section{% if settings.layout_style == 'rounded' %} product-layout-rounded{% endif %}"
+    data-section="{{ section.id }}"
+    data-url="{{ product.url }}"
+    style="--layoutRadius:{% if settings.layout_style == 'rounded' %}10px{% else %}0px{% endif %}">
+    <div class="row no-gutters">
+      <div class="col-12 col-sm-12 col-md-6 {{ left_col }} {{ common_class }}">
+        <a class="skip-to-content-link button yv-visually-hidden focus-inside" href="#ProductData-{{ section.id }}">
+          {{ 'accessibility.skip_to_product_info' | t }}
+        </a>
+        {%- liquid
+          if section.settings.gallery_style == 'slider'
+            render 'product-page-images-slider', section: section, product: product
+          elsif section.settings.gallery_style == 'stacked'
+            render 'product-page-images-stacked', section: section, product: product
+          elsif section.settings.gallery_style == 'gallery'
+            render 'product-page-images-gallery', section: section, product: product
+          endif
+        -%}
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 {{ right_col }}">
+        <div
+          id="ProductData-{{ section.id }}"
+          data-main-product-{{ product.id }}
+          class="sticky-item content-divider-mobile-{{ section.settings.content_divider_mobile }}">
+          {%- render 'product-form'
+            , product: product
+            ,  section: section
+            , mainProduct: true
+            , sliderClass: 'slider-product-detail'
+          -%}
+          {%- if section.settings.gallery_style == 'slider' -%}
+            <div class="d-block d-md-none">
+              {%- liquid
+                if section.settings.style == 'accordion'
+                  render 'product-accordion-content', product: product, section: section, position: 'belowProductGalllery'
+                else
+                  render 'product-tabs-content', product: product, section: section, contentWidth: 'belowProductGalllery'
+                endif
+              -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% liquid
+    for block in section.blocks
+      if block.type == 'button' and block.settings.sticky_add_to_cart
+        render 'sticky-add-to-cart', product: product, section: section, block: block
+      endif
+    endfor
+  %}
+
+{%- unless section.settings.gallery_style == 'slider' -%}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'interlink_tabs' -%}
+        <product-interlinks class="d-block yv-interlink-tabs" data-interlinks-id="{{ block.id }}">
+          <div class="main-product-interlinks container" data-interlinks-wrapper="">
+            <div class="yv-interlink-tabs-list" data-interlinks="">
+              <button type="button" data-id="shopify-section-{{ section.id }}" data-index="0" data-tab-button="" class="yv-interlink-tab-item">
+                <span class="yv-interlink-tabs-item-text">{{ 'products.product.interlink_tabs.overview' | t }}</span>
+              </button>
+              {%- for i in (1..3) -%}
+              {%- liquid
+                assign interlink_text_key = 'interlink_text_' | append: i
+                assign interlink_text = block.settings[interlink_text_key]
+                assign interlink_id_key = 'interlink_id_' | append: i
+                assign interlink_id = block.settings[interlink_id_key]
+
+              -%}
+              {%- if interlink_text != blank and interlink_id != blank -%}
+                <button type="button" data-id="{{ interlink_id }}" data-index="{{ i }}" data-tab-button="" class="yv-interlink-tab-item">
+                  <span class="yv-interlink-tabs-item-text">{{ interlink_text }}</span>
+                </button>
+              {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        </product-interlinks>
+      {%- endcase -%}
+  {%- endfor -%}
+{%- endunless -%}
+
+</product-info>
+{%- liquid
+  if section.settings.gallery_style != 'slider'
+    if section.settings.width == 'full'
+      if section.settings.style == 'accordion'
+        render 'product-accordion-content', product: product, section: section, contentWidth: 'full'
+      else
+        render 'product-tabs-content', product: product, section: section, contentWidth: 'full'
+      endif
+    endif
+  endif
+-%}
+{%- liquid
+  render 'similar-products', product: product, section: section
+
+  render 'product-form', product: product, section: section, sizeChartContent: true
+-%}
+{% liquid
+  for block in section.blocks
+    if block.type == 'query-form' and block.settings.heading != blank
+      render 'product-query-form', block: block
+    endif
+  endfor
+%}
+<script type="application/json" id="product3DModel-{{ product.id }}">
+  {{ product.media | where: 'media_type', 'model' | json }}
+</script>
+<script src="{{ 'fancybox.min.js' | asset_url }}" defer></script>
+<script src="{{ 'product.js' | asset_url }}" defer></script>
+<script>
+  var fancySelector = '[data-fancybox="gallery{{ section.id }}"]';
+  document.addEventListener("DOMContentLoaded", function(){
+    let currentProduct = {{ product.id }};
+    let cookieName = 'yv-recently-viewed';
+    let rvProducts = JSON.parse(window.localStorage.getItem(cookieName) || '[]');
+    if (!rvProducts.includes(currentProduct)) {
+      rvProducts.unshift(currentProduct);
+    }
+    window.localStorage.setItem(cookieName, JSON.stringify(rvProducts.slice(0, 14)));
+  })
+
+  if (!customElements.get('product-interlinks')) {
+    class ProductInterlinks extends HTMLElement {
+      constructor() {
+        super();
+        this.section = this.closest('section');
+        this.buttons = this.querySelectorAll('[data-tab-button]');
+        this.interlinksWrapper = this.querySelector('[data-interlinks-wrapper]');
+        this.interlinksInner = this.querySelector('[data-interlinks]');
+        this.init();
+      }
+  
+      init() {
+        if (this.buttons.length && this.interlinksInner) {
+          this.setupListeners();
+          // Wait for DOM to be ready before setting up observer
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+              this.setupScrollObserver();
+            });
+          } else {
+            // Use requestAnimationFrame to ensure sections are rendered
+            requestAnimationFrame(() => {
+              this.setupScrollObserver();
+            });
+          }
+          // Initial height calculation with delay to ensure rendering
+          setTimeout(() => {
+            this.interLinkHeight();
+          }, 100);
+
+          // Observe both section and interlinksWrapper for resize
+          this.resizeObserver = new ResizeObserver(this.interLinkHeight.bind(this));
+          this.resizeObserver.observe(this.section);
+          if (this.interlinksWrapper) {
+            this.resizeObserver.observe(this.interlinksWrapper);
+          }
+        }
+      }
+
+      interLinkHeight() {
+        // Use requestAnimationFrame to ensure DOM is fully rendered before measuring
+        requestAnimationFrame(() => {
+          // Get height from interlinksWrapper (the actual container with height)
+          // Fallback to custom element if wrapper not available
+          const elementToMeasure = this.interlinksWrapper || this;
+          const height = elementToMeasure.getBoundingClientRect().height;
+          
+          if (height > 0) {
+            this.section.style.setProperty('--interlinkTabHeight', `${height}px`);
+            document.documentElement.style.setProperty('--interlinkTabHeight', `${height}px`);
+          }
+        });
+      }
+
+      setupListeners() {
+        this.buttons.forEach((button) => {
+          button.addEventListener('click', (event) => {
+            this.handleButtonClick(event.currentTarget);
+          });
+        });
+      }
+
+      setupScrollObserver() {
+        // Store mapping of section elements to buttons for quick lookup
+        this.sectionToButtonMap = new Map();
+        this.observedSections = [];
+        this.lastScrollY = window.scrollY;
+
+        // Create Intersection Observer to track sections in viewport
+        const observerOptions = {
+          root: null, // viewport
+          rootMargin: '-10% 0px -70% 0px', // Trigger when section top is 10% from viewport top
+          threshold: [0, 0.25, 0.5, 0.75, 1] // Multiple thresholds for smooth detection
+        };
+
+        this.observer = new IntersectionObserver((entries) => {
+          // Get current scroll direction
+          const currentScrollY = window.scrollY;
+          const scrollingDown = currentScrollY > this.lastScrollY;
+          this.lastScrollY = currentScrollY;
+
+          // Collect all intersecting sections
+          const intersectingSections = entries.filter(entry => entry.isIntersecting);
+          
+          if (intersectingSections.length === 0) return;
+
+          // Find the best section to activate based on viewport position
+          let bestSection = null;
+          let bestScore = -Infinity;
+          const viewportCenter = window.innerHeight / 2;
+
+          intersectingSections.forEach((entry) => {
+            const rect = entry.boundingClientRect;
+            const sectionTop = rect.top;
+            const sectionBottom = rect.bottom;
+            const sectionHeight = rect.height;
+            
+            // Calculate how much of the section is visible
+            const visibleHeight = Math.min(sectionBottom, window.innerHeight) - Math.max(sectionTop, 0);
+            const visibilityRatio = visibleHeight / sectionHeight;
+            
+            // Calculate distance from viewport top (prefer sections near top)
+            const distanceFromTop = Math.abs(sectionTop);
+            
+            // Score: higher visibility + closer to top = better
+            // Weight visibility more than position
+            const score = (visibilityRatio * 100) - (distanceFromTop / 10);
+            
+            // If scrolling down, prefer sections that are entering from bottom
+            // If scrolling up, prefer sections that are entering from top
+            if (scrollingDown && sectionTop < viewportCenter) {
+              if (score > bestScore) {
+                bestScore = score;
+                bestSection = entry;
+              }
+            } else if (!scrollingDown && sectionTop > 0) {
+              if (score > bestScore) {
+                bestScore = score;
+                bestSection = entry;
+              }
+            } else if (score > bestScore) {
+              bestScore = score;
+              bestSection = entry;
+            }
+          });
+
+          // If no best section found with scroll direction logic, use most visible
+          if (!bestSection && intersectingSections.length > 0) {
+            bestSection = intersectingSections.reduce((prev, current) => {
+              const prevRatio = prev.intersectionRatio;
+              const currentRatio = current.intersectionRatio;
+              return currentRatio > prevRatio ? current : prev;
+            });
+          }
+
+          // Activate the corresponding button
+          if (bestSection) {
+            const sectionElement = bestSection.target;
+            const correspondingButton = this.sectionToButtonMap.get(sectionElement);
+
+            if (correspondingButton) {
+              // Only update if not already active (to avoid unnecessary updates)
+              if (!correspondingButton.classList.contains('active')) {
+                this.updateActiveButton(correspondingButton);
+                this.updateActiveInterlink(correspondingButton.dataset.index);
+              }
+            }
+          }
+        }, observerOptions);
+
+        // Observe all sections referenced by buttons
+        this.buttons.forEach((button) => {
+          const sectionId = button.dataset.id;
+          let targetSection = null;
+          
+          // Normalize section ID - Shopify sections have format: shopify-section-{id}
+          let normalizedSectionId = sectionId;
+          if (!sectionId.startsWith('shopify-section-')) {
+            normalizedSectionId = `shopify-section-${sectionId}`;
+          }
+          
+          // Find the section element
+          targetSection = document.getElementById(normalizedSectionId);
+          
+          // If still not found, try with the original ID
+          if (!targetSection) {
+            targetSection = document.getElementById(sectionId);
+          }
+          
+          if (targetSection) {
+            // Store mapping for quick lookup in observer callback
+            this.sectionToButtonMap.set(targetSection, button);
+            this.observedSections.push(targetSection);
+            // Start observing the section
+            this.observer.observe(targetSection);
+          } else {
+            console.warn(`Section with ID '${sectionId}' or '${normalizedSectionId}' not found for scroll observer.`);
+          }
+        });
+
+        // Check initial state - activate section that's currently in viewport
+        this.checkInitialActiveSection();
+      }
+
+      checkInitialActiveSection() {
+        // Find which section is currently most visible in viewport
+        let bestSection = null;
+        let bestScore = -Infinity;
+        const viewportTop = 0;
+        const viewportBottom = window.innerHeight;
+        const viewportCenter = window.innerHeight / 2;
+
+        this.observedSections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          const sectionTop = rect.top;
+          const sectionBottom = rect.bottom;
+          const sectionHeight = rect.height;
+          
+          // Check if section is in viewport
+          if (sectionBottom > viewportTop && sectionTop < viewportBottom) {
+            // Calculate visible height
+            const visibleTop = Math.max(sectionTop, viewportTop);
+            const visibleBottom = Math.min(sectionBottom, viewportBottom);
+            const visibleHeight = visibleBottom - visibleTop;
+            const visibilityRatio = visibleHeight / sectionHeight;
+            
+            // Prefer sections that are near the top of viewport
+            const distanceFromTop = Math.max(0, sectionTop);
+            const score = (visibilityRatio * 100) - (distanceFromTop / 5);
+            
+            if (score > bestScore) {
+              bestScore = score;
+              bestSection = section;
+            }
+          }
+        });
+
+        // Activate the button for the best section
+        if (bestSection) {
+          const correspondingButton = this.sectionToButtonMap.get(bestSection);
+          if (correspondingButton && !correspondingButton.classList.contains('active')) {
+            this.updateActiveButton(correspondingButton);
+            this.updateActiveInterlink(correspondingButton.dataset.index);
+          }
+        }
+      }
+  
+      handleButtonClick(button) {
+        const activeIndex = button.dataset.index;
+        const sectionId = button.dataset.id;
+  
+        // Update active class
+        this.updateActiveButton(button);
+  
+        // Update --active-interlink property
+        this.updateActiveInterlink(activeIndex);
+  
+        // Scroll to the section
+        this.scrollToSection(sectionId);
+      }
+  
+      updateActiveButton(activeButton) {
+        this.buttons.forEach((button) => button.classList.remove('active'));
+        activeButton.classList.add('active');
+      }
+  
+      updateActiveInterlink(activeIndex) {
+        if (this.interlinksInner) {
+          this.interlinksInner.style.setProperty('--active-interlink', activeIndex);
+        }
+      }
+  
+      scrollToSection(sectionId) {
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+          const sectionTop = targetSection.getBoundingClientRect().top + window.scrollY + 1;
+          const targetScrollPosition = sectionTop;
+          window.scrollTo({
+            top: targetScrollPosition,
+            behavior: 'smooth',
+          });
+        } else {
+          console.warn(`Section with ID '${sectionId}' not found.`);
+        }
+      }
+
+      disconnectedCallback() {
+        // Cleanup observer when component is removed
+        if (this.observer) {
+          this.observer.disconnect();
+        }
+      }
+    }
+  
+    customElements.define('product-interlinks', ProductInterlinks);
+  }
+</script>
+{% schema %}
+  {
+    "name": "t:sections.main-product.name",
+    "tag": "section",
+    "class": "product-section single__product",
+    "settings": [
+      {
+        "type": "select",
+        "id": "gallery_style",
+        "label": "t:sections.main-product.settings.gallery_style.label",
+        "default": "slider",
+        "options": [
+          {
+            "value": "slider",
+            "label": "t:sections.main-product.settings.gallery_style.options.slider.label"
+          }, {
+            "value": "gallery",
+            "label": "t:sections.main-product.settings.gallery_style.options.gallery.label"
+          }, {
+            "value": "stacked",
+            "label": "t:sections.main-product.settings.gallery_style.options.stacked.label"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "show_description",
+        "label": "t:sections.main-product.settings.show_description.label",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "open_description_accordion",
+        "label": "t:sections.main-product.settings.open_description_accordion.label",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_variant-media",
+        "label": "t:sections.main-product.settings.show_variant-media.label",
+        "default": false
+      }, {
+        "type": "checkbox",
+        "id": "enable_shipping_policy",
+        "label": "t:sections.main-product.settings.enable_shipping_policy.label",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "enable_zoom_icon",
+        "label": "t:sections.main-product.settings.enable_zoom_icon.label"
+      }, {
+        "type": "checkbox",
+        "id": "enable_thumb",
+        "label": "t:sections.main-product.settings.enable_thumb.label"
+      }, {
+        "type": "select",
+        "id": "content_divider_mobile",
+        "label": "t:sections.main-product.settings.content_divider_mobile.label",
+        "default": "none",
+        "options": [
+          {
+            "value": "none",
+            "label": "t:sections.main-product.settings.content_divider_mobile.options.none.label"
+          }, {
+            "value": "small",
+            "label": "t:sections.main-product.settings.content_divider_mobile.options.small.label"
+          }, {
+            "value": "medium",
+            "label": "t:sections.main-product.settings.content_divider_mobile.options.medium.label"
+          }, {
+            "value": "large",
+            "label": "t:sections.main-product.settings.content_divider_mobile.options.large.label"
+          }
+        ]
+      }, {
+        "type": "header",
+        "content": "t:sections.main-product.settings.carousel_header.content"
+      }, {
+        "type": "select",
+        "id": "carousel_thumbnail_position",
+        "label": "t:sections.main-product.settings.carousel_thumbnail_position.label",
+        "info":"t:sections.featured-product.settings.thumb_position.info",
+        "default": "center",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:sections.main-product.settings.carousel_thumbnail_position.options.left.label"
+          }, {
+            "value": "center",
+            "label": "t:sections.main-product.settings.carousel_thumbnail_position.options.center.label"
+          }, {
+            "value": "right",
+            "label": "t:sections.main-product.settings.carousel_thumbnail_position.options.right.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "carousel_media_width",
+        "label":"Media width",
+        "default":"large",
+        "options": [
+          {
+            "label": "t:common.heading_size.options.small.label",
+            "value": "small"
+          },
+          {
+            "label": "t:common.heading_size.options.medium.label",
+            "value": "medium"
+          },
+          {
+            "label": "t:common.heading_size.options.large.label", 
+            "value": "large"
+          }
+        ]
+      }, 
+      {
+        "type": "select",
+        "id": "carousel_height_desktop",
+        "label": "t:sections.main-product.settings.carousel_height_desktop.label",
+        "default": "adapt",
+        "options": [
+          {
+            "value": "600px",
+            "label": "t:sections.main-product.settings.carousel_height_desktop.options.small.label"
+          }, {
+            "value": "700px",
+            "label": "t:sections.main-product.settings.carousel_height_desktop.options.medium.label"
+          }, {
+            "value": "800px",
+            "label": "t:sections.main-product.settings.carousel_height_desktop.options.large.label"
+          }, {
+            "value": "adapt",
+            "label": "t:sections.main-product.settings.carousel_height_desktop.options.adapt_image.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "carousel_height_mobile",
+        "label": "t:sections.main-product.settings.carousel_height_mobile.label",
+        "default": "adapt",
+        "options": [
+          {
+            "value": "400px",
+            "label": "t:sections.main-product.settings.carousel_height_mobile.options.small.label"
+          }, {
+            "value": "500px",
+            "label": "t:sections.main-product.settings.carousel_height_mobile.options.medium.label"
+          }, {
+            "value": "600px",
+            "label": "t:sections.main-product.settings.carousel_height_mobile.options.large.label"
+          }, {
+            "value": "adapt",
+            "label": "t:sections.main-product.settings.carousel_height_mobile.options.adapt_image.label"
+          }
+        ]
+      }, {
+        "type": "header",
+        "content": "t:common.header.content_section.label",
+        "info": "t:sections.main-product.settings.width.info"
+      }, {
+        "type": "select",
+        "id": "width",
+        "label": "t:sections.main-product.settings.width.label",
+        "default": "half",
+        "options": [
+          {
+            "value": "half",
+            "label": "t:sections.main-product.settings.width.options.half.label"
+          }, {
+            "value": "full",
+            "label": "t:sections.main-product.settings.width.options.full.label"
+          }
+        ]
+      }, {
+        "type": "select",
+        "id": "style",
+        "label": "t:sections.main-product.settings.style.label",
+        "default": "accordion",
+        "options": [
+          {
+            "value": "accordion",
+            "label": "t:sections.main-product.settings.style.options.accordion.label"
+          }, {
+            "value": "tabs",
+            "label": "t:sections.main-product.settings.style.options.tabs.label"
+          }
+        ]
+      }, {
+        "type": "select",
+        "id": "accordion_content_alignment",
+        "label": "t:sections.main-product.settings.accordion_content_alignment.label",
+        "info": "t:sections.main-product.settings.accordion_content_alignment.info",
+        "default": "center",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:sections.main-product.settings.accordion_content_alignment.options.left.label"
+          }, {
+            "value": "center",
+            "label": "t:sections.main-product.settings.accordion_content_alignment.options.center.label"
+          }, {
+            "value": "right",
+            "label": "t:sections.main-product.settings.accordion_content_alignment.options.right.label"
+          }
+        ]
+      }, {
+        "type": "header",
+        "content": "t:common.header.custom_section.label"
+      }, {
+        "type": "text",
+        "id": "content_heading",
+        "default": "heading",
+        "label": "t:sections.main-product.settings.heading.label"
+      }, {
+        "type": "liquid",
+        "id": "content",
+        "label": "t:sections.main-product.settings.content.label"
+      }, {
+        "type": "text",
+        "id": "content_heading2",
+        "label": "t:sections.main-product.settings.content_heading2.label"
+      }, {
+        "type": "liquid",
+        "id": "content2",
+        "label": "t:sections.main-product.settings.content.label"
+      }, {
+        "type": "text",
+        "id": "content_heading3",
+        "label": "t:sections.main-product.settings.content_heading3.label"
+      }, {
+        "type": "liquid",
+        "id": "content3",
+        "label": "t:sections.main-product.settings.content.label"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "interlink_tabs",
+        "name": "t:sections.main-product.settings.interlink-tabs.label",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.main-product.settings.interlink-tabs.info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.main-product.settings.1Tab.label"
+          },
+          {
+            "type": "text",
+            "id": "interlink_text_1",
+            "label": "t:sections.main-product.settings.tab-title.label"
+          },
+          {
+            "type": "text",
+            "id": "interlink_id_1",
+            "label": "t:sections.images-carousel.link-to.label",
+            "info": "t:sections.main-product.settings.link_to_info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.main-product.settings.2Tab.label"
+          },
+          {
+            "type": "text",
+            "id": "interlink_text_2",
+            "label": "t:sections.main-product.settings.tab-title.label"
+          },
+          {
+            "type": "text",
+            "id": "interlink_id_2",
+            "label": "t:sections.images-carousel.link-to.label",
+            "info": "t:sections.main-product.settings.link_to_info"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.main-product.settings.3Tab.label"
+          },
+          {
+            "type": "text",
+            "id": "interlink_text_3",
+            "label": "t:sections.main-product.settings.tab-title.label"
+          },
+          {
+            "type": "text",
+            "id": "interlink_id_3",
+            "label": "t:sections.images-carousel.link-to.label",
+            "info": "t:sections.main-product.settings.link_to_info"
+          }
+        ]
+      },
+      {
+        "type": "title",
+        "name": "t:sections.main-product.blocks.title.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "select",
+            "id": "heading_size",
+            "label": "t:common.heading_size.label",
+            "default": "h6",
+            "options": [
+              {
+                "value": "h1",
+                "label": "H1"
+              },
+              {
+                "value": "h2",
+                "label": "H2"
+              },
+              {
+                "value": "h3",
+                "label": "H3"
+              },
+              {
+                "value": "h4",
+                "label": "H4"
+              }, {
+                "value": "h5",
+                "label": "H5"
+              }, {
+                "value": "h6",
+                "label": "H6"
+              }
+            ]
+          }, {
+            "type": "select",
+            "id": "seo_heading",
+            "label": "t:common.header.heading_tag.label",
+            "info": "t:common.header.heading_tag.info",
+            "default": "h2",
+            "options": [
+              {
+                "value": "h1",
+                "label": "t:common.header.heading_tag.options.h1.label"
+              },
+              {
+                "value": "h2",
+                "label": "t:common.header.heading_tag.options.h2.label"
+              },
+              {
+                "value": "h3",
+                "label": "t:common.header.heading_tag.options.h3.label"
+              },
+              {
+                "value": "h4",
+                "label": "t:common.header.heading_tag.options.h4.label"
+              }, {
+                "value": "h5",
+                "label": "t:common.header.heading_tag.options.h5.label"
+              }, {
+                "value": "h6",
+                "label": "t:common.header.heading_tag.options.h6.label"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "sku",
+        "name": "t:sections.main-product.blocks.sku.name",
+        "limit": 1
+      },
+      {
+        "type": "text",
+        "name": "t:sections.main-product.blocks.text.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "t:sections.main-product.blocks.text.settings.text.label"
+          }
+        ]
+      }, {
+        "type": "price",
+        "name": "t:sections.main-product.blocks.price.name",
+        "limit": 1
+      }, {
+        "type": "review-star",
+        "name": "t:sections.main-product.blocks.review-star.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.main-product.blocks.review-star.info"
+          }
+        ]
+      }, {
+        "type": "social-icons",
+        "name": "t:sections.main-product.blocks.social-icons.name",
+        "limit": 1
+      }, {
+        "type": "query-form",
+        "name": "t:sections.main-product.blocks.query-form.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.main-product.blocks.query-form.settings.heading.label",
+            "default": "Ask a question"
+          }, {
+            "type": "text",
+            "id": "form_button",
+            "label": "t:sections.main-product.blocks.query-form.settings.form_button.label",
+            "default": "Send question"
+          }
+        ],
+        "limit": 1
+      }, {
+        "type": "variant",
+        "name": "t:sections.main-product.blocks.variant.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "page",
+            "id": "size_chart",
+            "label": "t:sections.main-product.blocks.variant.settings.size_chart.label",
+            "info": "t:sections.main-product.blocks.variant.settings.size_chart.info"
+          }, {
+            "type": "header",
+            "content": "t:sections.main-product.blocks.variant.settings.custom_size_chart.label",
+            "info": "t:sections.main-product.blocks.variant.settings.custom_size_chart.info"
+          }
+        ]
+      }, {
+        "type": "productsignup",
+        "name": "t:sections.main-product.blocks.productsignup.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.main-product.blocks.productsignup.settings.paragraph.content"
+          }, {
+            "type": "text",
+            "id": "notify_heading",
+            "label": "t:sections.main-product.blocks.productsignup.settings.notify_heading.label"
+          }, {
+            "type": "text",
+            "id": "button_text",
+            "label": "t:sections.main-product.blocks.productsignup.settings.button_text.label"
+          }
+        ]
+      }, {
+        "type": "product_variations",
+        "name": "t:sections.main-product.blocks.product_variations.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.main-product.blocks.product_variations.settings.info"
+          }, {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.main-product.blocks.product_variations.settings.heading.label"
+          }, {
+            "type": "product_list",
+            "id": "variation_products",
+            "label": "t:sections.main-product.blocks.product_variations.settings.variation_products.label",
+            "info": "t:sections.main-product.blocks.product_variations.settings.variation_products.info"
+          }, {
+            "type": "checkbox",
+            "id": "show_image",
+            "default": true,
+            "label": "t:sections.main-product.blocks.product_variations.settings.show_image.label",
+            "info": "t:sections.main-product.blocks.product_variations.settings.show_image.info"
+          }
+        ]
+      }, {
+        "type": "description",
+        "name": "t:sections.main-product.blocks.description.name",
+        "limit": 2,
+        "settings": [
+          {
+            "type": "select",
+            "id": "description_visibility",
+            "label": "t:sections.main-product.blocks.description.settings.description_visibility.label",
+            "default": "always",
+            "options": [
+              {
+                "label": "t:common.section_visibility.options.always.label",
+                "value": "always"
+              }, {
+                "label": "t:common.section_visibility.options.small_devices.label",
+                "value": "small"
+              }, {
+                "label": "t:common.section_visibility.options.large_devices.label",
+                "value": "large"
+              }
+            ]
+          }, {
+            "type": "checkbox",
+            "id": "show_as_accordion",
+            "default": false,
+            "label": "t:sections.main-product.blocks.description.settings.show_as_accordion.label"
+          }, {
+            "type": "checkbox",
+            "id": "open_default_accordion",
+            "default": false,
+            "label": "t:sections.main-product.blocks.description.settings.open_default_accordion.label"
+          }
+        ]
+      }, {
+        "type": "accordion",
+        "name": "t:sections.main-product.blocks.accordion.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "content_heading",
+            "default": "Accordion heading",
+            "label": "t:sections.main-product.settings.heading.label"
+          }, {
+            "type": "richtext",
+            "id": "content",
+            "default": "<p>Accordion content</p>",
+            "label": "t:sections.main-product.settings.content.label"
+          }, {
+            "type": "checkbox",
+            "id": "open_default_accordion",
+            "default": false,
+            "label": "t:sections.main-product.blocks.accordion.settings.open_default_accordion.label"
+          }
+        ]
+      }, {
+        "type": "product-meta",
+        "name": "t:sections.main-product.blocks.product-meta.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "show_as_tab",
+            "label": "t:sections.main-product.blocks.product-meta.settings.show_as_tab.label",
+            "default": false
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.main-product.blocks.product-meta.settings.heading.label",
+            "info": "t:sections.main-product.blocks.product-meta.settings.heading.info",
+            "default": "Specifications"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_availability",
+            "label": "t:sections.main-product.blocks.product-meta.settings.show_availability.label"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_sku",
+            "label": "t:sections.main-product.blocks.product-meta.settings.show_sku.label"
+          }, {
+            "type": "checkbox",
+            "id": "show_vendor",
+            "label": "t:sections.main-product.blocks.product-meta.settings.show_vendor.label"
+          }, {
+            "type": "checkbox",
+            "id": "show_type",
+            "label": "t:sections.main-product.blocks.product-meta.settings.show_type.label"
+          }, {
+            "type": "checkbox",
+            "id": "show_collections",
+            "label": "t:sections.main-product.blocks.product-meta.settings.show_collections.label"
+          }, {
+            "type": "checkbox",
+            "id": "show_tags",
+            "label": "t:sections.main-product.blocks.product-meta.settings.show_tags.label"
+          }
+        ]
+      }, {
+        "type": "payment-icons",
+        "name": "t:sections.main-product.blocks.payment-icons.name",
+        "limit": 1
+      }, {
+        "type": "product-countdown",
+        "name": "t:sections.main-product.blocks.product-countdown.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "countdown_time",
+            "label": "t:sections.main-product.blocks.product-countdown.settings.countdown_time.label",
+            "info": "t:sections.main-product.blocks.product-countdown.settings.countdown_time.info"
+          }, {
+            "type": "text",
+            "id": "countdown_title",
+            "label": "t:sections.main-product.blocks.product-countdown.settings.countdown_title.label"
+          }
+        ]
+      }, {
+        "type": "quantity",
+        "name": "t:sections.main-product.blocks.quantity.name",
+        "limit": 1
+      }, {
+        "type": "inventory_status",
+        "name": "t:sections.main-product.blocks.inventory_status.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "range",
+            "id": "minimun_inventory",
+            "label": "t:sections.main-product.blocks.inventory_status.settings.minimun_inventory.label",
+            "default": 10,
+            "min": 1,
+            "max": 100,
+            "step": 1
+          }, {
+            "type": "text",
+            "id": "inventory_available_status",
+            "label": "t:sections.main-product.blocks.inventory_status.settings.inventory_available_status.label"
+          }, {
+            "type": "text",
+            "id": "inventory_less_status",
+            "label": "t:sections.main-product.blocks.inventory_status.settings.inventory_less_status.label",
+            "info": "t:sections.main-product.blocks.inventory_status.settings.inventory_less_status.info"
+          }, {
+            "type": "checkbox",
+            "id": "show_inventory_bar",
+            "default": true,
+            "label": "t:sections.main-product.blocks.inventory_status.settings.show_inventory_bar.label"
+          }
+        ]
+      }, {
+        "type": "custom_liquid",
+        "name": "t:sections.main-product.blocks.custom_liquid.name",
+        "settings": [
+          {
+            "type": "liquid",
+            "id": "custom_liquid",
+            "label": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.label",
+            "info": "t:sections.main-product.blocks.custom_liquid.settings.custom_liquid.info"
+          }
+        ]
+      }, {
+        "type": "complementary_products",
+        "name": "t:sections.main-product.blocks.complementary_products.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "t:sections.main-product.blocks.complementary_products.settings.paragraph.content"
+          }, {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.main-product.blocks.complementary_products.settings.heading.label",
+            "default": "Pairs well with"
+          }, {
+            "type": "range",
+            "id": "products_count",
+            "min": 2,
+            "max": 10,
+            "step": 1,
+            "label": "t:sections.main-product.blocks.complementary_products.settings.products_count.label",
+            "default": 8
+          }
+        ]
+      }, {
+        "type": "button",
+        "name": "t:sections.main-product.blocks.button.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "checkbox",
+            "id": "dynamic_checkout_btn",
+            "default": true,
+            "label": "t:sections.main-product.blocks.button.settings.dynamic_checkout_btn.label"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_fullwidth",
+            "default": false,
+            "label": "t:sections.main-product.blocks.button.settings.enable_fullwidth.label"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_subscriptions_plan",
+            "default": false,
+            "label": "t:sections.main-product.blocks.button.settings.show_subscriptions_plan.label",
+            "info": "t:sections.main-product.blocks.button.settings.show_subscriptions_plan.info"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_recipient_form",
+            "default": false,
+            "label": "t:sections.main-product.blocks.button.settings.show_recipient_form.label"
+          }, {
+            "type": "checkbox",
+            "id": "sticky_add_to_cart",
+            "default": true,
+            "label": "t:sections.main-product.blocks.button.settings.sticky_add_to_cart.label"
+          }, {
+            "type": "select",
+            "id": "sticky_add_to_cart_position",
+            "default": "bottom",
+            "label": "t:sections.main-product.blocks.button.settings.sticky_add_to_cart_position.label",
+            "options": [
+              {
+                "value": "top",
+                "label": "t:sections.main-product.blocks.button.settings.sticky_add_to_cart_position.options.top.label"
+              }, {
+                "value": "bottom",
+                "label": "t:sections.main-product.blocks.button.settings.sticky_add_to_cart_position.options.bottom.label"
+              }
+            ]
+          },
+          {
+            "type": "checkbox",
+            "id": "pickup_availability",
+            "default": true,
+            "label": "t:sections.featured-product.blocks.button.settings.pickup-availability.name"
+          }
+        ]
+      }, {
+        "type": "reels",
+        "name": "t:sections.main-product.blocks.short_video.name",
+        "settings": [
+          {
+            "type": "text",
+            "label": "t:sections.main-product.blocks.short_video.settings.reels_heading.label",
+            "id": "reels_heading",
+            "default": "Short videos"
+          },
+          {
+            "type": "video",
+            "id": "video_url_1",
+            "label": "t:sections.main-product.blocks.short_video.settings.video_url_1.label"
+          },
+          {
+            "type": "video",
+            "id": "video_url_2",
+            "label": "t:sections.main-product.blocks.short_video.settings.video_url_2.label"
+          },
+          {
+            "type": "video",
+            "id": "video_url_3",
+            "label": "t:sections.main-product.blocks.short_video.settings.video_url_3.label"
+          }, {
+            "type": "video",
+            "id": "video_url_4",
+            "label": "t:sections.main-product.blocks.short_video.settings.video_url_4.label"
+          }
+        ]
+      }, {
+        "type": "icons",
+        "name": "t:sections.main-product.blocks.icons.name",
+        "settings": [
+          {
+            "type": "header",
+            "content": "t:sections.main-product.blocks.icons.settings.header1.content"
+          },
+          {
+            "type": "select",
+            "id": "icon1",
+            "label": "t:sections.main-product.blocks.icons.settings.icon.label",
+            "default": "shipping",
+            "options": [
+              {
+                "label": "t:common.icon.options.chat.label",
+                "value": "chat"
+              },
+              {
+                "label": "t:common.icon.options.eye.label",
+                "value": "eye"
+              },
+              {
+                "label": "t:common.icon.options.file.label",
+                "value": "file"
+              },
+              {
+                "label": "t:common.icon.options.gift.label",
+                "value": "gift"
+              }, {
+                "label": "t:common.icon.options.global.label",
+                "value": "global"
+              }, {
+                "label": "t:common.icon.options.heart.label",
+                "value": "heart"
+              }, {
+                "label": "t:common.icon.options.phone.label",
+                "value": "phone"
+              }, {
+                "label": "t:common.icon.options.refund.label",
+                "value": "refund"
+              }, {
+                "label": "t:common.icon.options.search.label",
+                "value": "search"
+              }, {
+                "label": "t:common.icon.options.secure.label",
+                "value": "secure"
+              }, {
+                "label": "t:common.icon.options.shipping.label",
+                "value": "shipping"
+              }, {
+                "label": "t:common.icon.options.smile.label",
+                "value": "smile"
+              }, {
+                "label": "t:common.icon.options.support.label",
+                "value": "support"
+              }, {
+                "label": "t:common.icon.options.tag.label",
+                "value": "tag"
+              }, {
+                "label": "t:common.icon.options.thumb.label",
+                "value": "thumb"
+              }, {
+                "label": "t:common.icon.options.user.label",
+                "value": "user"
+              }, {
+                "label": "t:common.icon.options.gift-colored.label",
+                "value": "gift-colored"
+              }, {
+                "label": "t:common.icon.options.paw-colored.label",
+                "value": "paw-colored"
+              }, {
+                "label": "t:common.icon.options.vegan-colored.label",
+                "value": "vegan-colored"
+              }, {
+                "label": "t:common.icon.options.shipping-colored.label",
+                "value": "shipping-colored"
+              }
+            ]
+          },
+          {
+            "type": "image_picker",
+            "id": "image1",
+            "label": "t:sections.main-product.blocks.icons.settings.image.label"
+          },
+          {
+            "type": "text",
+            "id": "heading1",
+            "default": "Add heading",
+            "label": "t:sections.main-product.blocks.icons.settings.heading.label"
+          }, {
+            "type": "header",
+            "content": "t:sections.main-product.blocks.icons.settings.header2.content"
+          }, {
+            "type": "select",
+            "id": "icon2",
+            "label": "t:sections.main-product.blocks.icons.settings.icon.label",
+            "default": "shipping",
+            "options": [
+              {
+                "label": "t:common.icon.options.chat.label",
+                "value": "chat"
+              },
+              {
+                "label": "t:common.icon.options.eye.label",
+                "value": "eye"
+              },
+              {
+                "label": "t:common.icon.options.file.label",
+                "value": "file"
+              },
+              {
+                "label": "t:common.icon.options.gift.label",
+                "value": "gift"
+              }, {
+                "label": "t:common.icon.options.global.label",
+                "value": "global"
+              }, {
+                "label": "t:common.icon.options.heart.label",
+                "value": "heart"
+              }, {
+                "label": "t:common.icon.options.phone.label",
+                "value": "phone"
+              }, {
+                "label": "t:common.icon.options.refund.label",
+                "value": "refund"
+              }, {
+                "label": "t:common.icon.options.search.label",
+                "value": "search"
+              }, {
+                "label": "t:common.icon.options.secure.label",
+                "value": "secure"
+              }, {
+                "label": "t:common.icon.options.shipping.label",
+                "value": "shipping"
+              }, {
+                "label": "t:common.icon.options.smile.label",
+                "value": "smile"
+              }, {
+                "label": "t:common.icon.options.support.label",
+                "value": "support"
+              }, {
+                "label": "t:common.icon.options.tag.label",
+                "value": "tag"
+              }, {
+                "label": "t:common.icon.options.thumb.label",
+                "value": "thumb"
+              }, {
+                "label": "t:common.icon.options.user.label",
+                "value": "user"
+              }, {
+                "label": "t:common.icon.options.gift-colored.label",
+                "value": "gift-colored"
+              }, {
+                "label": "t:common.icon.options.paw-colored.label",
+                "value": "paw-colored"
+              }, {
+                "label": "t:common.icon.options.vegan-colored.label",
+                "value": "vegan-colored"
+              }, {
+                "label": "t:common.icon.options.shipping-colored.label",
+                "value": "shipping-colored"
+              }
+            ]
+          }, {
+            "type": "image_picker",
+            "id": "image2",
+            "label": "t:sections.main-product.blocks.icons.settings.image.label"
+          }, {
+            "type": "text",
+            "id": "heading2",
+            "default": "Add Heading here",
+            "label": "t:sections.main-product.blocks.icons.settings.heading.label"
+          }, {
+            "type": "header",
+            "content": "t:sections.main-product.blocks.icons.settings.header3.content"
+          }, {
+            "type": "select",
+            "id": "icon3",
+            "label": "t:sections.main-product.blocks.icons.settings.icon.label",
+            "default": "shipping",
+            "options": [
+              {
+                "label": "t:common.icon.options.chat.label",
+                "value": "chat"
+              },
+              {
+                "label": "t:common.icon.options.eye.label",
+                "value": "eye"
+              },
+              {
+                "label": "t:common.icon.options.file.label",
+                "value": "file"
+              },
+              {
+                "label": "t:common.icon.options.gift.label",
+                "value": "gift"
+              }, {
+                "label": "t:common.icon.options.global.label",
+                "value": "global"
+              }, {
+                "label": "t:common.icon.options.heart.label",
+                "value": "heart"
+              }, {
+                "label": "t:common.icon.options.phone.label",
+                "value": "phone"
+              }, {
+                "label": "t:common.icon.options.refund.label",
+                "value": "refund"
+              }, {
+                "label": "t:common.icon.options.search.label",
+                "value": "search"
+              }, {
+                "label": "t:common.icon.options.secure.label",
+                "value": "secure"
+              }, {
+                "label": "t:common.icon.options.shipping.label",
+                "value": "shipping"
+              }, {
+                "label": "t:common.icon.options.smile.label",
+                "value": "smile"
+              }, {
+                "label": "t:common.icon.options.support.label",
+                "value": "support"
+              }, {
+                "label": "t:common.icon.options.tag.label",
+                "value": "tag"
+              }, {
+                "label": "t:common.icon.options.thumb.label",
+                "value": "thumb"
+              }, {
+                "label": "t:common.icon.options.user.label",
+                "value": "user"
+              }, {
+                "label": "t:common.icon.options.gift-colored.label",
+                "value": "gift-colored"
+              }, {
+                "label": "t:common.icon.options.paw-colored.label",
+                "value": "paw-colored"
+              }, {
+                "label": "t:common.icon.options.vegan-colored.label",
+                "value": "vegan-colored"
+              }, {
+                "label": "t:common.icon.options.shipping-colored.label",
+                "value": "shipping-colored"
+              }
+            ]
+          }, {
+            "type": "image_picker",
+            "id": "image3",
+            "label": "t:sections.main-product.blocks.icons.settings.image.label"
+          }, {
+            "type": "text",
+            "id": "heading3",
+            "default": "Add heading",
+            "label": "t:sections.main-product.blocks.icons.settings.heading.label"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
