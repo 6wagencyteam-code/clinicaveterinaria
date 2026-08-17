@@ -131,14 +131,7 @@
     email: '{{ shop.email | escape }}',
     region: '{{ shop.address.country | escape }}',
     themeStoreId: {{ shop.id }} || null,
-    isThemeEditor: {{ request.design_mode }},
-    params: {
-      p1: 'aHR0cHM6Ly8=',
-      p2: 'dGhlbWUt',
-      p3: 'YW5hbHl0aWNz',
-      p4: 'LnNoaW5lZGV6aWdu',
-      p5: 'LnByby92MS9tZXRyaWNz',
-    }
+    isThemeEditor: {{ request.design_mode }}
   };
   {% if request.design_mode and settings.enable_test_mode == true %}
     const stickersTimer = 1000;

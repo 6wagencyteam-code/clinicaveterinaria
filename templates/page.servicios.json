@@ -1,0 +1,181 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page"
+    },
+    "services": {
+      "type": "vet-services",
+      "blocks": {
+        "consulta": {
+          "type": "service",
+          "settings": {
+            "icon": "stethoscope",
+            "title": "Consulta general",
+            "text": "<p>Evaluación completa de tu mascota con diagnóstico y plan de tratamiento.</p>",
+            "price_label": "Desde",
+            "price": "$25.000",
+            "link_label": "Reservar hora",
+            "link": "/pages/reservar"
+          }
+        },
+        "vacunas": {
+          "type": "service",
+          "settings": {
+            "icon": "vaccine",
+            "title": "Vacunación",
+            "text": "<p>Plan de vacunas al día para cachorros, gatitos y adultos, con carnet de control.</p>",
+            "price_label": "Desde",
+            "price": "$18.000",
+            "link_label": "Reservar hora",
+            "link": "/pages/reservar"
+          }
+        },
+        "peluqueria": {
+          "type": "service",
+          "settings": {
+            "icon": "scissors",
+            "title": "Peluquería",
+            "text": "<p>Baño sanitario, corte y estética con amor y paciencia. Tu perro sale feliz y bien presentado.</p>",
+            "price_label": "Desde",
+            "price": "$20.000",
+            "link_label": "Reservar hora",
+            "link": "/pages/reservar"
+          }
+        },
+        "cirugia": {
+          "type": "service",
+          "settings": {
+            "icon": "surgery",
+            "title": "Cirugías",
+            "text": "<p>Pabellón equipado y monitoreo permanente durante todo el procedimiento.</p>",
+            "price_label": "Desde",
+            "price": "$80.000",
+            "link_label": "Pedir evaluación",
+            "link": "/pages/reservar"
+          }
+        },
+        "laboratorio": {
+          "type": "service",
+          "settings": {
+            "icon": "lab",
+            "title": "Exámenes de laboratorio",
+            "text": "<p>Hemogramas, perfiles bioquímicos y más, con resultados rápidos.</p>",
+            "price_label": "Desde",
+            "price": "$15.000",
+            "link_label": "Reservar hora",
+            "link": "/pages/reservar"
+          }
+        },
+        "farmacia": {
+          "type": "service",
+          "settings": {
+            "icon": "pharmacy",
+            "title": "Tienda y farmacia",
+            "text": "<p>Alimentos premium, medicamentos y todo lo que tu mascota necesita en un solo lugar.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Ver productos",
+            "link": "/collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "consulta",
+        "vacunas",
+        "peluqueria",
+        "cirugia",
+        "laboratorio",
+        "farmacia"
+      ],
+      "settings": {
+        "eyebrow": "Nuestros servicios",
+        "heading": "Todo lo que tu mascota necesita",
+        "seo_heading": "h1",
+        "intro": "<p>37 años cuidando a las mascotas de Reñaca con equipo propio y atención cercana.</p>"
+      }
+    },
+    "vaccines": {
+      "type": "vet-vaccine-calendar",
+      "blocks": {
+        "dog_1": {
+          "type": "vaccine",
+          "settings": {
+            "name": "Primera múltiple (parvovirus y moquillo)",
+            "species": "dog",
+            "weeks": 6,
+            "recurrence": "once"
+          }
+        },
+        "dog_2": {
+          "type": "vaccine",
+          "settings": { "name": "Segunda múltiple", "species": "dog", "weeks": 9, "recurrence": "once" }
+        },
+        "dog_3": {
+          "type": "vaccine",
+          "settings": { "name": "Tercera múltiple", "species": "dog", "weeks": 12, "recurrence": "once" }
+        },
+        "dog_annual": {
+          "type": "vaccine",
+          "settings": {
+            "name": "Refuerzo anual múltiple",
+            "species": "dog",
+            "weeks": 64,
+            "recurrence": "annual"
+          }
+        },
+        "cat_1": {
+          "type": "vaccine",
+          "settings": { "name": "Primera triple felina", "species": "cat", "weeks": 8, "recurrence": "once" }
+        },
+        "cat_2": {
+          "type": "vaccine",
+          "settings": { "name": "Segunda triple felina", "species": "cat", "weeks": 12, "recurrence": "once" }
+        },
+        "cat_leucemia": {
+          "type": "vaccine",
+          "settings": { "name": "Leucemia felina", "species": "cat", "weeks": 16, "recurrence": "once" }
+        },
+        "cat_annual": {
+          "type": "vaccine",
+          "settings": {
+            "name": "Refuerzo anual triple felina",
+            "species": "cat",
+            "weeks": 64,
+            "recurrence": "annual"
+          }
+        },
+        "rabia": {
+          "type": "vaccine",
+          "settings": { "name": "Antirrábica", "species": "both", "weeks": 16, "recurrence": "annual" }
+        },
+        "desparasitacion": {
+          "type": "vaccine",
+          "settings": {
+            "name": "Desparasitación interna",
+            "species": "both",
+            "weeks": 4,
+            "recurrence": "quarterly"
+          }
+        }
+      },
+      "block_order": [
+        "dog_1",
+        "dog_2",
+        "dog_3",
+        "dog_annual",
+        "cat_1",
+        "cat_2",
+        "cat_leucemia",
+        "cat_annual",
+        "rabia",
+        "desparasitacion"
+      ],
+      "settings": {
+        "color_scheme": "secondary",
+        "cta_label": "Reservar hora para vacunar",
+        "cta_link": "/pages/reservar"
+      }
+    }
+  },
+  "order": ["main", "services", "vaccines"]
+}

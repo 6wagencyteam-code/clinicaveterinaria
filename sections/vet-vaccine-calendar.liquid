@@ -1,0 +1,257 @@
+{{ 'vet-clinic.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'vet-vaccines.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign today = 'now' | date: '%Y-%m-%d'
+-%}
+
+<div class="vet-section vet-vaccines color-{{ section.settings.color_scheme }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.intro != blank -%}
+      <div class="vet-section__head">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="vet-section__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <{{ section.settings.seo_heading }} class="vet-section__title h2">{{ section.settings.heading }}</{{ section.settings.seo_heading }}>
+        {%- endif -%}
+        {%- if section.settings.intro != blank -%}
+          <div class="vet-section__intro rte">{{ section.settings.intro }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div data-vet-vaccines>
+      {%- comment -%}
+        Los datos de las vacunas se entregan al navegador como JSON.
+        Cada bloque de la sección es una vacuna editable desde el editor.
+      {%- endcomment -%}
+      <script type="application/json" data-vet-vaccines-data>
+        {
+          "locale": {{ request.locale.iso_code | json }},
+          "vaccines": [
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'vaccine' -%}
+                {
+                  "name": {{ block.settings.name | json }},
+                  "species": {{ block.settings.species | json }},
+                  "weeks": {{ block.settings.weeks | json }},
+                  "recurrence": {{ block.settings.recurrence | json }},
+                  "note": {{ block.settings.note | json }}
+                }{%- unless forloop.last -%},{%- endunless -%}
+              {%- endif -%}
+            {%- endfor -%}
+          ],
+          "states": {
+            "done": {{ section.settings.state_done | json }},
+            "due": {{ section.settings.state_due | json }},
+            "soon": {{ section.settings.state_soon | json }},
+            "future": {{ section.settings.state_future | json }}
+          },
+          "texts": {
+            "defaultPetName": {{ section.settings.default_pet_name | json }},
+            "summaryAge": {{ section.settings.summary_age | json }},
+            "summaryOneDue": {{ section.settings.summary_one_due | json }},
+            "summaryManyDue": {{ section.settings.summary_many_due | json }},
+            "summaryNoneDue": {{ section.settings.summary_none_due | json }},
+            "repeatSuffix": {{ section.settings.repeat_suffix | json }},
+            "futureDateError": {{ section.settings.future_date_error | json }},
+            "ageUnborn": {{ section.settings.age_unborn | json }},
+            "ageNewborn": {{ section.settings.age_newborn | json }},
+            "ageWeeks": {{ section.settings.age_weeks | json }},
+            "ageMonth": {{ section.settings.age_month | json }},
+            "ageMonths": {{ section.settings.age_months | json }},
+            "ageYear": {{ section.settings.age_year | json }},
+            "ageYears": {{ section.settings.age_years | json }}
+          }
+        }
+      </script>
+
+      <form class="vet-vaccines__form" data-vet-vaccines-form novalidate>
+        <div class="vet-field">
+          <label for="VetPet-name-{{ section.id }}">{{ section.settings.label_pet_name }}</label>
+          <input type="text" id="VetPet-name-{{ section.id }}" data-vet-pet-name autocomplete="off">
+        </div>
+
+        <div class="vet-field">
+          <label for="VetPet-species-{{ section.id }}">{{ section.settings.label_species }}</label>
+          <select id="VetPet-species-{{ section.id }}" data-vet-pet-species required>
+            <option value="dog">{{ section.settings.species_dog }}</option>
+            <option value="cat">{{ section.settings.species_cat }}</option>
+          </select>
+        </div>
+
+        <div class="vet-field">
+          <label for="VetPet-birth-{{ section.id }}">{{ section.settings.label_birth }}</label>
+          <input type="date" id="VetPet-birth-{{ section.id }}" data-vet-pet-birth max="{{ today }}" required>
+        </div>
+
+        <div class="vet-field vet-field--full">
+          <button type="submit" class="button btn-block">
+            <span class="btn-txt">{{ section.settings.button_label }}</span>
+          </button>
+        </div>
+      </form>
+
+      <div class="vet-vaccines__results" data-vet-vaccines-results hidden>
+        <p class="vet-vaccines__summary" data-vet-vaccines-summary></p>
+        <ul class="vet-vaccines__list" data-vet-vaccines-list></ul>
+
+        {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+          <div class="vet-vaccines__cta">
+            <a href="{{ section.settings.cta_link }}" class="button">
+              <span class="btn-txt">{{ section.settings.cta_label }}</span>
+            </a>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.disclaimer != blank -%}
+          <p class="vet-vaccines__disclaimer">{{ section.settings.disclaimer }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Calendario de vacunas",
+  "tag": "section",
+  "class": "vet-vaccines-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Herramienta gratuita" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "¿Tu mascota tiene sus vacunas al día?" },
+    {
+      "type": "select",
+      "id": "seo_heading",
+      "label": "Etiqueta del título (SEO)",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" },
+        { "value": "h3", "label": "H3" }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Texto introductorio",
+      "default": "<p>Ingresa la fecha de nacimiento y te mostramos qué vacunas le corresponden y cuándo.</p>"
+    },
+    { "type": "header", "content": "Formulario" },
+    { "type": "text", "id": "label_pet_name", "label": "Etiqueta: nombre", "default": "Nombre de tu mascota" },
+    { "type": "text", "id": "label_species", "label": "Etiqueta: especie", "default": "Especie" },
+    { "type": "text", "id": "species_dog", "label": "Opción: perro", "default": "Perro" },
+    { "type": "text", "id": "species_cat", "label": "Opción: gato", "default": "Gato" },
+    { "type": "text", "id": "label_birth", "label": "Etiqueta: fecha de nacimiento", "default": "Fecha de nacimiento" },
+    { "type": "text", "id": "button_label", "label": "Texto del botón", "default": "Ver su calendario" },
+    { "type": "header", "content": "Estados de cada vacuna" },
+    { "type": "text", "id": "state_done", "label": "Ya correspondía", "default": "Ya correspondía" },
+    { "type": "text", "id": "state_due", "label": "Toca ahora", "default": "Toca ahora" },
+    { "type": "text", "id": "state_soon", "label": "Próxima", "default": "Próxima" },
+    { "type": "text", "id": "state_future", "label": "Más adelante", "default": "Más adelante" },
+    { "type": "header", "content": "Mensajes del resumen" },
+    { "type": "text", "id": "default_pet_name", "label": "Nombre por defecto", "default": "Tu mascota" },
+    { "type": "text", "id": "summary_age", "label": "Texto antes de la edad", "default": "tiene" },
+    { "type": "text", "id": "summary_one_due", "label": "Una vacuna pendiente", "default": "Hay 1 vacuna que le toca ahora." },
+    {
+      "type": "text",
+      "id": "summary_many_due",
+      "label": "Varias vacunas pendientes",
+      "info": "Usa [[count]] para mostrar la cantidad.",
+      "default": "Hay [[count]] vacunas que le tocan ahora."
+    },
+    { "type": "text", "id": "summary_none_due", "label": "Sin vacunas pendientes", "default": "Por ahora no tiene vacunas pendientes." },
+    { "type": "text", "id": "repeat_suffix", "label": "Texto para refuerzos", "default": "refuerzo" },
+    { "type": "text", "id": "future_date_error", "label": "Error de fecha futura", "default": "La fecha de nacimiento no puede ser futura." },
+    { "type": "header", "content": "Textos de edad" },
+    { "type": "text", "id": "age_unborn", "label": "Aún no nace", "default": "aún no nace" },
+    { "type": "text", "id": "age_newborn", "label": "Recién nacido", "default": "menos de una semana" },
+    { "type": "text", "id": "age_weeks", "label": "Semanas", "default": "semanas" },
+    { "type": "text", "id": "age_month", "label": "Mes", "default": "mes" },
+    { "type": "text", "id": "age_months", "label": "Meses", "default": "meses" },
+    { "type": "text", "id": "age_year", "label": "Año", "default": "año" },
+    { "type": "text", "id": "age_years", "label": "Años", "default": "años" },
+    { "type": "header", "content": "Llamada a la acción" },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Reservar hora para vacunar" },
+    { "type": "url", "id": "cta_link", "label": "Enlace del botón" },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Aviso legal",
+      "default": "Este calendario es referencial. El plan definitivo lo determina el médico veterinario según cada mascota."
+    },
+    { "type": "header", "content": "Diseño" },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "options": [
+        { "value": "primary", "label": "Principal" },
+        { "value": "secondary", "label": "Secundario" },
+        { "value": "tertiary", "label": "Terciario" },
+        { "value": "quaternary", "label": "Cuaternario" }
+      ],
+      "default": "primary"
+    },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "vaccine",
+      "name": "Vacuna",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nombre de la vacuna", "default": "Vacuna múltiple" },
+        {
+          "type": "select",
+          "id": "species",
+          "label": "Aplica a",
+          "options": [
+            { "value": "dog", "label": "Perros" },
+            { "value": "cat", "label": "Gatos" },
+            { "value": "both", "label": "Ambos" }
+          ],
+          "default": "dog"
+        },
+        {
+          "type": "number",
+          "id": "weeks",
+          "label": "Edad en semanas",
+          "info": "Semanas de vida en que corresponde la primera dosis.",
+          "default": 8
+        },
+        {
+          "type": "select",
+          "id": "recurrence",
+          "label": "Repetición",
+          "options": [
+            { "value": "once", "label": "Una sola vez" },
+            { "value": "annual", "label": "Cada año" },
+            { "value": "quarterly", "label": "Cada 3 meses" }
+          ],
+          "default": "once"
+        },
+        { "type": "text", "id": "note", "label": "Nota (opcional)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Calendario de vacunas",
+      "blocks": [
+        { "type": "vaccine", "settings": { "name": "Primera múltiple (parvovirus y moquillo)", "species": "dog", "weeks": 6, "recurrence": "once" } },
+        { "type": "vaccine", "settings": { "name": "Segunda múltiple", "species": "dog", "weeks": 9, "recurrence": "once" } },
+        { "type": "vaccine", "settings": { "name": "Tercera múltiple", "species": "dog", "weeks": 12, "recurrence": "once" } },
+        { "type": "vaccine", "settings": { "name": "Refuerzo anual múltiple", "species": "dog", "weeks": 64, "recurrence": "annual" } },
+        { "type": "vaccine", "settings": { "name": "Primera triple felina", "species": "cat", "weeks": 8, "recurrence": "once" } },
+        { "type": "vaccine", "settings": { "name": "Segunda triple felina", "species": "cat", "weeks": 12, "recurrence": "once" } },
+        { "type": "vaccine", "settings": { "name": "Leucemia felina", "species": "cat", "weeks": 16, "recurrence": "once" } },
+        { "type": "vaccine", "settings": { "name": "Refuerzo anual triple felina", "species": "cat", "weeks": 64, "recurrence": "annual" } },
+        { "type": "vaccine", "settings": { "name": "Antirrábica", "species": "both", "weeks": 16, "recurrence": "annual" } },
+        { "type": "vaccine", "settings": { "name": "Desparasitación interna", "species": "both", "weeks": 4, "recurrence": "quarterly" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

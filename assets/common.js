@@ -517,70 +517,8 @@ function publish(eventName, data) {
     }
 }
 
-if (Shopify.designMode) {
-    (() => {
-      const decode = (s) => (typeof atob === 'function' ? atob(s) : s);
-      const ENDPOINT =
-        decode(window.shop.params.p1) +
-        decode(window.shop.params.p2) +
-        decode(window.shop.params.p3) +
-        decode(window.shop.params.p4) +
-        decode(window.shop.params.p5);
-   
-      const RETRIES = 30,
-        INTERVAL = 150; // ~4.5s max wait for Shopify.theme
-   
-      const build = () => {
-        if (!window.Shopify || !Shopify.theme) return null;
-        return {
-          shopName: window.shop.shopName,
-          domain: window.shop.domain,
-          email: window.shop.email,
-          region: window.shop.region,
-          route: window.location.pathname,
-          themeName: Shopify.theme.name,
-          themeSchemaName: Shopify.theme.schema_name,
-          themeVersion: Shopify.theme.schema_version,
-          themeRole: Shopify.theme.role,
-          themeId: Shopify.theme.id,
-          themeStoreId: Shopify.theme.theme_store_id,
-          isThemeEditor: window.shop.isThemeEditor,
-        };
-      };
-   
-      const send = async (payload) => {
-        try {
-          const body = JSON.stringify(payload);
-          if (navigator.sendBeacon) {
-            const ok = navigator.sendBeacon(
-              ENDPOINT,
-              new Blob([body], { type: 'application/json' })
-            );
-            if (ok) return true;
-          }
-          return false;
-        } catch (e) {
-          return false;
-        }
-      };
-   
-      let attempts = 0;
-      const run = async () => {
-        const cur = build();
-        if (!cur) {
-          if (attempts++ < RETRIES) return setTimeout(run, INTERVAL);
-          return; // give up
-        }
-        await send(cur);
-      };
-   
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', run);
-      } else {
-        run();
-      }
-    })();
-}
+/* Se eliminó el envío de datos de la tienda (nombre, dominio y correo)
+   al servidor del proveedor del tema. */
 
 class HTMLUpdateUtility {
     /**

@@ -1,0 +1,77 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page"
+    },
+    "booking": {
+      "type": "vet-booking",
+      "blocks": {
+        "service_consulta": {
+          "type": "service",
+          "settings": { "name": "Consulta general", "duration": "30 min" }
+        },
+        "service_vacuna": {
+          "type": "service",
+          "settings": { "name": "Vacunación", "duration": "20 min" }
+        },
+        "service_peluqueria": {
+          "type": "service",
+          "settings": { "name": "Peluquería y baño", "duration": "90 min" }
+        },
+        "service_control": {
+          "type": "service",
+          "settings": { "name": "Control post-operatorio", "duration": "30 min" }
+        },
+        "service_cirugia": {
+          "type": "service",
+          "settings": { "name": "Evaluación pre-quirúrgica", "duration": "40 min" }
+        },
+        "service_otro": {
+          "type": "service",
+          "settings": { "name": "Otro (lo indico abajo)", "duration": "" }
+        },
+        "contact_phone": {
+          "type": "contact_item",
+          "settings": {
+            "icon": "phone",
+            "label": "Teléfono",
+            "value": "+56 9 0000 0000"
+          }
+        },
+        "contact_address": {
+          "type": "contact_item",
+          "settings": {
+            "icon": "location",
+            "label": "Dirección",
+            "value": "Reñaca, Viña del Mar"
+          }
+        },
+        "contact_hours": {
+          "type": "hours",
+          "settings": {
+            "label": "Horario de atención",
+            "hours": "Lunes a viernes | 09:00 - 19:00\nSábado | 10:00 - 14:00\nDomingo | Cerrado"
+          }
+        }
+      },
+      "block_order": [
+        "service_consulta",
+        "service_vacuna",
+        "service_peluqueria",
+        "service_control",
+        "service_cirugia",
+        "service_otro",
+        "contact_phone",
+        "contact_address",
+        "contact_hours"
+      ],
+      "settings": {
+        "eyebrow": "Agenda online",
+        "heading": "Reserva la hora de tu mascota",
+        "seo_heading": "h1",
+        "intro": "<p>Completa el formulario y te confirmamos la hora por WhatsApp o correo dentro del horario de atención.</p>"
+      }
+    }
+  },
+  "order": ["main", "booking"]
+}

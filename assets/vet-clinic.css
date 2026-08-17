@@ -1,0 +1,466 @@
+/* ==========================================================================
+   Clínica Veterinaria — servicios, reserva de hora y calendario de vacunas
+   Estilos compartidos. Se carga sólo en las páginas que usan estas secciones.
+   Usa las variables de color del tema para heredar la marca automáticamente.
+   ========================================================================== */
+
+.vet-section {
+  padding: 60px 0;
+}
+
+.vet-section__head {
+  max-width: 720px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.vet-section__eyebrow {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: var(--semibold, 600);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--theme-light-color, rgba(0, 0, 0, 0.08));
+  color: var(--theme-color, #2b41f5);
+}
+
+.vet-section__title {
+  margin: 0 0 12px;
+}
+
+.vet-section__intro {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* --------------------------------------------------------------- Servicios */
+
+.vet-services__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.vet-service {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 28px;
+  border: 1px solid var(--colorXXlightTextBody, rgba(0, 0, 0, 0.1));
+  border-radius: var(--layoutRadius, 10px);
+  background: var(--primaryCardBackground, transparent);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.vet-service:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+.vet-service__icon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--theme-light-color, rgba(0, 0, 0, 0.08));
+  color: var(--theme-color, #2b41f5);
+}
+
+.vet-service__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.vet-service__title {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.vet-service__text {
+  margin: 0 0 20px;
+  opacity: 0.8;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.vet-service__price {
+  margin-top: auto;
+  padding-top: 16px;
+  font-weight: var(--semibold, 600);
+}
+
+.vet-service__price span {
+  display: block;
+  font-size: 12px;
+  font-weight: var(--normal, 400);
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.vet-service__link {
+  margin-top: 18px;
+}
+
+/* ----------------------------------------------------------- Reserva/form */
+
+.vet-booking__inner {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .vet-booking__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.vet-form {
+  padding: 36px;
+  border-radius: var(--layoutRadius, 10px);
+  border: 1px solid var(--colorXXlightTextBody, rgba(0, 0, 0, 0.1));
+  background: var(--secondaryColorBody, #fff);
+  color: var(--secondary_color_body_text, #111);
+}
+
+.vet-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 620px) {
+  .vet-form__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vet-field--full {
+  grid-column: 1 / -1;
+}
+
+.vet-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: var(--medium, 500);
+}
+
+.vet-field input,
+.vet-field select,
+.vet-field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--colorXlightTextBody, rgba(0, 0, 0, 0.25));
+  border-radius: var(--inputRadius, 6px);
+  background: #fff;
+  color: inherit;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.vet-field input:focus,
+.vet-field select:focus,
+.vet-field textarea:focus {
+  outline: 2px solid var(--theme-color, #2b41f5);
+  outline-offset: 1px;
+}
+
+.vet-field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.vet-form__note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.vet-form__submit {
+  grid-column: 1 / -1;
+}
+
+.vet-form__status {
+  grid-column: 1 / -1;
+  margin: 0 0 4px;
+  padding: 14px 18px;
+  border-radius: var(--inputRadius, 6px);
+  font-size: 15px;
+}
+
+.vet-form__status--success {
+  background: rgba(108, 173, 97, 0.15);
+  color: #33702a;
+}
+
+.vet-form__status--error {
+  background: rgba(236, 124, 124, 0.15);
+  color: #9e2b2b;
+}
+
+/* Datos de contacto al costado del formulario */
+
+.vet-aside__item {
+  display: flex;
+  gap: 14px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--colorXXlightTextBody, rgba(0, 0, 0, 0.1));
+}
+
+.vet-aside__item:last-child {
+  border-bottom: 0;
+}
+
+.vet-aside__icon {
+  flex: 0 0 auto;
+  width: 22px;
+  color: var(--theme-color, #2b41f5);
+}
+
+.vet-aside__label {
+  display: block;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+  margin-bottom: 2px;
+}
+
+.vet-aside__value {
+  font-weight: var(--medium, 500);
+}
+
+.vet-aside__value a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.vet-aside__value a:hover {
+  text-decoration: underline;
+}
+
+.vet-hours {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 15px;
+}
+
+.vet-hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+}
+
+/* ------------------------------------------------- Calendario de vacunas */
+
+.vet-vaccines__form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  max-width: 760px;
+  margin: 0 auto 40px;
+  padding: 28px;
+  border-radius: var(--layoutRadius, 10px);
+  background: var(--secondaryColorBody, #fff);
+  color: var(--secondary_color_body_text, #111);
+}
+
+@media (max-width: 720px) {
+  .vet-vaccines__form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vet-vaccines__results {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.vet-vaccines__summary {
+  margin: 0 0 24px;
+  padding: 20px 24px;
+  border-radius: var(--layoutRadius, 10px);
+  background: var(--theme-light-color, rgba(0, 0, 0, 0.06));
+  font-size: 17px;
+}
+
+.vet-vaccines__summary strong {
+  font-weight: var(--semibold, 600);
+}
+
+.vet-vaccines__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.vet-vaccine {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 18px;
+  align-items: center;
+  padding: 20px 24px;
+  border: 1px solid var(--colorXXlightTextBody, rgba(0, 0, 0, 0.1));
+  border-left-width: 4px;
+  border-radius: var(--layoutRadius, 10px);
+}
+
+@media (max-width: 620px) {
+  .vet-vaccine {
+    grid-template-columns: auto 1fr;
+  }
+
+  .vet-vaccine__state {
+    grid-column: 2;
+  }
+}
+
+.vet-vaccine__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.vet-vaccine__name {
+  margin: 0 0 4px;
+  font-size: 17px;
+  font-weight: var(--semibold, 600);
+}
+
+.vet-vaccine__meta {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+.vet-vaccine__state {
+  font-size: 13px;
+  font-weight: var(--semibold, 600);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* Estados */
+.vet-vaccine--done {
+  border-left-color: #6cad61;
+  color: #4a8442;
+}
+
+.vet-vaccine--due {
+  border-left-color: #ec7c7c;
+  color: #c04a4a;
+  background: rgba(236, 124, 124, 0.06);
+}
+
+.vet-vaccine--soon {
+  border-left-color: #e0a33c;
+  color: #a5731c;
+}
+
+.vet-vaccine--future {
+  border-left-color: var(--colorXlightTextBody, rgba(0, 0, 0, 0.2));
+  opacity: 0.75;
+}
+
+.vet-vaccine__name,
+.vet-vaccine__meta {
+  color: var(--colorTextBody, inherit);
+}
+
+.vet-vaccines__cta {
+  margin-top: 32px;
+  text-align: center;
+}
+
+.vet-vaccines__disclaimer {
+  margin: 24px auto 0;
+  max-width: 640px;
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.65;
+}
+
+[data-vet-vaccines-results][hidden] {
+  display: none;
+}
+
+/* ------------------------------------------------------ Botón de WhatsApp */
+
+.vet-whatsapp {
+  position: fixed;
+  z-index: 60;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 20px 13px 16px;
+  border-radius: 100px;
+  background: #25d366;
+  color: #fff;
+  font-weight: var(--semibold, 600);
+  font-size: 15px;
+  text-decoration: none;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vet-whatsapp:hover,
+.vet-whatsapp:focus {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.vet-whatsapp--right {
+  right: 22px;
+}
+
+.vet-whatsapp--left {
+  left: 22px;
+}
+
+.vet-whatsapp svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 767px) {
+  /* Deja espacio para la barra inferior del tema en móvil */
+  .vet-whatsapp {
+    bottom: 80px;
+    padding: 13px;
+  }
+
+  .vet-whatsapp__label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vet-service,
+  .vet-whatsapp {
+    transition: none;
+  }
+
+  .vet-service:hover,
+  .vet-whatsapp:hover {
+    transform: none;
+  }
+}

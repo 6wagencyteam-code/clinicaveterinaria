@@ -8,6 +8,53 @@
     "theme_support_url": "https://shinedezigninfonet.com/theme-contact-us"
   },
   {
+    "name": "WhatsApp",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "whatsapp_enable",
+        "label": "Mostrar botón flotante de WhatsApp",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_number",
+        "label": "Número de WhatsApp",
+        "info": "Con código de país y sin espacios. Ejemplo: +56912345678",
+        "default": ""
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_label",
+        "label": "Texto del botón",
+        "default": "Escríbenos"
+      },
+      {
+        "type": "text",
+        "id": "whatsapp_message",
+        "label": "Mensaje predefinido",
+        "info": "Texto con el que se abre la conversación.",
+        "default": "Hola, quiero consultar por una hora para mi mascota."
+      },
+      {
+        "type": "select",
+        "id": "whatsapp_position",
+        "label": "Posición",
+        "options": [
+          {
+            "value": "right",
+            "label": "Abajo a la derecha"
+          },
+          {
+            "value": "left",
+            "label": "Abajo a la izquierda"
+          }
+        ],
+        "default": "right"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {
@@ -38,7 +85,7 @@
         "label": "t:settings_schema.colors.settings.bg_savings_text.label",
         "default": "#ffe18c"
       },
-      { 
+      {
         "type": "color",
         "id": "color_savings_text",
         "label": "t:settings_schema.colors.settings.color_savings_text.label",
@@ -789,7 +836,7 @@
             "label": "t:settings_schema.arrow_layout.settings.layout_style.options.circle.label"
           }
         ]
-      },
+      }
     ]
   },
   {
@@ -1062,7 +1109,7 @@
       {
         "type": "select",
         "id": "content_width",
-        "label":"t:sections.before-after.settings.container_width.label",
+        "label": "t:sections.before-after.settings.container_width.label",
         "options": [
           {
             "value": "container sm-container",
@@ -1082,7 +1129,7 @@
       {
         "type": "select",
         "id": "search_style",
-        "default":"classic",
+        "default": "classic",
         "label": "Style",
         "options": [
           {
@@ -1596,7 +1643,7 @@
   },
   {
     "name": "t:settings_schema.product-grid.name",
-    "settings": [     
+    "settings": [
       {
         "type": "checkbox",
         "id": "show_atc",
@@ -1695,8 +1742,8 @@
         "unit": "%"
       },
       {
-        "type":"range",
-        "id":"truncate_title",
+        "type": "range",
+        "id": "truncate_title",
         "label": "t:settings_schema.product-grid.settings.truncate_title.label",
         "min": 0,
         "max": 4,
@@ -1906,7 +1953,7 @@
         "type": "text",
         "id": "custom_tag",
         "label": "t:settings_schema.product-grid.settings.custom_tag.label",
-        "info": "t:settings_schema.product-grid.settings.custom_tag.info" 
+        "info": "t:settings_schema.product-grid.settings.custom_tag.info"
       },
       {
         "type": "text",
