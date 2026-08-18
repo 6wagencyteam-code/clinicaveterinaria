@@ -158,15 +158,16 @@
 <style>   
 </style>
 <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
-<script src="{{ 'cookies.min.js' | asset_url }}" defer></script>
+{% if request.page_type == 'collection' or request.page_type == 'search' or settings.age_verification_pop_enable %}
+  <script src="{{ 'cookies.min.js' | asset_url }}" defer></script>
+{% endif %}
 <script src="{{ 'flickity.min.js' | asset_url }}" defer></script>
 {% comment %} <script src="{{ 'fancybox.min.js' | asset_url }}" defer></script> {% endcomment %}
 <script src="{{ 'parallax.js' | asset_url }}" defer></script>
 {% if settings.enable_animation %} 
-  <script src="{{ 'aos.js' | asset_url }}"></script>
+  <script src="{{ 'aos.js' | asset_url }}" defer></script>
 {% endif %}
 <script src="{{ 'common.js' | asset_url }}" defer></script>
-<script src="{{ 'modernizr.min.js' | asset_url }}" defer></script>
 <script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
 {% if request.page_type == 'collection' or request.page_type == 'search' %}
   <script src="{{ 'nouislider.min.js' | asset_url }}" defer></script>

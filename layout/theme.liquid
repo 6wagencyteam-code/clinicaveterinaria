@@ -89,12 +89,12 @@
         </div>
       </div>
     {% endif %}
-    {% unless settings.atc_alert == 'none' %}
+    {% if settings.atc_alert != blank and settings.atc_alert != 'none' %}
       <audio id="addToCartAlert">
         
         <source src="{{ settings.atc_alert | append: '.mp3' | asset_url }}" type="audio/mpeg">
       </audio>
-    {% endunless %}
+    {% endif %}
     {% if settings.enable_stickers %}
       <div class="fixed-overlay"></div>
     {% endif %}

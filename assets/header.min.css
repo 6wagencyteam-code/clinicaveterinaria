@@ -720,7 +720,7 @@ header {
     position: absolute;
 }
 
-.Yuva-logo.transparent-logo {
+.6wlab-logo.transparent-logo {
     position: absolute;
     top: 0;
     left: 0;
@@ -735,11 +735,11 @@ body:not(.sticky-header, .header2) .shopify-section-main-header header[header-tr
     background: var(--header-transparent-bg);
 }
 
-body:not(.sticky-header, .header2) .shopify-section-main-header header[header-transparent=true]:not(:hover) .Yuva-logo {
+body:not(.sticky-header, .header2) .shopify-section-main-header header[header-transparent=true]:not(:hover) .6wlab-logo {
     opacity: 0;
 }
 
-body:not(.sticky-header, .header2) .shopify-section-main-header header[header-transparent=true]:not(:hover) .Yuva-logo.transparent-logo {
+body:not(.sticky-header, .header2) .shopify-section-main-header header[header-transparent=true]:not(:hover) .6wlab-logo.transparent-logo {
     opacity: 1;
 }
 
