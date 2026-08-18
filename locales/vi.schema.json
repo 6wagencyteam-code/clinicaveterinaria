@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Tiêu đề có chiều rộng đầy đủ với thanh tìm kiếm"
           },
-          "info": "[Cách thức hoạt động](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Cách thức hoạt động](https://www.6wagency.com).",
           "label": "Loại điều hướng"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Cách hoạt động](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Cách hoạt động](https://www.6wagency.com).",
           "label": "Kích hoạt ngăn kéo giỏ hàng"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "bản đồ Google",
       "settings": {
         "googlemapapi": {
-          "info": "Bạn sẽ cần đăng ký [Khóa API Google Maps](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) để hiển thị bản đồ.",
+          "info": "Bạn sẽ cần đăng ký [Khóa API Google Maps](https://www.6wagency.com) để hiển thị bản đồ.",
           "label": "Khóa API bản đồ của Google"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Sản phẩm",
       "option_style": {
-        "info": "[Tìm hiểu cách thiết lập mẫu màu.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Tìm hiểu cách thiết lập mẫu màu.](https://www.6wagency.com)",
         "label": "Kiểu tùy chọn",
         "options": {
           "dropdown": {

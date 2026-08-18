@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Täysleveä otsikko hakupalkilla"
           },
-          "info": "[Kuinka se toimii](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Kuinka se toimii](https://www.6wagency.com).",
           "label": "Navigointityyppi"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Kuinka se toimii](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Kuinka se toimii](https://www.6wagency.com).",
           "label": "Ota kärrylaatikko käyttöön"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google maps",
       "settings": {
         "googlemapapi": {
-          "info": "Sinun on rekisteröitävä [Google Mapsin sovellusliittymäavain](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1), jotta voit näyttää kartan.",
+          "info": "Sinun on rekisteröitävä [Google Mapsin sovellusliittymäavain](https://www.6wagency.com), jotta voit näyttää kartan.",
           "label": "Google Maps API avain"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Tuote",
       "option_style": {
-        "info": "[Katso, miten värimalleja määritetään.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Katso, miten värimalleja määritetään.](https://www.6wagency.com)",
         "label": "Vaihtoehto tyyli",
         "options": {
           "dropdown": {

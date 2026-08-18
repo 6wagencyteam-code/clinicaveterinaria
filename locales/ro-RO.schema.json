@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Antet cu lățime completă cu bară de căutare"
           },
-          "info": "[Cum funcționează](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Cum funcționează](https://www.6wagency.com).",
           "label": "Tip de navigare"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Cum funcționează](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Cum funcționează](https://www.6wagency.com).",
           "label": "Activați sertarul căruciorului"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Hărți Google",
       "settings": {
         "googlemapapi": {
-          "info": "Va trebui să înregistrați o [Cheie API Google Maps](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) pentru a afișa harta.",
+          "info": "Va trebui să înregistrați o [Cheie API Google Maps](https://www.6wagency.com) pentru a afișa harta.",
           "label": "Cheia API Google Maps"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Produs",
       "option_style": {
-        "info": "[Aflați cum să configurați mostre.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Aflați cum să configurați mostre.](https://www.6wagency.com)",
         "label": "Stil de opțiune",
         "options": {
           "dropdown": {

@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Intestazione a larghezza intera con barra di ricerca"
           },
-          "info": "[Come funziona](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Come funziona](https://www.6wagency.com).",
           "label": "Tipo di navigazione"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Come funziona](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Come funziona](https://www.6wagency.com).",
           "label": "Abilita il cassetto del carrello"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Mappe di Google",
       "settings": {
         "googlemapapi": {
-          "info": "Dovrai registrare una [chiave API di Google Maps](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) per visualizzare la mappa.",
+          "info": "Dovrai registrare una [chiave API di Google Maps](https://www.6wagency.com) per visualizzare la mappa.",
           "label": "Chiave API di Google Maps"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Prodotto",
       "option_style": {
-        "info": "[Scopri come impostare i campioni.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Scopri come impostare i campioni.](https://www.6wagency.com)",
         "label": "Stile dell'opzione",
         "options": {
           "dropdown": {

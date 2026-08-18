@@ -124,8 +124,8 @@ html.no-js .yv-filter-content-list.more-options {
   display: block;
 }
 
-.lazyImg .yuva-loader,
-html:not(.no-js) .lazyloading+.yuva-loader {
+.lazyImg .sixw-loader,
+html:not(.no-js) .lazyloading+.sixw-loader {
   opacity: 1;
   visibility: visible;
   z-index: 1;
@@ -717,7 +717,7 @@ html:not(.no-js) .yv-collection-slider-wrapper:not(.flickity-enabled) {
   background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* .yv-banner-thumbnail .yuva-loader {
+/* .yv-banner-thumbnail .sixw-loader {
     width: 50px;
     height: 2px
 } */
@@ -5498,7 +5498,7 @@ button.product__xr-button svg {
   margin-right: 15px;
 }
 
-/* .yv-product-small-slider .yv-product-slider-item .yuva-loader {
+/* .yv-product-small-slider .yv-product-slider-item .sixw-loader {
     height: 2px;
     width: 40px
 } */
@@ -7030,8 +7030,8 @@ html.with-fancybox body main {
   background-color: var(--theme-light-color);
 }
 
-/* .yuva-loader,
-.yuva-loader:after {
+/* .sixw-loader,
+.sixw-loader:after {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -10335,7 +10335,7 @@ body.account-popup-open .yv-login-popup {
 
 /* loader css start here */
 
-.yuva-loader {
+.sixw-loader {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10355,7 +10355,7 @@ body.account-popup-open .yv-login-popup {
   height: 100%;
 }
 
-.yuva-loader>div {
+.sixw-loader>div {
   width: 18px;
   height: 18px;
   border-radius: 100%;
@@ -10364,24 +10364,24 @@ body.account-popup-open .yv-login-popup {
   animation: bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.searchbar-content-list .yuva-loader>div {
+.searchbar-content-list .sixw-loader>div {
   width: 5px;
   height: 5px;
 }
 
-.yuva-loader .bounce1 {
+.sixw-loader .bounce1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
   background-color: #774023;
 }
 
-.yuva-loader .bounce2 {
+.sixw-loader .bounce2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
   background-color: #d88c51;
 }
 
-.yuva-loader .bounce3 {
+.sixw-loader .bounce3 {
   background-color: #f3e7c9;
 }
 

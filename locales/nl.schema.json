@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Koptekst over de volledige breedte met zoekbalk"
           },
-          "info": "[Hoe het werkt](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Hoe het werkt](https://www.6wagency.com).",
           "label": "Navigatietype"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Hoe het werkt](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Hoe het werkt](https://www.6wagency.com).",
           "label": "Wagenlade inschakelen"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google-kaarten",
       "settings": {
         "googlemapapi": {
-          "info": "U moet een [Google Maps API Key](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) registreren om de kaart weer te geven.",
+          "info": "U moet een [Google Maps API Key](https://www.6wagency.com) registreren om de kaart weer te geven.",
           "label": "API-sleutel van Google Maps"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Product",
       "option_style": {
-        "info": "[Leer hoe u stalen instelt.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Leer hoe u stalen instelt.](https://www.6wagency.com)",
         "label": "Optie stijl",
         "options": {
           "dropdown": {

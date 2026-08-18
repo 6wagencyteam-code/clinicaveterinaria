@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Заголовок во всю ширину с панелью поиска"
           },
-          "info": "[Как это работает](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Как это работает](https://www.6wagency.com).",
           "label": "Тип навигации"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Как это работает](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Как это работает](https://www.6wagency.com).",
           "label": "Включить ящик корзины"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Карты Google",
       "settings": {
         "googlemapapi": {
-          "info": "Чтобы отобразить карту, вам необходимо зарегистрировать [Ключ API Google Maps](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1).",
+          "info": "Чтобы отобразить карту, вам необходимо зарегистрировать [Ключ API Google Maps](https://www.6wagency.com).",
           "label": "Ключ API карт Google"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Продукт",
       "option_style": {
-        "info": "[Узнайте, как настроить образцы.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Узнайте, как настроить образцы.](https://www.6wagency.com)",
         "label": "Вариант стиля",
         "options": {
           "dropdown": {

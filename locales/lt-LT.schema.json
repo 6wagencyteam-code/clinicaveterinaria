@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Viso pločio antraštė su paieškos juosta"
           },
-          "info": "[Kaip tai veikia](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Kaip tai veikia](https://www.6wagency.com).",
           "label": "Navigacijos tipas"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Kaip tai veikia](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Kaip tai veikia](https://www.6wagency.com).",
           "label": "Įgalinti krepšelio stalčių"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google žemėlapiai",
       "settings": {
         "googlemapapi": {
-          "info": "Kad būtų rodomas žemėlapis, turėsite užregistruoti [Google Maps API raktą](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1).",
+          "info": "Kad būtų rodomas žemėlapis, turėsite užregistruoti [Google Maps API raktą](https://www.6wagency.com).",
           "label": "Google žemėlapių API raktas"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Produktas",
       "option_style": {
-        "info": "[Sužinokite, kaip nustatyti pavyzdžius.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Sužinokite, kaip nustatyti pavyzdžius.](https://www.6wagency.com)",
         "label": "Parinkčių stilius",
         "options": {
           "dropdown": {

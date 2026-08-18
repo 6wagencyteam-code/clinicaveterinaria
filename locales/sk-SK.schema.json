@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Hlavička na celú šírku s vyhľadávacím panelom"
           },
-          "info": "[Ako to funguje](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Ako to funguje](https://www.6wagency.com).",
           "label": "Typ navigácie"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Ako to funguje](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Ako to funguje](https://www.6wagency.com).",
           "label": "Povoliť zásuvku košíka"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google mapy",
       "settings": {
         "googlemapapi": {
-          "info": "Na zobrazenie mapy si budete musieť zaregistrovať [kľúč rozhrania Google Maps API] (https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1).",
+          "info": "Na zobrazenie mapy si budete musieť zaregistrovať [kľúč rozhrania Google Maps API] (https://www.6wagency.com).",
           "label": "Kľúč API pre mapy Google"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Produkt",
       "option_style": {
-        "info": "[Prečítajte si, ako nastaviť vzorky.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Prečítajte si, ako nastaviť vzorky.](https://www.6wagency.com)",
         "label": "Možnosť štýlu",
         "options": {
           "dropdown": {

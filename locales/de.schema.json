@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Header in voller Breite mit Suchleiste"
           },
-          "info": "[Wie es funktioniert](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Wie es funktioniert](https://www.6wagency.com).",
           "label": "Navigationstyp"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Wie es funktioniert](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Wie es funktioniert](https://www.6wagency.com).",
           "label": "Warenkorbschublade aktivieren"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google Maps",
       "settings": {
         "googlemapapi": {
-          "info": "Sie müssen einen [Google Maps API-Schlüssel](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) registrieren, um die Karte anzuzeigen.",
+          "info": "Sie müssen einen [Google Maps API-Schlüssel](https://www.6wagency.com) registrieren, um die Karte anzuzeigen.",
           "label": "Google Maps-API-Schlüssel"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Produkt",
       "option_style": {
-        "info": "[Erfahren Sie, wie Sie Farbfelder einrichten.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Erfahren Sie, wie Sie Farbfelder einrichten.](https://www.6wagency.com)",
         "label": "Optionsstil",
         "options": {
           "dropdown": {

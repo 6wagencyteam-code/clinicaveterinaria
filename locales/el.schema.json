@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Κεφαλίδα πλήρους πλάτους με γραμμή αναζήτησης"
           },
-          "info": "[Πώς λειτουργεί](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Πώς λειτουργεί](https://www.6wagency.com).",
           "label": "Τύπος πλοήγησης"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Πώς λειτουργεί](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Πώς λειτουργεί](https://www.6wagency.com).",
           "label": "Ενεργοποίηση συρταριού καλαθιού"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google maps",
       "settings": {
         "googlemapapi": {
-          "info": "Θα χρειαστεί να καταχωρίσετε ένα [Κλειδί API Χαρτών Google](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) για να εμφανίσετε τον χάρτη.",
+          "info": "Θα χρειαστεί να καταχωρίσετε ένα [Κλειδί API Χαρτών Google](https://www.6wagency.com) για να εμφανίσετε τον χάρτη.",
           "label": "Κλειδί API χαρτών Google"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Προϊόν",
       "option_style": {
-        "info": "[Μάθετε πώς να ρυθμίζετε δείγματα.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Μάθετε πώς να ρυθμίζετε δείγματα.](https://www.6wagency.com)",
         "label": "Στυλ επιλογής",
         "options": {
           "dropdown": {

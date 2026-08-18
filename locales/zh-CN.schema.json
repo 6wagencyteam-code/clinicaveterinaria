@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "带搜索栏的全宽标题"
           },
-          "info": "[它是如何工作的](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout)。",
+          "info": "[它是如何工作的](https://www.6wagency.com)。",
           "label": "导航类型"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[它是如何工作的](https://shinedezigninfonet.com/yuva-documentation/#Theme_5)。",
+          "info": "[它是如何工作的](https://www.6wagency.com)。",
           "label": "启用购物车抽屉"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "谷歌地图",
       "settings": {
         "googlemapapi": {
-          "info": "您需要注册 [Google 地图 API 密钥](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) 才能显示地图。",
+          "info": "您需要注册 [Google 地图 API 密钥](https://www.6wagency.com) 才能显示地图。",
           "label": "谷歌地图 API 密钥"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "产品",
       "option_style": {
-        "info": "[了解如何设置样本。](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[了解如何设置样本。](https://www.6wagency.com)",
         "label": "选项样式",
         "options": {
           "dropdown": {

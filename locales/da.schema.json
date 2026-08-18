@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Overskrift i fuld bredde med søgelinje"
           },
-          "info": "[Sådan virker det](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Sådan virker det](https://www.6wagency.com).",
           "label": "Navigationstype"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Sådan virker det](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Sådan virker det](https://www.6wagency.com).",
           "label": "Aktiver vognskuffe"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google maps",
       "settings": {
         "googlemapapi": {
-          "info": "Du skal registrere en [Google Maps API-nøgle](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) for at få vist kortet.",
+          "info": "Du skal registrere en [Google Maps API-nøgle](https://www.6wagency.com) for at få vist kortet.",
           "label": "Google maps API nøgle"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Produkt",
       "option_style": {
-        "info": "[Lær, hvordan du opsætter farveprøver.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Lær, hvordan du opsætter farveprøver.](https://www.6wagency.com)",
         "label": "Option stil",
         "options": {
           "dropdown": {

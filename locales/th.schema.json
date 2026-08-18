@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "ส่วนหัวแบบเต็มความกว้างพร้อมแถบค้นหา"
           },
-          "info": "[วิธีการทำงาน](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout)",
+          "info": "[วิธีการทำงาน](https://www.6wagency.com)",
           "label": "ประเภทการนำทาง"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[วิธีการทำงาน](https://shinedezigninfonet.com/yuva-documentation/#Theme_5)",
+          "info": "[วิธีการทำงาน](https://www.6wagency.com)",
           "label": "เปิดใช้งานลิ้นชักรถเข็น"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google แผนที่",
       "settings": {
         "googlemapapi": {
-          "info": "คุณจะต้องลงทะเบียน [คีย์ Google Maps API](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) เพื่อแสดงแผนที่",
+          "info": "คุณจะต้องลงทะเบียน [คีย์ Google Maps API](https://www.6wagency.com) เพื่อแสดงแผนที่",
           "label": "คีย์ Google Maps API"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "ผลิตภัณฑ์",
       "option_style": {
-        "info": "[เรียนรู้วิธีตั้งค่าตัวอย่าง](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[เรียนรู้วิธีตั้งค่าตัวอย่าง](https://www.6wagency.com)",
         "label": "สไตล์ตัวเลือก",
         "options": {
           "dropdown": {

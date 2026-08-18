@@ -282,7 +282,7 @@
       },
       "product_label": {
         "content": "產品標籤",
-        "info": "通過創建產品標籤，使用動態源來突出顯示獨特的屬性。 [了解更多](https://shinedezigninfonet.com/yuva-documentation/#Productlabels)。"
+        "info": "通過創建產品標籤，使用動態源來突出顯示獨特的屬性。 [了解更多](https://www.6wagency.com)。"
       },
       "button_section": {
         "label": "按鈕"
@@ -2249,7 +2249,7 @@
               "label": "顯示子菜單"
             },
             "title": {
-              "info": "輸入菜單項以應用大型菜單。 [了解更多](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_megamenu1)。",
+              "info": "輸入菜單項以應用大型菜單。 [了解更多](https://www.6wagency.com)。",
               "label": "菜單標籤"
             }
           }
@@ -2299,7 +2299,7 @@
               "label": "副標題"
             },
             "title": {
-              "info": "輸入菜單項以應用大型菜單。 [了解更多](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_megamenu2)。",
+              "info": "輸入菜單項以應用大型菜單。 [了解更多](https://www.6wagency.com)。",
               "label": "菜單標籤"
             }
           }
@@ -2350,7 +2350,7 @@
               "info": "不適用於漢堡菜單。"
             },
             "title": {
-              "info": "輸入菜單項以應用大型菜單。 [了解更多](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_megamenu3)。",
+              "info": "輸入菜單項以應用大型菜單。 [了解更多](https://www.6wagency.com)。",
               "label": "菜單標籤"
             }
           }
@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "帶搜索欄的全寬標題"
           },
-          "info": "[它是如何工作的](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout)。",
+          "info": "[它是如何工作的](https://www.6wagency.com)。",
           "label": "導航類型"
         },
         "header_textcolor": {
@@ -3536,7 +3536,7 @@
             },
             "variation_products": {
               "label": "產品列表",
-              "info": "專業提示：使用 [metaobjects](/admin/content/entries) 避免重複的元字段。 [了解更多](https://shinedezign.gitbook.io/yuva-knowledgebase/sections/how-to-setup-the-product-variations)。"
+              "info": "專業提示：使用 [metaobjects](/admin/content/entries) 避免重複的元字段。 [了解更多](https://www.6wagency.com)。"
             },
             "show_image": {
               "label": "顯示產品圖片",
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[它是如何工作的](https://shinedezigninfonet.com/yuva-documentation/#Theme_5)。",
+          "info": "[它是如何工作的](https://www.6wagency.com)。",
           "label": "啟用購物車抽屜"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "谷歌地圖",
       "settings": {
         "googlemapapi": {
-          "info": "您需要註冊 [Google 地圖 API 密鑰](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) 才能顯示地圖。",
+          "info": "您需要註冊 [Google 地圖 API 密鑰](https://www.6wagency.com) 才能顯示地圖。",
           "label": "谷歌地圖 API 密鑰"
         }
       }
@@ -6776,7 +6776,7 @@
       "name": "搜索引擎優化",
       "settings": {
         "seo_microdata": {
-          "info": "這將從頁面中刪除 schema.org 標記。僅當您使用第三方應用程序進行 SEO 時才禁用！ [了解更多](https://shinedezign.gitbook.io/yuva-knowledgebase/sections/microdata-schema)",
+          "info": "這將從頁面中刪除 schema.org 標記。僅當您使用第三方應用程序進行 SEO 時才禁用！ [了解更多](https://www.6wagency.com)",
           "label": "禁用微數據架構"
         },
         "remove_collection_url": {
@@ -7211,12 +7211,12 @@
         }
       },
       "enable_preorder": {
-        "info": "當啟用“缺貨時繼續銷售”選項時，預購將起作用。 [工作原理](https://shinedezigninfonet.com/yuva-documentation/#theme_setting_id)。",
+        "info": "當啟用“缺貨時繼續銷售”選項時，預購將起作用。 [工作原理](https://www.6wagency.com)。",
         "label": "啟用預購"
       },
       "name": "產品",
       "option_style": {
-        "info": "[了解如何設置樣本。 ](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[了解如何設置樣本。 ](https://www.6wagency.com)",
         "label": "選項樣式",
         "options": {
           "dropdown": {

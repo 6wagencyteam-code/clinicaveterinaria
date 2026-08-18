@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Zaglavlje pune širine s trakom za pretraživanje"
           },
-          "info": "[Kako radi](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Kako radi](https://www.6wagency.com).",
           "label": "Vrsta navigacije"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Kako radi](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Kako radi](https://www.6wagency.com).",
           "label": "Omogući ladicu kolica"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google karte",
       "settings": {
         "googlemapapi": {
-          "info": "Za prikaz karte morat ćete registrirati [Google Maps API Key](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1).",
+          "info": "Za prikaz karte morat ćete registrirati [Google Maps API Key](https://www.6wagency.com).",
           "label": "Google Maps API ključ"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Proizvod",
       "option_style": {
-        "info": "[Naučite kako postaviti uzorke.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Naučite kako postaviti uzorke.](https://www.6wagency.com)",
         "label": "Stil opcije",
         "options": {
           "dropdown": {

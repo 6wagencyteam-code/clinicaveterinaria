@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Arama çubuğuyla birlikte tam genişlikte başlık"
           },
-          "info": "[Nasıl çalışır](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Nasıl çalışır](https://www.6wagency.com).",
           "label": "Gezinme türü"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Nasıl çalışır](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Nasıl çalışır](https://www.6wagency.com).",
           "label": "Sepet çekmecesini etkinleştir"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google haritaları",
       "settings": {
         "googlemapapi": {
-          "info": "Haritayı görüntülemek için bir [Google Haritalar API Anahtarı](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) kaydetmeniz gerekir.",
+          "info": "Haritayı görüntülemek için bir [Google Haritalar API Anahtarı](https://www.6wagency.com) kaydetmeniz gerekir.",
           "label": "Google haritalar API anahtarı"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Ürün",
       "option_style": {
-        "info": "[Renk örneklerini nasıl ayarlayacağınızı öğrenin.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Renk örneklerini nasıl ayarlayacağınızı öğrenin.](https://www.6wagency.com)",
         "label": "Seçenek stili",
         "options": {
           "dropdown": {

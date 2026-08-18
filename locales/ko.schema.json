@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "검색창이 포함된 전체 너비 헤더"
           },
-          "info": "[작동 방식](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[작동 방식](https://www.6wagency.com).",
           "label": "내비게이션 유형"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[작동 방식](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[작동 방식](https://www.6wagency.com).",
           "label": "카트 서랍 활성화"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "구글 지도",
       "settings": {
         "googlemapapi": {
-          "info": "지도를 표시하려면 [Google Maps API Key](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1)를 등록해야 합니다.",
+          "info": "지도를 표시하려면 [Google Maps API Key](https://www.6wagency.com)를 등록해야 합니다.",
           "label": "Google 지도 API 키"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "제품",
       "option_style": {
-        "info": "[견본 설정 방법을 알아보세요.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[견본 설정 방법을 알아보세요.](https://www.6wagency.com)",
         "label": "옵션 스타일",
         "options": {
           "dropdown": {

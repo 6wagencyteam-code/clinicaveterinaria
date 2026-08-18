@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Glava polne širine z iskalno vrstico"
           },
-          "info": "[Kako deluje](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Kako deluje](https://www.6wagency.com).",
           "label": "Vrsta navigacije"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Kako deluje](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Kako deluje](https://www.6wagency.com).",
           "label": "Omogoči predal vozička"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google zemljevidi",
       "settings": {
         "googlemapapi": {
-          "info": "Za prikaz zemljevida boste morali registrirati [ključ API za Google Zemljevide](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1).",
+          "info": "Za prikaz zemljevida boste morali registrirati [ključ API za Google Zemljevide](https://www.6wagency.com).",
           "label": "Ključ Google Maps API"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Izdelek",
       "option_style": {
-        "info": "[Naučite se nastaviti vzorce.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Naučite se nastaviti vzorce.](https://www.6wagency.com)",
         "label": "Slog možnosti",
         "options": {
           "dropdown": {

@@ -282,7 +282,7 @@
       },
       "product_label": {
         "content": "Product labels",
-        "info": "Use a dynamic source to highlight a unique attribute by creating product label. [Learn more](https://shinedezigninfonet.com/yuva-documentation/#Productlabels)."
+        "info": "Use a dynamic source to highlight a unique attribute by creating product label. [Learn more](https://www.6wagency.com)."
       },
       "button_section": {
         "label": "Button"
@@ -2249,7 +2249,7 @@
               "label": "Show submenu"
             },
             "title": {
-              "info": "Enter a menu item to apply a mega menu. [Learn more](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_megamenu1).",
+              "info": "Enter a menu item to apply a mega menu. [Learn more](https://www.6wagency.com).",
               "label": "Menu label"
             }
           }
@@ -2299,7 +2299,7 @@
               "label": "Subheading"
             },
             "title": {
-              "info": "Enter a menu item to apply a mega menu. [Learn more](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_megamenu2).",
+              "info": "Enter a menu item to apply a mega menu. [Learn more](https://www.6wagency.com).",
               "label": "Menu label"
             }
           }
@@ -2350,7 +2350,7 @@
               "info": "Not applicable to the hamburger menu."
             },
             "title": {
-              "info": "Enter a menu item to apply a mega menu. [Learn more](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_megamenu3).",
+              "info": "Enter a menu item to apply a mega menu. [Learn more](https://www.6wagency.com).",
               "label": "Menu label"
             }
           }
@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Full width header with searchbar"
           },
-          "info": "[How it works](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[How it works](https://www.6wagency.com).",
           "label": "Navigation type"
         },
         "header_textcolor": {
@@ -3536,7 +3536,7 @@
             },
             "variation_products": {
               "label": "Product list",
-              "info": "Pro tip: use [metaobjects](/admin/content/entries) to avoid repetitive metafields. [Learn more](https://shinedezign.gitbook.io/yuva-knowledgebase/sections/how-to-setup-the-product-variations)."
+              "info": "Pro tip: use [metaobjects](/admin/content/entries) to avoid repetitive metafields. [Learn more](https://www.6wagency.com)."
             },
             "show_image": {
               "label": "Show product images",
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[How it works](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[How it works](https://www.6wagency.com).",
           "label": "Enable cart drawer"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google maps",
       "settings": {
         "googlemapapi": {
-          "info": "You'll need to register a [Google Maps API Key](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) to display the map.",
+          "info": "You'll need to register a [Google Maps API Key](https://www.6wagency.com) to display the map.",
           "label": "Google maps API key"
         }
       }
@@ -6776,7 +6776,7 @@
       "name": "SEO",
       "settings": {
         "seo_microdata": {
-          "info": "This will remove the schema.org markup from the page. Disable only if you are using a third party app for SEO! [Learn more](https://shinedezign.gitbook.io/yuva-knowledgebase/sections/microdata-schema)",
+          "info": "This will remove the schema.org markup from the page. Disable only if you are using a third party app for SEO! [Learn more](https://www.6wagency.com)",
           "label": "Disable microdata schema"
         },
         "remove_collection_url": {
@@ -7211,12 +7211,12 @@
         }
       },
       "enable_preorder": {
-        "info": "Preorder will work when, \"Continue selling when out of stock\" option is enabled. [How it works](https://shinedezigninfonet.com/yuva-documentation/#theme_setting_id).",
+        "info": "Preorder will work when, \"Continue selling when out of stock\" option is enabled. [How it works](https://www.6wagency.com).",
         "label": "Enable preorder"
       },
       "name": "Product",
       "option_style": {
-        "info": "[Learn how to set up swatches.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Learn how to set up swatches.](https://www.6wagency.com)",
         "label": "Option style",
         "options": {
           "dropdown": {

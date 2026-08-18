@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Overskrift i full bredde med søkefelt"
           },
-          "info": "[Slik fungerer det](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Slik fungerer det](https://www.6wagency.com).",
           "label": "Navigasjonstype"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Slik fungerer det](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Slik fungerer det](https://www.6wagency.com).",
           "label": "Aktiver handlekurvskuff"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google maps",
       "settings": {
         "googlemapapi": {
-          "info": "Du må registrere en [Google Maps API-nøkkel](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) for å vise kartet.",
+          "info": "Du må registrere en [Google Maps API-nøkkel](https://www.6wagency.com) for å vise kartet.",
           "label": "Google maps API-nøkkel"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Produkt",
       "option_style": {
-        "info": "[Finn ut hvordan du setter opp fargeprøver.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Finn ut hvordan du setter opp fargeprøver.](https://www.6wagency.com)",
         "label": "Alternativ stil",
         "options": {
           "dropdown": {

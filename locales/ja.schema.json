@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "検索バー付きの全幅ヘッダー"
           },
-          "info": "[仕組み](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout)。",
+          "info": "[仕組み](https://www.6wagency.com)。",
           "label": "ナビゲーションの種類"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[仕組み](https://shinedezigninfonet.com/yuva-documentation/#Theme_5)。",
+          "info": "[仕組み](https://www.6wagency.com)。",
           "label": "カートドロワーを有効にする"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Googleマップ",
       "settings": {
         "googlemapapi": {
-          "info": "地図を表示するには[Google Maps API Key](https://shinedezigninfonet.com/yuva-documentation/?locale=ja#map_1)の登録が必要です。",
+          "info": "地図を表示するには[Google Maps API Key](https://www.6wagency.com)の登録が必要です。",
           "label": "Google マップ API キー"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "製品",
       "option_style": {
-        "info": "[スウォッチの設定方法についてはこちらをご覧ください。](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[スウォッチの設定方法についてはこちらをご覧ください。](https://www.6wagency.com)",
         "label": "オプションスタイル",
         "options": {
           "dropdown": {

@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Teljes szélességű fejléc keresősávval"
           },
-          "info": "[Hogyan működik](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Hogyan működik](https://www.6wagency.com).",
           "label": "Navigációs típus"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Hogyan működik](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Hogyan működik](https://www.6wagency.com).",
           "label": "Kosárfiók engedélyezése"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google maps",
       "settings": {
         "googlemapapi": {
-          "info": "A térkép megjelenítéséhez regisztrálnia kell egy [Google Maps API-kulcsot](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1).",
+          "info": "A térkép megjelenítéséhez regisztrálnia kell egy [Google Maps API-kulcsot](https://www.6wagency.com).",
           "label": "Google Maps API kulcs"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Termék",
       "option_style": {
-        "info": "[További információ a színminták beállításáról.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[További információ a színminták beállításáról.](https://www.6wagency.com)",
         "label": "Opció stílus",
         "options": {
           "dropdown": {

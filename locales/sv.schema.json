@@ -2582,7 +2582,7 @@
           "header4": {
             "label": "Helbreddshuvud med sökfält"
           },
-          "info": "[Hur det fungerar](https://shinedezigninfonet.com/yuva-documentation/?locale=en#idocs_layout).",
+          "info": "[Hur det fungerar](https://www.6wagency.com).",
           "label": "Navigeringstyp"
         },
         "header_textcolor": {
@@ -6536,7 +6536,7 @@
           }
         },
         "enable_cart_drawer": {
-          "info": "[Så fungerar det](https://shinedezigninfonet.com/yuva-documentation/#Theme_5).",
+          "info": "[Så fungerar det](https://www.6wagency.com).",
           "label": "Aktivera kundvagnslåda"
         },
         "enable_shipping": {
@@ -6767,7 +6767,7 @@
       "name": "Google maps",
       "settings": {
         "googlemapapi": {
-          "info": "Du måste registrera en [Google Maps API-nyckel](https://shinedezigninfonet.com/yuva-documentation/?locale=en#map_1) för att visa kartan.",
+          "info": "Du måste registrera en [Google Maps API-nyckel](https://www.6wagency.com) för att visa kartan.",
           "label": "Google maps API-nyckel"
         }
       }
@@ -7216,7 +7216,7 @@
       },
       "name": "Produkt",
       "option_style": {
-        "info": "[Läs om hur du ställer in färgrutor.](https://shinedezigninfonet.com/yuva-documentation#Theme_7)",
+        "info": "[Läs om hur du ställer in färgrutor.](https://www.6wagency.com)",
         "label": "Alternativ stil",
         "options": {
           "dropdown": {
