@@ -1,0 +1,33 @@
+{
+  "current": {
+    "color_brand": "#2B41F5",
+    "color_brand_ink": "#FFFFFF",
+    "color_gradient": "linear-gradient(90deg, #A678C8 0%, #718CC7 48%, #639A47 100%)",
+    "color_bg": "#FFFFFF",
+    "color_surface": "#F6F7FB",
+    "color_ink": "#14161F",
+    "color_ink_muted": "#5B6070",
+    "color_line": "#E3E5EF",
+    "allow_dark_mode": false,
+    "font_body": "outfit_n4",
+    "font_heading": "outfit_n7",
+    "page_width": 1280,
+    "radius": 14,
+    "contact_phone": "",
+    "contact_email": "",
+    "contact_address": "",
+    "contact_hours": "Lunes a viernes | 09:00 - 19:00\nSábado | 10:00 - 14:00\nDomingo | Cerrado",
+    "emergency_phone": "",
+    "whatsapp_enable": true,
+    "whatsapp_number": "",
+    "whatsapp_label": "Escríbenos",
+    "whatsapp_message": "Hola, quiero consultar por una hora para mi mascota.",
+    "social_instagram": "",
+    "social_facebook": "",
+    "social_tiktok": "",
+    "show_vendor": true,
+    "show_sale_badge": true,
+    "products_per_row": "4",
+    "sections": {}
+  }
+}

@@ -1,0 +1,38 @@
+<section class="section">
+  <div class="wrap" style="max-width:440px">
+    <h1 class="section-head">{{ 'customer.login' | t }}</h1>
+
+    {%- form 'customer_login' -%}
+      {%- if form.errors -%}
+        <p class="notice notice--error">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+      <div class="field">
+        <label for="ln-email">{{ 'customer.email' | t }}</label>
+        <input id="ln-email" type="email" name="customer[email]" autocomplete="email" required>
+      </div>
+      <div class="field">
+        <label for="ln-pass">{{ 'customer.password' | t }}</label>
+        <input id="ln-pass" type="password" name="customer[password]" autocomplete="current-password" required>
+      </div>
+      <button class="btn btn--full" type="submit">{{ 'customer.login' | t }}</button>
+      <p style="margin-top:1rem;text-align:center">
+        <a href="#recover">{{ 'customer.forgot' | t }}</a> ·
+        <a href="{{ routes.account_register_url }}">{{ 'customer.register' | t }}</a>
+      </p>
+    {%- endform -%}
+
+    <div id="recover" style="margin-top:2.5rem">
+      {%- form 'recover_customer_password' -%}
+        <h2 style="font-size:var(--step-1)">{{ 'customer.reset' | t }}</h2>
+        {%- if form.posted_successfully? -%}
+          <p class="notice notice--ok">{{ 'customer.reset_sent' | t }}</p>
+        {%- endif -%}
+        <div class="field">
+          <label for="rc-email">{{ 'customer.email' | t }}</label>
+          <input id="rc-email" type="email" name="email" autocomplete="email" required>
+        </div>
+        <button class="btn btn--ghost btn--full" type="submit">{{ 'customer.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>

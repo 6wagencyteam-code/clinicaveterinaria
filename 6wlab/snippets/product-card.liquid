@@ -1,0 +1,29 @@
+{%- comment -%}Tarjeta de producto. Uso: {% render 'product-card', product: product %}{%- endcomment -%}
+<a class="product-card" href="{{ product.url }}" {% if reveal %}data-reveal{% endif %}>
+  <div class="product-card__media">
+    {%- if product.featured_media -%}
+      {{ product.featured_media
+         | image_url: width: 600
+         | image_tag:
+           widths: '200,300,400,600',
+           sizes: '(min-width: 900px) 25vw, 45vw',
+           loading: 'lazy',
+           alt: product.featured_media.alt | default: product.title | escape }}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag }}
+    {%- endif -%}
+
+    {%- if product.available == false -%}
+      <span class="badge badge--out">{{ 'products.sold_out' | t }}</span>
+    {%- elsif settings.show_sale_badge and product.compare_at_price > product.price -%}
+      <span class="badge badge--sale">{{ 'products.on_sale' | t }}</span>
+    {%- endif -%}
+  </div>
+
+  {%- if settings.show_vendor and product.vendor != blank -%}
+    <span class="product-card__vendor">{{ product.vendor }}</span>
+  {%- endif -%}
+
+  <h3 class="product-card__title">{{ product.title }}</h3>
+  {%- render 'price', product: product -%}
+</a>

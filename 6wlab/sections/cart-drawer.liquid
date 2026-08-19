@@ -1,0 +1,68 @@
+{%- comment -%}
+  Cajón del carrito. Se refresca solo pidiendo esta misma sección
+  con ?section_id=cart-drawer, así el HTML lo arma siempre Shopify.
+{%- endcomment -%}
+<dialog class="drawer" data-cart-drawer aria-label="{{ 'cart.title' | t }}">
+  <div data-cart-drawer-inner style="display:flex;flex-direction:column;height:100%">
+    <div class="drawer__head">
+      <h2 style="margin:0;font-size:var(--step-1)">{{ 'cart.title' | t }}</h2>
+      <button class="icon-btn" type="button" data-cart-close aria-label="{{ 'general.close' | t }}">
+        {%- render 'icon', name: 'close' -%}
+      </button>
+    </div>
+
+    <div class="drawer__body">
+      {%- if cart.item_count > 0 -%}
+        {%- for item in cart.items -%}
+          <div class="line-item">
+            <a href="{{ item.url }}">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 136 | image_tag: widths: '68,136', loading: 'lazy', alt: item.title | escape }}
+              {%- endif -%}
+            </a>
+            <div>
+              <a class="line-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}
+                <div class="line-item__meta">{{ item.variant.title }}</div>
+              {%- endunless -%}
+              <div class="line-item__meta">{{ item.final_line_price | money }}</div>
+              <div style="margin-top:.5rem;display:flex;align-items:center;gap:.75rem">
+                <div class="qty">
+                  <button type="button" data-qty-step="-1" aria-label="{{ 'products.decrease' | t }}">&minus;</button>
+                  <input type="number" min="0" value="{{ item.quantity }}"
+                         data-line-qty data-line-key="{{ item.key }}"
+                         aria-label="{{ 'products.quantity' | t }}">
+                  <button type="button" data-qty-step="1" aria-label="{{ 'products.increase' | t }}">&plus;</button>
+                </div>
+                <button type="button" class="muted" style="border:0;background:none;cursor:pointer;text-decoration:underline"
+                        data-line-remove data-line-key="{{ item.key }}">{{ 'cart.remove' | t }}</button>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="empty-state">
+          <p>{{ 'cart.empty' | t }}</p>
+          <a class="btn" href="{{ routes.all_products_collection_url }}">{{ 'cart.empty_action' | t }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <div class="drawer__foot">
+        <div class="cart-total">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <p class="field-hint">{{ 'cart.taxes_note' | t }}</p>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button class="btn btn--full" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+        </form>
+      </div>
+    {%- endif -%}
+  </div>
+</dialog>
+
+{% schema %}
+{ "name": "Cajón del carrito" }
+{% endschema %}

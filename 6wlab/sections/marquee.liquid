@@ -1,0 +1,22 @@
+<div class="marquee">
+  <div class="marquee__track" data-marquee>
+    {%- for block in section.blocks -%}
+      <span {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Texto en movimiento",
+  "blocks": [
+    { "type": "item", "name": "Frase", "settings": [
+      { "type": "text", "id": "text", "label": "Texto", "default": "Atención con cariño ✦" } ] }
+  ],
+  "presets": [{ "name": "Texto en movimiento", "blocks": [
+    { "type": "item", "settings": { "text": "37 años de experiencia ✦" } },
+    { "type": "item", "settings": { "text": "Equipo propio ✦" } },
+    { "type": "item", "settings": { "text": "Urgencias ✦" } },
+    { "type": "item", "settings": { "text": "Farmacia veterinaria ✦" } } ] }]
+}
+{% endschema %}

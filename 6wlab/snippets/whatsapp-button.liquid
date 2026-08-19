@@ -1,0 +1,36 @@
+{%- if settings.whatsapp_enable and settings.whatsapp_number != blank -%}
+  {%- liquid
+    assign wa = settings.whatsapp_number | remove: ' ' | remove: '+' | remove: '-' | remove: '(' | remove: ')'
+    assign msg = settings.whatsapp_message | url_encode
+  -%}
+  <a class="wa-float"
+     href="https://wa.me/{{ wa }}{% if msg != blank %}?text={{ msg }}{% endif %}"
+     target="_blank" rel="noopener"
+     aria-label="{{ settings.whatsapp_label | default: 'WhatsApp' | escape }}">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.5 14.4c-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.1s-.7 1-.9 1.2-.4.2-.6.1c-.3-.2-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1s0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.5 1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4s-.3-.2-.6-.4Z"/>
+      <path d="M12 2C6.6 2 2.1 6.5 2.1 11.9c0 1.8.5 3.5 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 9.9-4.4 9.9-9.9 0-2.6-1-5.1-2.9-7A9.8 9.8 0 0 0 12 2Zm0 18.1c-1.5 0-2.9-.4-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 0 1-1.3-4.4c0-4.5 3.7-8.2 8.3-8.2 2.2 0 4.3.9 5.8 2.4a8.2 8.2 0 0 1 2.4 5.8c0 4.6-3.7 8.2-8.2 8.2Z"/>
+    </svg>
+    {%- if settings.whatsapp_label != blank -%}
+      <span class="wa-float__label">{{ settings.whatsapp_label }}</span>
+    {%- endif -%}
+  </a>
+
+  {% style %}
+    .wa-float {
+      position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 50;
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .8rem 1.15rem .8rem .95rem;
+      border-radius: var(--radius-pill); background: #25d366; color: #fff;
+      font-weight: 600; text-decoration: none;
+      box-shadow: 0 6px 22px rgba(0,0,0,.22);
+      transition: transform .2s var(--ease);
+    }
+    .wa-float:hover { transform: translateY(-2px); color: #fff; }
+    .wa-float svg { width: 1.5rem; height: 1.5rem; flex: 0 0 auto; }
+    @media (max-width: 640px) {
+      .wa-float { padding: .8rem; }
+      .wa-float__label { display: none; }
+    }
+  {% endstyle %}
+{%- endif -%}

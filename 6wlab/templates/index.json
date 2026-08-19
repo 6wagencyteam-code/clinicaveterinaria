@@ -1,0 +1,97 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-split",
+      "blocks": {
+        "clinica": { "type": "panel", "settings": { "heading": "Clínica", "text": "Consultas, cirugías, vacunas y más. 37 años cuidando a tu mascota con el trato que merece.", "link_label": "Ver servicios", "link": "/pages/servicios" } },
+        "tienda": { "type": "panel", "settings": { "heading": "Tienda y Farmacia", "text": "Alimentos premium, medicamentos y todo lo que tu mascota necesita en un solo lugar.", "link_label": "Ver productos", "link": "/collections/all" } },
+        "peluqueria": { "type": "panel", "settings": { "heading": "Peluquería", "text": "Baño sanitario, corte y estética con amor y paciencia.", "link_label": "Reservar hora", "link": "/pages/reservar" } }
+      },
+      "block_order": ["clinica", "tienda", "peluqueria"],
+      "settings": {}
+    },
+    "marquee": {
+      "type": "marquee",
+      "blocks": {
+        "a": { "type": "item", "settings": { "text": "37 años de experiencia ✦" } },
+        "b": { "type": "item", "settings": { "text": "Equipo propio de diagnóstico ✦" } },
+        "c": { "type": "item", "settings": { "text": "Farmacia veterinaria ✦" } },
+        "d": { "type": "item", "settings": { "text": "Peluquería canina ✦" } }
+      },
+      "block_order": ["a", "b", "c", "d"],
+      "settings": {}
+    },
+    "services": {
+      "type": "services",
+      "blocks": {
+        "consulta": { "type": "service", "settings": { "icon": "stethoscope", "title": "Consulta general", "text": "<p>Evaluación completa de tu mascota con diagnóstico y plan de tratamiento.</p>", "link_label": "Reservar hora", "link": "/pages/reservar" } },
+        "vacunas": { "type": "service", "settings": { "icon": "vaccine", "title": "Vacunación", "text": "<p>Plan de vacunas al día para cachorros, gatitos y adultos.</p>", "link_label": "Reservar hora", "link": "/pages/reservar" } },
+        "peluqueria": { "type": "service", "settings": { "icon": "scissors", "title": "Peluquería", "text": "<p>Baño sanitario, corte y estética con amor y paciencia.</p>", "link_label": "Reservar hora", "link": "/pages/reservar" } },
+        "cirugia": { "type": "service", "settings": { "icon": "surgery", "title": "Cirugías", "text": "<p>Pabellón equipado y monitoreo permanente durante todo el procedimiento.</p>", "link_label": "Pedir evaluación", "link": "/pages/reservar" } }
+      },
+      "block_order": ["consulta", "vacunas", "peluqueria", "cirugia"],
+      "settings": { "surface": false }
+    },
+    "vaccines": {
+      "type": "vaccine-calendar",
+      "blocks": {
+        "d1": { "type": "vaccine", "settings": { "name": "Primera múltiple (parvovirus y moquillo)", "species": "dog", "weeks": 6, "recurrence": "once" } },
+        "d2": { "type": "vaccine", "settings": { "name": "Segunda múltiple", "species": "dog", "weeks": 9, "recurrence": "once" } },
+        "d3": { "type": "vaccine", "settings": { "name": "Tercera múltiple", "species": "dog", "weeks": 12, "recurrence": "once" } },
+        "d4": { "type": "vaccine", "settings": { "name": "Refuerzo anual múltiple", "species": "dog", "weeks": 64, "recurrence": "annual" } },
+        "c1": { "type": "vaccine", "settings": { "name": "Primera triple felina", "species": "cat", "weeks": 8, "recurrence": "once" } },
+        "c2": { "type": "vaccine", "settings": { "name": "Segunda triple felina", "species": "cat", "weeks": 12, "recurrence": "once" } },
+        "c3": { "type": "vaccine", "settings": { "name": "Leucemia felina", "species": "cat", "weeks": 16, "recurrence": "once" } },
+        "c4": { "type": "vaccine", "settings": { "name": "Refuerzo anual triple felina", "species": "cat", "weeks": 64, "recurrence": "annual" } },
+        "r1": { "type": "vaccine", "settings": { "name": "Antirrábica", "species": "both", "weeks": 16, "recurrence": "annual" } },
+        "p1": { "type": "vaccine", "settings": { "name": "Desparasitación interna", "species": "both", "weeks": 4, "recurrence": "quarterly" } }
+      },
+      "block_order": ["d1", "d2", "d3", "d4", "c1", "c2", "c3", "c4", "r1", "p1"],
+      "settings": { "cta_link": "/pages/reservar" }
+    },
+    "about": {
+      "type": "image-with-text",
+      "blocks": {
+        "p1": { "type": "point", "settings": { "text": "Equipamiento propio de diagnóstico" } },
+        "p2": { "type": "point", "settings": { "text": "Pabellón de cirugía" } },
+        "p3": { "type": "point", "settings": { "text": "Farmacia veterinaria en el local" } }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "eyebrow": "Sobre nosotros",
+        "heading": "37 años cuidando a las mascotas de Reñaca",
+        "text": "<p>Somos una clínica de barrio con equipamiento de primer nivel. Conocemos a cada mascota por su nombre.</p>",
+        "link_label": "Ver servicios",
+        "link": "/pages/servicios"
+      }
+    },
+    "products": {
+      "type": "featured-collection",
+      "settings": { "eyebrow": "Tienda", "heading": "Lo más pedido", "limit": 8 }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "t1": { "type": "quote", "settings": { "quote": "<p>Excelente atención, se nota el cariño por los animales.</p>", "name": "María", "pet": "tutora de Rocky" } },
+        "t2": { "type": "quote", "settings": { "quote": "<p>Llevo años trayendo a mis gatos. Confianza total.</p>", "name": "Pablo", "pet": "tutor de Mishi y Luna" } },
+        "t3": { "type": "quote", "settings": { "quote": "<p>Me explicaron todo con calma. Muy recomendables.</p>", "name": "Carolina", "pet": "tutora de Kira" } }
+      },
+      "block_order": ["t1", "t2", "t3"],
+      "settings": {}
+    },
+    "booking": {
+      "type": "booking",
+      "blocks": {
+        "s1": { "type": "service", "settings": { "name": "Consulta general", "duration": "30 min" } },
+        "s2": { "type": "service", "settings": { "name": "Vacunación", "duration": "20 min" } },
+        "s3": { "type": "service", "settings": { "name": "Peluquería y baño", "duration": "90 min" } },
+        "s4": { "type": "service", "settings": { "name": "Control post-operatorio", "duration": "30 min" } },
+        "s5": { "type": "service", "settings": { "name": "Otro (lo indico abajo)", "duration": "" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4", "s5"],
+      "settings": {}
+    },
+    "newsletter": { "type": "newsletter", "settings": {} }
+  },
+  "order": ["hero", "marquee", "services", "vaccines", "about", "products", "testimonials", "booking", "newsletter"]
+}

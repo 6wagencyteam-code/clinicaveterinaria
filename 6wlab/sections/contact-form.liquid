@@ -1,0 +1,50 @@
+<section class="section">
+  <div class="wrap wrap--narrow">
+    <div class="section-head section-head--center">
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="lede rte">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    {%- form 'contact' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="notice notice--ok" tabindex="-1" autofocus>{{ 'contact.success' | t }}</p>
+      {%- elsif form.errors -%}
+        <p class="notice notice--error" tabindex="-1" autofocus>{{ 'contact.error' | t }}</p>
+      {%- endif -%}
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="ct-name">{{ 'contact.name' | t }}</label>
+          <input id="ct-name" type="text" name="contact[Nombre]" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="ct-phone">{{ 'contact.phone' | t }}</label>
+          <input id="ct-phone" type="tel" name="contact[Teléfono]" autocomplete="tel">
+        </div>
+        <div class="field span-all">
+          <label for="ct-email">{{ 'contact.email' | t }}</label>
+          <input id="ct-email" type="email" name="contact[email]" autocomplete="email" required
+                 value="{% if form.email %}{{ form.email }}{% endif %}">
+        </div>
+        <div class="field span-all">
+          <label for="ct-body">{{ 'contact.message' | t }}</label>
+          <textarea id="ct-body" name="contact[Mensaje]" rows="5" required>{{ form.body }}</textarea>
+        </div>
+        <div class="span-all">
+          <button class="btn btn--full" type="submit">{{ 'contact.send' | t }}</button>
+        </div>
+      </div>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Formulario de contacto",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Escríbenos" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Te respondemos dentro del horario de atención.</p>" }
+  ],
+  "presets": [{ "name": "Formulario de contacto" }]
+}
+{% endschema %}

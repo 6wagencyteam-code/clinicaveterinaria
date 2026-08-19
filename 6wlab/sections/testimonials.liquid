@@ -1,0 +1,40 @@
+<section class="section {% if section.settings.surface %}section--surface{% endif %}">
+  <div class="wrap">
+    <div class="section-head section-head--center">
+      {%- if section.settings.eyebrow != blank -%}<span class="eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    </div>
+
+    <div class="grid">
+      {%- for block in section.blocks -%}
+        <figure class="card" data-reveal {{ block.shopify_attributes }} style="margin:0">
+          <blockquote class="rte" style="margin:0 0 1rem;font-size:var(--step-1)">{{ block.settings.quote }}</blockquote>
+          <figcaption class="card__foot">
+            <strong>{{ block.settings.name }}</strong>
+            {%- if block.settings.pet != blank -%}
+              <div class="card__text">{{ block.settings.pet }}</div>
+            {%- endif -%}
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonios",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Testimonios" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Lo que dicen quienes nos visitan" },
+    { "type": "checkbox", "id": "surface", "label": "Fondo gris suave", "default": true }
+  ],
+  "blocks": [
+    { "type": "quote", "name": "Testimonio", "settings": [
+      { "type": "richtext", "id": "quote", "label": "Testimonio", "default": "<p>Excelente atención, se nota el cariño por los animales.</p>" },
+      { "type": "text", "id": "name", "label": "Nombre", "default": "María" },
+      { "type": "text", "id": "pet", "label": "Mascota", "default": "tutora de Rocky" } ] }
+  ],
+  "presets": [{ "name": "Testimonios", "blocks": [{ "type": "quote" }, { "type": "quote" }, { "type": "quote" }] }]
+}
+{% endschema %}

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": { "type": "main-page" },
+    "booking": {
+      "type": "booking",
+      "blocks": {
+        "s1": { "type": "service", "settings": { "name": "Consulta general", "duration": "30 min" } },
+        "s2": { "type": "service", "settings": { "name": "Vacunación", "duration": "20 min" } },
+        "s3": { "type": "service", "settings": { "name": "Peluquería y baño", "duration": "90 min" } },
+        "s4": { "type": "service", "settings": { "name": "Control post-operatorio", "duration": "30 min" } },
+        "s5": { "type": "service", "settings": { "name": "Evaluación pre-quirúrgica", "duration": "40 min" } },
+        "s6": { "type": "service", "settings": { "name": "Otro (lo indico abajo)", "duration": "" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4", "s5", "s6"],
+      "settings": { "surface": false }
+    }
+  },
+  "order": ["main", "booking"]
+}

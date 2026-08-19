@@ -1,0 +1,56 @@
+<section class="section">
+  <div class="wrap">
+    <h1 class="section-head">{{ 'cart.title' | t }}</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" novalidate>
+        {%- for item in cart.items -%}
+          <div class="line-item">
+            <a href="{{ item.url }}">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 136 | image_tag: loading: 'lazy', alt: item.title | escape }}
+              {%- endif -%}
+            </a>
+            <div>
+              <a class="line-item__title" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}
+                <div class="line-item__meta">{{ item.variant.title }}</div>
+              {%- endunless -%}
+              <div class="qty" style="margin-top:.6rem">
+                <button type="button" data-qty-step="-1" aria-label="{{ 'products.decrease' | t }}">&minus;</button>
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0"
+                       aria-label="{{ 'products.quantity' | t }}">
+                <button type="button" data-qty-step="1" aria-label="{{ 'products.increase' | t }}">&plus;</button>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <strong>{{ item.final_line_price | money }}</strong>
+              <div><a class="muted" href="{{ item.url_to_remove }}">{{ 'cart.remove' | t }}</a></div>
+            </div>
+          </div>
+        {%- endfor -%}
+
+        <div style="margin-top:var(--gap);max-width:420px;margin-left:auto">
+          <div class="cart-total">
+            <span>{{ 'cart.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          <p class="field-hint">{{ 'cart.taxes_note' | t }}</p>
+          <div style="display:grid;gap:.6rem">
+            <button class="btn btn--full" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+            <button class="btn btn--ghost btn--full" type="submit" name="update">{{ 'cart.update' | t }}</button>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="empty-state">
+        <p class="lede">{{ 'cart.empty' | t }}</p>
+        <a class="btn" href="{{ routes.all_products_collection_url }}">{{ 'cart.empty_action' | t }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Carrito", "settings": [] }
+{% endschema %}

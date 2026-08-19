@@ -1,0 +1,22 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ shop.name }}</title>
+    {%- render 'css-variables' -%}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+  </head>
+  <body>
+    <section class="section">
+      <div class="wrap wrap--narrow text-center stack">
+        <h1>{{ shop.name }}</h1>
+        <p class="lede">{{ gift_card.balance | money }}</p>
+        {{ gift_card.qr_identifier }}
+        <p><code>{{ gift_card.code | format_code }}</code></p>
+        <p><a class="btn" href="{{ shop.url }}">{{ 'not_found.action' | t }}</a></p>
+      </div>
+    </section>
+  </body>
+</html>

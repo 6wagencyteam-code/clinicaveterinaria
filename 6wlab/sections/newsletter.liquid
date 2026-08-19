@@ -1,0 +1,30 @@
+<section class="section section--brand">
+  <div class="wrap wrap--narrow text-center stack">
+    {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+    {%- if section.settings.text != blank -%}<div class="rte">{{ section.settings.text }}</div>{%- endif -%}
+
+    {%- form 'customer' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p class="notice notice--ok">{{ 'newsletter.success' | t }}</p>
+      {%- else -%}
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;max-width:520px;margin-inline:auto">
+          <input class="input" style="flex:1 1 240px" type="email" name="contact[email]"
+                 placeholder="{{ 'newsletter.email' | t }}" aria-label="{{ 'newsletter.email' | t }}" required>
+          <button class="btn btn--on-brand" type="submit">{{ 'newsletter.submit' | t }}</button>
+        </div>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Título", "default": "Consejos para cuidar a tu mascota" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Recordatorios de vacunas y consejos, sin spam.</p>" }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

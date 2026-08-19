@@ -1,0 +1,104 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h3>{{ shop.name }}</h3>
+        {%- if settings.contact_address != blank -%}
+          <p class="muted">{{ settings.contact_address }}</p>
+        {%- endif -%}
+        {%- if settings.contact_phone != blank -%}
+          <p><a href="tel:{{ settings.contact_phone | remove: ' ' }}">{{ settings.contact_phone }}</a></p>
+        {%- endif -%}
+        {%- if settings.contact_email != blank -%}
+          <p><a href="mailto:{{ settings.contact_email }}">{{ settings.contact_email }}</a></p>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+              <ul>
+                {%- for link in block.settings.menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+
+          {%- when 'hours' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+              <ul>
+                {%- assign rows = settings.contact_hours | newline_to_br | split: '<br />' -%}
+                {%- for row in rows -%}
+                  {%- assign clean = row | strip_newlines | strip -%}
+                  {%- if clean != blank -%}
+                    {%- assign parts = clean | split: '|' -%}
+                    <li class="muted">{{ parts[0] | strip }}{% if parts.size > 1 %} · {{ parts[1] | strip }}{% endif %}</li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+
+          {%- when 'text' -%}
+            <div {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}<h3>{{ block.settings.title }}</h3>{%- endif -%}
+              <div class="rte muted">{{ block.settings.text }}</div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="footer__bottom">
+      <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+
+      {%- if settings.social_instagram != blank or settings.social_facebook != blank or settings.social_tiktok != blank -%}
+        <p style="display:flex;gap:.75rem">
+          {%- if settings.social_instagram != blank -%}
+            <a href="{{ settings.social_instagram }}" aria-label="Instagram" target="_blank" rel="noopener" style="width:1.3rem">{%- render 'icon', name: 'instagram' -%}</a>
+          {%- endif -%}
+          {%- if settings.social_facebook != blank -%}
+            <a href="{{ settings.social_facebook }}" aria-label="Facebook" target="_blank" rel="noopener" style="width:1.3rem">{%- render 'icon', name: 'facebook' -%}</a>
+          {%- endif -%}
+          {%- if settings.social_tiktok != blank -%}
+            <a href="{{ settings.social_tiktok }}" aria-label="TikTok" target="_blank" rel="noopener" style="width:1.3rem">{%- render 'icon', name: 'tiktok' -%}</a>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pie de página",
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menú",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Explorar" },
+        { "type": "link_list", "id": "menu", "label": "Menú", "default": "footer" }
+      ]
+    },
+    {
+      "type": "hours",
+      "name": "Horario",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Horario" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texto",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Sobre nosotros" },
+        { "type": "richtext", "id": "text", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Pie de página" }]
+}
+{% endschema %}

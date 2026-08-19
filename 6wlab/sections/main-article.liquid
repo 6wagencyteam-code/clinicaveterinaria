@@ -1,0 +1,30 @@
+<article class="section">
+  <div class="wrap wrap--narrow">
+    <div class="section-head">
+      <p class="muted">{{ article.published_at | date: '%d/%m/%Y' }}</p>
+      <h1>{{ article.title }}</h1>
+    </div>
+
+    {%- if article.image -%}
+      <div class="article-hero">
+        {{ article.image | image_url: width: 1200 | image_tag:
+           widths: '600,900,1200', sizes: '100vw', loading: 'eager',
+           alt: article.title | escape }}
+      </div>
+    {%- endif -%}
+
+    <div class="rte">{{ article.content }}</div>
+
+    <p style="margin-top:var(--gap)">
+      <a class="btn btn--ghost" href="{{ blog.url }}">{{ 'blog.back' | t }}</a>
+    </p>
+  </div>
+</article>
+
+{% stylesheet %}
+  .article-hero img { width: 100%; border-radius: var(--radius); margin-bottom: var(--gap); }
+{% endstylesheet %}
+
+{% schema %}
+{ "name": "Artículo", "settings": [] }
+{% endschema %}

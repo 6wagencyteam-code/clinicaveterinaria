@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "main": { "type": "main-page" },
+    "services": {
+      "type": "services",
+      "blocks": {
+        "consulta": { "type": "service", "settings": { "icon": "stethoscope", "title": "Consulta general", "text": "<p>Evaluación completa con diagnóstico y plan de tratamiento.</p>", "price": "$25.000", "link_label": "Reservar hora", "link": "/pages/reservar" } },
+        "vacunas": { "type": "service", "settings": { "icon": "vaccine", "title": "Vacunación", "text": "<p>Plan de vacunas al día, con carnet de control.</p>", "price": "$18.000", "link_label": "Reservar hora", "link": "/pages/reservar" } },
+        "peluqueria": { "type": "service", "settings": { "icon": "scissors", "title": "Peluquería", "text": "<p>Baño sanitario, corte y estética.</p>", "price": "$20.000", "link_label": "Reservar hora", "link": "/pages/reservar" } },
+        "cirugia": { "type": "service", "settings": { "icon": "surgery", "title": "Cirugías", "text": "<p>Pabellón equipado y monitoreo permanente.</p>", "price": "$80.000", "link_label": "Pedir evaluación", "link": "/pages/reservar" } },
+        "laboratorio": { "type": "service", "settings": { "icon": "lab", "title": "Exámenes de laboratorio", "text": "<p>Hemogramas, perfiles bioquímicos y más.</p>", "price": "$15.000", "link_label": "Reservar hora", "link": "/pages/reservar" } },
+        "farmacia": { "type": "service", "settings": { "icon": "pharmacy", "title": "Tienda y farmacia", "text": "<p>Alimentos premium y medicamentos.</p>", "price_label": "", "price": "", "link_label": "Ver productos", "link": "/collections/all" } }
+      },
+      "block_order": ["consulta", "vacunas", "peluqueria", "cirugia", "laboratorio", "farmacia"],
+      "settings": { "surface": false }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "¿Atienden urgencias?", "answer": "<p>Sí, dentro del horario de atención. Llámanos antes para avisarte que vas en camino.</p>" } },
+        "q2": { "type": "qa", "settings": { "question": "¿Necesito reservar hora?", "answer": "<p>Es lo recomendable para no esperar. Puedes hacerlo desde el formulario de esta página.</p>" } },
+        "q3": { "type": "qa", "settings": { "question": "¿Qué formas de pago aceptan?", "answer": "<p>Efectivo, débito y crédito.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3"],
+      "settings": { "surface": true }
+    }
+  },
+  "order": ["main", "services", "faq"]
+}

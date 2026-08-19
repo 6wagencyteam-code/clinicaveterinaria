@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="wrap">
+    <h1 class="section-head">{{ 'customer.order_number' | t }} {{ order.name }}</h1>
+    <p class="muted">{{ order.created_at | date: '%d/%m/%Y' }} · {{ order.financial_status_label }}</p>
+
+    <div class="table-scroll" style="margin-top:var(--gap)">
+      <table class="rte" style="width:100%">
+        <thead>
+          <tr><th>{{ 'cart.product' | t }}</th><th>{{ 'products.quantity' | t }}</th><th>{{ 'cart.total' | t }}</th></tr>
+        </thead>
+        <tbody>
+          {%- for line in order.line_items -%}
+            <tr>
+              <td>{{ line.title }}</td>
+              <td>{{ line.quantity }}</td>
+              <td>{{ line.final_line_price | money }}</td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+        <tfoot>
+          <tr><th colspan="2">{{ 'cart.total' | t }}</th><th>{{ order.total_price | money }}</th></tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <p style="margin-top:var(--gap)">
+      <a class="btn btn--ghost" href="{{ routes.account_url }}">{{ 'customer.return' | t }}</a>
+    </p>
+  </div>
+</section>

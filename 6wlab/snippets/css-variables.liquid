@@ -1,0 +1,27 @@
+{%- comment -%}
+  Convierte los ajustes del tema en variables CSS.
+  Un solo bloque <style>: nada de hojas extra que bloqueen el dibujado.
+{%- endcomment -%}
+{% style %}
+  {{ settings.font_body | font_face: font_display: 'swap' }}
+  {{ settings.font_body | font_modify: 'weight', '600' | font_face: font_display: 'swap' }}
+  {{ settings.font_body | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+  {{ settings.font_heading | font_face: font_display: 'swap' }}
+  {{ settings.font_heading | font_modify: 'weight', 'bold' | font_face: font_display: 'swap' }}
+
+  :root {
+    --brand: {{ settings.color_brand }};
+    --brand-ink: {{ settings.color_brand_ink }};
+    --brand-gradient: {{ settings.color_gradient }};
+    --bg: {{ settings.color_bg }};
+    --surface: {{ settings.color_surface }};
+    --ink: {{ settings.color_ink }};
+    --ink-muted: {{ settings.color_ink_muted }};
+    --line: {{ settings.color_line }};
+    --font: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
+    --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
+    --radius: {{ settings.radius }}px;
+    --radius-sm: {{ settings.radius | times: 0.65 | round }}px;
+    --wrap: {{ settings.page_width }}px;
+  }
+{% endstyle %}

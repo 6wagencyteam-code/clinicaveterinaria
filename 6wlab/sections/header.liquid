@@ -1,0 +1,68 @@
+<header class="header">
+  <div class="wrap header__bar">
+    <a class="header__logo" href="{{ routes.root_url }}">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 300 | image_tag:
+             widths: '150,300', alt: shop.name | escape, loading: 'eager' }}
+      {%- else -%}
+        {{ shop.name }}
+      {%- endif -%}
+    </a>
+
+    <nav class="nav" aria-label="{{ 'general.menu' | t }}">
+      <ul>
+        {%- for link in section.settings.menu.links -%}
+          <li>
+            <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+        <a class="btn btn--sm" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+
+      <a class="icon-btn" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">
+        {%- render 'icon', name: 'search' -%}
+      </a>
+
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="icon-btn" href="{{ routes.account_url }}" aria-label="{{ 'general.account' | t }}">
+          {%- render 'icon', name: 'user' -%}
+        </a>
+      {%- endif -%}
+
+      <button class="icon-btn" type="button" data-cart-open aria-label="{{ 'general.cart' | t }}">
+        {%- render 'icon', name: 'cart' -%}
+        <span class="cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </button>
+
+      <button class="icon-btn nav-toggle" type="button" data-nav-toggle
+              aria-expanded="false" aria-controls="mobile-nav" aria-label="{{ 'general.menu' | t }}">
+        {%- render 'icon', name: 'menu' -%}
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav wrap" id="mobile-nav" data-mobile-nav hidden>
+    <ul>
+      {%- for link in section.settings.menu.links -%}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Encabezado",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "link_list", "id": "menu", "label": "Menú", "default": "main-menu" },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Reservar hora" },
+    { "type": "url", "id": "cta_link", "label": "Enlace del botón" }
+  ]
+}
+{% endschema %}

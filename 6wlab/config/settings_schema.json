@@ -1,0 +1,87 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "6W LAB",
+    "theme_version": "1.0.0",
+    "theme_author": "6W Agency",
+    "theme_documentation_url": "https://www.6wagency.com",
+    "theme_support_url": "https://www.6wagency.com"
+  },
+  {
+    "name": "Colores",
+    "settings": [
+      { "type": "color", "id": "color_brand", "label": "Color de marca", "default": "#2B41F5" },
+      { "type": "color", "id": "color_brand_ink", "label": "Texto sobre el color de marca", "default": "#FFFFFF" },
+      { "type": "color_background", "id": "color_gradient", "label": "Degradado de acento", "default": "linear-gradient(90deg, #A678C8 0%, #718CC7 48%, #639A47 100%)" },
+      { "type": "color", "id": "color_bg", "label": "Fondo", "default": "#FFFFFF" },
+      { "type": "color", "id": "color_surface", "label": "Fondo de bloques", "default": "#F6F7FB" },
+      { "type": "color", "id": "color_ink", "label": "Texto", "default": "#14161F" },
+      { "type": "color", "id": "color_ink_muted", "label": "Texto secundario", "default": "#5B6070" },
+      { "type": "color", "id": "color_line", "label": "Bordes", "default": "#E3E5EF" },
+      {
+        "type": "checkbox",
+        "id": "allow_dark_mode",
+        "label": "Permitir modo oscuro",
+        "info": "Se adapta a quien tenga el modo oscuro activado en su teléfono.",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Tipografía",
+    "settings": [
+      { "type": "font_picker", "id": "font_body", "label": "Texto", "default": "outfit_n4" },
+      { "type": "font_picker", "id": "font_heading", "label": "Títulos", "default": "outfit_n7" }
+    ]
+  },
+  {
+    "name": "Diseño",
+    "settings": [
+      { "type": "range", "id": "page_width", "label": "Ancho máximo", "min": 1000, "max": 1600, "step": 20, "unit": "px", "default": 1280 },
+      { "type": "range", "id": "radius", "label": "Redondeo de esquinas", "min": 0, "max": 24, "step": 2, "unit": "px", "default": 14 },
+      { "type": "image_picker", "id": "favicon", "label": "Ícono del navegador" },
+      { "type": "image_picker", "id": "share_image", "label": "Imagen al compartir en redes" }
+    ]
+  },
+  {
+    "name": "Datos de la clínica",
+    "settings": [
+      { "type": "text", "id": "contact_phone", "label": "Teléfono", "default": "" },
+      { "type": "text", "id": "contact_email", "label": "Correo", "default": "" },
+      { "type": "text", "id": "contact_address", "label": "Dirección", "default": "" },
+      {
+        "type": "textarea",
+        "id": "contact_hours",
+        "label": "Horario de atención",
+        "info": "Una línea por día. Separa el día y la hora con el símbolo |",
+        "default": "Lunes a viernes | 09:00 - 19:00\nSábado | 10:00 - 14:00\nDomingo | Cerrado"
+      },
+      { "type": "text", "id": "emergency_phone", "label": "Teléfono de urgencias", "default": "" }
+    ]
+  },
+  {
+    "name": "WhatsApp",
+    "settings": [
+      { "type": "checkbox", "id": "whatsapp_enable", "label": "Mostrar botón flotante", "default": true },
+      { "type": "text", "id": "whatsapp_number", "label": "Número", "info": "Con código de país, sin espacios. Ejemplo: +56912345678", "default": "" },
+      { "type": "text", "id": "whatsapp_label", "label": "Texto del botón", "default": "Escríbenos" },
+      { "type": "text", "id": "whatsapp_message", "label": "Mensaje predefinido", "default": "Hola, quiero consultar por una hora para mi mascota." }
+    ]
+  },
+  {
+    "name": "Redes sociales",
+    "settings": [
+      { "type": "text", "id": "social_instagram", "label": "Instagram" },
+      { "type": "text", "id": "social_facebook", "label": "Facebook" },
+      { "type": "text", "id": "social_tiktok", "label": "TikTok" }
+    ]
+  },
+  {
+    "name": "Productos",
+    "settings": [
+      { "type": "checkbox", "id": "show_vendor", "label": "Mostrar la marca del producto", "default": true },
+      { "type": "checkbox", "id": "show_sale_badge", "label": "Mostrar etiqueta de oferta", "default": true },
+      { "type": "select", "id": "products_per_row", "label": "Productos por fila (escritorio)", "options": [{ "value": "3", "label": "3" }, { "value": "4", "label": "4" }, { "value": "5", "label": "5" }], "default": "4" }
+    ]
+  }
+]

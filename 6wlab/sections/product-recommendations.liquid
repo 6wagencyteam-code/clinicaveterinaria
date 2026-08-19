@@ -1,0 +1,17 @@
+{%- assign recs = recommendations.products -%}
+{%- if recs.size > 0 -%}
+  <section class="section section--surface">
+    <div class="wrap">
+      <h2 class="section-head">{{ 'products.related' | t }}</h2>
+      <div class="rail">
+        {%- for product in recs -%}
+          {%- render 'product-card', product: product -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{ "name": "Recomendados", "settings": [] }
+{% endschema %}

@@ -1,0 +1,166 @@
+{
+  "general": {
+    "skip_to_content": "Ir al contenido",
+    "error": "Algo salió mal. Vuelve a intentarlo.",
+    "close": "Cerrar",
+    "menu": "Menú",
+    "search": "Buscar",
+    "account": "Mi cuenta",
+    "cart": "Carrito",
+    "home": "Inicio",
+    "loading": "Cargando",
+    "share": "Compartir"
+  },
+  "products": {
+    "add_to_cart": "Agregar al carrito",
+    "adding": "Agregando…",
+    "sold_out": "Agotado",
+    "unavailable": "No disponible",
+    "on_sale": "Oferta",
+    "quantity": "Cantidad",
+    "increase": "Aumentar cantidad",
+    "decrease": "Disminuir cantidad",
+    "from": "Desde",
+    "regular_price": "Precio normal",
+    "sale_price": "Precio de oferta",
+    "description": "Descripción",
+    "view_details": "Ver detalles",
+    "related": "También te puede servir",
+    "vendor": "Marca"
+  },
+  "cart": {
+    "title": "Tu carrito",
+    "empty": "Tu carrito está vacío",
+    "empty_action": "Ver productos",
+    "subtotal": "Subtotal",
+    "checkout": "Ir a pagar",
+    "continue": "Seguir comprando",
+    "remove": "Quitar",
+    "taxes_note": "Impuestos y despacho se calculan al pagar.",
+    "update": "Actualizar",
+    "product": "Producto",
+    "total": "Total"
+  },
+  "collections": {
+    "all": "Todos los productos",
+    "empty": "No hay productos en esta categoría.",
+    "products_count": {
+      "one": "{{ count }} producto",
+      "other": "{{ count }} productos"
+    },
+    "sort_by": "Ordenar por",
+    "filters": "Filtros",
+    "clear": "Limpiar"
+  },
+  "search": {
+    "title": "Buscar",
+    "placeholder": "Buscar productos, artículos…",
+    "submit": "Buscar",
+    "results_for": "Resultados para “{{ terms }}”",
+    "no_results": "No encontramos resultados para “{{ terms }}”.",
+    "results_count": {
+      "one": "{{ count }} resultado",
+      "other": "{{ count }} resultados"
+    }
+  },
+  "blog": {
+    "read_more": "Leer más",
+    "posted_on": "Publicado el",
+    "by": "por",
+    "back": "Volver al blog"
+  },
+  "pagination": {
+    "label": "Paginación",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "page": "Página {{ number }}"
+  },
+  "contact": {
+    "name": "Tu nombre",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "success": "¡Gracias! Recibimos tu mensaje y te responderemos pronto.",
+    "error": "Revisa los datos e inténtalo de nuevo."
+  },
+  "booking": {
+    "service": "¿Qué servicio necesitas?",
+    "pet_name": "Nombre de tu mascota",
+    "species": "Especie",
+    "dog": "Perro",
+    "cat": "Gato",
+    "other": "Otra",
+    "date": "Fecha preferida",
+    "time": "Horario preferido",
+    "reason": "Cuéntanos brevemente el motivo",
+    "select": "Selecciona una opción",
+    "submit": "Solicitar hora",
+    "success": "¡Gracias! Recibimos tu solicitud y te contactaremos para confirmar la hora."
+  },
+  "vaccines": {
+    "pet_name": "Nombre de tu mascota",
+    "species": "Especie",
+    "birth": "Fecha de nacimiento",
+    "submit": "Ver su calendario",
+    "state_done": "Ya correspondía",
+    "state_due": "Toca ahora",
+    "state_soon": "Próxima",
+    "state_future": "Más adelante",
+    "default_name": "Tu mascota",
+    "age_is": "tiene",
+    "one_due": "Hay 1 vacuna que le toca ahora.",
+    "many_due": "Hay [[count]] vacunas que le tocan ahora.",
+    "none_due": "Por ahora no tiene vacunas pendientes.",
+    "booster": "refuerzo",
+    "future_error": "La fecha de nacimiento no puede ser futura.",
+    "weeks": "semanas",
+    "month": "mes",
+    "months": "meses",
+    "year": "año",
+    "years": "años",
+    "newborn": "menos de una semana",
+    "unborn": "aún no nace"
+  },
+  "customer": {
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "register": "Crear cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "first_name": "Nombre",
+    "last_name": "Apellido",
+    "submit": "Continuar",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "reset": "Restablecer contraseña",
+    "reset_sent": "Te enviamos un correo con las instrucciones.",
+    "account_title": "Mi cuenta",
+    "orders": "Mis pedidos",
+    "no_orders": "Todavía no tienes pedidos.",
+    "order_number": "Pedido",
+    "date": "Fecha",
+    "status": "Estado",
+    "total": "Total",
+    "addresses": "Mis direcciones",
+    "add_address": "Agregar dirección",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "return": "Volver a mi cuenta",
+    "activate": "Activar cuenta",
+    "decline": "Rechazar invitación",
+    "new_password": "Nueva contraseña",
+    "confirm_password": "Confirmar contraseña"
+  },
+  "newsletter": {
+    "email": "Tu correo",
+    "submit": "Suscribirme",
+    "success": "¡Listo! Ya estás suscrito."
+  },
+  "not_found": {
+    "title": "No encontramos esta página",
+    "text": "Puede que el enlace esté roto o que la página se haya movido.",
+    "action": "Volver al inicio"
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "general": {
+    "skip_to_content": "Skip to content",
+    "error": "Something went wrong. Please try again.",
+    "close": "Close",
+    "menu": "Menu",
+    "search": "Search",
+    "account": "Account",
+    "cart": "Cart",
+    "home": "Home",
+    "loading": "Loading",
+    "share": "Share"
+  },
+  "products": {
+    "add_to_cart": "Add to cart",
+    "adding": "Adding…",
+    "sold_out": "Sold out",
+    "unavailable": "Unavailable",
+    "on_sale": "Sale",
+    "quantity": "Quantity",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity",
+    "from": "From",
+    "regular_price": "Regular price",
+    "sale_price": "Sale price",
+    "description": "Description",
+    "view_details": "View details",
+    "related": "You may also need",
+    "vendor": "Brand"
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty": "Your cart is empty",
+    "empty_action": "Browse products",
+    "subtotal": "Subtotal",
+    "checkout": "Check out",
+    "continue": "Continue shopping",
+    "remove": "Remove",
+    "taxes_note": "Taxes and shipping calculated at checkout.",
+    "update": "Update",
+    "product": "Product",
+    "total": "Total"
+  },
+  "collections": {
+    "all": "All products",
+    "empty": "There are no products in this category.",
+    "products_count": {
+      "one": "{{ count }} product",
+      "other": "{{ count }} products"
+    },
+    "sort_by": "Sort by",
+    "filters": "Filters",
+    "clear": "Clear"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search products, articles…",
+    "submit": "Search",
+    "results_for": "Results for “{{ terms }}”",
+    "no_results": "No results for “{{ terms }}”.",
+    "results_count": {
+      "one": "{{ count }} result",
+      "other": "{{ count }} results"
+    }
+  },
+  "blog": {
+    "read_more": "Read more",
+    "posted_on": "Posted on",
+    "by": "by",
+    "back": "Back to blog"
+  },
+  "pagination": {
+    "label": "Pagination",
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{ number }}"
+  },
+  "contact": {
+    "name": "Your name",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "send": "Send",
+    "success": "Thanks! We received your message and will reply soon.",
+    "error": "Please check the details and try again."
+  },
+  "booking": {
+    "service": "Which service do you need?",
+    "pet_name": "Your pet's name",
+    "species": "Species",
+    "dog": "Dog",
+    "cat": "Cat",
+    "other": "Other",
+    "date": "Preferred date",
+    "time": "Preferred time",
+    "reason": "Briefly, what's the reason?",
+    "select": "Select an option",
+    "submit": "Request appointment",
+    "success": "Thanks! We received your request and will contact you to confirm."
+  },
+  "vaccines": {
+    "pet_name": "Your pet's name",
+    "species": "Species",
+    "birth": "Date of birth",
+    "submit": "See their schedule",
+    "state_done": "Was due",
+    "state_due": "Due now",
+    "state_soon": "Coming up",
+    "state_future": "Later on",
+    "default_name": "Your pet",
+    "age_is": "is",
+    "one_due": "1 vaccine is due now.",
+    "many_due": "[[count]] vaccines are due now.",
+    "none_due": "Nothing is due right now.",
+    "booster": "booster",
+    "future_error": "The date of birth cannot be in the future.",
+    "weeks": "weeks",
+    "month": "month",
+    "months": "months",
+    "year": "year",
+    "years": "years",
+    "newborn": "less than a week",
+    "unborn": "not born yet"
+  },
+  "customer": {
+    "login": "Log in",
+    "logout": "Log out",
+    "register": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "submit": "Continue",
+    "forgot": "Forgot your password?",
+    "reset": "Reset password",
+    "reset_sent": "We sent you an email with instructions.",
+    "account_title": "My account",
+    "orders": "My orders",
+    "no_orders": "You have no orders yet.",
+    "order_number": "Order",
+    "date": "Date",
+    "status": "Status",
+    "total": "Total",
+    "addresses": "My addresses",
+    "add_address": "Add address",
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "return": "Back to my account",
+    "activate": "Activate account",
+    "decline": "Decline invitation",
+    "new_password": "New password",
+    "confirm_password": "Confirm password"
+  },
+  "newsletter": {
+    "email": "Your email",
+    "submit": "Subscribe",
+    "success": "You're subscribed."
+  },
+  "not_found": {
+    "title": "Page not found",
+    "text": "The link may be broken or the page may have moved.",
+    "action": "Back to home"
+  }
+}

@@ -1,0 +1,190 @@
+{%- assign today = 'now' | date: '%Y-%m-%d' -%}
+
+<section class="section {% if section.settings.surface %}section--surface{% endif %}" id="reservar">
+  <div class="wrap">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-head section-head--center">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+        {%- if section.settings.text != blank -%}
+          <div class="lede rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div style="display:grid;gap:calc(var(--gap)*2);grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));align-items:start">
+      <div>
+        {%- form 'contact', id: 'booking-form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="notice notice--ok" tabindex="-1" autofocus>{{ 'booking.success' | t }}</p>
+          {%- elsif form.errors -%}
+            <p class="notice notice--error" tabindex="-1" autofocus>
+              {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+            </p>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[Tipo]" value="Reserva de hora">
+
+          <div class="form-grid">
+            <div class="field span-all">
+              <label for="bk-service">{{ 'booking.service' | t }}</label>
+              <select id="bk-service" name="contact[Servicio]" required>
+                <option value="">{{ 'booking.select' | t }}</option>
+                {%- for block in section.blocks -%}
+                  {%- if block.settings.name != blank -%}
+                    <option value="{{ block.settings.name | escape }}">
+                      {{- block.settings.name -}}
+                      {%- if block.settings.duration != blank %} — {{ block.settings.duration }}{% endif -%}
+                    </option>
+                  {%- endif -%}
+                {%- endfor -%}
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="bk-name">{{ 'contact.name' | t }}</label>
+              <input id="bk-name" type="text" name="contact[Nombre del tutor]" autocomplete="name"
+                     value="{% if customer %}{{ customer.name }}{% endif %}" required>
+            </div>
+
+            <div class="field">
+              <label for="bk-phone">{{ 'contact.phone' | t }}</label>
+              <input id="bk-phone" type="tel" name="contact[Teléfono]" autocomplete="tel"
+                     placeholder="+56 9 1234 5678" required>
+            </div>
+
+            <div class="field span-all">
+              <label for="bk-email">{{ 'contact.email' | t }}</label>
+              <input id="bk-email" type="email" name="contact[email]" autocomplete="email" spellcheck="false"
+                     value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required>
+            </div>
+
+            <div class="field">
+              <label for="bk-pet">{{ 'booking.pet_name' | t }}</label>
+              <input id="bk-pet" type="text" name="contact[Mascota]" required>
+            </div>
+
+            <div class="field">
+              <label for="bk-species">{{ 'booking.species' | t }}</label>
+              <select id="bk-species" name="contact[Especie]" required>
+                <option value="">{{ 'booking.select' | t }}</option>
+                <option value="Perro">{{ 'booking.dog' | t }}</option>
+                <option value="Gato">{{ 'booking.cat' | t }}</option>
+                <option value="Otra">{{ 'booking.other' | t }}</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="bk-date">{{ 'booking.date' | t }}</label>
+              <input id="bk-date" type="date" name="contact[Fecha preferida]" min="{{ today }}" required>
+            </div>
+
+            <div class="field">
+              <label for="bk-time">{{ 'booking.time' | t }}</label>
+              <select id="bk-time" name="contact[Horario preferido]" required>
+                <option value="">{{ 'booking.select' | t }}</option>
+                {%- assign slots = section.settings.slots | split: ',' -%}
+                {%- for slot in slots -%}
+                  {%- assign s = slot | strip -%}
+                  {%- if s != blank -%}<option value="{{ s | escape }}">{{ s }}</option>{%- endif -%}
+                {%- endfor -%}
+              </select>
+            </div>
+
+            <div class="field span-all">
+              <label for="bk-msg">{{ 'booking.reason' | t }}</label>
+              <textarea id="bk-msg" name="contact[Motivo]" rows="4">{{ form.body }}</textarea>
+            </div>
+
+            {%- if section.settings.note != blank -%}
+              <p class="field-hint span-all">{{ section.settings.note }}</p>
+            {%- endif -%}
+
+            <div class="span-all">
+              <button class="btn btn--full" type="submit">{{ 'booking.submit' | t }}</button>
+            </div>
+          </div>
+        {%- endform -%}
+      </div>
+
+      <aside class="stack">
+        {%- if settings.contact_phone != blank -%}
+          <div class="card">
+            <span class="card__icon">{%- render 'icon', name: 'phone' -%}</span>
+            <h3 class="card__title">{{ 'contact.phone' | t }}</h3>
+            <p><a href="tel:{{ settings.contact_phone | remove: ' ' }}">{{ settings.contact_phone }}</a></p>
+            {%- if settings.emergency_phone != blank -%}
+              <p class="card__text">Urgencias: <a href="tel:{{ settings.emergency_phone | remove: ' ' }}">{{ settings.emergency_phone }}</a></p>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if settings.contact_address != blank -%}
+          <div class="card">
+            <span class="card__icon">{%- render 'icon', name: 'pin' -%}</span>
+            <h3 class="card__title">Dónde estamos</h3>
+            <p class="card__text">{{ settings.contact_address }}</p>
+          </div>
+        {%- endif -%}
+
+        {%- if settings.contact_hours != blank -%}
+          <div class="card">
+            <span class="card__icon">{%- render 'icon', name: 'clock' -%}</span>
+            <h3 class="card__title">Horario</h3>
+            <ul style="margin:0;padding:0;list-style:none">
+              {%- assign rows = settings.contact_hours | newline_to_br | split: '<br />' -%}
+              {%- for row in rows -%}
+                {%- assign clean = row | strip_newlines | strip -%}
+                {%- if clean != blank -%}
+                  {%- assign parts = clean | split: '|' -%}
+                  <li style="display:flex;justify-content:space-between;gap:1rem;padding:.25rem 0">
+                    <span>{{ parts[0] | strip }}</span>
+                    {%- if parts.size > 1 -%}<span class="muted">{{ parts[1] | strip }}</span>{%- endif -%}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reserva de hora",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Agenda online" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Reserva la hora de tu mascota" },
+    { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Completa el formulario y te confirmamos la hora dentro del horario de atención.</p>" },
+    { "type": "text", "id": "slots", "label": "Horarios disponibles", "info": "Sepáralos con comas.", "default": "Mañana (09:00 - 13:00), Tarde (15:00 - 19:00), Me acomoda cualquiera" },
+    { "type": "text", "id": "note", "label": "Nota", "default": "Esta es una solicitud de hora. Confirmamos disponibilidad antes de agendar." },
+    { "type": "checkbox", "id": "surface", "label": "Fondo gris suave", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "service",
+      "name": "Servicio agendable",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nombre", "default": "Consulta general" },
+        { "type": "text", "id": "duration", "label": "Duración", "default": "30 min" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reserva de hora",
+      "blocks": [
+        { "type": "service", "settings": { "name": "Consulta general", "duration": "30 min" } },
+        { "type": "service", "settings": { "name": "Vacunación", "duration": "20 min" } },
+        { "type": "service", "settings": { "name": "Peluquería y baño", "duration": "90 min" } },
+        { "type": "service", "settings": { "name": "Control post-operatorio", "duration": "30 min" } },
+        { "type": "service", "settings": { "name": "Otro", "duration": "" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

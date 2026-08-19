@@ -1,0 +1,64 @@
+<section class="section">
+  <div class="wrap" style="max-width:640px">
+    <h1 class="section-head">{{ 'customer.addresses' | t }}</h1>
+
+    {%- paginate customer.addresses by 10 -%}
+      {%- for address in customer.addresses -%}
+        <div class="card" style="margin-bottom:var(--gap)">
+          <p class="muted">{{ address | format_address }}</p>
+          <div class="card__foot" style="display:flex;gap:.6rem">
+            <button class="btn btn--ghost btn--sm" type="button"
+                    onclick="document.getElementById('edit-{{ address.id }}').toggleAttribute('hidden')">
+              {{ 'customer.edit' | t }}
+            </button>
+            {%- form 'customer_address', address -%}
+              <button class="btn btn--ghost btn--sm" type="submit" name="_method" value="delete">
+                {{ 'customer.delete' | t }}
+              </button>
+            {%- endform -%}
+          </div>
+
+          <div id="edit-{{ address.id }}" hidden style="margin-top:1rem">
+            {%- form 'customer_address', address -%}
+              <div class="field"><label>{{ 'customer.first_name' | t }}</label>
+                <input type="text" name="address[first_name]" value="{{ address.first_name }}"></div>
+              <div class="field"><label>{{ 'customer.last_name' | t }}</label>
+                <input type="text" name="address[last_name]" value="{{ address.last_name }}"></div>
+              <div class="field"><label>Dirección</label>
+                <input type="text" name="address[address1]" value="{{ address.address1 }}"></div>
+              <div class="field"><label>Ciudad</label>
+                <input type="text" name="address[city]" value="{{ address.city }}"></div>
+              <div class="field"><label>País</label>
+                <select name="address[country]">{{ country_option_tags }}</select></div>
+              <button class="btn btn--sm" type="submit">{{ 'customer.save' | t }}</button>
+            {%- endform -%}
+          </div>
+        </div>
+      {%- endfor -%}
+      {%- render 'pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+
+    <details style="margin-top:var(--gap)">
+      <summary class="btn btn--ghost">{{ 'customer.add_address' | t }}</summary>
+      <div style="margin-top:var(--gap)">
+        {%- form 'customer_address', customer.new_address -%}
+          <div class="field"><label for="na-first">{{ 'customer.first_name' | t }}</label>
+            <input id="na-first" type="text" name="address[first_name]"></div>
+          <div class="field"><label for="na-last">{{ 'customer.last_name' | t }}</label>
+            <input id="na-last" type="text" name="address[last_name]"></div>
+          <div class="field"><label for="na-addr">Dirección</label>
+            <input id="na-addr" type="text" name="address[address1]"></div>
+          <div class="field"><label for="na-city">Ciudad</label>
+            <input id="na-city" type="text" name="address[city]"></div>
+          <div class="field"><label for="na-country">País</label>
+            <select id="na-country" name="address[country]">{{ country_option_tags }}</select></div>
+          <button class="btn" type="submit">{{ 'customer.save' | t }}</button>
+        {%- endform -%}
+      </div>
+    </details>
+
+    <p style="margin-top:var(--gap)">
+      <a class="btn btn--ghost" href="{{ routes.account_url }}">{{ 'customer.return' | t }}</a>
+    </p>
+  </div>
+</section>

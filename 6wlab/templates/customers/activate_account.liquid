@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="wrap" style="max-width:440px">
+    <h1 class="section-head">{{ 'customer.activate' | t }}</h1>
+    {%- form 'activate_customer_password' -%}
+      {%- if form.errors -%}
+        <p class="notice notice--error">{{ form.errors | default_errors }}</p>
+      {%- endif -%}
+      <div class="field">
+        <label for="ac-pass">{{ 'customer.password' | t }}</label>
+        <input id="ac-pass" type="password" name="customer[password]" autocomplete="new-password" required>
+      </div>
+      <div class="field">
+        <label for="ac-conf">{{ 'customer.confirm_password' | t }}</label>
+        <input id="ac-conf" type="password" name="customer[password_confirmation]" autocomplete="new-password" required>
+      </div>
+      <button class="btn btn--full" type="submit">{{ 'customer.activate' | t }}</button>
+      <button class="btn btn--ghost btn--full" type="submit" name="decline" style="margin-top:.6rem">
+        {{ 'customer.decline' | t }}
+      </button>
+    {%- endform -%}
+  </div>
+</section>
