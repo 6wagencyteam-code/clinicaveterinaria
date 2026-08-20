@@ -6,11 +6,12 @@
   <div class="wrap product" data-gallery>
     <div class="product__gallery">
       {%- if product.featured_media -%}
+        {%- assign main_alt = product.featured_media.alt | default: product.title | escape -%}
         {{ product.featured_media | image_url: width: 1200 | image_tag:
            widths: '500,800,1200', sizes: '(min-width: 900px) 55vw, 100vw',
            loading: 'eager', fetchpriority: 'high',
            class: 'gallery-main',
-           alt: product.featured_media.alt | default: product.title | escape }}
+           alt: main_alt }}
       {%- else -%}
         {{ 'product-1' | placeholder_svg_tag }}
       {%- endif -%}
@@ -22,8 +23,9 @@
                     data-gallery-thumb
                     data-full="{{ media | image_url: width: 1200 }}"
                     aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+              {%- assign thumb_alt = media.alt | default: product.title | escape -%}
               {{ media | image_url: width: 200 | image_tag: loading: 'lazy',
-                 alt: media.alt | default: product.title | escape }}
+                 alt: thumb_alt }}
             </button>
           {%- endfor -%}
         </div>

@@ -7,9 +7,10 @@
 
     {%- if article.image -%}
       <div class="article-hero">
+        {%- assign article_alt = article.title | escape -%}
         {{ article.image | image_url: width: 1200 | image_tag:
            widths: '600,900,1200', sizes: '100vw', loading: 'eager',
-           alt: article.title | escape }}
+           alt: article_alt }}
       </div>
     {%- endif -%}
 

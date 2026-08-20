@@ -2,8 +2,9 @@
   <div class="wrap header__bar">
     <a class="header__logo" href="{{ routes.root_url }}">
       {%- if section.settings.logo != blank -%}
+        {%- assign logo_alt = shop.name | escape -%}
         {{ section.settings.logo | image_url: width: 300 | image_tag:
-             widths: '150,300', alt: shop.name | escape, loading: 'eager' }}
+             widths: '150,300', alt: logo_alt, loading: 'eager' }}
       {%- else -%}
         {{ shop.name }}
       {%- endif -%}

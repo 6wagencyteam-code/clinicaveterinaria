@@ -2,13 +2,14 @@
 <a class="product-card" href="{{ product.url }}" {% if reveal %}data-reveal{% endif %}>
   <div class="product-card__media">
     {%- if product.featured_media -%}
+      {%- assign card_alt = product.featured_media.alt | default: product.title | escape -%}
       {{ product.featured_media
          | image_url: width: 600
          | image_tag:
            widths: '200,300,400,600',
            sizes: '(min-width: 900px) 25vw, 45vw',
            loading: 'lazy',
-           alt: product.featured_media.alt | default: product.title | escape }}
+           alt: card_alt }}
     {%- else -%}
       {{ 'product-1' | placeholder_svg_tag }}
     {%- endif -%}

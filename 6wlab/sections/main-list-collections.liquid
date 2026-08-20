@@ -6,9 +6,10 @@
         <a class="product-card" href="{{ collection.url }}">
           <div class="product-card__media">
             {%- if collection.featured_image -%}
+              {%- assign col_alt = collection.title | escape -%}
               {{ collection.featured_image | image_url: width: 600 | image_tag:
                  widths: '300,600', sizes: '(min-width: 900px) 25vw, 45vw',
-                 loading: 'lazy', alt: collection.title | escape }}
+                 loading: 'lazy', alt: col_alt }}
             {%- else -%}
               {{ 'collection-1' | placeholder_svg_tag }}
             {%- endif -%}

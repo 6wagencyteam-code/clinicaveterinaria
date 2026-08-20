@@ -20,13 +20,14 @@
       {{ block.shopify_attributes }}>
 
       {%- if block.settings.image != blank -%}
+        {%- assign panel_alt = block.settings.heading | escape -%}
         {{ block.settings.image
            | image_url: width: 1200
            | image_tag:
              widths: '400,600,900,1200',
              sizes: '(min-width: 800px) 34vw, 100vw',
              loading: loading_attr,
-             alt: block.settings.heading | escape }}
+             alt: panel_alt }}
       {%- endif -%}
 
       <h2>{{ block.settings.heading }}</h2>
