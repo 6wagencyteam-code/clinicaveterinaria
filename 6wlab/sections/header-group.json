@@ -2,8 +2,23 @@
   "type": "header",
   "name": "Encabezado",
   "sections": {
-    "announcement": { "type": "announcement-bar", "settings": {} },
-    "header": { "type": "header", "settings": { "cta_label": "Reservar hora", "cta_link": "/pages/reservar" } }
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "text": "37 años cuidando a las mascotas de Reñaca"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "cta_label": "Reservar hora",
+        "cta_link": "/pages/reservar",
+        "logo": "shopify://shop_images/Plan_de_travail_4.png"
+      }
+    }
   },
-  "order": ["announcement", "header"]
+  "order": [
+    "announcement",
+    "header"
+  ]
 }

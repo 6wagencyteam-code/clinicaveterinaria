@@ -28,6 +28,8 @@
     "show_vendor": true,
     "show_sale_badge": true,
     "products_per_row": "4",
-    "sections": {}
+    "sections": {},
+    "favicon": "shopify://shop_images/LOGOO.png",
+    "share_image": "shopify://shop_images/Plan_de_travail_4.png"
   }
 }

@@ -1,0 +1,17 @@
+{%- comment -%}
+  Bloque de código propio. Permite conservar secciones hechas a medida
+  (HTML, CSS y Liquid) exactamente como estaban.
+{%- endcomment -%}
+<div class="custom-liquid">
+  {{ section.settings.custom_liquid }}
+</div>
+
+{% schema %}
+{
+  "name": "Código personalizado",
+  "settings": [
+    { "type": "liquid", "id": "custom_liquid", "label": "Código", "info": "HTML, CSS y Liquid." }
+  ],
+  "presets": [{ "name": "Código personalizado" }]
+}
+{% endschema %}
