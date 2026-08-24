@@ -4,40 +4,51 @@
     assign count = 3
   endif
 -%}
-<section class="hero-split hero-split--{{ count }}">
+<section class="hero-split hero-split--{{ count }}"
+         style="--hero-h: {{ section.settings.height }}px;">
   {%- for block in section.blocks -%}
-    {%- assign tag = 'div' -%}
-    {%- if block.settings.link != blank -%}{%- assign tag = 'a' -%}{%- endif -%}
-
-    {%- if forloop.first -%}
-      {%- assign loading_attr = 'eager' -%}
-    {%- else -%}
-      {%- assign loading_attr = 'lazy' -%}
-    {%- endif -%}
+    {%- liquid
+      assign tag = 'div'
+      if block.settings.link != blank
+        assign tag = 'a'
+      endif
+      if forloop.first
+        assign loading_attr = 'eager'
+      else
+        assign loading_attr = 'lazy'
+      endif
+      assign panel_alt = block.settings.heading | escape
+    -%}
 
     <{{ tag }} class="hero-panel"
       {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}
       {{ block.shopify_attributes }}>
 
       {%- if block.settings.image != blank -%}
-        {%- assign panel_alt = block.settings.heading | escape -%}
         {{ block.settings.image
-           | image_url: width: 1200
+           | image_url: width: 1400
            | image_tag:
-             widths: '400,600,900,1200',
-             sizes: '(min-width: 800px) 34vw, 100vw',
+             widths: '500,800,1100,1400',
+             sizes: '(min-width: 800px) 60vw, 100vw',
              loading: loading_attr,
              alt: panel_alt }}
       {%- endif -%}
 
-      <h2>{{ block.settings.heading }}</h2>
-      {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
-      {%- if block.settings.link != blank and block.settings.link_label != blank -%}
-        <span class="hero-panel__cta">
-          {{ block.settings.link_label }}
-          <span style="width:1.1rem">{%- render 'icon', name: 'arrow' -%}</span>
-        </span>
-      {%- endif -%}
+      <div class="hero-panel__body">
+        <h2 class="hero-panel__title">{{ block.settings.heading }}</h2>
+
+        <div class="hero-panel__reveal">
+          {%- if block.settings.text != blank -%}
+            <p class="hero-panel__text">{{ block.settings.text }}</p>
+          {%- endif -%}
+          {%- if block.settings.link != blank and block.settings.link_label != blank -%}
+            <span class="hero-panel__cta">
+              {{ block.settings.link_label }}
+              <span class="hero-panel__arrow">{%- render 'icon', name: 'arrow' -%}</span>
+            </span>
+          {%- endif -%}
+        </div>
+      </div>
     </{{ tag }}>
   {%- endfor -%}
 </section>
@@ -46,6 +57,12 @@
 {
   "name": "Portada dividida",
   "max_blocks": 3,
+  "settings": [
+    {
+      "type": "range", "id": "height", "label": "Alto de las fotos",
+      "min": 400, "max": 900, "step": 20, "unit": "px", "default": 680
+    }
+  ],
   "blocks": [
     {
       "type": "panel",
@@ -63,9 +80,9 @@
     {
       "name": "Portada dividida",
       "blocks": [
-        { "type": "panel", "settings": { "heading": "Clínica", "text": "Consultas, cirugías, vacunas y más. 37 años cuidando a tu mascota." } },
-        { "type": "panel", "settings": { "heading": "Tienda y Farmacia", "text": "Alimentos premium, medicamentos y todo lo que tu mascota necesita." } },
-        { "type": "panel", "settings": { "heading": "Peluquería", "text": "Baño sanitario, corte y estética con amor y paciencia." } }
+        { "type": "panel", "settings": { "heading": "Clínica" } },
+        { "type": "panel", "settings": { "heading": "Tienda y Farmacia" } },
+        { "type": "panel", "settings": { "heading": "Peluquería" } }
       ]
     }
   ]

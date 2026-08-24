@@ -1,4 +1,7 @@
-<section class="promo" {% if section.settings.bg_color != blank %}style="background:{{ section.settings.bg_color }}"{% endif %}>
+<section class="promo" style="
+  {% if section.settings.bg_color != blank %}background: {{ section.settings.bg_color }};{% endif %}
+  --promo-title: {{ section.settings.title_color }};
+  --promo-text: {{ section.settings.text_color }};">
   <div class="promo__media">
     {%- if section.settings.image != blank -%}
       {%- assign promo_alt = section.settings.title | escape -%}
@@ -25,15 +28,41 @@
   .promo { position: relative; isolation: isolate; overflow: hidden; }
   .promo__media { position: absolute; inset: 0; z-index: -1; }
   .promo__media img { width: 100%; height: 100%; object-fit: cover; }
-  .promo__inner { display: flex; align-items: center; min-height: clamp(380px, 52vh, 620px); padding-block: var(--pad-block); }
-  .promo__body { max-width: 34rem; }
-  .promo__tag {
-    display: inline-block; padding: .35em .9em; border-radius: var(--radius-pill);
-    background: var(--brand); color: var(--brand-ink);
-    font-size: var(--step--1); font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  .promo__inner {
+    display: flex; align-items: center;
+    min-height: clamp(460px, 66vh, 780px);
+    padding-block: var(--pad-block);
   }
-  .promo__title { margin: 0; font-size: var(--step-4); }
-  .promo__text { margin: 0; font-size: var(--step-1); color: var(--ink-muted); }
+  .promo__body { max-width: 32rem; }
+
+  /* Etiqueta azul redondeada, como una píldora */
+  .promo__tag {
+    display: inline-block; padding: .5em 1.3em; border-radius: var(--radius-pill);
+    background: var(--brand); color: var(--brand-ink);
+    font-size: var(--step--1); font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  }
+
+  .promo__title {
+    margin: 0;
+    font-size: clamp(2.6rem, 1.4rem + 5vw, 5rem);
+    font-weight: 800; line-height: .95; letter-spacing: -0.035em;
+    color: var(--promo-title, var(--ink));
+  }
+
+  .promo__text { margin: 0; font-size: var(--step-0); color: var(--promo-text, var(--ink-muted)); }
+
+  /* Botón rectangular, no de píldora */
+  .promo .btn {
+    border-radius: 10px; padding: 1em 2.2em;
+    font-size: var(--step-0); font-weight: 800;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+
+  @media (max-width: 749px) {
+    .promo__inner { min-height: 0; }
+    .promo__media { position: relative; height: 60vw; }
+    .promo { background: var(--surface); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -45,6 +74,8 @@
     { "type": "text", "id": "subtitle", "label": "Etiqueta", "default": "PET SHOP" },
     { "type": "text", "id": "title", "label": "Título", "default": "PURINA PRO PLAN" },
     { "type": "text", "id": "text", "label": "Texto", "default": "Nueva fórmula para piel y estómago sensibles." },
+    { "type": "color", "id": "title_color", "label": "Color del título", "default": "#111111" },
+    { "type": "color", "id": "text_color", "label": "Color del texto", "default": "#333333" },
     { "type": "text", "id": "link_label", "label": "Texto del botón", "default": "COMPRA AHORA" },
     { "type": "url", "id": "link", "label": "Enlace" }
   ],

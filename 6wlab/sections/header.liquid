@@ -1,10 +1,10 @@
-<header class="header">
+<header class="header header--{{ section.settings.color_scheme }}">
   <div class="wrap header__bar">
     <a class="header__logo" href="{{ routes.root_url }}">
       {%- if section.settings.logo != blank -%}
         {%- assign logo_alt = shop.name | escape -%}
-        {{ section.settings.logo | image_url: width: 300 | image_tag:
-             widths: '150,300', alt: logo_alt, loading: 'eager' }}
+        {{ section.settings.logo | image_url: width: 600 | image_tag:
+             widths: '200,300,450,600', alt: logo_alt, loading: 'eager' }}
       {%- else -%}
         {{ shop.name }}
       {%- endif -%}
@@ -21,8 +21,20 @@
     </nav>
 
     <div class="header__actions">
+      {%- if section.settings.phone_primary != blank -%}
+        <div class="header__phones">
+          <span class="header__phone-icon" aria-hidden="true">{%- render 'icon', name: 'phone' -%}</span>
+          <div>
+            <a href="tel:{{ section.settings.phone_primary | remove: ' ' }}">{{ section.settings.phone_primary }}</a>
+            {%- if section.settings.phone_secondary != blank -%}
+              <a href="tel:{{ section.settings.phone_secondary | remove: ' ' }}">{{ section.settings.phone_secondary }}</a>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
       {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
-        <a class="btn btn--sm" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+        <a class="btn btn--sm header__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
       {%- endif -%}
 
       <a class="icon-btn" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">
@@ -53,6 +65,14 @@
         <li><a href="{{ link.url }}">{{ link.title }}</a></li>
       {%- endfor -%}
     </ul>
+    {%- if section.settings.phone_primary != blank -%}
+      <p class="mobile-nav__phone">
+        <a href="tel:{{ section.settings.phone_primary | remove: ' ' }}">{{ section.settings.phone_primary }}</a>
+        {%- if section.settings.phone_secondary != blank -%}
+          · <a href="tel:{{ section.settings.phone_secondary | remove: ' ' }}">{{ section.settings.phone_secondary }}</a>
+        {%- endif -%}
+      </p>
+    {%- endif -%}
   </div>
 </header>
 
@@ -62,7 +82,16 @@
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Logo" },
     { "type": "link_list", "id": "menu", "label": "Menú", "default": "main-menu" },
-    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Reservar hora" },
+    {
+      "type": "select", "id": "color_scheme", "label": "Color del encabezado", "default": "brand",
+      "options": [
+        { "value": "brand", "label": "Azul de marca" },
+        { "value": "light", "label": "Blanco" }
+      ]
+    },
+    { "type": "text", "id": "phone_primary", "label": "Teléfono principal" },
+    { "type": "text", "id": "phone_secondary", "label": "Segundo teléfono" },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón" },
     { "type": "url", "id": "cta_link", "label": "Enlace del botón" }
   ]
 }

@@ -1,7 +1,8 @@
-<section class="section {% if section.settings.surface %}section--surface{% endif %}">
+<section class="section section--{{ section.settings.bg }}{% if section.settings.join_prev %} section--joined-top{% endif %}">
   <div class="wrap">
     <div class="team {% if section.settings.image_right %}team--flip{% endif %}">
       <div class="team__media">
+        <div class="team__frame">
         {%- if section.settings.image != blank -%}
           {%- assign team_alt = section.settings.name | escape -%}
           {{ section.settings.image | image_url: width: 900 | image_tag:
@@ -10,6 +11,7 @@
         {%- else -%}
           {{ 'lifestyle-2' | placeholder_svg_tag }}
         {%- endif -%}
+        </div>
 
         {%- if section.settings.stat_figure != blank -%}
           <div class="team__badge">
@@ -52,7 +54,16 @@
 {% stylesheet %}
   .team { display: grid; gap: calc(var(--gap) * 1.8); align-items: center; }
   .team__media { position: relative; }
-  .team__media img, .team__media svg { width: 100%; border-radius: var(--radius); }
+  .team__frame { overflow: hidden; border-radius: var(--radius); }
+  .team__media img, .team__media svg {
+    width: 100%; display: block;
+    transition: transform 0.6s var(--ease);
+  }
+  .team__media:hover img { transform: scale(1.05); }
+  @media (prefers-reduced-motion: reduce) {
+    .team__media img { transition: none; }
+    .team__media:hover img { transform: none; }
+  }
   .team__badge {
     position: absolute; left: 1rem; bottom: 1rem;
     padding: .85rem 1.15rem; border-radius: var(--radius);
@@ -91,7 +102,15 @@
     { "type": "text", "id": "link_label", "label": "Texto del botón" },
     { "type": "url", "id": "link", "label": "Enlace" },
     { "type": "checkbox", "id": "image_right", "label": "Foto a la derecha", "default": false },
-    { "type": "checkbox", "id": "surface", "label": "Fondo gris suave", "default": false }
+    { "type": "checkbox", "id": "join_prev", "label": "Unir con la sección anterior", "default": false },
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "brand",
+      "options": [
+        { "value": "default", "label": "Blanco" },
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "brand", "label": "Azul de marca" }
+      ]
+    }
   ],
   "presets": [{ "name": "Equipo" }]
 }

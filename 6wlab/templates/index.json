@@ -47,61 +47,61 @@
         "w1": {
           "type": "item",
           "settings": {
-            "text": "Reñaca ✦"
+            "text": "Reñaca"
           }
         },
         "w2": {
           "type": "item",
           "settings": {
-            "text": "Consultas Médicas ✦"
+            "text": "Consultas Médicas"
           }
         },
         "w3": {
           "type": "item",
           "settings": {
-            "text": "Vacunación ✦"
+            "text": "Vacunación"
           }
         },
         "w4": {
           "type": "item",
           "settings": {
-            "text": "Cirugía Veterinaria ✦"
+            "text": "Cirugía Veterinaria"
           }
         },
         "w5": {
           "type": "item",
           "settings": {
-            "text": "Peluquería Canina ✦"
+            "text": "Peluquería Canina"
           }
         },
         "w6": {
           "type": "item",
           "settings": {
-            "text": "Farmacia Veterinaria ✦"
+            "text": "Farmacia Veterinaria"
           }
         },
         "w7": {
           "type": "item",
           "settings": {
-            "text": "37 Años ✦"
+            "text": "37 Años"
           }
         },
         "w8": {
           "type": "item",
           "settings": {
-            "text": "Pacientes Exóticos ✦"
+            "text": "Pacientes Exóticos"
           }
         },
         "w9": {
           "type": "item",
           "settings": {
-            "text": "Ecografías ✦"
+            "text": "Ecografías"
           }
         },
         "w10": {
           "type": "item",
           "settings": {
-            "text": "Pet Shop ✦"
+            "text": "Pet Shop"
           }
         }
       },
@@ -191,7 +191,8 @@
         "b"
       ],
       "settings": {
-        "surface": false
+        "bg": "brand",
+        "join_next": true
       }
     },
     "doctor1": {
@@ -208,7 +209,8 @@
         "link_label": "Pide Una Hora",
         "link": "/pages/reservar",
         "image_right": false,
-        "surface": false
+        "bg": "brand",
+        "join_prev": true
       }
     },
     "doctor2": {
@@ -225,7 +227,8 @@
         "link_label": "Pide Una Hora",
         "link": "/pages/reservar",
         "image_right": true,
-        "surface": true
+        "bg": "default",
+        "join_prev": false
       }
     },
     "vaccines": {
@@ -341,9 +344,12 @@
     "products": {
       "type": "featured-collection",
       "settings": {
-        "eyebrow": "Pet Shop",
+        "eyebrow": "",
         "heading": "Pet Picks Just For You",
-        "limit": 8
+        "limit": 12,
+        "per_row": 5,
+        "link_label": "",
+        "bg": "default"
       }
     },
     "promo": {

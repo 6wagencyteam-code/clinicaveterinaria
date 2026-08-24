@@ -1,4 +1,4 @@
-<section class="section {% if section.settings.surface %}section--surface{% endif %}">
+<section class="section section--{{ section.settings.bg }}{% if section.settings.join_next %} section--joined-bottom{% endif %}">
   <div class="wrap wrap--narrow text-center stack">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
@@ -20,7 +20,17 @@
 {% schema %}
 {
   "name": "Texto destacado",
-  "settings": [{ "type": "checkbox", "id": "surface", "label": "Fondo gris suave", "default": false }],
+  "settings": [
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "default",
+      "options": [
+        { "value": "default", "label": "Blanco" },
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "brand", "label": "Azul de marca" }
+      ]
+    },
+    { "type": "checkbox", "id": "join_next", "label": "Unir con la sección siguiente", "default": false }
+  ],
   "blocks": [
     { "type": "eyebrow", "name": "Texto pequeño", "settings": [{ "type": "text", "id": "text", "label": "Texto", "default": "Sobre nosotros" }] },
     { "type": "heading", "name": "Título", "settings": [{ "type": "text", "id": "text", "label": "Texto", "default": "Cuidamos a tu mascota como si fuera nuestra" }] },

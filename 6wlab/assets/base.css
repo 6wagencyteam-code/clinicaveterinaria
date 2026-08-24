@@ -132,9 +132,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .section { padding-block: var(--pad-block); }
 .section--tight { padding-block: calc(var(--pad-block) * 0.55); }
+.section--default { background: var(--bg); }
 .section--surface { background: var(--surface); }
 .section--brand { background: var(--brand); color: var(--brand-ink); }
-.section--brand .lede, .section--brand .eyebrow { color: inherit; opacity: 0.85; }
+.section--brand .lede { color: inherit; opacity: 0.9; }
+.section--brand .eyebrow { background: rgba(255, 255, 255, 0.18); color: inherit; }
+.section--brand .btn--ghost { --btn-ink: #fff; --btn-line: rgba(255, 255, 255, 0.55); }
+.section--brand .btn--ghost:hover { --btn-line: #fff; }
+.section--brand .btn { --btn-bg: #fff; --btn-ink: var(--brand); --btn-line: #fff; }
+.section--brand a { color: inherit; }
+
+/* Secciones azules más ajustadas: se leen como un solo bloque */
+.section--joined-top { padding-top: 0; }
+.section--joined-bottom { padding-bottom: 0; }
 
 .stack > * + * { margin-top: var(--gap); }
 
@@ -314,10 +324,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* ------------------------------------------------------------- 7. Header */
 
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 40;
+.header { position: sticky; top: 0; z-index: 40; }
+
+/* Encabezado azul: logo, menú, teléfonos e íconos en blanco */
+.header--brand { background: var(--brand); color: var(--brand-ink); }
+.header--brand a { color: inherit; }
+.header--brand .nav a:hover,
+.header--brand .nav a[aria-current='page'] { background: rgba(255, 255, 255, 0.16); }
+.header--brand .icon-btn:hover { background: rgba(255, 255, 255, 0.16); }
+.header--brand .cart-count { background: #fff; color: var(--brand); }
+.header--brand .mobile-nav { border-top-color: rgba(255, 255, 255, 0.25); }
+.header--brand .btn { --btn-bg: #fff; --btn-ink: var(--brand); --btn-line: #fff; }
+
+.header--light {
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
@@ -331,23 +350,45 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 .header__logo { flex: 0 0 auto; font-size: var(--step-1); font-weight: 700; text-decoration: none; }
-.header__logo img { max-height: 44px; width: auto; }
+.header__logo img { max-height: 62px; width: auto; }
 
-.nav { display: none; flex: 1; }
-.nav ul { display: flex; gap: 0.35rem; margin: 0; padding: 0; list-style: none; }
+/* El menú ocupa el centro del encabezado */
+.nav { display: none; flex: 1 1 auto; }
+.nav ul { display: flex; justify-content: center; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
 
 .nav a {
   display: block;
-  padding: 0.5em 0.85em;
+  padding: 0.55em 1em;
   border-radius: var(--radius-pill);
+  font-size: var(--step-0);
   font-weight: 500;
   text-decoration: none;
+  white-space: nowrap;
   transition: background 0.15s var(--ease);
 }
 
 .nav a:hover, .nav a[aria-current='page'] { background: var(--surface-2); }
 
 .header__actions { display: flex; align-items: center; gap: 0.3rem; margin-left: auto; }
+
+/* Teléfonos de contacto */
+.header__phones {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-right: 0.6rem;
+  font-size: var(--step--1);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.header__phones a { display: block; text-decoration: none; white-space: nowrap; }
+.header__phones a:hover { text-decoration: underline; }
+.header__phone-icon { flex: 0 0 auto; width: 1.5rem; }
+.header__phone-icon svg { width: 100%; height: auto; }
+
+@media (max-width: 1180px) { .header__phones { display: none; } }
+@media (max-width: 1300px) { .header__cta { display: none; } }
 
 .icon-btn {
   display: grid;
@@ -357,13 +398,14 @@ button, input, select, textarea { font: inherit; color: inherit; }
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
+  color: inherit;
   cursor: pointer;
   position: relative;
   transition: background 0.15s var(--ease);
 }
 
 .icon-btn:hover { background: var(--surface-2); }
-.icon-btn svg { width: 1.35rem; height: 1.35rem; }
+.icon-btn svg { width: 1.4rem; height: 1.4rem; }
 
 .cart-count {
   position: absolute;
@@ -381,7 +423,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .cart-count[hidden] { display: none; }
 
-@media (min-width: 900px) {
+@media (min-width: 1000px) {
   .nav { display: block; }
   .nav-toggle { display: none; }
 }
@@ -391,8 +433,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .mobile-nav[hidden] { display: none; }
 .mobile-nav ul { margin: 0; padding: 0.5rem 0 1rem; list-style: none; }
 .mobile-nav a { display: block; padding: 0.7rem 0; font-size: var(--step-1); font-weight: 600; text-decoration: none; }
+.mobile-nav__phone { padding-bottom: 1rem; font-weight: 700; }
 
-@media (min-width: 900px) { .mobile-nav { display: none; } }
+@media (min-width: 1000px) { .mobile-nav { display: none; } }
 
 /* -------------------------------------------------------- 8. Announcement */
 
@@ -408,22 +451,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* --------------------------------------------------------------- 9. Hero */
 
-.hero-split { display: grid; gap: 3px; grid-template-columns: 1fr; }
-
-@media (min-width: 800px) {
-  .hero-split--2 { grid-template-columns: repeat(2, 1fr); }
-  .hero-split--3 { grid-template-columns: repeat(3, 1fr); }
-}
+.hero-split { display: grid; grid-template-columns: 1fr; gap: 0; }
 
 .hero-panel {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: clamp(340px, 46vh, 560px);
-  padding: calc(var(--gap) * 1.4);
+  align-items: center;
+  min-height: min(var(--hero-h, 680px), 78vh);
+  padding: clamp(1.5rem, 3vw, 3rem);
   overflow: hidden;
   color: #fff;
+  text-align: center;
   text-decoration: none;
   isolation: isolate;
 }
@@ -435,7 +475,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s var(--ease);
+  transition: transform 0.7s var(--ease);
 }
 
 .hero-panel::after {
@@ -443,18 +483,62 @@ button, input, select, textarea { font: inherit; color: inherit; }
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(10, 12, 24, 0.05) 30%, rgba(10, 12, 24, 0.78) 100%);
+  background: linear-gradient(180deg, rgba(10, 12, 24, 0) 35%, rgba(10, 12, 24, 0.72) 100%);
+  transition: opacity 0.4s var(--ease);
 }
 
-.hero-panel:hover img { transform: scale(1.04); }
-.hero-panel h2 { margin-bottom: 0.35rem; font-size: var(--step-2); }
-.hero-panel p { margin-bottom: 1rem; opacity: 0.92; font-size: var(--step--1); }
+.hero-panel__body { width: 100%; max-width: 32rem; }
+
+.hero-panel__title {
+  margin: 0;
+  font-size: var(--step-2);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.hero-panel__text { margin: 0.6rem 0 0; font-size: var(--step--1); opacity: 0.95; }
 
 .hero-panel__cta {
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
+  margin-top: 0.9rem;
   font-weight: 600;
+}
+
+.hero-panel__arrow { width: 1.1rem; }
+
+@media (min-width: 800px) {
+  /* Las fotos se reparten el ancho; al pasar el cursor, la de encima crece
+     y las otras se corren para dejarle espacio al texto. */
+  .hero-split--2, .hero-split--3 { display: flex; }
+
+  .hero-split--2 > *, .hero-split--3 > * {
+    flex: 1 1 0;
+    min-width: 0;
+    transition: flex-grow 0.55s var(--ease);
+  }
+
+  .hero-split:hover .hero-panel { flex-grow: 0.82; }
+  .hero-split .hero-panel:hover,
+  .hero-split .hero-panel:focus-visible { flex-grow: 1.6; }
+  .hero-split .hero-panel:hover img { transform: scale(1.05); }
+
+  /* La descripción aparece sólo en la foto que está bajo el cursor */
+  .hero-panel__reveal {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 0.5s var(--ease), opacity 0.35s var(--ease);
+  }
+
+  .hero-panel__reveal > * { overflow: hidden; }
+
+  .hero-panel:hover .hero-panel__reveal,
+  .hero-panel:focus-visible .hero-panel__reveal { grid-template-rows: 1fr; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-split--2 > *, .hero-split--3 > *, .hero-panel img, .hero-panel__reveal { transition: none; }
 }
 
 /* ---------------------------------------------------------- 10. Marquesina */
@@ -462,21 +546,30 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .marquee {
   overflow: hidden;
   padding: 0.9rem 0;
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--brand);
+  color: var(--brand-ink);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
 .marquee__track {
   display: flex;
-  gap: 3rem;
+  align-items: center;
+  gap: 1.6rem;
   width: max-content;
   animation: marquee 32s linear infinite;
 }
 
 .marquee:hover .marquee__track { animation-play-state: paused; }
 .marquee span { font-size: var(--step-1); font-weight: 600; white-space: nowrap; }
+
+/* Separador "+" entre cada frase */
+.marquee__track > span::after {
+  content: '+';
+  margin-left: 1.6rem;
+  font-weight: 400;
+  opacity: 0.5;
+}
 
 @keyframes marquee { to { transform: translateX(-50%); } }
 
@@ -536,8 +629,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
   top: 0.7rem; left: 0.7rem;
   padding: 0.25em 0.7em;
   border-radius: var(--radius-pill);
-  background: var(--ink);
-  color: var(--bg);
+  background: var(--brand);
+  color: var(--brand-ink);
   font-size: var(--step--1);
   font-weight: 600;
 }
@@ -728,3 +821,10 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .text-center { text-align: center; }
 .muted { color: var(--ink-muted); }
 .empty-state { padding-block: calc(var(--pad-block) * 0.8); text-align: center; }
+
+/* ------------------------------------------- 18. Equipo sobre fondo azul */
+
+.section--brand .team__creds { background: rgba(255, 255, 255, 0.14); }
+.section--brand .team__creds ul { color: inherit; opacity: 0.92; }
+.section--brand .team__quote { border-left-color: rgba(255, 255, 255, 0.6); color: inherit; opacity: 0.9; }
+.section--brand .team__badge { background: #fff; color: var(--brand); }

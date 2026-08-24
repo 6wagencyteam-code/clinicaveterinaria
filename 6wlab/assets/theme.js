@@ -254,6 +254,38 @@
     });
   };
 
+
+  /* ------------------------------------------- Flechas de los carruseles */
+
+  const initRails = () => {
+    $$('[data-rail]').forEach((rail) => {
+      const head = rail.closest('section')?.querySelector('.rail-nav');
+      if (!head) return;
+
+      const prev = $('[data-rail-prev]', head);
+      const next = $('[data-rail-next]', head);
+
+      const step = () => {
+        const first = rail.firstElementChild;
+        if (!first) return rail.clientWidth;
+        const gap = parseFloat(getComputedStyle(rail).columnGap || '0') || 0;
+        return first.getBoundingClientRect().width + gap;
+      };
+
+      const sync = () => {
+        const max = rail.scrollWidth - rail.clientWidth - 2;
+        if (prev) prev.toggleAttribute('disabled', rail.scrollLeft <= 2);
+        if (next) next.toggleAttribute('disabled', rail.scrollLeft >= max);
+      };
+
+      prev?.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
+      next?.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+      rail.addEventListener('scroll', sync, { passive: true });
+      window.addEventListener('resize', sync);
+      sync();
+    });
+  };
+
   /* ------------------------------------------------------- Marquesina */
 
   const initMarquee = () => {
@@ -299,6 +331,7 @@
     initQuantity();
     initVariants();
     initGallery();
+    initRails();
     initMarquee();
     initReveal();
   };

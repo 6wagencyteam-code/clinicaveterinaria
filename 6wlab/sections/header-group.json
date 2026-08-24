@@ -5,15 +5,18 @@
     "announcement": {
       "type": "announcement-bar",
       "settings": {
-        "text": "37 años cuidando a las mascotas de Reñaca"
+        "text": ""
       }
     },
     "header": {
       "type": "header",
       "settings": {
-        "cta_label": "Reservar hora",
-        "cta_link": "/pages/reservar",
-        "logo": "shopify://shop_images/Plan_de_travail_4.png"
+        "cta_label": "",
+        "cta_link": "",
+        "logo": "shopify://shop_images/Plan_de_travail_4.png",
+        "color_scheme": "brand",
+        "phone_primary": "+56 32 2833 333",
+        "phone_secondary": "+56 9 9820 6789"
       }
     }
   },
