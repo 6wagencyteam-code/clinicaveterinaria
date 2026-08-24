@@ -50,7 +50,7 @@
   --shadow-lg: 0 2px 6px rgba(20, 22, 31, 0.07), 0 18px 46px rgba(20, 22, 31, 0.13);
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --header-h: 72px;
+  --header-h: 112px;
 }
 
 /* Esquema oscuro sólo si la persona lo pide en su sistema */
@@ -140,11 +140,11 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .section--brand .btn--ghost { --btn-ink: #fff; --btn-line: rgba(255, 255, 255, 0.55); }
 .section--brand .btn--ghost:hover { --btn-line: #fff; }
 .section--brand .btn { --btn-bg: #fff; --btn-ink: var(--brand); --btn-line: #fff; }
-.section--brand a { color: inherit; }
+.section--brand a:not(.btn) { color: inherit; }
 
 /* Secciones azules más ajustadas: se leen como un solo bloque */
-.section--joined-top { padding-top: 0; }
-.section--joined-bottom { padding-bottom: 0; }
+.section--joined-top { padding-top: calc(var(--pad-block) * 0.28); }
+.section--joined-bottom { padding-bottom: calc(var(--pad-block) * 0.28); }
 
 .stack > * + * { margin-top: var(--gap); }
 
@@ -328,7 +328,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 /* Encabezado azul: logo, menú, teléfonos e íconos en blanco */
 .header--brand { background: var(--brand); color: var(--brand-ink); }
-.header--brand a { color: inherit; }
+.header--brand a:not(.btn) { color: inherit; }
 .header--brand .nav a:hover,
 .header--brand .nav a[aria-current='page'] { background: rgba(255, 255, 255, 0.16); }
 .header--brand .icon-btn:hover { background: rgba(255, 255, 255, 0.16); }
@@ -350,7 +350,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 .header__logo { flex: 0 0 auto; font-size: var(--step-1); font-weight: 700; text-decoration: none; }
-.header__logo img { max-height: 62px; width: auto; }
+.header__logo img { max-height: var(--logo-h, 78px); width: auto; }
 
 /* El menú ocupa el centro del encabezado */
 .nav { display: none; flex: 1 1 auto; }
@@ -459,7 +459,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  min-height: min(var(--hero-h, 680px), 78vh);
+  min-height: min(var(--hero-h, 820px), 88vh);
   padding: clamp(1.5rem, 3vw, 3rem);
   overflow: hidden;
   color: #fff;
@@ -491,17 +491,19 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .hero-panel__title {
   margin: 0;
-  font-size: var(--step-2);
+  font-size: var(--step-1);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
 }
 
-.hero-panel__text { margin: 0.6rem 0 0; font-size: var(--step--1); opacity: 0.95; }
+.hero-panel__text { margin: 0.55rem 0 0; font-size: var(--step--1); opacity: 0.92; }
 
 .hero-panel__cta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4em;
   margin-top: 0.9rem;
+  font-size: var(--step--1);
   font-weight: 600;
 }
 
@@ -548,8 +550,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
   padding: 0.9rem 0;
   background: var(--brand);
   color: var(--brand-ink);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
 .marquee__track {
@@ -772,6 +772,17 @@ button, input, select, textarea { font: inherit; color: inherit; }
 /* ------------------------------------------------------------- 15. Footer */
 
 .footer { padding-block: var(--pad-block) 2rem; background: var(--surface); }
+.footer--surface { background: var(--surface); }
+
+/* Pie de página azul */
+.footer--brand { background: var(--brand); color: var(--brand-ink); }
+.footer--brand a { color: rgba(255, 255, 255, 0.82); }
+.footer--brand a:hover { color: #fff; }
+.footer--brand .muted { color: rgba(255, 255, 255, 0.82); }
+.footer--brand .footer__bottom { border-top-color: rgba(255, 255, 255, 0.25); color: rgba(255, 255, 255, 0.82); }
+
+.footer__credit { margin: 0; font-weight: 700; letter-spacing: 0.1em; }
+.footer__credit a { text-decoration: none; }
 .footer__grid { display: grid; gap: calc(var(--gap) * 1.4); grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
 .footer h3 { font-size: var(--step-0); text-transform: uppercase; letter-spacing: 0.05em; }
 .footer ul { margin: 0; padding: 0; list-style: none; }
@@ -828,3 +839,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .section--brand .team__creds ul { color: inherit; opacity: 0.92; }
 .section--brand .team__quote { border-left-color: rgba(255, 255, 255, 0.6); color: inherit; opacity: 0.9; }
 .section--brand .team__badge { background: #fff; color: var(--brand); }
+
+/* -------------------------------------------------- 19. Cifras animadas */
+
+.stat__figure { font-size: var(--step-2); }
+.stat__figure[data-count] { font-variant-numeric: tabular-nums; }

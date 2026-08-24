@@ -1,4 +1,4 @@
-<header class="header header--{{ section.settings.color_scheme }}">
+<header class="header header--{{ section.settings.color_scheme }}" style="--logo-h: {{ section.settings.logo_height }}px;">
   <div class="wrap header__bar">
     <a class="header__logo" href="{{ routes.root_url }}">
       {%- if section.settings.logo != blank -%}
@@ -81,6 +81,7 @@
   "name": "Encabezado",
   "settings": [
     { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "range", "id": "logo_height", "label": "Alto del logo", "min": 40, "max": 140, "step": 2, "unit": "px", "default": 78 },
     { "type": "link_list", "id": "menu", "label": "Menú", "default": "main-menu" },
     {
       "type": "select", "id": "color_scheme", "label": "Color del encabezado", "default": "brand",

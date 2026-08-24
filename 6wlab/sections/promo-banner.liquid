@@ -1,7 +1,8 @@
 <section class="promo" style="
   {% if section.settings.bg_color != blank %}background: {{ section.settings.bg_color }};{% endif %}
   --promo-title: {{ section.settings.title_color }};
-  --promo-text: {{ section.settings.text_color }};">
+  --promo-text: {{ section.settings.text_color }};
+  --promo-h: {{ section.settings.height }}px;">
   <div class="promo__media">
     {%- if section.settings.image != blank -%}
       {%- assign promo_alt = section.settings.title | escape -%}
@@ -27,10 +28,10 @@
 {% stylesheet %}
   .promo { position: relative; isolation: isolate; overflow: hidden; }
   .promo__media { position: absolute; inset: 0; z-index: -1; }
-  .promo__media img { width: 100%; height: 100%; object-fit: cover; }
+  .promo__media img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
   .promo__inner {
     display: flex; align-items: center;
-    min-height: clamp(460px, 66vh, 780px);
+    min-height: min(var(--promo-h, 820px), 88vh);
     padding-block: var(--pad-block);
   }
   .promo__body { max-width: 32rem; }
@@ -70,6 +71,7 @@
   "name": "Banner promocional",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Imagen de fondo" },
+    { "type": "range", "id": "height", "label": "Alto del banner", "min": 400, "max": 1000, "step": 20, "unit": "px", "default": 820 },
     { "type": "color", "id": "bg_color", "label": "Color de fondo", "default": "#F6F7FB" },
     { "type": "text", "id": "subtitle", "label": "Etiqueta", "default": "PET SHOP" },
     { "type": "text", "id": "title", "label": "Título", "default": "PURINA PRO PLAN" },

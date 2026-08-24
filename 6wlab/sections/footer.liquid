@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer footer--{{ section.settings.bg }}">
   <div class="wrap">
     <div class="footer__grid">
       <div>
@@ -53,6 +53,16 @@
     <div class="footer__bottom">
       <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
 
+      {%- if section.settings.credit_label != blank -%}
+        <p class="footer__credit">
+          {%- if section.settings.credit_link != blank -%}
+            <a href="{{ section.settings.credit_link }}" target="_blank" rel="noopener">{{ section.settings.credit_label }}</a>
+          {%- else -%}
+            {{ section.settings.credit_label }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
       {%- if settings.social_instagram != blank or settings.social_facebook != blank or settings.social_tiktok != blank -%}
         <p style="display:flex;gap:.75rem">
           {%- if settings.social_instagram != blank -%}
@@ -73,6 +83,17 @@
 {% schema %}
 {
   "name": "Pie de página",
+  "settings": [
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "brand",
+      "options": [
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "brand", "label": "Azul de marca" }
+      ]
+    },
+    { "type": "text", "id": "credit_label", "label": "Crédito", "default": "POWERED BY 6W AGENCY" },
+    { "type": "url", "id": "credit_link", "label": "Enlace del crédito" }
+  ],
   "blocks": [
     {
       "type": "menu",

@@ -255,6 +255,65 @@
   };
 
 
+
+  /* ------------------------------------- Cifras que suben como cronómetro */
+
+  const initCounters = () => {
+    const items = $$('[data-count]');
+    if (!items.length) return;
+
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* Separa "5.000+" en prefijo, número y sufijo para poder animar sólo el número */
+    const parse = (raw) => {
+      const m = String(raw).match(/^(\D*?)([\d.,]+)(\D*)$/);
+      if (!m) return null;
+      const digits = m[2].replace(/\./g, '').replace(',', '.');
+      const value = Number(digits);
+      return isNaN(value) ? null : { prefix: m[1], value, suffix: m[3] };
+    };
+
+    const run = (el) => {
+      const parts = parse(el.dataset.count);
+      if (!parts) return;
+
+      const format = (n) => parts.prefix + Math.round(n).toLocaleString('es-CL') + parts.suffix;
+
+      if (reduce) { el.textContent = format(parts.value); return; }
+
+      const duration = 1400;
+      let start = null;
+
+      const tick = (now) => {
+        if (start === null) start = now;
+        const p = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);   // arranca rápido y frena al final
+        el.textContent = format(parts.value * eased);
+        if (p < 1) requestAnimationFrame(tick);
+      };
+
+      requestAnimationFrame(tick);
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(run);
+      return;
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        run(entry.target);
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.4 });
+
+    items.forEach((el) => {
+      el.textContent = parse(el.dataset.count) ? '0' : el.dataset.count;
+      io.observe(el);
+    });
+  };
+
   /* ------------------------------------------- Flechas de los carruseles */
 
   const initRails = () => {
@@ -331,6 +390,7 @@
     initQuantity();
     initVariants();
     initGallery();
+    initCounters();
     initRails();
     initMarquee();
     initReveal();

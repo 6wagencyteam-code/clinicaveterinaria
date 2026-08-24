@@ -5,12 +5,31 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "menu": { "type": "menu", "settings": { "title": "Explorar" } },
-        "hours": { "type": "hours", "settings": { "title": "Horario" } }
+        "menu": {
+          "type": "menu",
+          "settings": {
+            "title": "Explorar"
+          }
+        },
+        "hours": {
+          "type": "hours",
+          "settings": {
+            "title": "Horario"
+          }
+        }
       },
-      "block_order": ["menu", "hours"],
-      "settings": {}
+      "block_order": [
+        "menu",
+        "hours"
+      ],
+      "settings": {
+        "bg": "brand",
+        "credit_label": "POWERED BY 6W AGENCY",
+        "credit_link": "https://www.6wagency.com"
+      }
     }
   },
-  "order": ["footer"]
+  "order": [
+    "footer"
+  ]
 }

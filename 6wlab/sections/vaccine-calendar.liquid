@@ -1,7 +1,7 @@
 <script src="{{ 'vaccines.js' | asset_url }}" defer></script>
 {%- assign today = 'now' | date: '%Y-%m-%d' -%}
 
-<section class="section {% if section.settings.surface %}section--surface{% endif %}">
+<section class="section section--{{ section.settings.bg }}{% if section.settings.tight %} section--tight{% endif %}">
   <div class="wrap">
     <div class="section-head section-head--center">
       {%- if section.settings.eyebrow != blank -%}
@@ -132,6 +132,16 @@
     .vx { grid-template-columns: auto 1fr; }
     .vx__state { grid-column: 2; }
   }
+
+  /* Sobre fondo azul */
+  .section--brand .vx-summary { background: rgba(255, 255, 255, 0.16); }
+  .section--brand .vx {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: transparent;
+  }
+  .section--brand .vx__name { color: var(--ink); }
+  .section--brand .vx__meta { color: var(--ink-muted); }
+  .section--brand .vx-results .btn { --btn-bg: #fff; --btn-ink: var(--brand); --btn-line: #fff; }
 {% endstylesheet %}
 
 {% schema %}
@@ -144,7 +154,15 @@
     { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Reservar hora para vacunar" },
     { "type": "url", "id": "cta_link", "label": "Enlace del botón" },
     { "type": "text", "id": "disclaimer", "label": "Aviso", "default": "Este calendario es referencial. El plan definitivo lo determina el médico veterinario." },
-    { "type": "checkbox", "id": "surface", "label": "Fondo gris suave", "default": true }
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "brand",
+      "options": [
+        { "value": "default", "label": "Blanco" },
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "brand", "label": "Azul de marca" }
+      ]
+    },
+    { "type": "checkbox", "id": "tight", "label": "Menos espacio arriba y abajo", "default": true }
   ],
   "blocks": [
     {

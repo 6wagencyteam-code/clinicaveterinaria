@@ -16,7 +16,8 @@
         "logo": "shopify://shop_images/Plan_de_travail_4.png",
         "color_scheme": "brand",
         "phone_primary": "+56 32 2833 333",
-        "phone_secondary": "+56 9 9820 6789"
+        "phone_secondary": "+56 9 9820 6789",
+        "logo_height": 84
       }
     }
   },

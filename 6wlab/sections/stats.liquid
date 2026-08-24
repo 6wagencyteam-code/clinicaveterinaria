@@ -6,7 +6,7 @@
           {%- if block.settings.icon != 'none' -%}
             <span class="stat__icon">{%- render 'icon', name: block.settings.icon -%}</span>
           {%- endif -%}
-          <p class="stat__figure">{{ block.settings.figure }}</p>
+          <p class="stat__figure" data-count="{{ block.settings.figure | escape }}">{{ block.settings.figure }}</p>
           <p class="stat__label">{{ block.settings.label }}</p>
         </div>
       {%- endfor -%}
