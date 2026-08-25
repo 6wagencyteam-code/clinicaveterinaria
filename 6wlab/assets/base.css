@@ -50,7 +50,7 @@
   --shadow-lg: 0 2px 6px rgba(20, 22, 31, 0.07), 0 18px 46px rgba(20, 22, 31, 0.13);
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --header-h: 112px;
+  --header-h: 132px;
 }
 
 /* Esquema oscuro sólo si la persona lo pide en su sistema */
@@ -487,7 +487,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   transition: opacity 0.4s var(--ease);
 }
 
-.hero-panel__body { width: 100%; max-width: 32rem; }
+.hero-panel__body { width: 100%; max-width: 24rem; }
 
 .hero-panel__title {
   margin: 0;
@@ -495,7 +495,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
 }
 
-.hero-panel__text { margin: 0.55rem 0 0; font-size: var(--step--1); opacity: 0.92; }
+.hero-panel__text { margin: 0.5rem 0 0; font-size: var(--step--1); line-height: 1.45; opacity: 0.92; }
 
 .hero-panel__cta {
   display: flex;
@@ -774,13 +774,6 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .footer { padding-block: var(--pad-block) 2rem; background: var(--surface); }
 .footer--surface { background: var(--surface); }
 
-/* Pie de página azul */
-.footer--brand { background: var(--brand); color: var(--brand-ink); }
-.footer--brand a { color: rgba(255, 255, 255, 0.82); }
-.footer--brand a:hover { color: #fff; }
-.footer--brand .muted { color: rgba(255, 255, 255, 0.82); }
-.footer--brand .footer__bottom { border-top-color: rgba(255, 255, 255, 0.25); color: rgba(255, 255, 255, 0.82); }
-
 .footer__credit { margin: 0; font-weight: 700; letter-spacing: 0.1em; }
 .footer__credit a { text-decoration: none; }
 .footer__grid { display: grid; gap: calc(var(--gap) * 1.4); grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); }
@@ -844,3 +837,36 @@ button, input, select, textarea { font: inherit; color: inherit; }
 
 .stat__figure { font-size: var(--step-2); }
 .stat__figure[data-count] { font-variant-numeric: tabular-nums; }
+
+/* ------------------------------------------ 20. Correcciones sobre azul */
+
+/* La tarjeta del calendario es blanca: su texto no puede heredar el blanco
+   de la sección, o los rótulos desaparecen. */
+.section--brand .vx-form { color: var(--ink); }
+.section--brand .vx-form .btn {
+  --btn-bg: var(--brand);
+  --btn-ink: var(--brand-ink);
+  --btn-line: var(--brand);
+}
+
+/* Ficha del equipo: texto más contenido */
+.team__body h2 { font-size: var(--step-2); }
+.team__body .lede { font-size: var(--step-0); }
+.team__creds ul { font-size: var(--step--1); }
+.team__quote { font-size: var(--step--1); }
+
+/* Pie de página azul — va al final para ganarle a las reglas grises */
+.footer--brand { background: var(--brand); color: var(--brand-ink); }
+.footer--brand h3,
+.footer--brand p,
+.footer--brand li,
+.footer--brand .muted,
+.footer--brand .footer__bottom { color: #fff; }
+.footer--brand a { color: #fff; }
+.footer--brand a:hover { color: #fff; text-decoration: underline; }
+.footer--brand .footer__bottom { border-top-color: rgba(255, 255, 255, 0.3); }
+
+/* Misma precaución para cualquier tarjeta blanca dentro de una sección azul */
+.section--brand .card { color: var(--ink); }
+.section--brand .card .card__text { color: var(--ink-muted); }
+.section--brand .card .btn { --btn-bg: var(--brand); --btn-ink: var(--brand-ink); --btn-line: var(--brand); }
