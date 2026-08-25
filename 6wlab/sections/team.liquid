@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="team {% if section.settings.image_right %}team--flip{% endif %}">
       <div class="team__media">
-        <div class="team__frame">
+        <div class="team__frame team__frame--{{ section.settings.image_ratio }}">
         {%- if section.settings.image != blank -%}
           {%- assign team_alt = section.settings.name | escape -%}
           {{ section.settings.image | image_url: width: 900 | image_tag:
@@ -52,9 +52,13 @@
 </section>
 
 {% stylesheet %}
-  .team { display: grid; gap: calc(var(--gap) * 1.8); align-items: center; }
+  /* El texto arranca a la misma altura que la foto */
+  .team { display: grid; gap: calc(var(--gap) * 1.8); align-items: start; }
   .team__media { position: relative; }
   .team__frame { overflow: hidden; border-radius: var(--radius); }
+  .team__frame--square img { aspect-ratio: 1; object-fit: cover; }
+  .team__frame--portrait img { aspect-ratio: 4 / 5; object-fit: cover; }
+  .team__frame--landscape img { aspect-ratio: 3 / 2; object-fit: cover; }
   .team__media img, .team__media svg {
     width: 100%; display: block;
     transition: transform 0.6s var(--ease);
@@ -102,6 +106,15 @@
     { "type": "text", "id": "link_label", "label": "Texto del botón" },
     { "type": "url", "id": "link", "label": "Enlace" },
     { "type": "checkbox", "id": "image_right", "label": "Foto a la derecha", "default": false },
+    {
+      "type": "select", "id": "image_ratio", "label": "Proporción de la foto", "default": "portrait",
+      "options": [
+        { "value": "natural", "label": "Original" },
+        { "value": "portrait", "label": "Vertical (4:5)" },
+        { "value": "square", "label": "Cuadrada" },
+        { "value": "landscape", "label": "Horizontal (3:2)" }
+      ]
+    },
     { "type": "checkbox", "id": "join_prev", "label": "Unir con la sección anterior", "default": false },
     {
       "type": "select", "id": "bg", "label": "Fondo", "default": "brand",
