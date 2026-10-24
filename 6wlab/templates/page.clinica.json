@@ -208,7 +208,8 @@
         "heading": "Quienes te atienden",
         "text": "",
         "bg": "surface",
-        "tight": false
+        "tight": false,
+        "per_row": 5
       }
     },
     "faq": {

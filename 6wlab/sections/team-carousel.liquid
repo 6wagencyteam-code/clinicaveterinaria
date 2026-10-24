@@ -1,63 +1,46 @@
 <section class="section section--{{ section.settings.bg }}{% if section.settings.tight %} section--tight{% endif %}">
   <div class="wrap">
-    <div class="rail-head">
-      <div>
+    {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+      <div class="section-head">
         {%- if section.settings.eyebrow != blank -%}
           <span class="eyebrow">{{ section.settings.eyebrow }}</span>
         {%- endif -%}
         {%- if section.settings.heading != blank -%}
-          <h2 class="rail-head__title">{{ section.settings.heading }}</h2>
+          <h2 class="tm-title">{{ section.settings.heading }}</h2>
         {%- endif -%}
         {%- if section.settings.text != blank -%}
-          <div class="rte muted" style="margin-top:.4rem">{{ section.settings.text }}</div>
+          <div class="rte muted">{{ section.settings.text }}</div>
         {%- endif -%}
       </div>
+    {%- endif -%}
 
-      <div class="rail-nav">
-        <button class="rail-nav__btn" type="button" data-rail-prev aria-label="{{ 'pagination.previous' | t }}">
-          <span class="rail-nav__arrow--back">{%- render 'icon', name: 'arrow' -%}</span>
-        </button>
-        <button class="rail-nav__btn" type="button" data-rail-next aria-label="{{ 'pagination.next' | t }}">
-          {%- render 'icon', name: 'arrow' -%}
-        </button>
-      </div>
-    </div>
-
-    <div class="rail tm-rail" data-rail>
+    <div class="tm-grid" style="--tm-cols: {{ section.settings.per_row }};">
       {%- for block in section.blocks -%}
         {%- liquid
-          # Sin foto se muestra la tarjeta azul con su reseña; con foto, el retrato.
-          assign is_card = false
-          if block.settings.image == blank or block.settings.featured
-            assign is_card = true
-          endif
+          assign limpio = block.settings.name | remove: 'Dr. ' | remove: 'Dra. ' | remove: '«' | remove: '»'
+          assign partes = limpio | split: ' '
           assign person_alt = block.settings.name | escape
         -%}
-
-        <article class="tm {% if is_card %}tm--card{% endif %}" {{ block.shopify_attributes }}>
-          {%- if is_card -%}
-            <div class="tm__body">
-              <h3 class="tm__name">{{ block.settings.name }}</h3>
-              {%- if block.settings.role != blank -%}
-                <p class="tm__role">{{ block.settings.role }}</p>
-              {%- endif -%}
-              {%- if block.settings.bio != blank -%}
-                <p class="tm__bio">{{ block.settings.bio }}</p>
-              {%- endif -%}
-            </div>
-            {%- if block.settings.tag != blank -%}
-              <span class="tm__tag">{{ block.settings.tag }}</span>
+        <article class="tm" {{ block.shopify_attributes }} data-reveal>
+          <div class="tm__media">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 500 | image_tag:
+                 widths: '200,320,500', sizes: '(min-width: 900px) 18vw, 45vw',
+                 loading: 'lazy', alt: person_alt }}
+            {%- else -%}
+              {%- comment -%}Sin foto: iniciales sobre el azul de marca{%- endcomment -%}
+              <span class="tm__initials" aria-hidden="true">
+                {{- partes[0] | slice: 0 -}}{{- partes[1] | slice: 0 -}}
+              </span>
             {%- endif -%}
-          {%- else -%}
-            {{ block.settings.image | image_url: width: 600 | image_tag:
-               widths: '250,400,600', sizes: '(min-width: 900px) 20vw, 60vw',
-               loading: 'lazy', alt: person_alt }}
-            <div class="tm__caption">
-              <h3 class="tm__name">{{ block.settings.name }}</h3>
-              {%- if block.settings.role != blank -%}
-                <p class="tm__role">{{ block.settings.role }}</p>
-              {%- endif -%}
-            </div>
+          </div>
+
+          <h3 class="tm__name">{{ block.settings.name }}</h3>
+          {%- if block.settings.role != blank -%}
+            <p class="tm__role">{{ block.settings.role }}</p>
+          {%- endif -%}
+          {%- if block.settings.tag != blank -%}
+            <span class="tm__tag">{{ block.settings.tag }}</span>
           {%- endif -%}
         </article>
       {%- endfor -%}
@@ -66,70 +49,83 @@
 </section>
 
 {% stylesheet %}
-  .tm-rail { grid-auto-columns: minmax(230px, 1fr); }
-  @media (min-width: 900px) {
-    .tm-rail { grid-auto-columns: minmax(0, calc((100% - 4 * var(--gap)) / 5)); overflow-x: auto; }
-    .tm-rail { scrollbar-width: none; }
-    .tm-rail::-webkit-scrollbar { display: none; }
+  .tm-title { color: var(--brand); }
+  .section--brand .tm-title { color: var(--brand-ink); }
+
+  /* Grilla: el equipo se reparte en dos filas, no en un carrusel largo */
+  .tm-grid {
+    display: grid;
+    gap: calc(var(--gap) * 1.1) var(--gap);
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  .tm {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    aspect-ratio: 3 / 4;
+  @media (min-width: 620px) { .tm-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (min-width: 900px) { .tm-grid { grid-template-columns: repeat(var(--tm-cols, 5), 1fr); } }
+
+  .tm { display: flex; flex-direction: column; min-width: 0; }
+
+  .tm__media {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    margin-bottom: .85rem;
     overflow: hidden;
     border-radius: var(--radius);
-    background: var(--surface);
-    isolation: isolate;
+    background: var(--brand);
   }
 
-  .tm img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+  .tm__media img { width: 100%; height: 100%; object-fit: cover; }
 
-  /* Retrato: nombre y cargo sobre un degradado al pie */
-  .tm__caption {
-    position: relative;
-    padding: 1rem .9rem;
-    color: #fff;
-    text-align: center;
-  }
-  .tm__caption::before {
-    content: '';
-    position: absolute; inset: -3rem 0 0;
-    z-index: -1;
-    background: linear-gradient(180deg, rgba(10,12,24,0) 0%, rgba(10,12,24,.82) 70%);
+  .tm__initials {
+    font-family: var(--font-heading);
+    font-size: var(--step-2);
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--brand-ink);
   }
 
-  /* Tarjeta azul: reseña breve */
-  .tm--card { background: var(--brand); color: var(--brand-ink); justify-content: flex-start; }
-  .tm__body { padding: 1.3rem 1.2rem; }
-  .tm__name { margin: 0; font-size: var(--step-0); font-weight: 700; line-height: 1.2; }
-  .tm__role { margin: .25rem 0 0; font-size: var(--step--1); opacity: .85; }
-  .tm--card .tm__role { opacity: .78; }
-  .tm__bio {
-    margin: .9rem 0 0;
+  /* El nombre y el cargo van debajo de la foto, en flujo normal:
+     así no hay nada que se monte encima de nada. */
+  .tm__name {
+    margin: 0;
+    font-size: var(--step-0);
+    font-weight: 700;
+    line-height: 1.25;
+    text-wrap: balance;
+    hyphens: auto;
+  }
+
+  .tm__role {
+    margin: .2rem 0 0;
     font-size: var(--step--1);
-    line-height: 1.5;
-    opacity: .82;
+    line-height: 1.4;
+    color: var(--ink-muted);
   }
+
+  .section--brand .tm__role { color: rgba(255, 255, 255, .78); }
+
   .tm__tag {
-    position: absolute; left: 1.2rem; bottom: 1.2rem;
-    padding: .3em .8em;
+    align-self: flex-start;
+    margin-top: .55rem;
+    padding: .25em .7em;
     border-radius: var(--radius-pill);
-    background: rgba(255,255,255,.2);
+    background: var(--brand-soft);
+    color: var(--brand);
     font-size: var(--step--1);
     font-weight: 600;
   }
+
+  .section--brand .tm__tag { background: rgba(255, 255, 255, .18); color: var(--brand-ink); }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Equipo (carrusel)",
+  "name": "Equipo",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Nuestro equipo" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Quienes cuidan a tu mascota" },
     { "type": "richtext", "id": "text", "label": "Texto" },
+    { "type": "range", "id": "per_row", "label": "Por fila (escritorio)", "min": 3, "max": 6, "step": 1, "default": 5 },
     {
       "type": "select", "id": "bg", "label": "Fondo", "default": "default",
       "options": [
@@ -145,15 +141,15 @@
       "type": "member",
       "name": "Integrante",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Foto", "info": "Sin foto se muestra una tarjeta azul con su reseña." },
+        { "type": "image_picker", "id": "image", "label": "Foto", "info": "Sin foto se muestran sus iniciales." },
         { "type": "text", "id": "name", "label": "Nombre" },
         { "type": "text", "id": "role", "label": "Cargo" },
-        { "type": "textarea", "id": "bio", "label": "Reseña breve", "info": "Se muestra sólo en la tarjeta azul." },
+        { "type": "textarea", "id": "bio", "label": "Reseña", "info": "No se muestra en la grilla; queda guardada para la página de equipo." },
         { "type": "text", "id": "tag", "label": "Etiqueta (opcional)" },
-        { "type": "checkbox", "id": "featured", "label": "Mostrar como tarjeta azul aunque tenga foto", "default": false }
+        { "type": "checkbox", "id": "featured", "label": "Destacar", "default": false }
       ]
     }
   ],
-  "presets": [{ "name": "Equipo (carrusel)", "blocks": [{ "type": "member" }, { "type": "member" }, { "type": "member" }] }]
+  "presets": [{ "name": "Equipo", "blocks": [{ "type": "member" }, { "type": "member" }, { "type": "member" }] }]
 }
 {% endschema %}
