@@ -1,8 +1,11 @@
-<section class="promo" style="
+<section class="promo promo--{{ section.settings.fit }}" style="
   {% if section.settings.bg_color != blank %}background: {{ section.settings.bg_color }};{% endif %}
   --promo-title: {{ section.settings.title_color }};
   --promo-text: {{ section.settings.text_color }};
-  --promo-h: {{ section.settings.height }}px;">
+  --promo-h: {{ section.settings.height }}px;
+  {%- if section.settings.fit == 'full' and section.settings.image != blank %}
+  --promo-ratio: {{ section.settings.image.aspect_ratio }};
+  {%- endif %}">
   <div class="promo__media">
     {%- if section.settings.image != blank -%}
       {%- assign promo_alt = section.settings.title | escape -%}
@@ -33,6 +36,17 @@
     display: flex; align-items: center;
     min-height: min(var(--promo-h, 820px), 88vh);
     padding-block: var(--pad-block);
+  }
+
+  /* Imagen completa: la sección adopta la proporción de la foto,
+     así el aviso se ve entero de borde a borde. */
+  .promo--full { aspect-ratio: var(--promo-ratio, 16 / 7); }
+  .promo--full .promo__inner { min-height: 100%; padding-block: 0; }
+  .promo--full .promo__media img { object-fit: cover; object-position: center; }
+
+  @media (max-width: 899px) {
+    .promo--full { aspect-ratio: auto; }
+    .promo--full .promo__inner { min-height: 0; padding-block: var(--pad-block); }
   }
   .promo__body { max-width: 32rem; }
 
@@ -71,7 +85,14 @@
   "name": "Banner promocional",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Imagen de fondo" },
-    { "type": "range", "id": "height", "label": "Alto del banner", "min": 400, "max": 1000, "step": 20, "unit": "px", "default": 820 },
+    {
+      "type": "select", "id": "fit", "label": "Cómo se ve la imagen", "default": "full",
+      "options": [
+        { "value": "full", "label": "Completa (sin recortar)" },
+        { "value": "cover", "label": "Recortada al alto elegido" }
+      ]
+    },
+    { "type": "range", "id": "height", "label": "Alto del banner", "info": "Sólo aplica si la imagen va recortada.", "min": 400, "max": 1000, "step": 20, "unit": "px", "default": 820 },
     { "type": "color", "id": "bg_color", "label": "Color de fondo", "default": "#F6F7FB" },
     { "type": "text", "id": "subtitle", "label": "Etiqueta", "default": "PET SHOP" },
     { "type": "text", "id": "title", "label": "Título", "default": "PURINA PRO PLAN" },
