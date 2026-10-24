@@ -37,6 +37,13 @@
         <a class="btn btn--sm header__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
       {%- endif -%}
 
+      {%- if settings.social_instagram != blank -%}
+        <a class="icon-btn" href="{{ settings.social_instagram }}" target="_blank" rel="noopener"
+           aria-label="Instagram">
+          {%- render 'icon', name: 'instagram' -%}
+        </a>
+      {%- endif -%}
+
       <a class="icon-btn" href="{{ routes.search_url }}" aria-label="{{ 'general.search' | t }}">
         {%- render 'icon', name: 'search' -%}
       </a>
@@ -65,6 +72,11 @@
         <li><a href="{{ link.url }}">{{ link.title }}</a></li>
       {%- endfor -%}
     </ul>
+    {%- if settings.social_instagram != blank -%}
+      <p class="mobile-nav__phone">
+        <a href="{{ settings.social_instagram }}" target="_blank" rel="noopener">Síguenos en Instagram</a>
+      </p>
+    {%- endif -%}
     {%- if section.settings.phone_primary != blank -%}
       <p class="mobile-nav__phone">
         <a href="tel:{{ section.settings.phone_primary | remove: ' ' }}">{{ section.settings.phone_primary }}</a>
