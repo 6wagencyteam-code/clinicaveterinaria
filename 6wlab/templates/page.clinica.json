@@ -23,7 +23,7 @@
           "settings": {
             "icon": "stethoscope",
             "title": "Consulta médica",
-            "text": "<p>Diagnóstico integral y tratamiento personalizado. Atención a domicilio disponible en Reñaca, Concón y alrededores.</p>",
+            "text": "<p>Diagnóstico integral y tratamiento personalizado. Atención a domicilio en Reñaca, Jardín del Mar, Los Almendros, Los Pinos y Bosque de Montemar (Viña del Mar), además de Concón y Mantagua.</p>",
             "price_label": "",
             "price": "",
             "link_label": "Llámanos",
@@ -232,7 +232,7 @@
           "type": "qa",
           "settings": {
             "question": "¿Hacen visitas a domicilio?",
-            "answer": "<p>Sí, en Reñaca, Concón y alrededores. Consúltanos por teléfono.</p>"
+            "answer": "<p>Sí. Vamos a Reñaca, Jardín del Mar, Los Almendros, Los Pinos y Bosque de Montemar (Viña del Mar), además de Concón y Mantagua, según disponibilidad de horario. Si vives fuera de esos sectores, escríbenos y vemos la disponibilidad contigo.</p>"
           }
         },
         "q4": {

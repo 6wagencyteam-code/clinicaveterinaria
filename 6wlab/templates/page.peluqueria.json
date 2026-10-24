@@ -6,11 +6,11 @@
         "image": "shopify://shop_images/Gemini_Generated_Image_ngfc5vngfc5vngfc.jpg",
         "eyebrow": "Peluquería",
         "heading": "Baño, corte y estética canina",
-        "text": "<p>Tu mascota sale limpia, bien cuidada y feliz, con el mejor trato.</p>",
+        "text": "<p>Baño sanitario y estética, sin estrés y sin apuro. Reserva tu hora por WhatsApp o mensaje directo en Instagram.</p>",
         "phone_label": "Llámanos: +56 32 2833333",
         "phone": "+56 32 2833333",
         "whatsapp": "+56 9 9820 6789",
-        "note": "La atención es por orden de llegada y urgencia. Llámanos antes de venir para saber cuán disponibles estamos.",
+        "note": "A diferencia de la consulta médica, la peluquería sí se reserva con hora.",
         "bg": "brand",
         "height": 560
       }
@@ -23,23 +23,23 @@
           "settings": {
             "icon": "scissors",
             "title": "Baño sanitario",
-            "text": "<p>Baño con productos adecuados a la piel de tu mascota, secado y cepillado.</p>",
+            "text": "<p>Baño sanitario con productos adecuados a la piel de tu mascota.</p>",
             "price_label": "",
             "price": "",
-            "link_label": "Llámanos",
-            "link": "tel:+56322833333"
+            "link_label": "Reservar por WhatsApp",
+            "link": "https://wa.me/56998206789"
           }
         },
         "corte": {
           "type": "service",
           "settings": {
             "icon": "scissors",
-            "title": "Corte",
-            "text": "<p>Corte de pelo según la raza y lo que prefieras para tu mascota.</p>",
+            "title": "Corte por raza",
+            "text": "<p>Corte de pelo según la raza, o como prefieras para tu mascota.</p>",
             "price_label": "",
             "price": "",
-            "link_label": "Llámanos",
-            "link": "tel:+56322833333"
+            "link_label": "Reservar por WhatsApp",
+            "link": "https://wa.me/56998206789"
           }
         },
         "estetica": {
@@ -47,11 +47,11 @@
           "settings": {
             "icon": "heart",
             "title": "Estética canina",
-            "text": "<p>Corte de uñas, limpieza de oídos y terminaciones de estética, con paciencia y buen trato.</p>",
+            "text": "<p>Uñas, oídos y cepillado, con paciencia y buen trato.</p>",
             "price_label": "",
             "price": "",
-            "link_label": "Llámanos",
-            "link": "tel:+56322833333"
+            "link_label": "Reservar por WhatsApp",
+            "link": "https://wa.me/56998206789"
           }
         }
       },
@@ -85,8 +85,8 @@
         "b": {
           "type": "button",
           "settings": {
-            "label": "Llámanos: +56 32 2833333",
-            "link": "tel:+56322833333"
+            "label": "Reservar por WhatsApp",
+            "link": "https://wa.me/56998206789"
           }
         }
       },
@@ -107,7 +107,7 @@
           "type": "qa",
           "settings": {
             "question": "¿Necesito reservar?",
-            "answer": "<p>Llámanos para coordinar el día y la hora. La peluquería se organiza por disponibilidad.</p>"
+            "answer": "<p>Sí. La peluquería se reserva con hora: escríbenos por WhatsApp o por mensaje directo en Instagram y coordinamos el día.</p>"
           }
         },
         "q2": {
