@@ -1,0 +1,265 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "image": "shopify://shop_images/Unknown.jpg",
+        "eyebrow": "Clínica",
+        "heading": "Atención médica para tu mascota",
+        "text": "<p>Consultas, cirugías, vacunas y diagnóstico por imágenes. 37 años cuidando a las mascotas de Reñaca.</p>",
+        "phone_label": "Llámanos: +56 32 2833333",
+        "phone": "+56 32 2833333",
+        "whatsapp": "+56 9 9820 6789",
+        "note": "La atención es por orden de llegada y urgencia. Llámanos antes de venir para saber cuán disponibles estamos.",
+        "bg": "brand",
+        "height": 560
+      }
+    },
+    "servicios": {
+      "type": "services",
+      "blocks": {
+        "consulta": {
+          "type": "service",
+          "settings": {
+            "icon": "stethoscope",
+            "title": "Consulta médica",
+            "text": "<p>Diagnóstico integral y tratamiento personalizado. Atención a domicilio disponible en Reñaca, Concón y alrededores.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        },
+        "cirugia": {
+          "type": "service",
+          "settings": {
+            "icon": "surgery",
+            "title": "Cirugía veterinaria",
+            "text": "<p>Quirófano completo con monitor multiparamétrico, anestesia inhalatoria y mesa quirúrgica profesional. Cirugía general y de tejidos blandos.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        },
+        "vacunas": {
+          "type": "service",
+          "settings": {
+            "icon": "vaccine",
+            "title": "Vacunación y prevención",
+            "text": "<p>Plan vacunal completo para perros y gatos. Desparasitaciones internas y externas, y aplicación de microchip de identificación.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        },
+        "examenes": {
+          "type": "service",
+          "settings": {
+            "icon": "lab",
+            "title": "Exámenes y diagnóstico",
+            "text": "<p>Ecografías y toma de muestras para laboratorio, con especialistas en imagenología y cardiología.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        },
+        "exoticos": {
+          "type": "service",
+          "settings": {
+            "icon": "paw",
+            "title": "Pacientes exóticos",
+            "text": "<p>Atención de caninos, felinos y pacientes exóticos con profesionales dedicados.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        },
+        "urgencias": {
+          "type": "service",
+          "settings": {
+            "icon": "ambulance",
+            "title": "Urgencias",
+            "text": "<p>Atención de urgencias dentro del horario de la clínica. Llámanos antes de venir para avisarnos que vienes en camino.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        }
+      },
+      "block_order": [
+        "consulta",
+        "cirugia",
+        "vacunas",
+        "examenes",
+        "exoticos",
+        "urgencias"
+      ],
+      "settings": {
+        "eyebrow": "Nuestros servicios",
+        "heading": "Qué hacemos en la clínica",
+        "text": "<p>Atención integral para caninos, felinos y pacientes exóticos, bajo el mismo techo.</p>",
+        "surface": false
+      }
+    },
+    "equipo": {
+      "type": "team-carousel",
+      "blocks": {
+        "tapia": {
+          "type": "member",
+          "settings": {
+            "name": "Dr. Cristian Tapia Villarreal",
+            "role": "Fundador y Director Médico",
+            "bio": "Médico veterinario. Dirige la clínica desde 1989. Cirugía general y de tejidos blandos, medicina interna y diagnóstico por imágenes.",
+            "tag": "Desde 1989",
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_5_2026_at_09_58_45_PM.png"
+          }
+        },
+        "camila": {
+          "type": "member",
+          "settings": {
+            "name": "Camila Escobar Molina",
+            "role": "Médica Veterinaria · Anestesia",
+            "bio": "Universidad Santo Tomás, 2022. Diplomada en Medicina Felina. Medicina general, anestesia en cirugías, urgencias y atención a domicilio.",
+            "tag": "Medicina felina"
+          }
+        },
+        "jaime": {
+          "type": "member",
+          "settings": {
+            "name": "Jaime Leiva Retamales",
+            "role": "Médico Veterinario · Ecografía",
+            "bio": "Universidad Santo Tomás, 2000. Diplomado en Imagenología Veterinaria (U. de Chile) y en Cardiología Veterinaria. Docente universitario.",
+            "tag": "Imagenología"
+          }
+        },
+        "mariapaz": {
+          "type": "member",
+          "settings": {
+            "name": "María Paz Herrera Plaza",
+            "role": "Médica Veterinaria",
+            "bio": "Universidad Santo Tomás, Viña del Mar, 2022. Clínica de animales menores, consultas y manejo de medicamentos veterinarios.",
+            "tag": "Clínica menor"
+          }
+        },
+        "iso": {
+          "type": "member",
+          "settings": {
+            "name": "Dra. «Iso»",
+            "role": "Médica Veterinaria · Exóticos",
+            "bio": "Medicina general y atención de pacientes exóticos.",
+            "tag": "Exóticos"
+          }
+        },
+        "bertrand": {
+          "type": "member",
+          "settings": {
+            "name": "Dr. Christian Bertrand",
+            "role": "Médico Veterinario · Anestesia",
+            "bio": "Especialista en anestesia en animales de compañía.",
+            "tag": "Anestesia"
+          }
+        },
+        "cavada": {
+          "type": "member",
+          "settings": {
+            "name": "Dra. Sandra Cavada Sobota",
+            "role": "Médica Veterinaria · Cardiología",
+            "bio": "Especialista en cardiología y ultrasonido diagnóstico.",
+            "tag": "Cardiología"
+          }
+        },
+        "francisca": {
+          "type": "member",
+          "settings": {
+            "name": "Francisca Paillaman Valenzuela",
+            "role": "Técnica Veterinaria",
+            "bio": "Egresada de Medicina Veterinaria, Universidad Santo Tomás. A cargo de pedidos, stock e inventario de la clínica.",
+            "tag": "Farmacia y stock"
+          }
+        },
+        "claudia": {
+          "type": "member",
+          "settings": {
+            "name": "Claudia",
+            "role": "Peluquería canina",
+            "bio": "Baño sanitario, corte y estética canina.",
+            "tag": "Peluquería"
+          }
+        }
+      },
+      "block_order": [
+        "tapia",
+        "camila",
+        "jaime",
+        "mariapaz",
+        "iso",
+        "bertrand",
+        "cavada",
+        "francisca",
+        "claudia"
+      ],
+      "settings": {
+        "eyebrow": "Nuestro equipo",
+        "heading": "Quienes te atienden",
+        "text": "",
+        "bg": "surface",
+        "tight": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "¿Tengo que pedir hora?",
+            "answer": "<p>No agendamos horas por la web. La atención es por orden de llegada y urgencia. Te recomendamos llamarnos antes de venir para saber cuán disponibles estamos.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "¿Atienden urgencias?",
+            "answer": "<p>Sí, dentro del horario de atención. Llámanos para avisarnos que vienes en camino.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "¿Hacen visitas a domicilio?",
+            "answer": "<p>Sí, en Reñaca, Concón y alrededores. Consúltanos por teléfono.</p>"
+          }
+        },
+        "q4": {
+          "type": "qa",
+          "settings": {
+            "question": "¿Atienden animales exóticos?",
+            "answer": "<p>Sí. Contamos con profesionales dedicados a pacientes exóticos.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "eyebrow": "Dudas frecuentes",
+        "heading": "Preguntas frecuentes",
+        "surface": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "servicios",
+    "equipo",
+    "faq"
+  ]
+}

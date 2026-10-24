@@ -1,0 +1,97 @@
+<section class="page-hero page-hero--{{ section.settings.bg }}"
+         style="--ph-h: {{ section.settings.height }}px;">
+  {%- if section.settings.image != blank -%}
+    {%- assign ph_alt = section.settings.heading | escape -%}
+    <div class="page-hero__media">
+      {{ section.settings.image | image_url: width: 1800 | image_tag:
+         widths: '600,900,1400,1800', sizes: '100vw', loading: 'eager',
+         fetchpriority: 'high', alt: ph_alt }}
+    </div>
+  {%- endif -%}
+
+  <div class="wrap page-hero__inner">
+    <div class="page-hero__body stack">
+      {%- if section.settings.eyebrow != blank -%}
+        <div><span class="eyebrow">{{ section.settings.eyebrow }}</span></div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="page-hero__title">{{ section.settings.heading }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="rte lede">{{ section.settings.text }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.phone != blank -%}
+        <div class="page-hero__cta">
+          <a class="btn" href="tel:{{ section.settings.phone | remove: ' ' }}">
+            <span style="width:1.1rem;display:grid">{%- render 'icon', name: 'phone' -%}</span>
+            {{ section.settings.phone_label | default: section.settings.phone }}
+          </a>
+          {%- if section.settings.whatsapp != blank -%}
+            {%- assign wa = section.settings.whatsapp | remove: ' ' | remove: '+' -%}
+            <a class="btn btn--ghost" href="https://wa.me/{{ wa }}" target="_blank" rel="noopener">WhatsApp</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.note != blank -%}
+        <p class="page-hero__note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .page-hero { position: relative; isolation: isolate; overflow: hidden; }
+  .page-hero--brand { background: var(--brand); color: var(--brand-ink); }
+  .page-hero--brand .eyebrow { background: rgba(255,255,255,.18); color: inherit; }
+  .page-hero--brand .lede { color: inherit; opacity: .9; }
+  .page-hero--brand .btn { --btn-bg: #fff; --btn-ink: var(--brand); --btn-line: #fff; }
+  .page-hero--brand .btn--ghost { --btn-bg: transparent; --btn-ink: #fff; --btn-line: rgba(255,255,255,.55); }
+  .page-hero--surface { background: var(--surface); }
+
+  .page-hero__media { position: absolute; inset: 0; z-index: -2; }
+  .page-hero__media img { width: 100%; height: 100%; object-fit: cover; }
+  .page-hero__media::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(10,12,24,.78) 0%, rgba(10,12,24,.35) 60%, rgba(10,12,24,.1) 100%);
+  }
+  .page-hero__media ~ .page-hero__inner { color: #fff; }
+  .page-hero__media ~ .page-hero__inner .lede { color: #fff; opacity: .92; }
+
+  .page-hero__inner {
+    display: flex; align-items: center;
+    min-height: min(var(--ph-h, 520px), 76vh);
+    padding-block: var(--pad-block);
+  }
+  .page-hero__body { max-width: 40rem; }
+  .page-hero__title { margin: 0; }
+  .page-hero__cta { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .page-hero__note { margin: 0; font-size: var(--step--1); opacity: .8; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Portada de página",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Imagen de fondo" },
+    { "type": "range", "id": "height", "label": "Alto", "min": 320, "max": 800, "step": 20, "unit": "px", "default": 520 },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Clínica" },
+    { "type": "richtext", "id": "text", "label": "Texto" },
+    { "type": "text", "id": "phone_label", "label": "Texto del botón de llamada" },
+    { "type": "text", "id": "phone", "label": "Teléfono" },
+    { "type": "text", "id": "whatsapp", "label": "WhatsApp" },
+    { "type": "text", "id": "note", "label": "Nota al pie" },
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "brand",
+      "options": [
+        { "value": "default", "label": "Blanco" },
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "brand", "label": "Azul de marca" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Portada de página" }]
+}
+{% endschema %}

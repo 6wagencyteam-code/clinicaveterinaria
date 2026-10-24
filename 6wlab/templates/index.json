@@ -216,25 +216,6 @@
         "image_ratio": "portrait"
       }
     },
-    "doctor2": {
-      "type": "team",
-      "settings": {
-        "image": "shopify://shop_images/ChatGPT_Image_Jul_5_2026_at_10_07_15_PM.png",
-        "stat_figure": "37+ años",
-        "stat_text": "siendo parte de Reñaca.",
-        "name": "Dr. Cristian Tapia Villarreal",
-        "bio": "<p>Fundador y director médico de la Clínica Veterinaria Reñaca. </p><p>En 1989, el Dr. Cristian Tapia abrió las puertas de lo que hoy es la clínica veterinaria de referencia en Reñaca. Tres generaciones de familias han confiado en él para cuidar a sus mascotas, porque somos la que más los conoce.</p>",
-        "credentials_title": "Médico Veterinario",
-        "credentials": "<ul><li>Universidad Austral de Chile</li><li>Cirugía general y de tejidos blandos</li><li>Medicina interna y diagnóstico por imágenes</li><li>Atención de caninos, felinos y pacientes exóticos</li></ul>",
-        "quote": "<p><em>\"Hemos visto crecer a familias enteras junto a sus mascotas. Esa confianza que nos entregan es lo más valioso que tenemos. Cada consulta, cada tratamiento, cada dueño que entra por esta puerta: los conocemos, los recordamos y nos importan.\" - </em>Dr. Cristian Tapia Villarreal</p>",
-        "link_label": "Consulta por tu mascota",
-        "link": "shopify://pages/contact",
-        "image_right": true,
-        "bg": "default",
-        "join_prev": false,
-        "image_ratio": "portrait"
-      }
-    },
     "vaccines": {
       "type": "vaccine-calendar",
       "blocks": {
@@ -376,6 +357,111 @@
       "settings": {
         "custom_liquid": "<style>\n  .renaca-contacto {\n    font-family: 'Outfit', sans-serif;\n  }\n\n  .renaca-contacto__cta {\n    background: #2B41F5;\n    padding: 80px 5%;\n    position: relative;\n    overflow: hidden;\n  }\n\n  .renaca-contacto__geo1 {\n    position: absolute;\n    width: 400px; height: 400px;\n    border-radius: 50%;\n    border: 1px solid rgba(255,255,255,0.06);\n    right: -80px; bottom: -120px;\n    pointer-events: none;\n  }\n\n  .renaca-contacto__geo2 {\n    position: absolute;\n    width: 240px; height: 240px;\n    border-radius: 50%;\n    border: 1px solid rgba(255,255,255,0.04);\n    right: 200px; top: -60px;\n    pointer-events: none;\n  }\n\n  .renaca-contacto__cta-inner {\n    display: flex;\n    align-items: center;\n    justify-content: space-between;\n    gap: 40px;\n    position: relative;\n    z-index: 2;\n    max-width: 1200px;\n    margin: 0 auto;\n  }\n\n  .renaca-contacto__eyebrow {\n    font-size: 11px;\n    font-weight: 700;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: rgba(255,255,255,0.4);\n    display: flex;\n    align-items: center;\n    gap: 8px;\n    margin-bottom: 16px;\n  }\n\n  .renaca-contacto__eyebrow::before {\n    content: '';\n    width: 16px; height: 1.5px;\n    background: rgba(255,255,255,0.25);\n    display: block;\n  }\n\n  .renaca-contacto__cta-title {\n    font-size: clamp(28px, 3.5vw, 44px);\n    font-weight: 900;\n    color: #ffffff;\n    line-height: 1.05;\n    letter-spacing: -0.025em;\n    margin-bottom: 0;\n  }\n\n  .renaca-contacto__cta-title em {\n    color: rgba(255,255,255,0.35);\n    font-style: normal;\n  }\n\n  .renaca-contacto__cta-btns {\n    display: flex;\n    flex-direction: column;\n    gap: 12px;\n    flex-shrink: 0;\n  }\n\n  .renaca-contacto__btn-white {\n    background: #ffffff;\n    color: #2B41F5;\n    border: none;\n    padding: 16px 32px;\n    border-radius: 8px;\n    font-family: 'Outfit', sans-serif;\n    font-size: 15px;\n    font-weight: 800;\n    cursor: pointer;\n    text-decoration: none;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n    white-space: nowrap;\n    transition: opacity 0.2s;\n  }\n\n  .renaca-contacto__btn-white:hover { opacity: 0.9; color: #2B41F5; }\n\n  .renaca-contacto__btn-ghost {\n    background: transparent;\n    color: rgba(255,255,255,0.8);\n    border: 1.5px solid rgba(255,255,255,0.25);\n    padding: 15px 32px;\n    border-radius: 8px;\n    font-family: 'Outfit', sans-serif;\n    font-size: 15px;\n    font-weight: 700;\n    cursor: pointer;\n    text-decoration: none;\n    display: inline-flex;\n    align-items: center;\n    justify-content: center;\n    gap: 8px;\n    white-space: nowrap;\n  }\n\n  .renaca-contacto__btn-ghost:hover {\n    border-color: rgba(255,255,255,0.5);\n    color: #ffffff;\n  }\n\n  .renaca-contacto__bottom {\n    display: grid;\n    grid-template-columns: 1fr 1fr;\n    background: #2B41F5;\n    border-top: 1px solid rgba(255,255,255,0.1);\n  }\n\n  .renaca-contacto__info {\n    background: #2B41F5;\n    padding: 56px 5%;\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    gap: 36px;\n  }\n\n  .renaca-contacto__info-title {\n    font-size: 10px;\n    font-weight: 700;\n    letter-spacing: 0.14em;\n    text-transform: uppercase;\n    color: rgba(255,255,255,0.35);\n    margin-bottom: 14px;\n  }\n\n  .renaca-contacto__horarios {\n    display: flex;\n    flex-direction: column;\n  }\n\n  .renaca-contacto__horario-row {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: 11px 0;\n    border-bottom: 0.5px solid rgba(255,255,255,0.08);\n  }\n\n  .renaca-contacto__horario-row:last-child { border-bottom: none; }\n\n  .renaca-contacto__horario-day {\n    font-size: 13px;\n    color: rgba(255,255,255,0.5);\n    font-weight: 500;\n  }\n\n  .renaca-contacto__horario-time {\n    font-size: 14px;\n    font-weight: 800;\n    color: #ffffff;\n  }\n\n  .renaca-contacto__horario-time.closed {\n    color: rgba(255,255,255,0.25);\n    font-weight: 500;\n    font-size: 12px;\n  }\n\n  .renaca-contacto__ig {\n    display: flex;\n    align-items: center;\n    gap: 12px;\n    text-decoration: none;\n    transition: opacity 0.2s;\n  }\n\n  .renaca-contacto__ig:hover { opacity: 0.7; }\n\n  .renaca-contacto__ig-icon {\n    width: 40px; height: 40px;\n    background: rgba(255,255,255,0.1);\n    border-radius: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-shrink: 0;\n  }\n\n  .renaca-contacto__ig-icon svg { width: 18px; height: 18px; }\n\n  .renaca-contacto__ig-label {\n    font-size: 10px;\n    font-weight: 700;\n    letter-spacing: 0.08em;\n    text-transform: uppercase;\n    color: rgba(255,255,255,0.3);\n    margin-bottom: 2px;\n  }\n\n  .renaca-contacto__ig-value {\n    font-size: 15px;\n    font-weight: 800;\n    color: #ffffff;\n  }\n\n  /* MAP */\n  .renaca-contacto__map {\n    position: relative;\n    min-height: 420px;\n    overflow: hidden;\n    border-left: 1px solid rgba(255,255,255,0.1);\n  }\n\n  .renaca-contacto__map iframe {\n    position: absolute;\n    top: 0; left: 0;\n    width: 100%;\n    height: 100%;\n    border: none;\n    display: block;\n    filter: saturate(0.2) brightness(0.55) hue-rotate(210deg);\n  }\n\n  .renaca-contacto__map-overlay {\n    position: absolute;\n    bottom: 0; left: 0; right: 0;\n    background: linear-gradient(to top, rgba(27,44,200,0.95) 0%, rgba(27,44,200,0.4) 50%, transparent 100%);\n    padding: 20px 24px;\n    pointer-events: none;\n  }\n\n  .renaca-contacto__map-name {\n    font-size: 13px;\n    font-weight: 800;\n    color: #fff;\n    margin-bottom: 2px;\n    font-family: 'Outfit', sans-serif;\n  }\n\n  .renaca-contacto__map-sub {\n    font-size: 11px;\n    color: rgba(255,255,255,0.6);\n    font-family: 'Outfit', sans-serif;\n  }\n\n  .renaca-contacto__map-btn {\n    position: absolute;\n    top: 16px; right: 16px;\n    background: #2B41F5;\n    color: #fff;\n    text-decoration: none;\n    padding: 9px 14px;\n    border-radius: 7px;\n    font-size: 11px;\n    font-weight: 700;\n    display: inline-flex;\n    align-items: center;\n    gap: 5px;\n    font-family: 'Outfit', sans-serif;\n    z-index: 2;\n    transition: opacity 0.2s;\n  }\n\n  .renaca-contacto__map-btn:hover { opacity: 0.85; }\n\n  /* RESPONSIVE */\n  @media (max-width: 860px) {\n    .renaca-contacto__cta-inner {\n      flex-direction: column;\n      align-items: flex-start;\n      gap: 28px;\n    }\n    .renaca-contacto__cta-btns {\n      flex-direction: row;\n      flex-wrap: wrap;\n      width: 100%;\n    }\n    .renaca-contacto__btn-white,\n    .renaca-contacto__btn-ghost {\n      flex: 1;\n      min-width: 160px;\n    }\n    .renaca-contacto__bottom {\n      grid-template-columns: 1fr;\n    }\n    .renaca-contacto__map {\n      min-height: 300px;\n      border-left: none;\n      border-top: 1px solid rgba(255,255,255,0.1);\n    }\n  }\n\n  @media (max-width: 540px) {\n    .renaca-contacto__cta { padding: 48px 5%; }\n    .renaca-contacto__cta-title { font-size: 26px; }\n    .renaca-contacto__cta-btns { flex-direction: column; }\n    .renaca-contacto__btn-white,\n    .renaca-contacto__btn-ghost { width: 100%; }\n    .renaca-contacto__info { padding: 40px 5%; }\n  }\n</style>\n\n<section class=\"renaca-contacto\">\n\n  <div class=\"renaca-contacto__cta\">\n    <div class=\"renaca-contacto__geo1\"></div>\n    <div class=\"renaca-contacto__geo2\"></div>\n    <div class=\"renaca-contacto__cta-inner\">\n      <div>\n        <div class=\"renaca-contacto__eyebrow\">Estamos aquí para ti</div>\n        <h2 class=\"renaca-contacto__cta-title\">\n          ¿Tu mascota necesita<br>\n          atención <em>hoy</em>?\n        </h2>\n      </div>\n      <div class=\"renaca-contacto__cta-btns\">\n        <a href=\"tel:+56322833333\" class=\"renaca-contacto__btn-white\">\n          <svg width=\"16\" height=\"16\" viewBox=\"0 0 26 26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n            <path d=\"M5 6h2l2 5-1.5 1a11 11 0 005.5 5.5l1-1.5 5 2v2a2 2 0 01-2 2C8 22 4 14 4 8a2 2 0 012-2z\"/>\n          </svg>\n          +56 32 2833333\n        </a>\n        <a href=\"https://wa.me/56998206789\" class=\"renaca-contacto__btn-ghost\" target=\"_blank\">\n          <svg width=\"16\" height=\"16\" viewBox=\"0 0 26 26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n            <path d=\"M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z\"/>\n          </svg>\n          +56 9 9820 6789\n        </a>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"renaca-contacto__bottom\">\n\n    <div class=\"renaca-contacto__info\">\n      <div>\n        <div class=\"renaca-contacto__info-title\">Horarios de atención</div>\n        <div class=\"renaca-contacto__horarios\">\n          <div class=\"renaca-contacto__horario-row\">\n            <span class=\"renaca-contacto__horario-day\">Lunes a Viernes</span>\n            <span class=\"renaca-contacto__horario-time\">9:30 — 20:00</span>\n          </div>\n          <div class=\"renaca-contacto__horario-row\">\n            <span class=\"renaca-contacto__horario-day\">Sábado</span>\n            <span class=\"renaca-contacto__horario-time\">10:30 — 17:30</span>\n          </div>\n          <div class=\"renaca-contacto__horario-row\">\n            <span class=\"renaca-contacto__horario-day\">Domingo</span>\n            <span class=\"renaca-contacto__horario-time closed\">Cerrado</span>\n          </div>\n        </div>\n      </div>\n      <div>\n        <div class=\"renaca-contacto__info-title\">Síguenos</div>\n        <a href=\"https://instagram.com/veterinaria_renaca\" class=\"renaca-contacto__ig\" target=\"_blank\">\n          <div class=\"renaca-contacto__ig-icon\">\n            <svg viewBox=\"0 0 26 26\" fill=\"none\" stroke=\"#fff\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n              <rect x=\"3\" y=\"3\" width=\"20\" height=\"20\" rx=\"5\"/>\n              <circle cx=\"13\" cy=\"13\" r=\"4\"/>\n              <circle cx=\"18.5\" cy=\"7.5\" r=\"1\" fill=\"#fff\" stroke=\"none\"/>\n            </svg>\n          </div>\n          <div>\n            <div class=\"renaca-contacto__ig-label\">Instagram</div>\n            <div class=\"renaca-contacto__ig-value\">@veterinaria_renaca</div>\n          </div>\n        </a>\n      </div>\n    </div>\n\n    <!-- MAPA REAL — coordenadas exactas Angamos 376 Reñaca -->\n    <div class=\"renaca-contacto__map\">\n      <iframe\n        src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1474.2!2d-71.541742!3d-32.9717369!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9689dd0fa8f31c15%3A0x782d172705b41827!2sClinica%20Veterinaria%20Re%C3%B1aca!5e0!3m2!1ses!2scl!4v1720000000000!5m2!1ses!2scl\"\n        allowfullscreen=\"\"\n        loading=\"lazy\"\n        referrerpolicy=\"no-referrer-when-downgrade\"\n        title=\"Clínica Veterinaria Reñaca — Angamos 376\">\n      </iframe>\n      <div class=\"renaca-contacto__map-overlay\">\n        <div class=\"renaca-contacto__map-name\">Clínica Veterinaria Reñaca</div>\n        <div class=\"renaca-contacto__map-sub\">Angamos 376, Reñaca · Viña del Mar</div>\n      </div>\n      <a href=\"https://www.google.com/maps/place/Clinica+Veterinaria+Re%C3%B1aca/@-32.9717369,-71.541742\" target=\"_blank\" class=\"renaca-contacto__map-btn\">\n        <svg width=\"11\" height=\"11\" viewBox=\"0 0 26 26\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n          <path d=\"M18 13v6a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2h6M15 3h6v6M10 16L21 5\"/>\n        </svg>\n        Ver en Maps\n      </a>\n    </div>\n\n  </div>\n</section>"
       }
+    },
+    "equipo": {
+      "type": "team-carousel",
+      "blocks": {
+        "tapia": {
+          "type": "member",
+          "settings": {
+            "name": "Dr. Cristian Tapia Villarreal",
+            "role": "Fundador y Director Médico",
+            "bio": "Médico veterinario. Dirige la clínica desde 1989. Cirugía general y de tejidos blandos, medicina interna y diagnóstico por imágenes.",
+            "tag": "Desde 1989",
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_5_2026_at_09_58_45_PM.png"
+          }
+        },
+        "camila": {
+          "type": "member",
+          "settings": {
+            "name": "Camila Escobar Molina",
+            "role": "Médica Veterinaria · Anestesia",
+            "bio": "Universidad Santo Tomás, 2022. Diplomada en Medicina Felina. Medicina general, anestesia en cirugías, urgencias y atención a domicilio.",
+            "tag": "Medicina felina"
+          }
+        },
+        "jaime": {
+          "type": "member",
+          "settings": {
+            "name": "Jaime Leiva Retamales",
+            "role": "Médico Veterinario · Ecografía",
+            "bio": "Universidad Santo Tomás, 2000. Diplomado en Imagenología Veterinaria (U. de Chile) y en Cardiología Veterinaria. Docente universitario.",
+            "tag": "Imagenología"
+          }
+        },
+        "mariapaz": {
+          "type": "member",
+          "settings": {
+            "name": "María Paz Herrera Plaza",
+            "role": "Médica Veterinaria",
+            "bio": "Universidad Santo Tomás, Viña del Mar, 2022. Clínica de animales menores, consultas y manejo de medicamentos veterinarios.",
+            "tag": "Clínica menor"
+          }
+        },
+        "iso": {
+          "type": "member",
+          "settings": {
+            "name": "Dra. «Iso»",
+            "role": "Médica Veterinaria · Exóticos",
+            "bio": "Medicina general y atención de pacientes exóticos.",
+            "tag": "Exóticos"
+          }
+        },
+        "bertrand": {
+          "type": "member",
+          "settings": {
+            "name": "Dr. Christian Bertrand",
+            "role": "Médico Veterinario · Anestesia",
+            "bio": "Especialista en anestesia en animales de compañía.",
+            "tag": "Anestesia"
+          }
+        },
+        "cavada": {
+          "type": "member",
+          "settings": {
+            "name": "Dra. Sandra Cavada Sobota",
+            "role": "Médica Veterinaria · Cardiología",
+            "bio": "Especialista en cardiología y ultrasonido diagnóstico.",
+            "tag": "Cardiología"
+          }
+        },
+        "francisca": {
+          "type": "member",
+          "settings": {
+            "name": "Francisca Paillaman Valenzuela",
+            "role": "Técnica Veterinaria",
+            "bio": "Egresada de Medicina Veterinaria, Universidad Santo Tomás. A cargo de pedidos, stock e inventario de la clínica.",
+            "tag": "Farmacia y stock"
+          }
+        },
+        "claudia": {
+          "type": "member",
+          "settings": {
+            "name": "Claudia",
+            "role": "Peluquería canina",
+            "bio": "Baño sanitario, corte y estética canina.",
+            "tag": "Peluquería"
+          }
+        }
+      },
+      "block_order": [
+        "tapia",
+        "camila",
+        "jaime",
+        "mariapaz",
+        "iso",
+        "bertrand",
+        "cavada",
+        "francisca",
+        "claudia"
+      ],
+      "settings": {
+        "eyebrow": "Nuestro equipo",
+        "heading": "Quienes cuidan a tu mascota",
+        "text": "<p>Médicos veterinarios, especialistas y técnicos con años de experiencia en Reñaca.</p>",
+        "bg": "default",
+        "tight": false
+      }
     }
   },
   "order": [
@@ -385,7 +471,7 @@
     "servicios_custom",
     "equipo_intro",
     "doctor1",
-    "doctor2",
+    "equipo",
     "vaccines",
     "products",
     "promo",

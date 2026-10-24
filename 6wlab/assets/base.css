@@ -870,3 +870,28 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .section--brand .card { color: var(--ink); }
 .section--brand .card .card__text { color: var(--ink-muted); }
 .section--brand .card .btn { --btn-bg: var(--brand); --btn-ink: var(--brand-ink); --btn-line: var(--brand); }
+
+/* ------------------------- 21. Encabezado de carrusel con flechas */
+
+.rail-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 1rem; margin-bottom: calc(var(--gap) * 1.4);
+}
+.rail-head__title { margin: 0; color: var(--brand); font-size: var(--step-3); }
+.section--brand .rail-head__title { color: var(--brand-ink); }
+
+.rail-nav { display: flex; gap: 0.5rem; flex: 0 0 auto; }
+.rail-nav__btn {
+  display: grid; place-items: center;
+  width: 3rem; height: 3rem;
+  border: 1px solid var(--line); border-radius: var(--radius-pill);
+  background: var(--bg); color: var(--brand);
+  cursor: pointer;
+  transition: border-color 0.15s var(--ease), background 0.15s var(--ease);
+}
+.rail-nav__btn:hover { border-color: var(--brand); background: var(--brand-soft); }
+.rail-nav__btn[disabled] { opacity: 0.35; cursor: default; }
+.rail-nav__btn svg { width: 1.15rem; height: 1.15rem; }
+.rail-nav__arrow--back { transform: rotate(180deg); display: grid; }
+.section--brand .rail-nav__btn { background: transparent; border-color: rgba(255,255,255,.5); color: #fff; }
+.section--brand .rail-nav__btn:hover { background: rgba(255,255,255,.15); border-color: #fff; }

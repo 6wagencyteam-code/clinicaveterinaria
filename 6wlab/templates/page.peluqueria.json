@@ -1,0 +1,146 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero",
+      "settings": {
+        "image": "shopify://shop_images/Gemini_Generated_Image_ngfc5vngfc5vngfc.jpg",
+        "eyebrow": "Peluquería",
+        "heading": "Baño, corte y estética canina",
+        "text": "<p>Tu mascota sale limpia, bien cuidada y feliz, con el mejor trato.</p>",
+        "phone_label": "Llámanos: +56 32 2833333",
+        "phone": "+56 32 2833333",
+        "whatsapp": "+56 9 9820 6789",
+        "note": "La atención es por orden de llegada y urgencia. Llámanos antes de venir para saber cuán disponibles estamos.",
+        "bg": "brand",
+        "height": 560
+      }
+    },
+    "servicios": {
+      "type": "services",
+      "blocks": {
+        "bano": {
+          "type": "service",
+          "settings": {
+            "icon": "scissors",
+            "title": "Baño sanitario",
+            "text": "<p>Baño con productos adecuados a la piel de tu mascota, secado y cepillado.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        },
+        "corte": {
+          "type": "service",
+          "settings": {
+            "icon": "scissors",
+            "title": "Corte",
+            "text": "<p>Corte de pelo según la raza y lo que prefieras para tu mascota.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        },
+        "estetica": {
+          "type": "service",
+          "settings": {
+            "icon": "heart",
+            "title": "Estética canina",
+            "text": "<p>Corte de uñas, limpieza de oídos y terminaciones de estética, con paciencia y buen trato.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "Llámanos",
+            "link": "tel:+56322833333"
+          }
+        }
+      },
+      "block_order": [
+        "bano",
+        "corte",
+        "estetica"
+      ],
+      "settings": {
+        "eyebrow": "Peluquería canina",
+        "heading": "Lo que hacemos",
+        "text": "<p>Atendida por nuestra peluquera, dentro de la misma clínica.</p>",
+        "surface": false
+      }
+    },
+    "nota": {
+      "type": "rich-text",
+      "blocks": {
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Una peluquería dentro de una clínica"
+          }
+        },
+        "t": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Si durante el baño vemos algo que requiera atención médica —una herida, un problema de piel, parásitos— te avisamos en el momento. Esa es la ventaja de que la peluquería funcione dentro de la clínica.</p>"
+          }
+        },
+        "b": {
+          "type": "button",
+          "settings": {
+            "label": "Llámanos: +56 32 2833333",
+            "link": "tel:+56322833333"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "t",
+        "b"
+      ],
+      "settings": {
+        "bg": "brand",
+        "join_next": false
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "qa",
+          "settings": {
+            "question": "¿Necesito reservar?",
+            "answer": "<p>Llámanos para coordinar el día y la hora. La peluquería se organiza por disponibilidad.</p>"
+          }
+        },
+        "q2": {
+          "type": "qa",
+          "settings": {
+            "question": "¿Cuánto demora?",
+            "answer": "<p>Depende del tamaño y el pelaje de tu mascota. Te lo indicamos al coordinar.</p>"
+          }
+        },
+        "q3": {
+          "type": "qa",
+          "settings": {
+            "question": "¿Atienden gatos?",
+            "answer": "<p>Consúltanos por teléfono según el caso.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "eyebrow": "Dudas frecuentes",
+        "heading": "Preguntas frecuentes",
+        "surface": true
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "servicios",
+    "nota",
+    "faq"
+  ]
+}
