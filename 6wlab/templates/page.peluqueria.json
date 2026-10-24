@@ -135,12 +135,54 @@
         "heading": "Preguntas frecuentes",
         "surface": true
       }
+    },
+    "cierre": {
+      "type": "rich-text",
+      "blocks": {
+        "h": {
+          "type": "heading",
+          "settings": {
+            "text": "Reserva la hora de peluquería"
+          }
+        },
+        "t": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A diferencia de la consulta médica, la peluquería sí se agenda. Escríbenos por WhatsApp o por mensaje directo en Instagram y coordinamos el día.</p>"
+          }
+        },
+        "b1": {
+          "type": "button",
+          "settings": {
+            "label": "Llámanos: +56 32 2833333",
+            "link": "tel:+56322833333"
+          }
+        },
+        "b2": {
+          "type": "button",
+          "settings": {
+            "label": "Escríbenos por WhatsApp",
+            "link": "https://wa.me/56998206789"
+          }
+        }
+      },
+      "block_order": [
+        "h",
+        "t",
+        "b1",
+        "b2"
+      ],
+      "settings": {
+        "bg": "brand",
+        "join_next": false
+      }
     }
   },
   "order": [
     "hero",
     "servicios",
     "nota",
-    "faq"
+    "faq",
+    "cierre"
   ]
 }
