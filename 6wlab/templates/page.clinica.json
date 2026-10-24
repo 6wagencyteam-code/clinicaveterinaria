@@ -4,13 +4,13 @@
       "type": "page-hero",
       "settings": {
         "image": "shopify://shop_images/Unknown.jpg",
-        "eyebrow": "Clínica",
-        "heading": "Atención médica para tu mascota",
-        "text": "<p>Consultas, cirugías, vacunas y diagnóstico por imágenes. 37 años cuidando a las mascotas de Reñaca.</p>",
+        "eyebrow": "Clínica · 37 años",
+        "heading": "Medicina y cirugía integral",
+        "text": "<p>Consulta médica y a domicilio, cirugía general y ortopédica, ecografías y exámenes, pacientes exóticos.</p>",
         "phone_label": "Llámanos: +56 32 2833333",
         "phone": "+56 32 2833333",
         "whatsapp": "+56 9 9820 6789",
-        "note": "La atención es por orden de llegada y urgencia. Llámanos antes de venir para saber cuán disponibles estamos.",
+        "note": "Por el momento trabajamos con nuestros pacientes por orden de llegada y urgencia. Te recomendamos llamarnos antes de venir para saber cuán llena está la clínica.",
         "bg": "brand",
         "height": 560
       }
@@ -23,7 +23,7 @@
           "settings": {
             "icon": "stethoscope",
             "title": "Consulta médica",
-            "text": "<p>Diagnóstico integral y tratamiento personalizado. Atención a domicilio en Reñaca, Jardín del Mar, Los Almendros, Los Pinos y Bosque de Montemar (Viña del Mar), además de Concón y Mantagua.</p>",
+            "text": "<p>Hacemos atenciones a domicilio según disponibilidad de horario, en los sectores de Reñaca, Jardín del Mar, Los Almendros, Los Pinos y Bosque de Montemar (Viña del Mar), además de Concón y Mantagua.</p>",
             "price_label": "",
             "price": "",
             "link_label": "Llámanos",
@@ -35,7 +35,7 @@
           "settings": {
             "icon": "surgery",
             "title": "Cirugía veterinaria",
-            "text": "<p>Quirófano completo con monitor multiparamétrico, anestesia inhalatoria y mesa quirúrgica profesional. Cirugía general y de tejidos blandos.</p>",
+            "text": "<p>Quirófano completo con monitor multiparamétrico, anestesia inhalatoria y mesa quirúrgica profesional. Cirugía general y ortopédica, y de tejidos blandos.</p>",
             "price_label": "",
             "price": "",
             "link_label": "Llámanos",
@@ -47,7 +47,7 @@
           "settings": {
             "icon": "vaccine",
             "title": "Vacunación y prevención",
-            "text": "<p>Plan vacunal completo para perros y gatos. Desparasitaciones internas y externas, y aplicación de microchip de identificación.</p>",
+            "text": "<p>Cada mascota tiene su propio calendario de vacunas, según edad, estilo de vida y si sale mucho al aire libre. Revisamos su carnet y te decimos exactamente qué le falta.</p>",
             "price_label": "",
             "price": "",
             "link_label": "Llámanos",
@@ -218,7 +218,7 @@
           "type": "qa",
           "settings": {
             "question": "¿Tengo que pedir hora?",
-            "answer": "<p>No agendamos horas por la web. La atención es por orden de llegada y urgencia. Te recomendamos llamarnos antes de venir para saber cuán disponibles estamos.</p>"
+            "answer": "<p>Por el momento trabajamos con nuestros pacientes por orden de llegada y urgencia. Te recomendamos llamarnos antes de venir para saber cuán llena está la clínica en ese momento.</p>"
           }
         },
         "q2": {

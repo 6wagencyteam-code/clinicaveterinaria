@@ -4,13 +4,13 @@
       "type": "page-hero",
       "settings": {
         "image": "shopify://shop_images/Gemini_Generated_Image_ngfc5vngfc5vngfc.jpg",
-        "eyebrow": "Peluquería",
-        "heading": "Baño, corte y estética canina",
-        "text": "<p>Baño sanitario y estética, sin estrés y sin apuro. Reserva tu hora por WhatsApp o mensaje directo en Instagram.</p>",
+        "eyebrow": "Peluquería canina",
+        "heading": "Que salga brillando",
+        "text": "<p>Baño sanitario y estética, sin estrés y sin apuro.</p>",
         "phone_label": "Llámanos: +56 32 2833333",
         "phone": "+56 32 2833333",
         "whatsapp": "+56 9 9820 6789",
-        "note": "A diferencia de la consulta médica, la peluquería sí se reserva con hora.",
+        "note": "Reserva tu hora por WhatsApp o mensaje directo en Instagram.",
         "bg": "brand",
         "height": 560
       }
@@ -63,7 +63,7 @@
       "settings": {
         "eyebrow": "Peluquería canina",
         "heading": "Lo que hacemos",
-        "text": "<p>Atendida por nuestra peluquera, dentro de la misma clínica.</p>",
+        "text": "<p>Baño sanitario y corte por raza. Uñas, oídos y cepillado.</p>",
         "surface": false
       }
     },
