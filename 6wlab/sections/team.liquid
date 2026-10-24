@@ -68,9 +68,12 @@
     .team__media img { transition: none; }
     .team__media:hover img { transform: none; }
   }
+  /* Pegado a la esquina inferior izquierda de la foto: la esquina de abajo
+     sigue el redondeo de la imagen y sólo se redondea la de arriba a la derecha. */
   .team__badge {
-    position: absolute; left: 1rem; bottom: 1rem;
-    padding: .85rem 1.15rem; border-radius: var(--radius);
+    position: absolute; left: 0; bottom: 0;
+    padding: 1rem 1.4rem 1.05rem 1.3rem;
+    border-radius: 0 var(--radius) 0 var(--radius);
     background: var(--brand); color: var(--brand-ink);
     box-shadow: var(--shadow);
   }
