@@ -1,0 +1,171 @@
+{%- comment -%}
+  Barra de contacto rápida. Usa el formulario de contacto de Shopify, así que
+  el mensaje llega al correo configurado en la tienda, sin apps ni servicios externos.
+{%- endcomment -%}
+<section id="escribenos" class="section section--tight cbar-wrap cbar-wrap--{{ section.settings.bg }}">
+  <div class="wrap">
+    <div class="cbar">
+      <div class="cbar__intro">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="cbar__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="cbar__title">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="cbar__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- form 'contact', id: 'contact-bar', class: 'cbar__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="cbar__status cbar__status--ok" tabindex="-1" autofocus>
+            {{ section.settings.success }}
+          </p>
+        {%- else -%}
+          {%- if form.errors -%}
+            <p class="cbar__status cbar__status--error" tabindex="-1" autofocus>
+              {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+            </p>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[Origen]" value="Barra de contacto de la web">
+
+          <div class="cbar__field cbar__field--grow">
+            <label class="visually-hidden" for="cbar-msg">{{ section.settings.label_message }}</label>
+            <input id="cbar-msg" type="text" name="contact[body]"
+                   placeholder="{{ section.settings.label_message | escape }}"
+                   value="{{ form.body }}" required>
+          </div>
+
+          <div class="cbar__field">
+            <label class="visually-hidden" for="cbar-mail">{{ section.settings.label_email }}</label>
+            <input id="cbar-mail" type="email" name="contact[email]"
+                   placeholder="{{ section.settings.label_email | escape }}"
+                   autocomplete="email" spellcheck="false"
+                   value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                   required>
+          </div>
+
+          {%- if section.settings.ask_phone -%}
+            <div class="cbar__field">
+              <label class="visually-hidden" for="cbar-tel">{{ section.settings.label_phone }}</label>
+              <input id="cbar-tel" type="tel" name="contact[Telefono]"
+                     placeholder="{{ section.settings.label_phone | escape }}"
+                     autocomplete="tel" inputmode="tel">
+            </div>
+          {%- endif -%}
+
+          <button class="cbar__send" type="submit">{{ section.settings.button }}</button>
+        {%- endif -%}
+      {%- endform -%}
+
+      {%- if section.settings.note != blank -%}
+        <p class="cbar__note">{{ section.settings.note }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .cbar-wrap--brand { background: var(--brand); color: var(--brand-ink); }
+  .cbar-wrap--surface { background: var(--surface); }
+  .cbar-wrap--dark { background: var(--ink); color: #fff; }
+
+  .cbar { display: grid; gap: calc(var(--gap) * 0.9); }
+
+  @media (min-width: 1000px) {
+    .cbar { grid-template-columns: minmax(16rem, 22rem) 1fr; align-items: center; }
+    .cbar__note { grid-column: 2; margin-top: -.35rem; }
+  }
+
+  .cbar__eyebrow {
+    display: block; margin-bottom: .5rem;
+    font-size: var(--step--1); font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase; opacity: .6;
+  }
+  .cbar__title { margin: 0; font-size: var(--step-2); letter-spacing: -.02em; }
+  .cbar__text { margin: .5rem 0 0; font-size: var(--step--1); opacity: .8; }
+
+  /* En pantallas anchas es una sola barra; en móvil se apila */
+  .cbar__form { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .cbar__field { flex: 1 1 13rem; min-width: 0; }
+  .cbar__field--grow { flex: 3 1 20rem; }
+
+  .cbar__field input {
+    width: 100%;
+    padding: 1em 1.1em;
+    border: 1.5px solid transparent;
+    border-radius: 12px;
+    background: #fff;
+    color: var(--ink);
+    font-size: var(--step-0);
+  }
+  .cbar__field input::placeholder { color: var(--ink-muted); opacity: 1; }
+  .cbar__field input:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px rgba(255,255,255,.35); }
+  .cbar-wrap--surface .cbar__field input { border-color: var(--line); }
+
+  .cbar__send {
+    flex: 0 1 auto;
+    padding: 1em 2.2em;
+    border: 0; border-radius: 12px;
+    background: var(--ink); color: #fff;
+    font-size: var(--step-0); font-weight: 800;
+    cursor: pointer;
+    transition: transform .2s var(--ease), opacity .2s var(--ease);
+  }
+  .cbar-wrap--brand .cbar__send { background: #fff; color: var(--brand); }
+  .cbar-wrap--dark .cbar__send { background: var(--brand); color: #fff; }
+  .cbar__send:hover { transform: translateY(-2px); }
+
+  @media (max-width: 639px) {
+    .cbar__field, .cbar__send { flex: 1 1 100%; }
+  }
+
+  .cbar__note { margin: 0; font-size: var(--step--1); opacity: .65; }
+
+  .cbar__status {
+    flex: 1 1 100%;
+    margin: 0;
+    padding: 1em 1.2em;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .cbar__status--ok { background: var(--ok-soft); color: var(--ok); }
+  .cbar__status--error { background: var(--alert-soft); color: var(--alert); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cbar__send { transition: none; }
+    .cbar__send:hover { transform: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Barra de contacto",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Escríbenos" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Escríbenos para saber más" },
+    { "type": "text", "id": "text", "label": "Texto", "default": "Cuéntanos qué necesita tu mascota y te respondemos dentro del horario de atención." },
+    { "type": "text", "id": "label_message", "label": "Campo del mensaje", "default": "¿Qué necesita tu mascota?" },
+    { "type": "text", "id": "label_email", "label": "Campo del correo", "default": "Tu correo" },
+    { "type": "checkbox", "id": "ask_phone", "label": "Pedir también el teléfono", "default": true },
+    { "type": "text", "id": "label_phone", "label": "Campo del teléfono", "default": "Tu teléfono" },
+    { "type": "text", "id": "button", "label": "Texto del botón", "default": "Enviar" },
+    { "type": "text", "id": "success", "label": "Mensaje de éxito", "default": "¡Gracias! Recibimos tu mensaje y te respondemos a la brevedad." },
+    {
+      "type": "text", "id": "note", "label": "Nota al pie",
+      "default": "Si es una urgencia, llámanos al +56 32 2833333 en vez de escribirnos."
+    },
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "brand",
+      "options": [
+        { "value": "brand", "label": "Azul de marca" },
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "dark", "label": "Oscuro" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Barra de contacto" }]
+}
+{% endschema %}

@@ -505,6 +505,88 @@
         "flip": true,
         "surface": true
       }
+    },
+    "prevencion": {
+      "type": "prevention",
+      "blocks": {
+        "picazon": {
+          "type": "item",
+          "settings": {
+            "icon": "skin",
+            "question": "¿Se rasca más de lo normal?",
+            "title": "Picazón frecuente",
+            "text": "Lamido excesivo, piel enrojecida o pérdida de pelo son señales que conviene revisar."
+          }
+        },
+        "oidos": {
+          "type": "item",
+          "settings": {
+            "icon": "ear",
+            "question": "¿Sacude mucho la cabeza?",
+            "title": "Cuidemos sus oídos",
+            "text": "El enrojecimiento, el mal olor o la secreción pueden ser señales de un problema. Una revisión a tiempo evita complicaciones."
+          }
+        },
+        "pulgas": {
+          "type": "item",
+          "settings": {
+            "icon": "tick",
+            "question": "Pulgas y garrapatas están de vuelta",
+            "title": "Revisa regularmente su piel",
+            "text": "Especialmente después de los paseos, en orejas, cuello, axilas y entre los dedos."
+          }
+        },
+        "desparasitar": {
+          "type": "item",
+          "settings": {
+            "icon": "worm",
+            "question": "También es tiempo de desparasitar",
+            "title": "Protégelo todo el año",
+            "text": "La desparasitación regular previene enfermedades y lo mantiene más sano y feliz."
+          }
+        },
+        "dental": {
+          "type": "item",
+          "settings": {
+            "icon": "tooth",
+            "question": "Tu mascota también necesita cuidado dental",
+            "title": "Destartraje dental",
+            "text": "El sarro y el mal aliento avisan que es momento de revisar su salud oral. Evaluación, exámenes previos y procedimiento con hora agendada."
+          }
+        }
+      },
+      "block_order": [
+        "picazon",
+        "oidos",
+        "pulgas",
+        "desparasitar",
+        "dental"
+      ],
+      "settings": {
+        "eyebrow": "Salud preventiva",
+        "heading": "Señales que conviene revisar a tiempo",
+        "intro": "<p>Con la primavera aumentan las alergias, los parásitos y las molestias de piel y oídos. Una revisión a tiempo evita complicaciones.</p>",
+        "cta_label": "Escríbenos para saber más",
+        "cta_link": "#escribenos",
+        "cta_note": "También puedes llamarnos al +56 32 2833333 o escribirnos por WhatsApp al +56 9 9820 6789.",
+        "bg": "surface"
+      }
+    },
+    "barra": {
+      "type": "contact-bar",
+      "settings": {
+        "eyebrow": "Escríbenos",
+        "heading": "Escríbenos para saber más",
+        "text": "Cuéntanos qué necesita tu mascota y te respondemos dentro del horario de atención.",
+        "label_message": "¿Qué necesita tu mascota?",
+        "label_email": "Tu correo",
+        "ask_phone": true,
+        "label_phone": "Tu teléfono",
+        "button": "Enviar",
+        "success": "¡Gracias! Recibimos tu mensaje y te respondemos a la brevedad.",
+        "note": "Si es una urgencia, llámanos al +56 32 2833333 en vez de escribirnos.",
+        "bg": "brand"
+      }
     }
   },
   "order": [
@@ -516,6 +598,8 @@
     "doctor1",
     "equipo",
     "vaccines",
+    "prevencion",
+    "barra",
     "farmacia",
     "products",
     "promo",

@@ -246,6 +246,22 @@
         "text": "<p>A diferencia de la consulta médica, la peluquería sí se agenda. Escríbenos y coordinamos el día que te acomode.</p>",
         "bg": "brand"
       }
+    },
+    "barra": {
+      "type": "contact-bar",
+      "settings": {
+        "eyebrow": "Escríbenos",
+        "heading": "Escríbenos para saber más",
+        "text": "Cuéntanos qué necesita tu mascota y te respondemos dentro del horario de atención.",
+        "label_message": "Cuéntanos la raza y el tipo de corte",
+        "label_email": "Tu correo",
+        "ask_phone": true,
+        "label_phone": "Tu teléfono",
+        "button": "Enviar",
+        "success": "¡Gracias! Recibimos tu mensaje y te respondemos a la brevedad.",
+        "note": "Si es una urgencia, llámanos al +56 32 2833333 en vez de escribirnos.",
+        "bg": "brand"
+      }
     }
   },
   "order": [
@@ -254,6 +270,7 @@
     "galeria",
     "nota",
     "faq",
-    "cierre"
+    "cierre",
+    "barra"
   ]
 }

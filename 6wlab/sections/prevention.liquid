@@ -1,0 +1,212 @@
+{%- comment -%}
+  Salud preventiva. Replica en la web las campañas que ya publicamos en Instagram,
+  con el mismo llamado: "Escríbenos para saber más".
+{%- endcomment -%}
+<section class="section prev prev--{{ section.settings.bg }}">
+  <div class="wrap">
+    <div class="prev__head">
+      {%- if section.settings.eyebrow != blank -%}
+        <span class="prev__eyebrow">{{ section.settings.eyebrow }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="prev__title">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.intro != blank -%}
+        <div class="prev__intro rte">{{ section.settings.intro }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="prev__grid">
+      {%- for block in section.blocks -%}
+        <article class="prev__card" {{ block.shopify_attributes }} data-reveal>
+          {%- if block.settings.image != blank -%}
+            {%- assign card_alt = block.settings.title | default: 'Salud preventiva' -%}
+            <div class="prev__media">
+              {{ block.settings.image | image_url: width: 760 | image_tag:
+                 loading: 'lazy', sizes: '(min-width: 900px) 30vw, 90vw',
+                 widths: '380, 560, 760', alt: card_alt, class: 'prev__img' }}
+            </div>
+          {%- endif -%}
+
+          <div class="prev__body">
+            <span class="prev__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                {%- case block.settings.icon -%}
+                  {%- when 'skin' -%}
+                    <path d="M12 3c1.8 2.6 3.2 4.7 3.2 6.6A3.2 3.2 0 0 1 12 12.8a3.2 3.2 0 0 1-3.2-3.2C8.8 7.7 10.2 5.6 12 3Z"/>
+                    <circle cx="6.4" cy="15.4" r=".9"/><circle cx="11" cy="17.8" r=".9"/>
+                    <circle cx="16.4" cy="15.1" r=".9"/><circle cx="8.9" cy="20.4" r=".9"/>
+                    <circle cx="15" cy="20.6" r=".9"/>
+                  {%- when 'ear' -%}
+                    <path d="M8 21c0-2.3-.7-3.3-1.9-4.8A7 7 0 1 1 19 12.3c0 2.2-1.6 3.4-3 3.4-1.2 0-2.1-.8-2.1-2"/>
+                    <path d="M9.6 10.6A2.6 2.6 0 0 1 14.7 11c0 1-.5 1.6-1.2 2.2"/>
+                  {%- when 'worm' -%}
+                    <path d="M4 16.5c0-1.7 1.3-2.7 2.8-2.7s2.7 1 2.7 2.5-1.1 2.4-2.4 2.4"/>
+                    <path d="M9.5 14.3c0-1.7 1.3-2.8 2.9-2.8s2.8 1.1 2.8 2.6"/>
+                    <path d="M15.2 11.6c0-1.7 1.3-2.8 2.8-2.8S20.8 10 20.8 11.6c0 1.3-.8 2.2-1.9 2.5"/>
+                    <path d="M4.3 9.4C5 7.9 6.6 7.1 8.1 7.6"/>
+                  {%- when 'tick' -%}
+                    <ellipse cx="12" cy="13.6" rx="4.1" ry="5"/>
+                    <circle cx="12" cy="7.2" r="2"/>
+                    <path d="M7.9 10.4 4.6 8.2M7.6 13.6H4M7.9 16.8l-3.1 2.1M16.1 10.4l3.3-2.2M16.4 13.6H20M16.1 16.8l3.1 2.1"/>
+                  {%- when 'tooth' -%}
+                    <path d="M8.4 3.2c1.5 0 2.1.7 3.6.7s2.1-.7 3.6-.7c2.3 0 3.6 1.8 3.6 4.4 0 2.4-.8 3.6-1.3 5.6-.4 1.6-.5 3.1-.9 4.9-.3 1.5-.8 2.7-1.8 2.7-1.2 0-1.4-1.6-1.7-3.5-.2-1.5-.4-2.9-1.5-2.9s-1.3 1.4-1.5 2.9c-.3 1.9-.5 3.5-1.7 3.5-1 0-1.5-1.2-1.8-2.7-.4-1.8-.5-3.3-.9-4.9-.5-2-1.3-3.2-1.3-5.6 0-2.6 1.3-4.4 3.6-4.4Z"/>
+                  {%- when 'vaccine' -%}
+                    <path d="m18 2 4 4M17 7 6 18l-4 1 1-4L14 4z"/><path d="m9 11 4 4"/>
+                  {%- else -%}
+                    <path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1 7.8 7.7 7.8-7.7 1-1a5.5 5.5 0 0 0 0-7.8Z"/>
+                {%- endcase -%}
+              </svg>
+            </span>
+
+            {%- if block.settings.question != blank -%}
+              <p class="prev__question">{{ block.settings.question }}</p>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="prev__name">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="prev__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <div class="prev__cta">
+        <a class="btn" href="{{ section.settings.cta_link | default: '#escribenos' }}">
+          <svg class="prev__send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M3 11.5 21 4l-7.5 18-2.4-7.1L3 11.5Z"/>
+          </svg>
+          {{ section.settings.cta_label }}
+        </a>
+        {%- if section.settings.cta_note != blank -%}
+          <p class="prev__note">{{ section.settings.cta_note }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .prev--surface { background: var(--surface); }
+  .prev--white { background: #fff; }
+
+  .prev__head { max-width: 46rem; margin-bottom: calc(var(--gap) * 1.4); }
+  .prev__eyebrow {
+    display: block; margin-bottom: .6rem;
+    font-size: var(--step--1); font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--brand);
+  }
+  .prev__title { margin: 0; font-size: var(--step-3); letter-spacing: -.03em; line-height: 1.05; }
+  .prev__intro { margin-top: .9rem; color: var(--ink-muted); }
+
+  .prev__grid {
+    display: grid; gap: var(--gap);
+    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  }
+
+  .prev__card {
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #fff;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  .prev--white .prev__card { background: var(--surface); border-color: transparent; }
+  .prev__card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.09); }
+
+  .prev__media { aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface); }
+  .prev__img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s var(--ease); }
+  .prev__card:hover .prev__img { transform: scale(1.04); }
+
+  .prev__body { padding: calc(var(--gap) * 0.85); }
+
+  .prev__icon {
+    display: grid; place-items: center;
+    width: 3rem; height: 3rem; margin-bottom: .9rem;
+    border-radius: 50%;
+    background: var(--brand); color: #fff;
+  }
+  .prev__icon svg { width: 1.6rem; height: 1.6rem; }
+
+  .prev__question {
+    margin: 0 0 .3rem;
+    font-size: var(--step--1); font-weight: 700;
+    color: var(--brand);
+  }
+  .prev__name { margin: 0; font-size: var(--step-1); letter-spacing: -.02em; line-height: 1.15; }
+  .prev__text { margin: .5rem 0 0; font-size: var(--step--1); color: var(--ink-muted); }
+
+  .prev__cta { margin-top: calc(var(--gap) * 1.3); text-align: center; }
+  .prev__send { width: 1.1em; height: 1.1em; margin-right: .5em; vertical-align: -.18em; }
+  .prev__note { margin: .8rem 0 0; font-size: var(--step--1); color: var(--ink-muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .prev__card, .prev__img { transition: none; }
+    .prev__card:hover { transform: none; }
+    .prev__card:hover .prev__img { transform: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Salud preventiva",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Salud preventiva" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Señales que conviene revisar a tiempo" },
+    {
+      "type": "richtext", "id": "intro", "label": "Texto introductorio",
+      "default": "<p>Con la primavera aumentan las alergias, los parásitos y las molestias de piel y oídos. Una revisión a tiempo evita complicaciones.</p>"
+    },
+    { "type": "text", "id": "cta_label", "label": "Texto del botón", "default": "Escríbenos para saber más" },
+    { "type": "url", "id": "cta_link", "label": "Enlace del botón" },
+    { "type": "text", "id": "cta_note", "label": "Nota bajo el botón", "default": "También puedes llamarnos al +56 32 2833333 o escribirnos por WhatsApp." },
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "surface",
+      "options": [
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "white", "label": "Blanco" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Campaña",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Ícono", "default": "skin",
+          "options": [
+            { "value": "skin", "label": "Piel y picazón" },
+            { "value": "ear", "label": "Oídos" },
+            { "value": "worm", "label": "Desparasitación" },
+            { "value": "tick", "label": "Pulgas y garrapatas" },
+            { "value": "tooth", "label": "Dental" },
+            { "value": "vaccine", "label": "Vacunas" },
+            { "value": "heart", "label": "Corazón" }
+          ]
+        },
+        { "type": "image_picker", "id": "image", "label": "Imagen de la campaña (opcional)" },
+        { "type": "text", "id": "question", "label": "Pregunta", "default": "¿Se rasca más de lo normal?" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Picazón frecuente" },
+        { "type": "textarea", "id": "text", "label": "Texto", "default": "Lamido excesivo, piel enrojecida o pérdida de pelo son señales que conviene revisar." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Salud preventiva",
+      "blocks": [
+        { "type": "item", "settings": { "icon": "skin", "question": "¿Se rasca más de lo normal?", "title": "Picazón frecuente", "text": "Lamido excesivo, piel enrojecida o pérdida de pelo son señales que conviene revisar." } },
+        { "type": "item", "settings": { "icon": "ear", "question": "¿Sacude mucho la cabeza?", "title": "Cuidemos sus oídos", "text": "Una revisión a tiempo puede evitar molestias y complicaciones." } },
+        { "type": "item", "settings": { "icon": "tick", "question": "Pulgas y garrapatas están de vuelta", "title": "Revisa regularmente su piel", "text": "Especialmente después de los paseos, en orejas, cuello, axilas y entre los dedos." } },
+        { "type": "item", "settings": { "icon": "worm", "question": "También es tiempo de desparasitar", "title": "Protégelo todo el año", "text": "La desparasitación regular previene enfermedades y lo mantiene más sano y feliz." } },
+        { "type": "item", "settings": { "icon": "tooth", "question": "Tu mascota también necesita cuidado dental", "title": "Destartraje dental", "text": "Evaluación, exámenes previos y procedimiento con hora agendada." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
