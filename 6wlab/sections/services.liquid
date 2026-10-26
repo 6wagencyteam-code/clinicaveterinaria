@@ -12,7 +12,7 @@
       </div>
     {%- endif -%}
 
-    <div class="grid">
+    <div class="grid svc-grid" style="--svc-cols: {{ section.settings.per_row }};">
       {%- for block in section.blocks -%}
         <article class="card" data-reveal {{ block.shopify_attributes }}>
           <span class="card__icon">{%- render 'icon', name: block.settings.icon -%}</span>
@@ -41,6 +41,12 @@
   </div>
 </section>
 
+{% stylesheet %}
+  @media (min-width: 900px) {
+    .svc-grid { grid-template-columns: repeat(var(--svc-cols, 3), 1fr); }
+  }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "Servicios",
@@ -48,6 +54,7 @@
     { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Nuestros servicios" },
     { "type": "text", "id": "heading", "label": "Título", "default": "Todo lo que tu mascota necesita" },
     { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>37 años cuidando a las mascotas de Reñaca con equipo propio y atención cercana.</p>" },
+    { "type": "range", "id": "per_row", "label": "Por fila (escritorio)", "min": 2, "max": 4, "step": 1, "default": 3 },
     { "type": "checkbox", "id": "surface", "label": "Fondo gris suave", "default": false }
   ],
   "blocks": [

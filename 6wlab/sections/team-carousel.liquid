@@ -17,8 +17,6 @@
     <div class="tm-grid" style="--tm-cols: {{ section.settings.per_row }};">
       {%- for block in section.blocks -%}
         {%- liquid
-          assign limpio = block.settings.name | remove: 'Dr. ' | remove: 'Dra. ' | remove: '«' | remove: '»'
-          assign partes = limpio | split: ' '
           assign person_alt = block.settings.name | escape
         -%}
         <article class="tm" {{ block.shopify_attributes }} data-reveal>
@@ -28,10 +26,8 @@
                  widths: '200,320,500', sizes: '(min-width: 900px) 18vw, 45vw',
                  loading: 'lazy', alt: person_alt }}
             {%- else -%}
-              {%- comment -%}Sin foto: iniciales sobre el azul de marca{%- endcomment -%}
-              <span class="tm__initials" aria-hidden="true">
-                {{- partes[0] | slice: 0 -}}{{- partes[1] | slice: 0 -}}
-              </span>
+              {%- comment -%}Sin foto: ícono de profesional sobre el azul de marca{%- endcomment -%}
+              <span class="tm__icon">{%- render 'icon', name: block.settings.icon -%}</span>
             {%- endif -%}
           </div>
 
@@ -76,13 +72,8 @@
 
   .tm__media img { width: 100%; height: 100%; object-fit: cover; }
 
-  .tm__initials {
-    font-family: var(--font-heading);
-    font-size: var(--step-2);
-    font-weight: 700;
-    letter-spacing: .02em;
-    color: var(--brand-ink);
-  }
+  .tm__icon { display: grid; color: var(--brand-ink); opacity: .9; }
+  .tm__icon svg { width: 38%; height: auto; min-width: 42px; }
 
   /* El nombre y el cargo van debajo de la foto, en flujo normal:
      así no hay nada que se monte encima de nada. */
@@ -142,6 +133,18 @@
       "name": "Integrante",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Foto", "info": "Sin foto se muestran sus iniciales." },
+        {
+          "type": "select", "id": "icon", "label": "Ícono (si no hay foto)", "default": "vet",
+          "options": [
+            { "value": "vet", "label": "Profesional" },
+            { "value": "stethoscope", "label": "Estetoscopio" },
+            { "value": "scissors", "label": "Peluquería" },
+            { "value": "microscope", "label": "Laboratorio" },
+            { "value": "heart", "label": "Corazón" },
+            { "value": "paw", "label": "Huella" },
+            { "value": "pharmacy", "label": "Farmacia" }
+          ]
+        },
         { "type": "text", "id": "name", "label": "Nombre" },
         { "type": "text", "id": "role", "label": "Cargo" },
         { "type": "textarea", "id": "bio", "label": "Reseña", "info": "No se muestra en la grilla; queda guardada para la página de equipo." },

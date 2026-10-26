@@ -1,5 +1,5 @@
 /* ==========================================================================
-   6W LAB — comportamiento del tema
+   6W LAB · comportamiento del tema
    JavaScript propio, sin librerías. Cada componente es independiente:
    si uno falla, el resto de la página sigue funcionando.
    ========================================================================== */

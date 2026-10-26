@@ -36,7 +36,7 @@
                   {%- if block.settings.name != blank -%}
                     <option value="{{ block.settings.name | escape }}">
                       {{- block.settings.name -}}
-                      {%- if block.settings.duration != blank %} — {{ block.settings.duration }}{% endif -%}
+                      {%- if block.settings.duration != blank %} · {{ block.settings.duration }}{% endif -%}
                     </option>
                   {%- endif -%}
                 {%- endfor -%}

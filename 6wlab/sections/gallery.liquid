@@ -1,0 +1,137 @@
+{%- comment -%}
+  Galería de fotos. Si ninguna tiene imagen, la sección no se muestra:
+  así se puede dejar preparada y aparece sola cuando suben las fotos.
+{%- endcomment -%}
+{%- liquid
+  assign con_foto = 0
+  for block in section.blocks
+    if block.settings.image != blank
+      assign con_foto = con_foto | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if con_foto > 0 -%}
+  <section class="section section--{{ section.settings.bg }}{% if section.settings.tight %} section--tight{% endif %}">
+    <div class="wrap">
+      {%- if section.settings.heading != blank or section.settings.eyebrow != blank -%}
+        <div class="section-head {% if section.settings.centered %}section-head--center{% endif %}">
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="lede rte">{{ section.settings.text }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="gal" style="--gal-cols: {{ section.settings.per_row }};">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.image != blank -%}
+            {%- assign gal_alt = block.settings.caption | default: section.settings.heading | escape -%}
+            <figure class="gal__item gal__item--{{ block.settings.size }}" {{ block.shopify_attributes }} data-reveal>
+              {{ block.settings.image | image_url: width: 900 | image_tag:
+                 widths: '300,500,700,900', sizes: '(min-width: 900px) 30vw, 90vw',
+                 loading: 'lazy', alt: gal_alt }}
+              {%- if block.settings.caption != blank -%}
+                <figcaption class="gal__caption">{{ block.settings.caption }}</figcaption>
+              {%- endif -%}
+            </figure>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .gal {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 900px) {
+    .gal { grid-template-columns: repeat(var(--gal-cols, 3), 1fr); }
+    .gal__item--wide { grid-column: span 2; }
+  }
+
+  .gal__item {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--surface);
+  }
+
+  .gal__item img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    transition: transform .55s var(--ease);
+  }
+
+  .gal__item--wide img { aspect-ratio: 2 / 1; }
+  .gal__item--tall img { aspect-ratio: 3 / 4; }
+  .gal__item:hover img { transform: scale(1.05); }
+
+  .gal__caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 1.6rem 1rem .9rem;
+    background: linear-gradient(180deg, rgba(10,12,24,0) 0%, rgba(10,12,24,.75) 70%);
+    color: #fff;
+    font-size: var(--step--1);
+    font-weight: 600;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gal__item img { transition: none; }
+    .gal__item:hover img { transform: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Galería de fotos",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Así quedan" },
+    { "type": "richtext", "id": "text", "label": "Texto" },
+    { "type": "range", "id": "per_row", "label": "Por fila (escritorio)", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "centered", "label": "Título centrado", "default": true },
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "default",
+      "options": [
+        { "value": "default", "label": "Blanco" },
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "brand", "label": "Azul de marca" }
+      ]
+    },
+    { "type": "checkbox", "id": "tight", "label": "Menos espacio arriba y abajo", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "foto",
+      "name": "Foto",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Foto" },
+        { "type": "text", "id": "caption", "label": "Texto sobre la foto (opcional)" },
+        {
+          "type": "select", "id": "size", "label": "Tamaño", "default": "square",
+          "options": [
+            { "value": "square", "label": "Cuadrada" },
+            { "value": "tall", "label": "Vertical" },
+            { "value": "wide", "label": "Ancha (ocupa dos)" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Galería de fotos",
+      "blocks": [{ "type": "foto" }, { "type": "foto" }, { "type": "foto" }] }
+  ]
+}
+{% endschema %}

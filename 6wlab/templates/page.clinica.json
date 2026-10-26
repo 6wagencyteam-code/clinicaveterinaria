@@ -12,7 +12,8 @@
         "whatsapp": "+56 9 9820 6789",
         "note": "Por el momento trabajamos con nuestros pacientes por orden de llegada y urgencia. Te recomendamos llamarnos antes de venir para saber cuán llena está la clínica.",
         "bg": "brand",
-        "height": 560
+        "height": 700,
+        "fit": "cover"
       }
     },
     "servicios": {
@@ -103,7 +104,8 @@
         "eyebrow": "Nuestros servicios",
         "heading": "Qué hacemos en la clínica",
         "text": "<p>Atención integral para caninos, felinos y pacientes exóticos, bajo el mismo techo.</p>",
-        "surface": false
+        "surface": false,
+        "per_row": 3
       }
     },
     "equipo": {
@@ -149,7 +151,7 @@
         "iso": {
           "type": "member",
           "settings": {
-            "name": "Dra. «Iso»",
+            "name": "Dra. Iso",
             "role": "Médica Veterinaria · Exóticos",
             "bio": "Medicina general y atención de pacientes exóticos.",
             "tag": "Exóticos"
@@ -256,51 +258,110 @@
         "surface": true
       }
     },
-    "cierre": {
-      "type": "rich-text",
+    "tecnologia": {
+      "type": "services",
       "blocks": {
-        "h": {
-          "type": "heading",
+        "quirofano": {
+          "type": "service",
           "settings": {
-            "text": "¿Tu mascota necesita atención hoy?"
+            "icon": "surgery",
+            "title": "Quirófano equipado",
+            "text": "<p>Monitor multiparamétrico, anestesia inhalatoria y mesa quirúrgica profesional. El nivel clínico que tu mascota merece.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "",
+            "link": ""
           }
         },
-        "t": {
-          "type": "text",
+        "imagenes": {
+          "type": "service",
           "settings": {
-            "text": "<p>Te esperamos. La atención es por orden de llegada, sin reserva de hora. Te recomendamos llamarnos antes de venir para saber cuán llena está la clínica.</p>"
+            "icon": "monitor",
+            "title": "Diagnóstico por imágenes",
+            "text": "<p>Ecografías con especialistas en imagenología y cardiología veterinaria.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "",
+            "link": ""
           }
         },
+        "laboratorio": {
+          "type": "service",
+          "settings": {
+            "icon": "microscope",
+            "title": "Laboratorio",
+            "text": "<p>Toma de muestras para análisis, con resultados que revisamos contigo.</p>",
+            "price_label": "",
+            "price": "",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "quirofano",
+        "imagenes",
+        "laboratorio"
+      ],
+      "settings": {
+        "eyebrow": "Nuestra tecnología",
+        "heading": "Con qué trabajamos",
+        "text": "<p>Detrás de cada diagnóstico hay un equipo y cada colega aporta su especialidad para que tu mascota reciba la atención que necesita.</p>",
+        "per_row": 3,
+        "surface": true
+      }
+    },
+    "cierre": {
+      "type": "cta-band",
+      "blocks": {
         "b1": {
           "type": "button",
           "settings": {
             "label": "Llámanos: +56 32 2833333",
-            "link": "tel:+56322833333"
+            "link": "tel:+56322833333",
+            "style": "solid",
+            "icon": "phone",
+            "new_tab": false
           }
         },
         "b2": {
           "type": "button",
           "settings": {
             "label": "Escríbenos por WhatsApp",
-            "link": "https://wa.me/56998206789"
+            "link": "https://wa.me/56998206789",
+            "style": "ghost",
+            "icon": "none",
+            "new_tab": true
+          }
+        },
+        "b3": {
+          "type": "button",
+          "settings": {
+            "label": "Síguenos en Instagram",
+            "link": "https://www.instagram.com/veterinaria_renaca/",
+            "style": "ghost",
+            "icon": "instagram",
+            "new_tab": true
           }
         }
       },
       "block_order": [
-        "h",
-        "t",
         "b1",
-        "b2"
+        "b2",
+        "b3"
       ],
       "settings": {
-        "bg": "brand",
-        "join_next": false
+        "eyebrow": "Atención",
+        "heading": "¿Tu mascota necesita atención hoy?",
+        "text": "<p>Te esperamos. La atención es por orden de llegada, sin reserva de hora. Llámanos antes de venir para saber cuán llena está la clínica.</p>",
+        "bg": "brand"
       }
     }
   },
   "order": [
     "hero",
     "servicios",
+    "tecnologia",
     "equipo",
     "faq",
     "cierre"

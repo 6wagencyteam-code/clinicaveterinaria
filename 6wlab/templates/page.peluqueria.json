@@ -12,7 +12,8 @@
         "whatsapp": "+56 9 9820 6789",
         "note": "Reserva tu hora por WhatsApp o mensaje directo en Instagram.",
         "bg": "brand",
-        "height": 560
+        "height": 760,
+        "fit": "cover"
       }
     },
     "servicios": {
@@ -79,7 +80,7 @@
         "t": {
           "type": "text",
           "settings": {
-            "text": "<p>Si durante el baño vemos algo que requiera atención médica —una herida, un problema de piel, parásitos— te avisamos en el momento. Esa es la ventaja de que la peluquería funcione dentro de la clínica.</p>"
+            "text": "<p>Si durante el baño vemos algo que requiera atención médica (una herida, un problema de piel, parásitos) te avisamos en el momento. Esa es la ventaja de que la peluquería funcione dentro de la clínica.</p>"
           }
         },
         "b": {
@@ -136,51 +137,121 @@
         "surface": true
       }
     },
-    "cierre": {
-      "type": "rich-text",
+    "galeria": {
+      "type": "gallery",
       "blocks": {
-        "h": {
-          "type": "heading",
+        "f1": {
+          "type": "foto",
           "settings": {
-            "text": "Reserva la hora de peluquería"
+            "size": "wide",
+            "caption": ""
           }
         },
-        "t": {
-          "type": "text",
+        "f2": {
+          "type": "foto",
           "settings": {
-            "text": "<p>A diferencia de la consulta médica, la peluquería sí se agenda. Escríbenos por WhatsApp o por mensaje directo en Instagram y coordinamos el día.</p>"
+            "size": "square",
+            "caption": ""
           }
         },
+        "f3": {
+          "type": "foto",
+          "settings": {
+            "size": "square",
+            "caption": ""
+          }
+        },
+        "f4": {
+          "type": "foto",
+          "settings": {
+            "size": "square",
+            "caption": ""
+          }
+        },
+        "f5": {
+          "type": "foto",
+          "settings": {
+            "size": "square",
+            "caption": ""
+          }
+        },
+        "f6": {
+          "type": "foto",
+          "settings": {
+            "size": "square",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6"
+      ],
+      "settings": {
+        "eyebrow": "Nuestro trabajo",
+        "heading": "Así quedan",
+        "text": "",
+        "per_row": 3,
+        "centered": true,
+        "bg": "surface",
+        "tight": false
+      }
+    },
+    "cierre": {
+      "type": "cta-band",
+      "blocks": {
         "b1": {
           "type": "button",
           "settings": {
             "label": "Llámanos: +56 32 2833333",
-            "link": "tel:+56322833333"
+            "link": "tel:+56322833333",
+            "style": "solid",
+            "icon": "phone",
+            "new_tab": false
           }
         },
         "b2": {
           "type": "button",
           "settings": {
-            "label": "Escríbenos por WhatsApp",
-            "link": "https://wa.me/56998206789"
+            "label": "Reservar por WhatsApp",
+            "link": "https://wa.me/56998206789",
+            "style": "ghost",
+            "icon": "none",
+            "new_tab": true
+          }
+        },
+        "b3": {
+          "type": "button",
+          "settings": {
+            "label": "Síguenos en Instagram",
+            "link": "https://www.instagram.com/veterinaria_renaca/",
+            "style": "ghost",
+            "icon": "instagram",
+            "new_tab": true
           }
         }
       },
       "block_order": [
-        "h",
-        "t",
         "b1",
-        "b2"
+        "b2",
+        "b3"
       ],
       "settings": {
-        "bg": "brand",
-        "join_next": false
+        "eyebrow": "Peluquería canina",
+        "heading": "Reserva la hora de peluquería",
+        "text": "<p>A diferencia de la consulta médica, la peluquería sí se agenda. Escríbenos y coordinamos el día que te acomode.</p>",
+        "bg": "brand"
       }
     }
   },
   "order": [
     "hero",
     "servicios",
+    "galeria",
     "nota",
     "faq",
     "cierre"

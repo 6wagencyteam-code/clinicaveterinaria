@@ -1,5 +1,5 @@
 /* ==========================================================================
-   6W LAB — sistema de diseño
+   6W LAB · sistema de diseño
    Escrito desde cero para Clínica Veterinaria. Sin librerías externas.
    ========================================================================== */
 
@@ -855,7 +855,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .team__creds ul { font-size: var(--step--1); }
 .team__quote { font-size: var(--step--1); }
 
-/* Pie de página azul — va al final para ganarle a las reglas grises */
+/* Pie de página azul, va al final para ganarle a las reglas grises */
 .footer--brand { background: var(--brand); color: var(--brand-ink); }
 .footer--brand h3,
 .footer--brand p,
