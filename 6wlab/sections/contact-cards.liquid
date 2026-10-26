@@ -57,7 +57,14 @@
   .cc-grid {
     display: grid;
     gap: var(--gap);
-    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+    grid-template-columns: 1fr;
+  }
+  /* Dos por fila en tablet y tres por fila en escritorio */
+  @media (min-width: 640px) {
+    .cc__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1000px) {
+    .cc__grid { grid-template-columns: repeat(3, 1fr); }
   }
 
   .cc {

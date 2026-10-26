@@ -20,14 +20,19 @@
           assign person_alt = block.settings.name | escape
         -%}
         <article class="tm" {{ block.shopify_attributes }} data-reveal>
-          <div class="tm__media">
+          <div class="tm__media" style="--tm-focus: {{ block.settings.focus | default: 'top' }};">
             {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 500 | image_tag:
-                 widths: '200,320,500', sizes: '(min-width: 900px) 18vw, 45vw',
+              {{ block.settings.image | image_url: width: 600 | image_tag:
+                 widths: '240,400,600', sizes: '(min-width: 900px) 18vw, 45vw',
                  loading: 'lazy', alt: person_alt }}
             {%- else -%}
-              {%- comment -%}Sin foto: ícono de profesional sobre el azul de marca{%- endcomment -%}
-              <span class="tm__icon">{%- render 'icon', name: block.settings.icon -%}</span>
+              {%- comment -%}Sin foto: silueta sencilla, centrada dentro del cuadrado{%- endcomment -%}
+              <span class="tm__icon" aria-hidden="true">
+                <svg viewBox="0 0 64 64" fill="currentColor">
+                  <circle cx="32" cy="23" r="11"/>
+                  <path d="M32 38c-10.6 0-19.2 6.7-19.2 15 0 1.1.9 2 2 2h34.4c1.1 0 2-.9 2-2 0-8.3-8.6-15-19.2-15Z"/>
+                </svg>
+              </span>
             {%- endif -%}
           </div>
 
@@ -70,10 +75,19 @@
     background: var(--brand);
   }
 
-  .tm__media img { width: 100%; height: 100%; object-fit: cover; }
+  .tm__media > img {
+    grid-area: 1 / 1;
+    align-self: stretch;
+    justify-self: stretch;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center var(--tm-focus, top);
+    display: block;
+  }
 
   .tm__icon { display: grid; color: var(--brand-ink); opacity: .9; }
-  .tm__icon svg { width: 38%; height: auto; min-width: 42px; }
+  .tm__icon svg { width: 42%; height: auto; min-width: 46px; }
 
   /* El nombre y el cargo van debajo de la foto, en flujo normal:
      así no hay nada que se monte encima de nada. */
@@ -132,6 +146,14 @@
       "type": "member",
       "name": "Integrante",
       "settings": [
+        {
+          "type": "select", "id": "focus", "label": "Parte de la foto que se mantiene", "default": "top",
+          "options": [
+            { "value": "top", "label": "Arriba (la cara)" },
+            { "value": "center", "label": "Centro" },
+            { "value": "bottom", "label": "Abajo" }
+          ]
+        },
         { "type": "image_picker", "id": "image", "label": "Foto", "info": "Sin foto se muestran sus iniciales." },
         {
           "type": "select", "id": "icon", "label": "Ícono (si no hay foto)", "default": "vet",

@@ -12,8 +12,9 @@
         "whatsapp": "+56 9 9820 6789",
         "note": "Reserva tu hora por WhatsApp o mensaje directo en Instagram.",
         "bg": "brand",
-        "height": 760,
-        "fit": "cover"
+        "height": 980,
+        "fit": "cover",
+        "focus": "top"
       }
     },
     "servicios": {
@@ -98,7 +99,9 @@
       ],
       "settings": {
         "bg": "brand",
-        "join_next": false
+        "join_next": false,
+        "image": "shopify://shop_images/Gemini_Generated_Image_r2nw50r2nw50r2nw.jpg",
+        "image_alt": "Peluquería dentro de la clínica"
       }
     },
     "faq": {
@@ -144,42 +147,48 @@
           "type": "foto",
           "settings": {
             "size": "wide",
-            "caption": ""
+            "caption": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_3x4w6y3x4w6y3x4w.jpg"
           }
         },
         "f2": {
           "type": "foto",
           "settings": {
             "size": "square",
-            "caption": ""
+            "caption": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_6lksgk6lksgk6lks.jpg"
           }
         },
         "f3": {
           "type": "foto",
           "settings": {
             "size": "square",
-            "caption": ""
+            "caption": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_aii641aii641aii6.jpg"
           }
         },
         "f4": {
           "type": "foto",
           "settings": {
             "size": "square",
-            "caption": ""
+            "caption": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_2mn08r2mn08r2mn0.jpg"
           }
         },
         "f5": {
           "type": "foto",
           "settings": {
             "size": "square",
-            "caption": ""
+            "caption": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_cd191vcd191vcd19.jpg"
           }
         },
         "f6": {
           "type": "foto",
           "settings": {
             "size": "square",
-            "caption": ""
+            "caption": "",
+            "image": "shopify://shop_images/Gemini_Generated_Image_twl912twl912twl9.jpg"
           }
         }
       },

@@ -30,31 +30,22 @@
 
           <div class="prev__body">
             <span class="prev__icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
                 {%- case block.settings.icon -%}
                   {%- when 'skin' -%}
-                    <path d="M12 3c1.8 2.6 3.2 4.7 3.2 6.6A3.2 3.2 0 0 1 12 12.8a3.2 3.2 0 0 1-3.2-3.2C8.8 7.7 10.2 5.6 12 3Z"/>
-                    <circle cx="6.4" cy="15.4" r=".9"/><circle cx="11" cy="17.8" r=".9"/>
-                    <circle cx="16.4" cy="15.1" r=".9"/><circle cx="8.9" cy="20.4" r=".9"/>
-                    <circle cx="15" cy="20.6" r=".9"/>
+                    <circle cx="21" cy="17" r="4.1"/><circle cx="43" cy="17" r="4.1"/><circle cx="12" cy="32" r="4.1"/><circle cx="52" cy="32" r="4.1"/><path d="M32 29c-6.6 0-11.6 5.6-11.6 11.9 0 5 3.5 8.6 8.3 8.6 1.6 0 2.3-.5 3.3-.5s1.7.5 3.3.5c4.8 0 8.3-3.6 8.3-8.6C43.6 34.6 38.6 29 32 29Z"/>
                   {%- when 'ear' -%}
-                    <path d="M8 21c0-2.3-.7-3.3-1.9-4.8A7 7 0 1 1 19 12.3c0 2.2-1.6 3.4-3 3.4-1.2 0-2.1-.8-2.1-2"/>
-                    <path d="M9.6 10.6A2.6 2.6 0 0 1 14.7 11c0 1-.5 1.6-1.2 2.2"/>
+                    <path d="M24 57c0-6-2-8.4-5-12.3C15.6 40.3 14 35.6 14 30.4 14 19.7 22.3 11 33 11s19 8.1 19 18.6c0 6.4-4.6 10.6-9.3 10.6-3.6 0-6.3-2.4-6.3-5.9"/><path d="M27 28.6c0-3.6 2.9-6.6 6.5-6.6s6.5 3 6.5 6.6c0 2.6-1.3 4.3-3.1 5.6"/>
                   {%- when 'worm' -%}
-                    <path d="M4 16.5c0-1.7 1.3-2.7 2.8-2.7s2.7 1 2.7 2.5-1.1 2.4-2.4 2.4"/>
-                    <path d="M9.5 14.3c0-1.7 1.3-2.8 2.9-2.8s2.8 1.1 2.8 2.6"/>
-                    <path d="M15.2 11.6c0-1.7 1.3-2.8 2.8-2.8S20.8 10 20.8 11.6c0 1.3-.8 2.2-1.9 2.5"/>
-                    <path d="M4.3 9.4C5 7.9 6.6 7.1 8.1 7.6"/>
+                    <path d="M8 46.5c0-4.6 3.6-7.6 7.9-7.6s7.6 2.9 7.6 7-3.1 6.8-6.7 6.8"/><path d="M26 39.6c0-4.6 3.6-7.7 8-7.7s8 3.1 8 7.2"/><path d="M44.4 31.6c0-4.6 3.6-7.7 8-7.7s8 3.1 8 7.3c0 3.5-2.2 6-5.3 6.8"/>
                   {%- when 'tick' -%}
-                    <ellipse cx="12" cy="13.6" rx="4.1" ry="5"/>
-                    <circle cx="12" cy="7.2" r="2"/>
-                    <path d="M7.9 10.4 4.6 8.2M7.6 13.6H4M7.9 16.8l-3.1 2.1M16.1 10.4l3.3-2.2M16.4 13.6H20M16.1 16.8l3.1 2.1"/>
+                    <ellipse cx="32" cy="36" rx="11" ry="13.5"/><circle cx="32" cy="18.5" r="5.4"/><path d="M21 28 11.5 22M21 36H10M21 44l-9.5 6M43 28l9.5-6M43 36h11M43 44l9.5 6"/>
                   {%- when 'tooth' -%}
-                    <path d="M8.4 3.2c1.5 0 2.1.7 3.6.7s2.1-.7 3.6-.7c2.3 0 3.6 1.8 3.6 4.4 0 2.4-.8 3.6-1.3 5.6-.4 1.6-.5 3.1-.9 4.9-.3 1.5-.8 2.7-1.8 2.7-1.2 0-1.4-1.6-1.7-3.5-.2-1.5-.4-2.9-1.5-2.9s-1.3 1.4-1.5 2.9c-.3 1.9-.5 3.5-1.7 3.5-1 0-1.5-1.2-1.8-2.7-.4-1.8-.5-3.3-.9-4.9-.5-2-1.3-3.2-1.3-5.6 0-2.6 1.3-4.4 3.6-4.4Z"/>
+                    <path d="M22 8c4 0 5.6 1.9 10 1.9S38 8 42 8c6.2 0 9.6 4.8 9.6 11.8 0 6.4-2.1 9.6-3.5 15-1.1 4.3-1.3 8.3-2.4 13.1-.8 4-2.1 7.1-4.8 7.1-3.2 0-3.7-4.3-4.5-9.3C35.6 41.7 35.1 38 32 38s-3.6 3.7-4.4 7.7c-.8 5-1.3 9.3-4.5 9.3-2.7 0-4-3.1-4.8-7.1-1.1-4.8-1.3-8.8-2.4-13.1-1.4-5.4-3.5-8.6-3.5-15C12.4 12.8 15.8 8 22 8Z"/>
                   {%- when 'vaccine' -%}
-                    <path d="m18 2 4 4M17 7 6 18l-4 1 1-4L14 4z"/><path d="m9 11 4 4"/>
+                    <path d="m48 5 11 11M45.5 18.5 16 48l-10.5 2.5L8 40 37.5 10.5z"/><path d="m24 29 11 11"/>
                   {%- else -%}
-                    <path d="M20.8 5.6a5.5 5.5 0 0 0-7.8 0L12 6.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1 7.8 7.7 7.8-7.7 1-1a5.5 5.5 0 0 0 0-7.8Z"/>
+                    <path d="M55 15a14.6 14.6 0 0 0-20.8 0L32 17.2l-2.2-2.2A14.6 14.6 0 0 0 9 35.6l2.7 2.7L32 58.6l20.3-20.3L55 35.6A14.6 14.6 0 0 0 55 15Z"/>
                 {%- endcase -%}
               </svg>
             </span>
@@ -102,9 +93,16 @@
   .prev__title { margin: 0; font-size: var(--step-3); letter-spacing: -.03em; line-height: 1.05; }
   .prev__intro { margin-top: .9rem; color: var(--ink-muted); }
 
-  .prev__grid {
-    display: grid; gap: var(--gap);
-    grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  .prev__grid { display: grid; gap: var(--gap); grid-template-columns: 1fr; }
+
+  @media (min-width: 640px) {
+    .prev__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  /* En escritorio: dos tarjetas arriba y tres abajo */
+  @media (min-width: 1000px) {
+    .prev__grid { grid-template-columns: repeat(6, 1fr); }
+    .prev__card:nth-child(1), .prev__card:nth-child(2) { grid-column: span 3; }
+    .prev__card:nth-child(3), .prev__card:nth-child(4), .prev__card:nth-child(5) { grid-column: span 2; }
   }
 
   .prev__card {
@@ -130,7 +128,7 @@
     border-radius: 50%;
     background: var(--brand); color: #fff;
   }
-  .prev__icon svg { width: 1.6rem; height: 1.6rem; }
+  .prev__icon svg { width: 1.75rem; height: 1.75rem; }
 
   .prev__question {
     margin: 0 0 .3rem;

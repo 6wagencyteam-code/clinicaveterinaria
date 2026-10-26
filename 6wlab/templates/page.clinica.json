@@ -118,13 +118,14 @@
             "role": "Fundador y Director Médico",
             "bio": "Médico veterinario. Dirige la clínica desde 1989. Cirugía general y de tejidos blandos, medicina interna y diagnóstico por imágenes.",
             "tag": "Desde 1989",
-            "image": "shopify://shop_images/ChatGPT_Image_Jul_5_2026_at_09_58_45_PM.png"
+            "image": "shopify://shop_images/ChatGPT_Image_Jul_5_2026_at_09_58_45_PM.png",
+            "focus": "top"
           }
         },
         "camila": {
           "type": "member",
           "settings": {
-            "name": "Camila Escobar Molina",
+            "name": "Dra. Camila Escobar Molina",
             "role": "Médica Veterinaria · Anestesia",
             "bio": "Universidad Santo Tomás, 2022. Diplomada en Medicina Felina. Medicina general, anestesia en cirugías, urgencias y atención a domicilio.",
             "tag": "Medicina felina"
@@ -133,7 +134,7 @@
         "jaime": {
           "type": "member",
           "settings": {
-            "name": "Jaime Leiva Retamales",
+            "name": "Dr. Jaime Leiva Retamales",
             "role": "Médico Veterinario · Ecografía",
             "bio": "Universidad Santo Tomás, 2000. Diplomado en Imagenología Veterinaria (U. de Chile) y en Cardiología Veterinaria. Docente universitario.",
             "tag": "Imagenología"
@@ -142,7 +143,7 @@
         "mariapaz": {
           "type": "member",
           "settings": {
-            "name": "María Paz Herrera Plaza",
+            "name": "Dra. María Paz Herrera Plaza",
             "role": "Médica Veterinaria",
             "bio": "Universidad Santo Tomás, Viña del Mar, 2022. Clínica de animales menores, consultas y manejo de medicamentos veterinarios.",
             "tag": "Clínica menor"
@@ -438,12 +439,74 @@
         "note": "Si es una urgencia, llámanos al +56 32 2833333 en vez de escribirnos.",
         "bg": "brand"
       }
+    },
+    "galeria": {
+      "type": "gallery",
+      "blocks": {
+        "g1": {
+          "type": "foto",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_dojjmndojjmndojj.jpg",
+            "size": "wide",
+            "caption": ""
+          }
+        },
+        "g2": {
+          "type": "foto",
+          "settings": {
+            "image": "shopify://shop_images/Gemini_Generated_Image_ldp7adldp7adldp7.jpg",
+            "size": "square",
+            "caption": ""
+          }
+        },
+        "g3": {
+          "type": "foto",
+          "settings": {
+            "image": "shopify://shop_images/1.png",
+            "size": "square",
+            "caption": ""
+          }
+        },
+        "g4": {
+          "type": "foto",
+          "settings": {
+            "image": "shopify://shop_images/6.png",
+            "size": "square",
+            "caption": ""
+          }
+        },
+        "g5": {
+          "type": "foto",
+          "settings": {
+            "image": "shopify://shop_images/9.png",
+            "size": "square",
+            "caption": ""
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3",
+        "g4",
+        "g5"
+      ],
+      "settings": {
+        "eyebrow": "Nuestra clínica",
+        "heading": "Así trabajamos",
+        "text": "",
+        "per_row": 3,
+        "centered": false,
+        "bg": "default",
+        "tight": false
+      }
     }
   },
   "order": [
     "hero",
     "servicios",
     "tecnologia",
+    "galeria",
     "prevencion",
     "equipo",
     "faq",

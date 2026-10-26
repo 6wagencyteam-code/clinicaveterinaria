@@ -12,7 +12,9 @@
         "note": "La atención es por orden de llegada y urgencia.",
         "bg": "brand",
         "fit": "cover",
-        "height": 420
+        "height": 560,
+        "image": "shopify://shop_images/Gemini_Generated_Image_o75m0ao75m0ao75m.jpg",
+        "focus": "center"
       }
     },
     "tarjetas": {
@@ -40,7 +42,7 @@
             "value": "+56 9 9820 6789",
             "note": "Consultas, peluquería y atención a domicilio.",
             "link": "",
-            "tone": "dark",
+            "tone": "brand",
             "new_tab": true
           }
         },
