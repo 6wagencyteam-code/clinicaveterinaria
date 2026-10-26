@@ -446,7 +446,7 @@
         "g1": {
           "type": "foto",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_dojjmndojjmndojj.jpg",
+            "image": "shopify://shop_images/Gemini_Generated_Image_aii641aii641aii6.jpg",
             "size": "wide",
             "caption": ""
           }
@@ -454,7 +454,7 @@
         "g2": {
           "type": "foto",
           "settings": {
-            "image": "shopify://shop_images/Gemini_Generated_Image_ldp7adldp7adldp7.jpg",
+            "image": "shopify://shop_images/Gemini_Generated_Image_cd191vcd191vcd19.jpg",
             "size": "square",
             "caption": ""
           }
@@ -462,7 +462,7 @@
         "g3": {
           "type": "foto",
           "settings": {
-            "image": "shopify://shop_images/1.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_twl912twl912twl9.jpg",
             "size": "square",
             "caption": ""
           }
@@ -470,15 +470,7 @@
         "g4": {
           "type": "foto",
           "settings": {
-            "image": "shopify://shop_images/6.png",
-            "size": "square",
-            "caption": ""
-          }
-        },
-        "g5": {
-          "type": "foto",
-          "settings": {
-            "image": "shopify://shop_images/9.png",
+            "image": "shopify://shop_images/Gemini_Generated_Image_12u3fl12u3fl12u3.jpg",
             "size": "square",
             "caption": ""
           }
@@ -488,8 +480,7 @@
         "g1",
         "g2",
         "g3",
-        "g4",
-        "g5"
+        "g4"
       ],
       "settings": {
         "eyebrow": "Nuestra clínica",
