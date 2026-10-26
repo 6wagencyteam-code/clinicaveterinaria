@@ -588,6 +588,48 @@
         "note": "Si es una urgencia, llámanos al +56 32 2833333 en vez de escribirnos.",
         "bg": "brand"
       }
+    },
+    "campanas": {
+      "type": "campaigns",
+      "blocks": {
+        "p1": {
+          "type": "pieza",
+          "settings": {
+            "image": "shopify://shop_images/9.png",
+            "alt": "Medicina y cirugía integral: consulta, cirugía, ecografías y pacientes exóticos",
+            "link": "https://www.instagram.com/veterinaria_renaca/"
+          }
+        },
+        "p2": {
+          "type": "pieza",
+          "settings": {
+            "image": "shopify://shop_images/1.png",
+            "alt": "Cuidamos a quien más amas: 37 años de medicina veterinaria en Reñaca",
+            "link": "https://www.instagram.com/veterinaria_renaca/"
+          }
+        },
+        "p3": {
+          "type": "pieza",
+          "settings": {
+            "image": "shopify://shop_images/6.png",
+            "alt": "Cuidamos a quien más amas: trato personalizado para tu compañero",
+            "link": "https://www.instagram.com/veterinaria_renaca/"
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "eyebrow": "Campañas",
+        "heading": "Lo que estamos publicando",
+        "text": "<p>Las mismas campañas que ves en nuestro Instagram, con la información de salud que compartimos cada semana.</p>",
+        "link_label": "Síguenos en Instagram",
+        "link": "https://www.instagram.com/veterinaria_renaca/",
+        "bg": "white"
+      }
     }
   },
   "order": [
@@ -599,6 +641,7 @@
     "doctor1",
     "equipo",
     "vaccines",
+    "campanas",
     "prevencion",
     "barra",
     "farmacia",

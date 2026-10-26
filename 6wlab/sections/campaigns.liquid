@@ -1,0 +1,146 @@
+{%- comment -%}
+  Campañas. Muestra las piezas gráficas completas, sin recortar y sin texto
+  encima, porque ya traen su propio mensaje incorporado.
+{%- endcomment -%}
+{%- assign cmp_count = 0 -%}
+{%- for block in section.blocks -%}
+  {%- if block.settings.image != blank -%}{%- assign cmp_count = cmp_count | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+
+{%- if cmp_count > 0 -%}
+  <section class="section cmp cmp--{{ section.settings.bg }}">
+    <div class="wrap">
+      <div class="cmp__head">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="cmp__title">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <div class="rte muted cmp__intro">{{ section.settings.text }}</div>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.link != blank and section.settings.link_label != blank -%}
+          <a class="btn btn--ghost cmp__link" href="{{ section.settings.link }}" target="_blank" rel="noopener">
+            {{ section.settings.link_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <div class="cmp__rail">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.image != blank -%}
+            {%- assign cmp_alt = block.settings.alt | default: section.settings.heading | default: 'Campaña' -%}
+            {%- if block.settings.link != blank -%}
+              <a class="cmp__item" href="{{ block.settings.link }}" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+                {{ block.settings.image | image_url: width: 1080 | image_tag:
+                   widths: '420,640,860,1080', sizes: '(min-width: 1000px) 30vw, 78vw',
+                   loading: 'lazy', alt: cmp_alt, class: 'cmp__img' }}
+              </a>
+            {%- else -%}
+              <div class="cmp__item" {{ block.shopify_attributes }}>
+                {{ block.settings.image | image_url: width: 1080 | image_tag:
+                   widths: '420,640,860,1080', sizes: '(min-width: 1000px) 30vw, 78vw',
+                   loading: 'lazy', alt: cmp_alt, class: 'cmp__img' }}
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .cmp--surface { background: var(--surface); }
+  .cmp--white { background: #fff; }
+  .cmp--brand { background: var(--brand); color: var(--brand-ink); }
+  .cmp--brand .muted { color: inherit; opacity: .85; }
+  .cmp--brand .eyebrow { background: rgba(255,255,255,.18); color: inherit; }
+  .cmp--brand .btn--ghost { --btn-bg: transparent; --btn-ink: #fff; --btn-line: rgba(255,255,255,.55); }
+
+  .cmp__head {
+    display: flex; flex-wrap: wrap; gap: var(--gap);
+    align-items: flex-end; justify-content: space-between;
+    margin-bottom: calc(var(--gap) * 1.2);
+  }
+  .cmp__title { margin: .5rem 0 0; font-size: var(--step-3); letter-spacing: -.03em; line-height: 1.05; }
+  .cmp__intro { margin-top: .7rem; max-width: 42rem; }
+  .cmp__link { flex: 0 0 auto; }
+
+  /* En móvil se desliza de lado; en escritorio son tres columnas */
+  .cmp__rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    gap: var(--gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: .5rem;
+    scrollbar-width: thin;
+  }
+  .cmp__item { scroll-snap-align: start; }
+
+  @media (min-width: 1000px) {
+    .cmp__rail {
+      grid-auto-flow: row;
+      grid-auto-columns: auto;
+      grid-template-columns: repeat(3, 1fr);
+      overflow: visible;
+    }
+  }
+
+  .cmp__item {
+    display: block;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+  a.cmp__item:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.12); }
+
+  /* La pieza se ve completa: no se recorta nada del mensaje */
+  .cmp__img { width: 100%; height: auto; display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cmp__item { transition: none; }
+    a.cmp__item:hover { transform: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Campañas",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño", "default": "Campañas" },
+    { "type": "text", "id": "heading", "label": "Título", "default": "Lo que estamos publicando" },
+    { "type": "richtext", "id": "text", "label": "Texto" },
+    { "type": "text", "id": "link_label", "label": "Texto del enlace", "default": "Síguenos en Instagram" },
+    { "type": "url", "id": "link", "label": "Enlace" },
+    {
+      "type": "select", "id": "bg", "label": "Fondo", "default": "white",
+      "options": [
+        { "value": "white", "label": "Blanco" },
+        { "value": "surface", "label": "Gris suave" },
+        { "value": "brand", "label": "Azul de marca" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pieza",
+      "name": "Pieza",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagen de la campaña" },
+        { "type": "text", "id": "alt", "label": "Descripción de la imagen" },
+        { "type": "url", "id": "link", "label": "Enlace (opcional)" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Campañas", "blocks": [{ "type": "pieza" }, { "type": "pieza" }, { "type": "pieza" }] }
+  ]
+}
+{% endschema %}
